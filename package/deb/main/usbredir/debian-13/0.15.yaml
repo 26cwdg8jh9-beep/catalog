@@ -3,8 +3,8 @@
 image: dhi.io/pkg-usbredir
 variant: runtime
 tags:
-  - 0.15.0-1-dhi0
-  - 0.15.0-1-dhi0-debian13
+  - 0.15.0-1-dhi1
+  - 0.15.0-1-dhi1-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -20,9 +20,9 @@ vars:
   DEBIAN_ORIG_FILENAME: usbredir_0.15.0.orig.tar.xz
   DEBIAN_ORIG_URL: https://deb.debian.org/debian/pool/main/u/usbredir/usbredir_0.15.0.orig.tar.xz
   DEBIAN_VERSION: 0.15.0-1
-  DHI_REL: "0"
-  DHI_VERSION: 0.15.0-1+dhi0
-  TAG_VERSION: 0.15.0-1-dhi0
+  DHI_REL: "1"
+  DHI_VERSION: 0.15.0-1+dhi1
+  TAG_VERSION: 0.15.0-1-dhi1
   UPSTREAM_VERSION: 0.15.0
 contents:
   packages:
@@ -40,6 +40,8 @@ contents:
           - meson
           - ninja-build
           - pkgconf
+          - quilt
+          - util-linux
         files:
           - url: https://deb.debian.org/debian/pool/main/u/usbredir/usbredir_0.15.0-1.dsc
             checksum: sha256:dc03f67381d723646bdc9af28b0896ee9c2feea16586c3f47286b5313bbdf50e
@@ -62,14 +64,30 @@ contents:
           with:
             file: usbredir_0.15.0-1.dsc
             path: usbredir
+        - name: create debian patch stack directory
+          runs: |
+            set -eux -o pipefail
+
+            mkdir -p debian/patches
+        - uses: dpkg/patch@v1
+          with:
+            apply: true
+            patches:
+              - ${source.dir}/patch/CVE-2026-92382.patch
         - uses: dpkg/bump@v1
           with:
             changelog:
-              - DHI Rebuild
-            version: 0.15.0-1+dhi0
+              - Backport fix for CVE-2026-92382
+            version: 0.15.0-1+dhi1
         - uses: dpkg/build@v1
           with:
             args: -uc -us -d
+      paths:
+        - type: file
+          path: ${source.dir}/patch/CVE-2026-92382.patch
+          uid: 0
+          gid: 0
+          source: package/deb/main/usbredir/patch/CVE-2026-92382.patch
 os-release:
   name: Docker Hardened Images (Debian)
   id: debian
