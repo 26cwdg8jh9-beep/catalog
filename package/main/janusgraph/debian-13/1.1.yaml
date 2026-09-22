@@ -4,9 +4,9 @@ image: dhi.io/pkg-janusgraph
 variant: runtime
 tags:
   - 1.1.0
-  - 1.1.0-r0
+  - 1.1.0-r1
   - 1.1.0-debian13
-  - 1.1.0-r0-debian13
+  - 1.1.0-r1-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -16,7 +16,7 @@ vars:
   COMMIT_SHA: 3b8843ffc6c81cf0076bf00119f1ffe80b9cf234
   MAVEN_REFERENCE: dhi/maven:3.9.16-jdk17-debian13-dev@sha256:6bd511e5ba7a082e6a4299bef7b35b57327a5a67dde8bece3b4f1dfc6ec77776
   PACKAGE_NAME: janusgraph-1.1
-  REL: "0"
+  REL: "1"
   SEMVER_MAJOR_MINOR_VERSION: "1.1"
   SEMVER_MAJOR_VERSION: "1"
   SEMVER_VERSION: 1.1.0
@@ -175,7 +175,7 @@ contents:
               - deb
             license: Apache-2.0
             name: janusgraph-1.1
-            rel: 0
+            rel: 1
             url: https://janusgraph.org/
             version: 1.1.0
       paths:
