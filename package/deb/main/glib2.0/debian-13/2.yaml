@@ -3,8 +3,8 @@
 image: dhi.io/pkg-glib2.0
 variant: runtime
 tags:
-  - 2.84.4-3-deb13u5-dhi0
-  - 2.84.4-3-deb13u5-dhi0-debian13
+  - 2.84.4-3-deb13u5-dhi1
+  - 2.84.4-3-deb13u5-dhi1-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -23,9 +23,9 @@ vars:
   DEBIAN_ORIG_FILENAME: glib2.0_2.84.4.orig.tar.xz
   DEBIAN_ORIG_URL: https://deb.debian.org/debian/pool/main/g/glib2.0/glib2.0_2.84.4.orig.tar.xz
   DEBIAN_VERSION: 2.84.4-3~deb13u5
-  DHI_REL: "0"
-  DHI_VERSION: 2.84.4-3~deb13u5+dhi0
-  TAG_VERSION: 2.84.4-3-deb13u5-dhi0
+  DHI_REL: "1"
+  DHI_VERSION: 2.84.4-3~deb13u5+dhi1
+  TAG_VERSION: 2.84.4-3-deb13u5-dhi1
   UPSTREAM_VERSION: 2.84.4
 contents:
   packages:
@@ -54,6 +54,8 @@ contents:
           - python3
           - python3-debian
           - python3-packaging
+          - quilt
+          - util-linux
           - xsltproc
           - zlib1g-dev
         files:
@@ -83,14 +85,27 @@ contents:
           with:
             file: glib2.0_2.84.4-3~deb13u5.dsc
             path: glib2.0
+        - uses: dpkg/patch@v1
+          with:
+            apply: true
+            patches:
+              - ${source.dir}/patch/CVE-2026-86469.patch
         - uses: dpkg/bump@v1
           with:
-            version: 2.84.4-3~deb13u5+dhi0
+            changelog:
+              - Backport upstream fix for CVE-2026-86469
+            version: 2.84.4-3~deb13u5+dhi1
         - uses: dpkg/build@v1
           environment:
             DEB_BUILD_PROFILES: nodoc nocheck noudeb
           with:
             args: --build=source,any -uc -us -d
+      paths:
+        - type: file
+          path: ${source.dir}/patch/CVE-2026-86469.patch
+          uid: 0
+          gid: 0
+          source: package/deb/main/glib2.0/patch/CVE-2026-86469.patch
 os-release:
   name: Docker Hardened Images (Debian)
   id: debian
