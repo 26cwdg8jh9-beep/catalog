@@ -9,6 +9,8 @@ platforms:
   - linux/amd64
   - linux/arm64
 vars:
+  _REL: "1"
+  _VERSION: 2.5.2
   COMMIT_SHA: de0bf50b73c37ce0434aeaec700682dd1f1ba28f
   PACKAGE_NAME: main/ppp
   REL: "1"
