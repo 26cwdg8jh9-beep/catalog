@@ -4,9 +4,9 @@ image: dhi.io/pkg-datahub-frontend-react
 variant: runtime
 tags:
   - 1.7.0.1
-  - 1.7.0.1-r2
+  - 1.7.0.1-r3
   - 1.7.0.1-debian13
-  - 1.7.0.1-r2-debian13
+  - 1.7.0.1-r3-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -24,7 +24,7 @@ vars:
   OTEL_JAVAAGENT_VERSION: 2.28.0
   PACKAGE_HOME: /usr/share/datahub-frontend-react
   PACKAGE_NAME: datahub-frontend-react
-  REL: "2"
+  REL: "3"
   SEMVER_MAJOR_MINOR_VERSION: "1.7"
   SEMVER_MAJOR_VERSION: "1"
   SEMVER_VERSION: 1.7.0
@@ -129,6 +129,30 @@ contents:
                 - name: jackson-databind
                   purl: pkg:maven/tools.jackson.core/jackson-databind@3.1.6
                   license: Apache-2.0
+            uid: 0
+            gid: 0
+          - url: https://maven-central.storage-download.googleapis.com/maven2/org/bouncycastle/bcprov-jdk18on/1.85/bcprov-jdk18on-1.85.jar
+            checksum: sha256:20af26bf6060bb8005cc2389916812c1e0e998dc48d2ced7131b89461b54cff7
+            path: ${source.dir}/patch/deps/bcprov-jdk18on-1.85.jar
+            spdx:
+              name: bcprov-jdk18on
+              version: "1.85"
+              packages:
+                - name: bcprov-jdk18on
+                  purl: pkg:maven/org.bouncycastle/bcprov-jdk18on@1.85
+                  license: MIT
+            uid: 0
+            gid: 0
+          - url: https://maven-central.storage-download.googleapis.com/maven2/org/bouncycastle/bcpkix-jdk18on/1.85/bcpkix-jdk18on-1.85.jar
+            checksum: sha256:c9f82b2d4e99c4bbdfccf684e52cc06ea06a0b567bfd0d08f9c5a3f417055996
+            path: ${source.dir}/patch/deps/bcpkix-jdk18on-1.85.jar
+            spdx:
+              name: bcpkix-jdk18on
+              version: "1.85"
+              packages:
+                - name: bcpkix-jdk18on
+                  purl: pkg:maven/org.bouncycastle/bcpkix-jdk18on@1.85
+                  license: MIT
             uid: 0
             gid: 0
       pipeline:
@@ -241,6 +265,14 @@ contents:
                             details.useVersion '4.0.7'
                             details.because 'DHI CVE remediation: CVE-2026-41001'
                         }
+                        if (req.group == 'org.bouncycastle' && req.name == 'bcprov-jdk18on') {
+                            details.useVersion '1.85'
+                            details.because 'DHI CVE remediation: CVE-2026-8763, CVE-2026-13506'
+                        }
+                        if (req.group == 'org.bouncycastle' && req.name == 'bcpkix-jdk18on') {
+                            details.useVersion '1.85'
+                            details.because 'DHI CVE remediation: bcpkix alignment with bcprov-jdk18on 1.85'
+                        }
                     }
                 }
             }
@@ -266,7 +298,7 @@ contents:
               --warning-mode=summary \
               --parallel \
               --max-workers=4 \
-              --update-locks 'com.fasterxml.jackson.core:*,com.fasterxml.jackson.dataformat:*,com.fasterxml.jackson.datatype:*,com.fasterxml.jackson.module:*,com.fasterxml.jackson:*,tools.jackson.core:*,tools.jackson.dataformat:*,tools.jackson.datatype:*,tools.jackson.module:*,at.yawk.lz4:*,ch.qos.logback:*,com.typesafe.akka:*,io.netty:*,org.apache.httpcomponents.core5:*,org.apache.httpcomponents.client5:*,org.apache.logging.log4j:*,org.springframework.boot:*' \
+              --update-locks 'com.fasterxml.jackson.core:*,com.fasterxml.jackson.dataformat:*,com.fasterxml.jackson.datatype:*,com.fasterxml.jackson.module:*,com.fasterxml.jackson:*,tools.jackson.core:*,tools.jackson.dataformat:*,tools.jackson.datatype:*,tools.jackson.module:*,at.yawk.lz4:*,ch.qos.logback:*,com.typesafe.akka:*,io.netty:*,org.apache.httpcomponents.core5:*,org.apache.httpcomponents.client5:*,org.apache.logging.log4j:*,org.springframework.boot:*,org.bouncycastle:*' \
               :datahub-frontend:stage \
               -x test \
               -x check
@@ -316,6 +348,8 @@ contents:
             replace_loose_jar jackson-databind-2.21.2.jar jackson-databind-2.21.6.jar
             replace_loose_jar jackson-core-3.1.2.jar tools-jackson-core-3.1.6.jar
             replace_loose_jar jackson-databind-3.1.2.jar tools-jackson-databind-3.1.6.jar
+            replace_loose_jar bcprov-jdk18on-1.84.jar bcprov-jdk18on-1.85.jar
+            replace_loose_jar bcpkix-jdk18on-1.84.jar bcpkix-jdk18on-1.85.jar
         - name: fetch otel javaagent
           privileged: true
           runs: |
@@ -372,7 +406,7 @@ contents:
               - deb
             license: Apache-2.0
             name: datahub-frontend-react
-            rel: 2
+            rel: 3
             url: https://datahubproject.io/
             version: 1.7.0.1
       paths:
