@@ -60,13 +60,21 @@ contents:
             gid: 0
       pipeline:
         - name: patch (4 only)
-          uses: go/bump@v1
+          uses: go/bump@v2
           work-dir: /go/src/github.com/argoproj/argo-workflows
           with:
             deps:
               - golang.org/x/crypto@v0.56.0
               - google.golang.org/grpc@v1.83.2
+              - go.opentelemetry.io/otel/sdk@v1.45.0
+              - go.opentelemetry.io/otel/exporters/otlp/otlptrace@v1.45.0
+              - go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc@v1.45.0
+              - go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp@v1.45.0
+            downgrade: true
             download: true
+            replaces:
+              - google.golang.org/grpc=google.golang.org/grpc@v1.83.2
+            tidy: true
         - name: test
           work-dir: /go/src/github.com/argoproj/argo-workflows
           runs: |
