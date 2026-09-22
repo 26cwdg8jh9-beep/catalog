@@ -3,10 +3,10 @@
 image: dhi.io/pkg-gitlab-webservice
 variant: runtime
 tags:
-  - 18.11.11
-  - 18.11.11-r3
-  - 18.11.11-debian13
-  - 18.11.11-r3-debian13
+  - 18.11.12
+  - 18.11.12-r0
+  - 18.11.12-debian13
+  - 18.11.12-r0-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -14,20 +14,20 @@ dates:
   release: "2026-04-16"
 vars:
   CARGO_VERSION: 1.97.1-0
-  COMMIT_SHA: a89df1873534989410955eac34d2b8b0c248d155
+  COMMIT_SHA: 592c6ce238b6ade2469aaf1bb7e6adb9921aba95
   DEVFILE_COMMIT_SHA: 1f25dab8010cea3a8e23a498616efe654312e1cf
   DEVFILE_VERSION: 0.5.2
   GOLANG_VERSION: 1.26.8-0
   NODEJS_VERSION: 22.23.2-1
   PACKAGE_NAME: gitlab-webservice-18
-  REL: "3"
+  REL: "0"
   RUBY_MAJOR_MINOR_VERSION: "3.3"
-  RUBY_VERSION: 3.3.12-51
+  RUBY_VERSION: 3.3.12-53
   RUSTC_VERSION: 1.97.1-0
   SEMVER_MAJOR_MINOR_VERSION: "18.11"
   SEMVER_MAJOR_VERSION: "18"
-  SEMVER_VERSION: 18.11.11
-  VERSION: 18.11.11
+  SEMVER_VERSION: 18.11.12
+  VERSION: 18.11.12
 contents:
   packages:
     - '!base-files'
@@ -41,8 +41,8 @@ contents:
         keyring:
           - https://dhi.io/keyring/dhi-deb-gpg.D46852F6925E9F71.key
         packages:
-          - ruby-3.3-dev=3.3.12-51
-          - ruby-3.3=3.3.12-51
+          - ruby-3.3-dev=3.3.12-53
+          - ruby-3.3=3.3.12-53
           - autoconf
           - bash
           - bison
@@ -96,15 +96,15 @@ contents:
           - cargo-1.97=1.97.1-0
           - rustc-1.97=1.97.1-0
         files:
-          - url: git+https://gitlab.com/gitlab-org/gitlab-foss.git#v18.11.11
-            checksum: a89df1873534989410955eac34d2b8b0c248d155
+          - url: git+https://gitlab.com/gitlab-org/gitlab-foss.git#v18.11.12
+            checksum: 592c6ce238b6ade2469aaf1bb7e6adb9921aba95
             path: /srv/gitlab
             spdx:
               name: gitlab-ce
-              version: 18.11.11
+              version: 18.11.12
               packages:
                 - name: gitlab-ce
-                  purl: pkg:gitlab/gitlab-org/gitlab-foss@v18.11.11
+                  purl: pkg:gitlab/gitlab-org/gitlab-foss@v18.11.12
                   license: MIT
             uid: 0
             gid: 0
@@ -410,9 +410,9 @@ contents:
               - deb
             license: MIT
             name: gitlab-webservice-18
-            rel: 3
+            rel: 0
             url: https://gitlab.com/gitlab-org/gitlab-foss
-            version: 18.11.11
+            version: 18.11.12
 os-release:
   name: Docker Hardened Images (Debian)
   id: debian
