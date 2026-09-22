@@ -1,0 +1,186 @@
+# syntax=dhi.io/build:2-debian13
+
+name: NVIDIA Container Toolkit 1.x
+image: dhi.io/nvidia-container-toolkit
+variant: runtime
+tags:
+  - "1"
+  - "1.20"
+  - 1.20.0
+  - 1-debian
+  - 1-debian13
+  - 1.20-debian
+  - 1.20-debian13
+  - 1.20.0-debian
+  - 1.20.0-debian13
+platforms:
+  - linux/amd64
+  - linux/arm64
+dates:
+  release: "2019-10-22"
+vars:
+  FLAVORED_SUFFIX: ""
+  LIBNVC_DEBIAN_VERSION: 1.20.0-2
+  PKG_SUFFIX: ""
+  SEMVER_MAJOR_MINOR_VERSION: "1.20"
+  SEMVER_MAJOR_VERSION: "1"
+  SEMVER_VERSION: 1.20.0
+  SUFFIX: ""
+  VERSION: 1.20.0-2
+contents:
+  repositories:
+    - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
+  keyring:
+    - https://dhi.io/keyring/dhi-deb-gpg.D46852F6925E9F71.key
+  packages:
+    - '!libelogind0'
+    - '!mawk'
+    - '!original-awk'
+    - base-files
+    - bash
+    - ca-certificates-bundle
+    - coreutils
+    - dash
+    - nvidia-ctk-installer=1.20.0-2
+    - tzdata
+  builds:
+    - name: artifacts
+      contents:
+        repositories:
+          - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
+        keyring:
+          - https://dhi.io/keyring/dhi-deb-gpg.D46852F6925E9F71.key
+        packages:
+          - bash
+          - coreutils
+          - grep
+          - mawk
+          - libnvidia-container-tools=1.20.0-2
+          - libnvidia-container1=1.20.0-2
+          - nvidia-cdi-hook=1.20.0-2
+          - nvidia-container-runtime-hook=1.20.0-2
+          - nvidia-container-runtime.cdi=1.20.0-2
+          - nvidia-container-runtime.legacy=1.20.0-2
+          - nvidia-container-runtime=1.20.0-2
+          - nvidia-container-toolkit=1.20.0-2
+      pipeline:
+        - name: stage artifacts trees
+          shell: /bin/bash
+          runs: |
+            set -eux -o pipefail
+
+            case "${target.arch}" in
+              amd64) libdir=x86_64-linux-gnu ;;
+              arm64) libdir=aarch64-linux-gnu ;;
+              *)
+                echo "unsupported arch: ${target.arch}" >&2
+                exit 1
+                ;;
+            esac
+
+            mkdir -p "${target.dir}/artifacts/deb/usr/bin" \
+              "${target.dir}/artifacts/deb/usr/lib/${libdir}" \
+              "${target.dir}/artifacts/rpm/usr/bin" \
+              "${target.dir}/artifacts/rpm/usr/lib64"
+
+            for b in nvidia-ctk nvidia-cdi-hook nvidia-container-runtime \
+              nvidia-container-runtime.cdi nvidia-container-runtime.legacy \
+              nvidia-container-runtime-hook nvidia-container-cli; do
+              cp -a "/usr/bin/${b}" "${target.dir}/artifacts/deb/usr/bin/"
+              cp -a "/usr/bin/${b}" "${target.dir}/artifacts/rpm/usr/bin/"
+            done
+
+            cp -a "/usr/lib/${libdir}/"libnvidia-container*.so* "${target.dir}/artifacts/deb/usr/lib/${libdir}/"
+            cp -a "/usr/lib/${libdir}/"libnvidia-container*.so* "${target.dir}/artifacts/rpm/usr/lib64/"
+        - name: slice libnvidia-container dpkg stanzas into status.d
+          shell: /bin/bash
+          runs: |
+            set -eux -o pipefail
+
+            mkdir -p ${target.dir}/var/lib/dpkg/status.d
+            for pkg in libnvidia-container1 libnvidia-container-tools; do
+              grep -q "^Package: ${pkg}$" /var/lib/dpkg/status
+              awk -v pkg="${pkg}" '$0 == "Package: " pkg {f=1} f && !/^(Status|Depends|Pre-Depends|Recommends|Suggests):/{print} /^$/{if(f)exit}' /var/lib/dpkg/status \
+                > ${target.dir}/var/lib/dpkg/status.d/${pkg}
+              test -s ${target.dir}/var/lib/dpkg/status.d/${pkg}
+            done
+      outputs:
+        - source: ${target.dir}/artifacts
+          target: /artifacts
+          uid: 0
+          gid: 0
+        - source: ${target.dir}/var/lib/dpkg/status.d/libnvidia-container1
+          target: /var/lib/dpkg/status.d/libnvidia-container1
+          uid: 0
+          gid: 0
+        - source: ${target.dir}/var/lib/dpkg/status.d/libnvidia-container-tools
+          target: /var/lib/dpkg/status.d/libnvidia-container-tools
+          uid: 0
+          gid: 0
+        - source: /opt/docker/sbom/nvidia-container-toolkit
+          target: /opt/docker/sbom/nvidia-container-toolkit
+          uid: 0
+          gid: 0
+        - source: /opt/docker/sbom/libnvidia-container
+          target: /opt/docker/sbom/libnvidia-container
+          uid: 0
+          gid: 0
+        - source: /opt/docker/sbom/libtirpc
+          target: /opt/docker/sbom/libtirpc
+          uid: 0
+          gid: 0
+        - source: /opt/docker/sbom/elftoolchain
+          target: /opt/docker/sbom/elftoolchain
+          uid: 0
+          gid: 0
+        - source: /opt/docker/sbom/nvidia-modprobe
+          target: /opt/docker/sbom/nvidia-modprobe
+          uid: 0
+          gid: 0
+accounts:
+  root: true
+  run-as: root
+  users:
+    - name: nonroot
+      uid: 65532
+      gid: 65532
+  groups:
+    - name: nonroot
+      gid: 65532
+      members:
+        - nonroot
+os-release:
+  name: Docker Hardened Images (Debian)
+  id: debian
+  version-id: "13"
+  version-codename: trixie
+  pretty-name: Docker Hardened Images/Debian GNU/Linux 13 (trixie)
+  home-url: https://docker.com/products/hardened-images/
+  bug-report-url: https://docker.com/support/
+work-dir: /work
+environment:
+  NVIDIA_DISABLE_REQUIRE: "true"
+  NVIDIA_DRIVER_CAPABILITIES: utility
+  NVIDIA_VISIBLE_DEVICES: void
+  PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/work
+paths:
+  - type: directory
+    path: /work
+    uid: 0
+    gid: 0
+    mode: "0755"
+  - type: symlink
+    path: /work/nvidia-ctk-installer
+    uid: 0
+    gid: 0
+    source: /usr/bin/nvidia-ctk-installer
+  - type: symlink
+    path: /work/nvidia-toolkit
+    uid: 0
+    gid: 0
+    source: /usr/bin/nvidia-ctk-installer
+annotations:
+  org.opencontainers.image.description: A minimal NVIDIA Container Toolkit image
+  org.opencontainers.image.licenses: Apache-2.0
+entrypoint:
+  - /work/nvidia-ctk-installer
