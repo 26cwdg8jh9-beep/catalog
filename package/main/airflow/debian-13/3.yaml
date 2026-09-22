@@ -3,10 +3,10 @@
 image: dhi.io/pkg-airflow
 variant: runtime
 tags:
-  - 3.3.1
-  - 3.3.1-r15
-  - 3.3.1-debian13
-  - 3.3.1-r15-debian13
+  - 3.3.2
+  - 3.3.2-r0
+  - 3.3.2-debian13
+  - 3.3.2-r0-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -14,16 +14,16 @@ dates:
   release: "2025-04-22"
 vars:
   ARCH: '#{ target.arch == "amd64" ? "x86_64" : "aarch64" }'
-  COMMIT_SHA: 3adbbe1c58e4532df1964cb7794805e763816ee8
+  COMMIT_SHA: aa19d2dbb9ed187ec01957a92848d9b005e9ba9d
   PYTHON_MAJOR_MINOR_VERSION: "3.13"
   PYTHON_MINOR: "3.13"
   PYTHON_VERSION: 3.13.15-1
-  REL: "15"
+  REL: "0"
   SEMVER_MAJOR_MINOR_VERSION: "3.3"
   SEMVER_MAJOR_VERSION: "3"
-  SEMVER_VERSION: 3.3.1
+  SEMVER_VERSION: 3.3.2
   UV_VERSION: 0.11.23
-  VERSION: 3.3.1
+  VERSION: 3.3.2
   YQ_REFERENCE: dhi/pkg-go-yq:4.53.6-debian13@sha256:6174bc1b42a6352ee39a2eaab5dc20051408fef75fe9c25b5c6b0408e772fba5
   YQ_VERSION: 4.53.6
 contents:
@@ -87,19 +87,19 @@ contents:
             path: ${source.dir}/uv-unknown-linux-gnu.tar.gz
             uid: 0
             gid: 0
-          - url: git+https://github.com/apache/airflow.git#3.3.1
-            checksum: 3adbbe1c58e4532df1964cb7794805e763816ee8
+          - url: git+https://github.com/apache/airflow.git#3.3.2
+            checksum: aa19d2dbb9ed187ec01957a92848d9b005e9ba9d
             path: ${source.dir}/airflow
             spdx:
               name: airflow
-              version: 3.3.1
+              version: 3.3.2
               packages:
                 - name: airflow
-                  purl: pkg:dhi/airflow@3.3.1
+                  purl: pkg:dhi/airflow@3.3.2
                   license: Apache-2.0
             uid: 0
             gid: 0
-          - url: https://raw.githubusercontent.com/apache/airflow/constraints-3.3.1/constraints-3.13.txt
+          - url: https://raw.githubusercontent.com/apache/airflow/constraints-3.3.2/constraints-3.13.txt
             path: ${source.dir}/airflow/constraints.txt
             uid: 0
             gid: 0
@@ -277,21 +277,17 @@ contents:
             ui_dist="${airflow_root}/lib/python3.13/site-packages/airflow/ui/dist"
 
             cd "${source.dir}/airflow"
-            git checkout "3adbbe1c58e4532df1964cb7794805e763816ee8"
+            git checkout "aa19d2dbb9ed187ec01957a92848d9b005e9ba9d"
 
             cd '${source.dir}/airflow/airflow-core/src/airflow/ui'
 
-            corepack pnpm config set dangerously-allow-all-builds true --location project
+            yq -i '.pnpm.overrides."prismjs" = "1.30.0"' package.json
 
-            touch pnpm-workspace.yaml
+            yq -i '.pnpm.overrides."form-data" = "4.0.6"' package.json
 
-            yq -i '.overrides."prismjs" = "1.30.0"' pnpm-workspace.yaml
+            yq -i '.pnpm.overrides."js-yaml" = "4.3.0"' package.json
 
-            yq -i '.overrides."form-data" = "4.0.6"' pnpm-workspace.yaml
-
-            yq -i '.overrides."js-yaml" = "4.3.0"' pnpm-workspace.yaml
-
-            yq -i '.overrides."@hey-api/openapi-ts" = "0.97.3"' pnpm-workspace.yaml
+            yq -i '.pnpm.overrides."@hey-api/openapi-ts" = "0.97.3"' package.json
 
             corepack pnpm up axios@1.18.0
 
@@ -310,15 +306,11 @@ contents:
             airflow_root="${target.dir}/usr/lib/airflow"
             ui_dist="${airflow_root}/lib/python3.13/site-packages/airflow/api_fastapi/auth/managers/simple/ui/dist"
 
-            corepack pnpm config set dangerously-allow-all-builds true --location project
+            yq -i '.pnpm.overrides."form-data" = "4.0.6"' package.json
 
-            touch pnpm-workspace.yaml
+            yq -i '.pnpm.overrides."js-yaml" = "4.3.0"' package.json
 
-            yq -i '.overrides."form-data" = "4.0.6"' pnpm-workspace.yaml
-
-            yq -i '.overrides."js-yaml" = "4.3.0"' pnpm-workspace.yaml
-
-            yq -i '.overrides."@hey-api/openapi-ts" = "0.97.3"' pnpm-workspace.yaml
+            yq -i '.pnpm.overrides."@hey-api/openapi-ts" = "0.97.3"' package.json
 
             corepack pnpm up axios@1.18.0
 
@@ -354,9 +346,9 @@ contents:
               - deb
             license: Apache-2.0
             name: airflow
-            rel: 15
+            rel: 0
             url: https://airflow.apache.org/
-            version: 3.3.1
+            version: 3.3.2
       paths:
         - type: file
           path: ${source.dir}/scripts/build-provider
