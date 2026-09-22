@@ -3,25 +3,25 @@
 image: dhi.io/pkg-varnish
 variant: runtime
 tags:
-  - 8.0.0
-  - 8.0.0-r0
-  - 8.0.0-debian13
-  - 8.0.0-r0-debian13
+  - 9.1.0
+  - 9.1.0-r0
+  - 9.1.0-debian13
+  - 9.1.0-r0-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
-  release: "2025-09-15"
-  end-of-life: "2026-09-15"
+  release: "2026-09-16"
+  end-of-life: "2027-09-16"
 vars:
-  COMMIT_SHA: 71d4d75665f4d1949f7eeca28092a12df7037f3a
-  PACKAGE_NAME: varnish-8.0
+  COMMIT_SHA: ffd36e9db9a1ec2bf6637deda180a87d40a13d0f
+  PACKAGE_NAME: varnish-9.1
   REL: "0"
-  SEMVER_MAJOR_MINOR_VERSION: "8.0"
-  SEMVER_MAJOR_VERSION: "8"
-  SEMVER_VERSION: 8.0.0
-  VARNISH_GITHUB_REPO: varnishcache/varnish-cache
-  VERSION: 8.0.0
+  SEMVER_MAJOR_MINOR_VERSION: "9.1"
+  SEMVER_MAJOR_VERSION: "9"
+  SEMVER_VERSION: 9.1.0
+  VARNISH_GITHUB_REPO: varnish/varnish
+  VERSION: 9.1.0
 contents:
   packages:
     - base-files
@@ -57,15 +57,15 @@ contents:
           - python3-sphinx
           - tar
         files:
-          - url: git+https://github.com/varnishcache/varnish-cache.git#varnish-8.0.0
-            checksum: 71d4d75665f4d1949f7eeca28092a12df7037f3a
+          - url: git+https://github.com/varnish/varnish.git#varnish-9.1.0
+            checksum: ffd36e9db9a1ec2bf6637deda180a87d40a13d0f
             path: ${source.dir}
             spdx:
               name: varnish
-              version: 8.0.0
+              version: 9.1.0
               packages:
                 - name: varnish
-                  purl: pkg:dhi/varnish@8.0.0
+                  purl: pkg:dhi/varnish@9.1.0
                   license: BSD-2-Clause
             uid: 0
             gid: 0
@@ -127,10 +127,10 @@ contents:
             formats:
               - deb
             license: BSD-2-Clause
-            name: varnish-8.0
+            name: varnish-9.1
             rel: 0
             url: https://varnish-cache.org/
-            version: 8.0.0
+            version: 9.1.0
 os-release:
   name: Docker Hardened Images (Debian)
   id: debian
