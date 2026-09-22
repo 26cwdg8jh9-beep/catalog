@@ -4,9 +4,9 @@ image: dhi.io/pkg-mediawiki
 variant: runtime
 tags:
   - 1.46.0
-  - 1.46.0-r4
+  - 1.46.0-r5
   - 1.46.0-debian13
-  - 1.46.0-r4-debian13
+  - 1.46.0-r5-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -24,7 +24,7 @@ vars:
   PHP_SOURCE_CHECKSUM: e293ed620cec74651bb4a071317892a478aa6840fab22db45c72d77cd42f9676
   PHP_UPSTREAM_VERSION: 8.3.33
   PHP_VERSION: 8.3.33-0
-  REL: "4"
+  REL: "5"
   SEMVER_MAJOR_MINOR_VERSION: "1.46"
   SEMVER_MAJOR_VERSION: "1"
   SEMVER_VERSION: 1.46.0
@@ -235,6 +235,13 @@ contents:
             php "${source.dir}/composer.phar" require --no-interaction --no-ansi --no-progress --no-update guzzlehttp/guzzle:^7.12.1
             php "${source.dir}/composer.phar" install --no-interaction --no-ansi --no-progress --no-dev --prefer-dist
             rm -f vendor/composer.lock vendor/composer.json
+        - name: bump pygments in shellbox requirements
+          work-dir: ${source.dir}/mediawiki
+          runs: |
+            set -eux -o pipefail
+
+            requirements="vendor/wikimedia/shellbox/syntaxhighlight/requirements.txt"
+            printf 'Pygments==2.20.0  \\\n  --hash=sha256:6757cd03768053ff99f3039c1a36d6c0aa0b263438fcab17520b30a303a82b5f\n' > "${requirements}" # CVE-2026-4539
         - name: extract imagemagick source
           runs: |
             set -eux -o pipefail
@@ -319,7 +326,7 @@ contents:
               - deb
             license: GPL-2.0-or-later
             name: mediawiki-1.46
-            rel: 4
+            rel: 5
             url: https://www.mediawiki.org
             version: 1.46.0
       paths:
