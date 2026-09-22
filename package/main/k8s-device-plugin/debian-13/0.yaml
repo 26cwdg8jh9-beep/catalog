@@ -3,24 +3,24 @@
 image: dhi.io/pkg-k8s-device-plugin
 variant: runtime
 tags:
-  - 0.20.0
-  - 0.20.0-r3
-  - 0.20.0-debian13
-  - 0.20.0-r3-debian13
+  - 0.20.1
+  - 0.20.1-r0
+  - 0.20.1-debian13
+  - 0.20.1-r0-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
   release: "2026-01-23"
 vars:
-  COMMIT_SHA: 1b826acc6af3079d8923bac395c3124b8861a9a6
+  COMMIT_SHA: 487d7a93894b0f3ad08097169593972eb3ca8206
   GOLANG_MAJOR_MINOR_VERSION: "1.26"
   GOLANG_VERSION: 1.26.8-0
-  REL: "3"
+  REL: "0"
   SEMVER_MAJOR_MINOR_VERSION: "0.20"
   SEMVER_MAJOR_VERSION: "0"
-  SEMVER_VERSION: 0.20.0
-  VERSION: 0.20.0
+  SEMVER_VERSION: 0.20.1
+  VERSION: 0.20.1
 contents:
   packages:
     - base-files
@@ -44,15 +44,15 @@ contents:
           - golang-1.26=1.26.8-0
           - golang-1.26-oci-config=1.26.8-0
         files:
-          - url: git+https://github.com/NVIDIA/k8s-device-plugin.git#v0.20.0
-            checksum: 1b826acc6af3079d8923bac395c3124b8861a9a6
+          - url: git+https://github.com/NVIDIA/k8s-device-plugin.git#v0.20.1
+            checksum: 487d7a93894b0f3ad08097169593972eb3ca8206
             path: /go/src/github.com/NVIDIA/k8s-device-plugin
             spdx:
               name: k8s-device-plugin
-              version: 0.20.0
+              version: 0.20.1
               packages:
                 - name: k8s-device-plugin
-                  purl: pkg:golang/NVIDIA/k8s-device-plugin@0.20.0
+                  purl: pkg:golang/NVIDIA/k8s-device-plugin@0.20.1
                   license: Apache-2.0
             uid: 0
             gid: 0
@@ -77,8 +77,8 @@ contents:
             cgo_enabled: 1
             fips: false
             ldflags:
-              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.version=0.20.0
-              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.gitCommit=1b826acc6af3079d8923bac395c3124b8861a9a6
+              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.version=0.20.1
+              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.gitCommit=487d7a93894b0f3ad08097169593972eb3ca8206
             output: ${target.dir}/usr/bin/gpu-feature-discovery
             packages: ./cmd/gpu-feature-discovery
         - name: build gpu-feature-discovery dev
@@ -88,8 +88,8 @@ contents:
             cgo_enabled: 1
             fips: false
             ldflags:
-              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.version=0.20.0
-              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.gitCommit=1b826acc6af3079d8923bac395c3124b8861a9a6
+              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.version=0.20.1
+              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.gitCommit=487d7a93894b0f3ad08097169593972eb3ca8206
             output: ${target.dir}/usr/bin/gpu-feature-discovery-dev
             packages: ./cmd/gpu-feature-discovery
             strip: false
@@ -100,8 +100,8 @@ contents:
             cgo_enabled: 1
             fips: false
             ldflags:
-              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.version=0.20.0
-              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.gitCommit=1b826acc6af3079d8923bac395c3124b8861a9a6
+              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.version=0.20.1
+              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.gitCommit=487d7a93894b0f3ad08097169593972eb3ca8206
             output: ${target.dir}/usr/bin/nvidia-device-plugin
             packages: ./cmd/nvidia-device-plugin
         - name: build nvidia-device-plugin dev
@@ -111,8 +111,8 @@ contents:
             cgo_enabled: 1
             fips: false
             ldflags:
-              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.version=0.20.0
-              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.gitCommit=1b826acc6af3079d8923bac395c3124b8861a9a6
+              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.version=0.20.1
+              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.gitCommit=487d7a93894b0f3ad08097169593972eb3ca8206
             output: ${target.dir}/usr/bin/nvidia-device-plugin-dev
             packages: ./cmd/nvidia-device-plugin
             strip: false
@@ -123,8 +123,8 @@ contents:
             cgo_enabled: 1
             fips: false
             ldflags:
-              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.version=0.20.0
-              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.gitCommit=1b826acc6af3079d8923bac395c3124b8861a9a6
+              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.version=0.20.1
+              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.gitCommit=487d7a93894b0f3ad08097169593972eb3ca8206
             output: ${target.dir}/usr/bin/mps-control-daemon
             packages: ./cmd/mps-control-daemon
         - name: build mps-control-daemon dev
@@ -134,8 +134,8 @@ contents:
             cgo_enabled: 1
             fips: false
             ldflags:
-              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.version=0.20.0
-              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.gitCommit=1b826acc6af3079d8923bac395c3124b8861a9a6
+              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.version=0.20.1
+              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.gitCommit=487d7a93894b0f3ad08097169593972eb3ca8206
             output: ${target.dir}/usr/bin/mps-control-daemon-dev
             packages: ./cmd/mps-control-daemon
             strip: false
@@ -146,8 +146,8 @@ contents:
             cgo_enabled: 1
             fips: false
             ldflags:
-              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.version=0.20.0
-              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.gitCommit=1b826acc6af3079d8923bac395c3124b8861a9a6
+              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.version=0.20.1
+              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.gitCommit=487d7a93894b0f3ad08097169593972eb3ca8206
             output: ${target.dir}/usr/bin/config-manager
             packages: ./cmd/config-manager
         - name: build config-manager dev
@@ -157,8 +157,8 @@ contents:
             cgo_enabled: 1
             fips: false
             ldflags:
-              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.version=0.20.0
-              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.gitCommit=1b826acc6af3079d8923bac395c3124b8861a9a6
+              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.version=0.20.1
+              - -X github.com/NVIDIA/k8s-device-plugin/internal/info.gitCommit=487d7a93894b0f3ad08097169593972eb3ca8206
             output: ${target.dir}/usr/bin/config-manager-dev
             packages: ./cmd/config-manager
             strip: false
@@ -174,7 +174,7 @@ contents:
               - deb
             license: Apache-2.0
             name: k8s-device-plugin
-            rel: 3
+            rel: 0
             subpackages:
               - files:
                   - path: usr/bin/nvidia-device-plugin
@@ -202,7 +202,7 @@ contents:
                     source: usr/bin/config-manager-dev
                 name: config-manager-dev
             url: https://github.com/NVIDIA/k8s-device-plugin
-            version: 0.20.0
+            version: 0.20.1
 os-release:
   name: Docker Hardened Images (Debian)
   id: debian
