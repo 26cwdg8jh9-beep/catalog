@@ -4,23 +4,26 @@ name: VictoriaMetrics VMAlert 1.x (dev)
 image: dhi.io/victoriametrics-vmalert
 variant: dev
 tags:
-  - 1.151-dev
-  - 1.151.0-dev
-  - 1.151-debian-dev
-  - 1.151-debian13-dev
-  - 1.151.0-debian-dev
-  - 1.151.0-debian13-dev
+  - 1-dev
+  - 1.152-dev
+  - 1.152.0-dev
+  - 1-debian-dev
+  - 1-debian13-dev
+  - 1.152-debian-dev
+  - 1.152-debian13-dev
+  - 1.152.0-debian-dev
+  - 1.152.0-debian13-dev
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
-  release: "2026-08-28"
+  release: "2026-09-11"
 vars:
-  COMMIT_SHA: 83fc70c6aced8c99a0a445a872ee891191b98517
-  SEMVER_MAJOR_MINOR_VERSION: "1.151"
+  COMMIT_SHA: 9e2a55efad054eda661beef35e0b6ac9d9e2a1b4
+  SEMVER_MAJOR_MINOR_VERSION: "1.152"
   SEMVER_MAJOR_VERSION: "1"
-  SEMVER_VERSION: 1.151.0
-  VERSION: 1.151.0
+  SEMVER_VERSION: 1.152.0
+  VERSION: 1.152.0
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -59,15 +62,15 @@ contents:
           - mawk
           - sed
         files:
-          - url: git+https://github.com/VictoriaMetrics/VictoriaMetrics.git#v1.151.0
-            checksum: 83fc70c6aced8c99a0a445a872ee891191b98517
+          - url: git+https://github.com/VictoriaMetrics/VictoriaMetrics.git#v1.152.0
+            checksum: 9e2a55efad054eda661beef35e0b6ac9d9e2a1b4
             path: /go/src/github.com/VictoriaMetrics/VictoriaMetrics
             spdx:
               name: victoriametrics-vmalert
-              version: 1.151.0
+              version: 1.152.0
               packages:
                 - name: victoriametrics-vmalert
-                  purl: pkg:golang/github.com/VictoriaMetrics/VictoriaMetrics@1.151.0
+                  purl: pkg:golang/github.com/VictoriaMetrics/VictoriaMetrics@1.152.0
                   license: Apache-2.0
             uid: 0
             gid: 0
@@ -87,7 +90,7 @@ contents:
           uses: go/build@v1
           with:
             ldflags:
-              - -X 'github.com/VictoriaMetrics/VictoriaMetrics/lib/buildinfo.Version=vmalert-1.151.0'
+              - -X 'github.com/VictoriaMetrics/VictoriaMetrics/lib/buildinfo.Version=vmalert-1.152.0'
             output: ${target.dir}/usr/local/bin/vmalert
             packages: ./app/vmalert
       outputs:

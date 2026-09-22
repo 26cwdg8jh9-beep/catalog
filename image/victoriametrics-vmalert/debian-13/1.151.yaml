@@ -4,11 +4,8 @@ name: VictoriaMetrics VMAlert 1.x
 image: dhi.io/victoriametrics-vmalert
 variant: runtime
 tags:
-  - "1"
   - "1.151"
   - 1.151.0
-  - 1-debian
-  - 1-debian13
   - 1.151-debian
   - 1.151-debian13
   - 1.151.0-debian
