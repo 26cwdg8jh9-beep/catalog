@@ -3,24 +3,24 @@
 image: dhi.io/pkg-zot
 variant: runtime
 tags:
-  - 2.1.20-alpine3.24
-  - 2.1.20-r7-alpine3.24
+  - 2.1.21-alpine3.24
+  - 2.1.21-r0-alpine3.24
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
   release: "2026-03-08"
 vars:
-  COMMIT_SHA: 3b5796d834e8661ea661a5fcc47add8d4405aebf
+  COMMIT_SHA: 6429ce645b13f5a72275d793ae42df51739bb0ca
   GOLANG_MAJOR_MINOR_VERSION: "1.26"
-  GOLANG_VERSION: 1.26.7-r0
-  REL: "7"
+  GOLANG_VERSION: 1.26.8-r0
+  REL: "0"
   SEMVER_MAJOR_MINOR_VERSION: "2.1"
   SEMVER_MAJOR_VERSION: "2"
-  SEMVER_VERSION: 2.1.20
-  VERSION: 2.1.20
-  ZUI_SHA256: ebb9d428288480e357a69f8c3e32cdd36219700b9d325143a7e2813070f890c3
-  ZUI_VERSION: commit-fbbd359
+  SEMVER_VERSION: 2.1.21
+  VERSION: 2.1.21
+  ZUI_SHA256: b15d13c4f58b7a44006c4d1a2b223bbdc148f56a3fce8fb482f4b26fa1305c5e
+  ZUI_VERSION: commit-a7feb46
 contents:
   repositories:
     - https://dhi.io/apk/alpine/v3.24/main
@@ -44,18 +44,18 @@ contents:
           - gzip
           - mawk
           - sed
-          - golang-1.26=1.26.7-r0
-          - golang-1.26-oci-config=1.26.7-r0
+          - golang-1.26=1.26.8-r0
+          - golang-1.26-oci-config=1.26.8-r0
         files:
-          - url: git+https://github.com/project-zot/zot.git#v2.1.20
-            checksum: 3b5796d834e8661ea661a5fcc47add8d4405aebf
+          - url: git+https://github.com/project-zot/zot.git#v2.1.21
+            checksum: 6429ce645b13f5a72275d793ae42df51739bb0ca
             path: /go/src/github.com/project-zot/zot
             spdx:
               name: zot
-              version: 2.1.20
+              version: 2.1.21
               packages:
                 - name: zot
-                  purl: pkg:golang/github.com/project-zot/zot/v2@2.1.20
+                  purl: pkg:golang/github.com/project-zot/zot/v2@2.1.21
                   license: Apache-2.0
             uid: 0
             gid: 0
@@ -68,11 +68,9 @@ contents:
               - github.com/Azure/go-ntlmssp@v0.1.1
               - github.com/go-git/go-git/v5@v5.19.2
               - github.com/go-jose/go-jose/v4@v4.1.4
-              - github.com/google/cel-go@v0.30.0
+              - github.com/opencontainers/distribution-spec/specs-go@v0.0.0-20260627150115-216c04cd22ce
               - github.com/in-toto/in-toto-golang@v0.11.0
-              - github.com/moby/buildkit@v0.31.1
               - github.com/regclient/regclient@v0.11.5
-              - github.com/sigstore/sigstore-go@v1.2.1
               - go.opentelemetry.io/otel/sdk@v1.44.0
               - github.com/hashicorp/go-getter@v1.8.6
               - go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploghttp@v0.20.0
@@ -80,6 +78,7 @@ contents:
               - go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp@v1.44.0
               - github.com/distribution/distribution/v3@v3.1.1
               - oras.land/oras-go/v2@v2.6.2
+              - github.com/containerd/containerd/v2@v2.3.5
             tidy: true
         - name: align otel log modules after go/bump tidy
           uses: go/bump@v2
@@ -102,8 +101,8 @@ contents:
             experiments: jsonv2
             fips: false
             ldflags:
-              - -X zotregistry.dev/zot/v2/pkg/buildinfo.ReleaseTag=2.1.20
-              - -X zotregistry.dev/zot/v2/pkg/buildinfo.Commit=v2.1.20-3b5796d834e8661ea661a5fcc47add8d4405aebf
+              - -X zotregistry.dev/zot/v2/pkg/buildinfo.ReleaseTag=2.1.21
+              - -X zotregistry.dev/zot/v2/pkg/buildinfo.Commit=v2.1.21-6429ce645b13f5a72275d793ae42df51739bb0ca
               - -X zotregistry.dev/zot/v2/pkg/buildinfo.BinaryType=full
               - -s
               - -w
@@ -117,8 +116,8 @@ contents:
             experiments: jsonv2
             fips: false
             ldflags:
-              - -X zotregistry.dev/zot/v2/pkg/buildinfo.ReleaseTag=2.1.20
-              - -X zotregistry.dev/zot/v2/pkg/buildinfo.Commit=v2.1.20-3b5796d834e8661ea661a5fcc47add8d4405aebf
+              - -X zotregistry.dev/zot/v2/pkg/buildinfo.ReleaseTag=2.1.21
+              - -X zotregistry.dev/zot/v2/pkg/buildinfo.Commit=v2.1.21-6429ce645b13f5a72275d793ae42df51739bb0ca
               - -X zotregistry.dev/zot/v2/pkg/buildinfo.BinaryType=full
               - -s
               - -w
@@ -133,14 +132,14 @@ contents:
               - usr/bin/zot
             license: Apache-2.0
             name: zot
-            rel: 7
+            rel: 0
             subpackages:
               - files:
                   - path: usr/bin/zot
                     source: usr/bin/zot-dev
                 name: zot-dev
             url: https://github.com/project-zot/zot
-            version: 2.1.20
+            version: 2.1.21
     - name: zot-ui
       work-dir: /go/src/github.com/project-zot/zot
       contents:
@@ -153,30 +152,30 @@ contents:
           - gzip
           - mawk
           - sed
-          - golang-1.26=1.26.7-r0
-          - golang-1.26-oci-config=1.26.7-r0
+          - golang-1.26=1.26.8-r0
+          - golang-1.26-oci-config=1.26.8-r0
         files:
-          - url: git+https://github.com/project-zot/zot.git#v2.1.20
-            checksum: 3b5796d834e8661ea661a5fcc47add8d4405aebf
+          - url: git+https://github.com/project-zot/zot.git#v2.1.21
+            checksum: 6429ce645b13f5a72275d793ae42df51739bb0ca
             path: /go/src/github.com/project-zot/zot
             spdx:
               name: zot
-              version: 2.1.20
+              version: 2.1.21
               packages:
                 - name: zot
-                  purl: pkg:golang/github.com/project-zot/zot/v2@2.1.20
+                  purl: pkg:golang/github.com/project-zot/zot/v2@2.1.21
                   license: Apache-2.0
             uid: 0
             gid: 0
-          - url: https://github.com/project-zot/zui/releases/download/commit-fbbd359/zui.tgz
-            checksum: sha256:ebb9d428288480e357a69f8c3e32cdd36219700b9d325143a7e2813070f890c3
+          - url: https://github.com/project-zot/zui/releases/download/commit-a7feb46/zui.tgz
+            checksum: sha256:b15d13c4f58b7a44006c4d1a2b223bbdc148f56a3fce8fb482f4b26fa1305c5e
             path: ${source.dir}/zui.tgz
             spdx:
               name: zui
-              version: commit-fbbd359
+              version: commit-a7feb46
               packages:
                 - name: zui
-                  purl: pkg:github/project-zot/zui@commit-fbbd359
+                  purl: pkg:github/project-zot/zui@commit-a7feb46
                   license: Apache-2.0
             uid: 0
             gid: 0
@@ -189,11 +188,9 @@ contents:
               - github.com/Azure/go-ntlmssp@v0.1.1
               - github.com/go-git/go-git/v5@v5.19.2
               - github.com/go-jose/go-jose/v4@v4.1.4
-              - github.com/google/cel-go@v0.30.0
+              - github.com/opencontainers/distribution-spec/specs-go@v0.0.0-20260627150115-216c04cd22ce
               - github.com/in-toto/in-toto-golang@v0.11.0
-              - github.com/moby/buildkit@v0.31.1
               - github.com/regclient/regclient@v0.11.5
-              - github.com/sigstore/sigstore-go@v1.2.1
               - go.opentelemetry.io/otel/sdk@v1.44.0
               - github.com/hashicorp/go-getter@v1.8.6
               - go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploghttp@v0.20.0
@@ -201,6 +198,7 @@ contents:
               - go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp@v1.44.0
               - github.com/distribution/distribution/v3@v3.1.1
               - oras.land/oras-go/v2@v2.6.2
+              - github.com/containerd/containerd/v2@v2.3.5
             tidy: true
         - name: align otel log modules after go/bump tidy
           uses: go/bump@v2
@@ -231,8 +229,8 @@ contents:
             experiments: jsonv2
             fips: false
             ldflags:
-              - -X zotregistry.dev/zot/v2/pkg/buildinfo.ReleaseTag=2.1.20
-              - -X zotregistry.dev/zot/v2/pkg/buildinfo.Commit=v2.1.20-3b5796d834e8661ea661a5fcc47add8d4405aebf
+              - -X zotregistry.dev/zot/v2/pkg/buildinfo.ReleaseTag=2.1.21
+              - -X zotregistry.dev/zot/v2/pkg/buildinfo.Commit=v2.1.21-6429ce645b13f5a72275d793ae42df51739bb0ca
               - -X zotregistry.dev/zot/v2/pkg/buildinfo.BinaryType=full
               - -s
               - -w
@@ -246,8 +244,8 @@ contents:
             experiments: jsonv2
             fips: false
             ldflags:
-              - -X zotregistry.dev/zot/v2/pkg/buildinfo.ReleaseTag=2.1.20
-              - -X zotregistry.dev/zot/v2/pkg/buildinfo.Commit=v2.1.20-3b5796d834e8661ea661a5fcc47add8d4405aebf
+              - -X zotregistry.dev/zot/v2/pkg/buildinfo.ReleaseTag=2.1.21
+              - -X zotregistry.dev/zot/v2/pkg/buildinfo.Commit=v2.1.21-6429ce645b13f5a72275d793ae42df51739bb0ca
               - -X zotregistry.dev/zot/v2/pkg/buildinfo.BinaryType=full
               - -s
               - -w
@@ -262,14 +260,14 @@ contents:
               - usr/bin/zot
             license: Apache-2.0
             name: zot-ui
-            rel: 7
+            rel: 0
             subpackages:
               - files:
                   - path: usr/bin/zot
                     source: usr/bin/zot-dev
                 name: zot-ui-dev
             url: https://github.com/project-zot/zot
-            version: 2.1.20
+            version: 2.1.21
 os-release:
   name: Docker Hardened Images (Alpine)
   id: alpine
