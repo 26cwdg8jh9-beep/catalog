@@ -84,6 +84,10 @@ contents:
               - github.com/aquasecurity/trivy@v0.72.0
               - github.com/yuin/goldmark@v1.7.17
               - helm.sh/helm/v3@v3.20.2
+              - go.opentelemetry.io/otel@v1.45.0
+              - go.opentelemetry.io/otel/sdk@v1.45.0
+              - go.opentelemetry.io/otel/exporters/otlp/otlptrace@v1.45.0
+              - go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc@v1.45.0
               - google.golang.org/grpc@v1.83.2
             downgrade: true
             replaces:
