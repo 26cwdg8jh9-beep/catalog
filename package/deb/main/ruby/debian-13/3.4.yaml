@@ -3,14 +3,14 @@
 image: dhi.io/pkg-ruby
 variant: runtime
 tags:
-  - 3.4.10-57
-  - 3.4.10-57-debian13
+  - 3.4.10-58
+  - 3.4.10-58-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 vars:
-  DHI_REL: "57"
-  DHI_VERSION: 3.4.10-57
+  DHI_REL: "58"
+  DHI_VERSION: 3.4.10-58
   PACKAGE_NAME: ruby-3.4
   RUBY_REFERENCE: dhi/ruby:3.4.10-debian13-dev@sha256:9244353bb05153f1cd38371ec63fa24fb6fbf80abe11de0b08dbb4079b6e233e
   SEMVER_MAJOR_MINOR_VERSION: "3.4"
@@ -78,8 +78,8 @@ contents:
             path: /ruby/erb
             uid: 0
             gid: 0
-          - url: git+https://github.com/ruby/json.git#v2.19.2
-            checksum: 54f8a878aebee090476a53c851c943128894be62
+          - url: git+https://github.com/ruby/json.git#v2.19.9
+            checksum: 2cff2678d5af54890a49da58345ac141b571f661
             path: /ruby/json
             uid: 0
             gid: 0
@@ -172,6 +172,43 @@ contents:
               grep -q "@_init.equal?(self.class.singleton_class)" lib/erb.rb
               grep -q "VERSION = '${fixed}'" lib/erb/version.rb
             fi
+        - name: backport json default gem (CVE-2026-33210, CVE-2026-54696)
+          runs: |
+            set -eux -o pipefail
+
+            fixed=2.19.9
+            current="$(sed -nE "s/^[[:space:]]*VERSION[[:space:]]*=[[:space:]]*['\"]([^'\"]+)['\"].*/\1/p" ext/json/lib/json/version.rb | head -1)"
+            test -n "${current}"
+            if dpkg --compare-versions "${current}" ge "${fixed}"; then
+              echo "json ${current} already >= ${fixed}, skipping backport"
+              exit 0
+            fi
+
+            # json is a Ruby default gem. Replace Ruby's vendored sources before
+            # make install so the installed code and default gemspec both report
+            # the patched version. sync_default_gems.rb does not lay out ext/json
+            # correctly for large backports on the 3.4 line.
+            rm -rf test/json
+            cp -a /ruby/json/test/json test/json
+
+            rm -rf ext/json/fbuffer
+            rm -rf ext/json/generator
+            rm -rf ext/json/parser
+            rm -rf ext/json/simd
+            rm -rf ext/json/vendor
+            rm -rf ext/json/lib
+            rm -f ext/json/json.gemspec
+            rm -f ext/json/json.h
+
+            cp -a /ruby/json/ext/json/ext/. ext/json/
+            cp -a /ruby/json/lib ext/json/lib
+            cp -a /ruby/json/json.gemspec ext/json/json.gemspec
+
+            rm -rf ext/json/lib/json/truffle_ruby
+            rm -rf ext/json/lib/json/pure
+            rm -f ext/json/lib/json/pure.rb
+
+            grep -q "VERSION = '2.19.9'" ext/json/lib/json/version.rb
         - name: prepare debian metadata
           runs: |
             set -eux -o pipefail
@@ -190,8 +227,8 @@ contents:
             changelog:
               - Upgrade bundled net-imap default gem to fix CVE-2025-43857
               - Backport erb default gem def_method fix for CVE-2026-41316 (3.3, 3.4)
-              - Backport json default gem 2.19.2 to fix CVE-2026-33210 (4.0)
-            version: 3.4.10-57
+              - Backport json default gem 2.19.9 to fix CVE-2026-33210 and CVE-2026-54696 (3.4, 4.0)
+            version: 3.4.10-58
         - uses: dpkg/build@v1
           with:
             args: -b -uc -us -d
