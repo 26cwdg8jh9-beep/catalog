@@ -4,7 +4,7 @@ image: dhi.io/pkg-prometheus
 variant: runtime
 tags:
   - 3.14.0-alpine3.24
-  - 3.14.0-r6-alpine3.24
+  - 3.14.0-r9-alpine3.24
 platforms:
   - linux/amd64
   - linux/arm64
@@ -15,7 +15,7 @@ vars:
   NODEJS_VERSION: 24.21.0-r0
   PACKAGE_NAME: prometheus-3.14
   PROMETHEUS_GO_MODULE_VERSION: 0.314.0
-  REL: "6"
+  REL: "9"
   RELEASE_TYPE: stable
   SEMVER_MAJOR_MINOR_VERSION: "3.14"
   SEMVER_MAJOR_VERSION: "3"
@@ -88,7 +88,7 @@ contents:
 
             yq -i '.overrides."http-proxy-middleware" = "3.0.7"' pnpm-workspace.yaml # CVE-2026-55602
             yq -i '.overrides."immutable" = "5.1.8"' pnpm-workspace.yaml             # CVE-2026-59879, CVE-2026-59880
-            yq -i '.overrides."nanoid" = "3.3.18"' pnpm-workspace.yaml               # CVE-2026-67213
+            yq -i '.overrides."nanoid" = "3.3.19"' pnpm-workspace.yaml               # CVE-2026-67213 (postcss 8.5.23 pulls nanoid 3.3.19)
             yq -i '.overrides."postcss" = "8.5.23"' pnpm-workspace.yaml              # GHSA-r28c-9q8g-f849, CVE-2026-69153
             yq -i '.allowBuilds.unrs-resolver = true' pnpm-workspace.yaml
             pnpm install --lockfile-only
@@ -125,7 +125,15 @@ contents:
               - golang.org/x/crypto@v0.56.0
               - github.com/buger/jsonparser@v1.1.2
               - google.golang.org/grpc@v1.83.2
+              - go.opentelemetry.io/otel@v1.45.0
+              - go.opentelemetry.io/otel/sdk@v1.45.0
+              - go.opentelemetry.io/otel/exporters/otlp/otlptrace@v1.45.0
+              - go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc@v1.45.0
+              - go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp@v1.45.0
             download: true
+            replaces:
+              - google.golang.org/grpc=google.golang.org/grpc@v1.83.2
+              - go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp=go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp@v0.69.0
             tidy: true
         - name: build plugins
           runs: |
@@ -224,7 +232,7 @@ contents:
               - opt/docker/sbom/prometheus-go
             license: Apache-2.0
             name: prometheus-3.14
-            rel: 6
+            rel: 9
             subpackages:
               - files:
                   - path: usr/bin/prometheus
