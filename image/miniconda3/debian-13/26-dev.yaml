@@ -29,6 +29,10 @@ vars:
   SEMVER_VERSION: 26.7.1
   VERSION: 26.7.1-1
 contents:
+  repositories:
+    - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
+  keyring:
+    - https://dhi.io/keyring/dhi-deb-gpg.D46852F6925E9F71.key
   packages:
     - '!gawk'
     - '!libelogind0'
@@ -44,6 +48,7 @@ contents:
     - git
     - grep
     - libc-bin
+    - libexpat1
     - libglib2.0-0t64
     - libsm6
     - libxext6
@@ -51,12 +56,14 @@ contents:
     - mawk
     - mercurial
     - openssh-client
+    - perl
     - perl-base
     - procps
     - sed
     - subversion
     - util-linux
     - wget
+    - zlib1g
   builds:
     - name: miniconda3
       contents:
@@ -68,6 +75,7 @@ contents:
           - findutils
           - grep
           - libc-bin
+          - mawk
           - sed
         files:
           - url: https://repo.anaconda.com/miniconda/Miniconda3-py314_26.7.1-1-Linux-x86_64.sh
