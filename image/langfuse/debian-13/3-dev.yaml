@@ -229,10 +229,10 @@ contents:
             yq -i '.overrides."browserslist" = "4.28.7"' pnpm-workspace.yaml                        # CVE-2026-73088, CVE-2026-73089 (HIGH)
 
             # Update the lockfile with overrides
-            pnpm install ---lockfile-only --ignore-scripts
+            pnpm install --lockfile-only --ignore-scripts
 
             # Install updated dependencies
-            pnpm install ---frozen-lockfile --ignore-scripts
+            pnpm install --frozen-lockfile --ignore-scripts
 
             # Scope Next's trace root to the pruned monorepo; otherwise it
             # walks up to /src/langfuse and blows the trace memory budget.

@@ -215,10 +215,10 @@ contents:
             '
 
             # Update the lockfile with overrides
-            pnpm install ---lockfile-only --ignore-scripts
+            pnpm install --lockfile-only --ignore-scripts
 
             # Install updated dependencies
-            pnpm install ---frozen-lockfile --ignore-scripts
+            pnpm install --frozen-lockfile --ignore-scripts
 
             cp -a full/. .
 

@@ -5,30 +5,30 @@ image: dhi.io/langfuse
 variant: dev
 tags:
   - 4-dev
-  - 4.16-dev
-  - 4.16.0-dev
+  - 4.41-dev
+  - 4.41.0-dev
   - 4-debian-dev
   - 4-debian13-dev
-  - 4.16-debian-dev
-  - 4.16-debian13-dev
-  - 4.16.0-debian-dev
-  - 4.16.0-debian13-dev
+  - 4.41-debian-dev
+  - 4.41-debian13-dev
+  - 4.41.0-debian-dev
+  - 4.41.0-debian13-dev
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
   release: "2026-07-30"
 vars:
-  COMMIT_SHA: 12453aab35d43f1f5254571c95e456a03cf6a4ca
-  MIGRATE_COMMIT_SHA: 89e308c340a2c069c3260f268307d38a7db88227
-  MIGRATE_VERSION: 4.19.1
-  PNPM_VERSION: 11.1.3
+  COMMIT_SHA: d84020653a619a374bd36e4563d52a5db5590129
+  MIGRATE_COMMIT_SHA: 504568a3cbd23b8754760f55a3d89aec1b0c4963
+  MIGRATE_VERSION: 4.20.1
+  PNPM_VERSION: 12.4.1
   PRISMA_VERSION: 6.19.3
-  SEMVER_MAJOR_MINOR_VERSION: "4.16"
+  SEMVER_MAJOR_MINOR_VERSION: "4.41"
   SEMVER_MAJOR_VERSION: "4"
-  SEMVER_VERSION: 4.16.0
+  SEMVER_VERSION: 4.41.0
   TURBO_VERSION: 2.9.14
-  VERSION: 4.16.0
+  VERSION: 4.41.0
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -79,15 +79,15 @@ contents:
           - mawk
           - sed
         files:
-          - url: git+https://github.com/golang-migrate/migrate.git#v4.19.1
-            checksum: 89e308c340a2c069c3260f268307d38a7db88227
+          - url: git+https://github.com/golang-migrate/migrate.git#v4.20.1
+            checksum: 504568a3cbd23b8754760f55a3d89aec1b0c4963
             path: /go/src/github.com/golang-migrate/migrate
             spdx:
               name: golang-migrate
-              version: 4.19.1
+              version: 4.20.1
               packages:
                 - name: golang-migrate
-                  purl: pkg:golang/github.com/golang-migrate/migrate/v4@v4.19.1
+                  purl: pkg:golang/github.com/golang-migrate/migrate/v4@v4.20.1
                   license: MIT
             uid: 0
             gid: 0
@@ -145,15 +145,15 @@ contents:
           - yarn-classic
           - yq-go
         files:
-          - url: git+https://github.com/langfuse/langfuse.git#v4.16.0
-            checksum: 12453aab35d43f1f5254571c95e456a03cf6a4ca
+          - url: git+https://github.com/langfuse/langfuse.git#v4.41.0
+            checksum: d84020653a619a374bd36e4563d52a5db5590129
             path: ${source.dir}/langfuse
             spdx:
               name: langfuse
-              version: 4.16.0
+              version: 4.41.0
               packages:
                 - name: langfuse
-                  purl: pkg:github/langfuse/langfuse@4.16.0
+                  purl: pkg:github/langfuse/langfuse@4.41.0
                   license: MIT
             uid: 0
             gid: 0
@@ -164,7 +164,7 @@ contents:
             set -eux -o pipefail
 
             corepack enable
-            corepack prepare pnpm@11.1.3 --activate
+            corepack prepare pnpm@12.4.1 --activate
             npm install -g --no-package-lock --no-save turbo@2.9.14
             export PATH="$(npm config get prefix)/bin:${PATH}"
 
@@ -174,7 +174,7 @@ contents:
             cp -a json/. .
             cp -a full/. .
 
-            npm pkg set packageManager=pnpm@11.1.3
+            npm pkg set packageManager=pnpm@12.4.1
 
             yq -i '.minimumReleaseAge = 0' pnpm-workspace.yaml
             yq -i '.overrides."axios" = "1.18.0"' pnpm-workspace.yaml
@@ -210,9 +210,9 @@ contents:
             yq -i '.overrides."next-auth" = "4.24.15"' pnpm-workspace.yaml
             yq -i '.overrides."browserslist" = "4.28.7"' pnpm-workspace.yaml # CVE-2026-73088, CVE-2026-73089 (HIGH)
 
-            pnpm install ---lockfile-only --ignore-scripts
+            pnpm install --lockfile-only --ignore-scripts
 
-            pnpm install ---frozen-lockfile --ignore-scripts
+            pnpm install --frozen-lockfile --ignore-scripts
 
             rm -f /src/langfuse/pnpm-workspace.yaml /src/langfuse/pnpm-lock.yaml
 
@@ -252,7 +252,7 @@ contents:
               fs.writeFileSync(f, s);
             '
 
-            HEAP_MB=$(node -e 'console.log(Math.min(8192, Math.floor(require("os").totalmem()/1024/1024*0.45)))')
+            HEAP_MB=$(node -e 'console.log(Math.min(16384, Math.floor(require("os").totalmem()/1024/1024*0.45)))')
             NODE_OPTIONS="--max-old-space-size=${HEAP_MB}" \
               NEXT_IGNORE_BUILD_ERRORS=true \
               turbo run build --filter=web... --concurrency=1
@@ -280,7 +280,9 @@ contents:
                 -e 's| && source | \&\& . |g' \
                 -e 's|&> /dev/null|>/dev/null 2>\&1|g' \
                 -e 's|" == "|" = "|g' \
+                -e 's|^SCRIPT_DIR=.*dirname.*$|SCRIPT_DIR=${0%/*}; [ "$SCRIPT_DIR" = "$0" ] \&\& SCRIPT_DIR=.; SCRIPT_DIR=$(CDPATH= cd -- "$SCRIPT_DIR" \&\& pwd)|' \
                 ./packages/shared/clickhouse/scripts/up.sh
+              grep -q 'dirname' ./packages/shared/clickhouse/scripts/up.sh && exit 1
             fi
             cp -a ./packages/shared/clickhouse "${target.dir}/app/packages/shared/clickhouse"
 
