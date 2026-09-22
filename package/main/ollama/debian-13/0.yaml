@@ -3,17 +3,17 @@
 image: dhi.io/pkg-ollama
 variant: runtime
 tags:
-  - 0.34.2
-  - 0.34.2-r0
-  - 0.34.2-debian13
-  - 0.34.2-r0-debian13
+  - 0.34.3
+  - 0.34.3-r0
+  - 0.34.3-debian13
+  - 0.34.3-r0-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
   release: "2026-08-27"
 vars:
-  COMMIT_SHA: dfabde4539e42ba1e1eab50a3a50b88aea7958a0
+  COMMIT_SHA: 6383a0fa9cbf97494b847226e189f6e36b401a08
   GOLANG_MAJOR_MINOR_VERSION: "1.27"
   GOLANG_VERSION: 1.27.1-0
   LLAMA_CPP_COMMIT_SHA: 391fac16460f15233a7740550d858ac96df3419d
@@ -23,8 +23,8 @@ vars:
   REL: "0"
   SEMVER_MAJOR_MINOR_VERSION: "0.34"
   SEMVER_MAJOR_VERSION: "0"
-  SEMVER_VERSION: 0.34.2
-  VERSION: 0.34.2
+  SEMVER_VERSION: 0.34.3
+  VERSION: 0.34.3
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -51,15 +51,15 @@ contents:
           - golang-1.27=1.27.1-0
           - golang-1.27-oci-config=1.27.1-0
         files:
-          - url: git+https://github.com/ollama/ollama.git#v0.34.2
-            checksum: dfabde4539e42ba1e1eab50a3a50b88aea7958a0
+          - url: git+https://github.com/ollama/ollama.git#v0.34.3
+            checksum: 6383a0fa9cbf97494b847226e189f6e36b401a08
             path: /go/src/github.com/ollama/ollama
             spdx:
               name: ollama
-              version: 0.34.2
+              version: 0.34.3
               packages:
                 - name: ollama
-                  purl: pkg:golang/github.com/ollama/ollama@0.34.2
+                  purl: pkg:golang/github.com/ollama/ollama@0.34.3
                   license: MIT
             uid: 0
             gid: 0
@@ -114,7 +114,7 @@ contents:
             fips: false
             ldflags:
               - -linkmode=external
-              - -X github.com/ollama/ollama/version.Version=0.34.2
+              - -X github.com/ollama/ollama/version.Version=0.34.3
               - -X github.com/ollama/ollama/server.mode=release
             output: ${target.dir}/usr/bin/ollama
         - name: build ollama dev
@@ -126,7 +126,7 @@ contents:
             fips: false
             ldflags:
               - -linkmode=external
-              - -X github.com/ollama/ollama/version.Version=0.34.2
+              - -X github.com/ollama/ollama/version.Version=0.34.3
               - -X github.com/ollama/ollama/server.mode=release
             output: ${target.dir}/usr/bin/ollama-dev
             strip: false
@@ -157,7 +157,7 @@ contents:
                 replaces:
                   - ollama
             url: https://ollama.com
-            version: 0.34.2
+            version: 0.34.3
 os-release:
   name: Docker Hardened Images (Debian)
   id: debian
