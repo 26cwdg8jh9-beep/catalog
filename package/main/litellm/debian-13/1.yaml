@@ -3,24 +3,24 @@
 image: dhi.io/pkg-litellm
 variant: runtime
 tags:
-  - 1.101.0
-  - 1.101.0-r1
-  - 1.101.0-debian13
-  - 1.101.0-r1-debian13
+  - 1.102.0
+  - 1.102.0-r0
+  - 1.102.0-debian13
+  - 1.102.0-r0-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 vars:
   CARGO_VERSION: 1.97.1-0
-  COMMIT_SHA: 18243cd7af4c3325165ba68b21379e2719e051c7
+  COMMIT_SHA: 95293834e833b2d2979f87d1bd2a5be45db6728a
   PYTHON_MINOR: "3.13"
-  PYTHON_VERSION: 3.13.15-1
-  REL: "1"
+  PYTHON_VERSION: 3.13.15-2
+  REL: "0"
   RUSTC_VERSION: 1.97.1-0
-  SEMVER_MAJOR_MINOR_VERSION: "1.101"
+  SEMVER_MAJOR_MINOR_VERSION: "1.102"
   SEMVER_MAJOR_VERSION: "1"
-  SEMVER_VERSION: 1.101.0
-  VERSION: 1.101.0
+  SEMVER_VERSION: 1.102.0
+  VERSION: 1.102.0
 contents:
   packages:
     - base-files
@@ -52,27 +52,27 @@ contents:
           - pkg-config
           - rustc-1.97=1.97.1-0
           - sed
-          - libpython-3.13-minimal=3.13.15-1
-          - libpython-3.13-stdlib=3.13.15-1
-          - libpython-3.13-dev=3.13.15-1
-          - libpython-3.13=3.13.15-1
-          - python-3.13-minimal=3.13.15-1
-          - python-3.13=3.13.15-1
-          - python-3.13-dev=3.13.15-1
+          - libpython-3.13-minimal=3.13.15-2
+          - libpython-3.13-stdlib=3.13.15-2
+          - libpython-3.13-dev=3.13.15-2
+          - libpython-3.13=3.13.15-2
+          - python-3.13-minimal=3.13.15-2
+          - python-3.13=3.13.15-2
+          - python-3.13-dev=3.13.15-2
           - python3-pip
           - python3-setuptools
           - python3-venv
           - python3-wheel
         files:
-          - url: git+https://github.com/BerriAI/litellm.git#18243cd7af4c3325165ba68b21379e2719e051c7
-            checksum: 18243cd7af4c3325165ba68b21379e2719e051c7
+          - url: git+https://github.com/BerriAI/litellm.git#95293834e833b2d2979f87d1bd2a5be45db6728a
+            checksum: 95293834e833b2d2979f87d1bd2a5be45db6728a
             path: ${source.dir}/litellm-src
             spdx:
               name: litellm
-              version: 1.101.0
+              version: 1.102.0
               packages:
                 - name: litellm
-                  purl: pkg:pypi/litellm@1.101.0
+                  purl: pkg:pypi/litellm@1.102.0
                   license: MIT
             uid: 0
             gid: 0
@@ -155,9 +155,9 @@ contents:
               - deb
             license: MIT
             name: litellm
-            rel: 1
+            rel: 0
             url: https://github.com/BerriAI/litellm
-            version: 1.101.0
+            version: 1.102.0
       paths:
         - type: file
           path: ${source.dir}/build-litellm.sh
