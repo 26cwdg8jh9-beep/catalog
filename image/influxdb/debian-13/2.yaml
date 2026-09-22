@@ -153,9 +153,15 @@ contents:
               - github.com/hashicorp/vault/api@v1.9.2
               - github.com/klauspost/compress@v1.18.7
               - go.opentelemetry.io/otel@v1.44.0
-              - go.opentelemetry.io/otel/sdk@v1.43.0
+              - go.opentelemetry.io/otel/sdk@v1.45.0
               - google.golang.org/grpc@v1.83.2
             download: true
+        - name: patch session store test expiry window
+          uses: patch@v1
+          work-dir: /go/src/github.com/influxdata/influxdb
+          with:
+            options: -p1
+            patch: ${source.dir}/patch/session-store-test-expiry.patch
         - name: test
           work-dir: /go/src/github.com/influxdata/influxdb
           privileged: true
@@ -185,6 +191,11 @@ contents:
             packages: ./cmd/influxd
             tags: libsqlite3,sqlite_foreign_keys,sqlite_json,assets,noasm
       paths:
+        - type: directory
+          path: ${source.dir}/patch
+          uid: 0
+          gid: 0
+          source: image/influxdb/patch
         - type: file
           path: ${source.dir}/helpers/bin/cargo-wrapper.sh
           uid: 0
