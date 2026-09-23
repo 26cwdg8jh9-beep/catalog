@@ -4,9 +4,9 @@ image: dhi.io/pkg-falco
 variant: runtime
 tags:
   - 0.45.0
-  - 0.45.0-r0
+  - 0.45.0-r1
   - 0.45.0-debian13
-  - 0.45.0-r0-debian13
+  - 0.45.0-r1-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -16,7 +16,7 @@ vars:
   COMMIT_SHA: 05d5b3e363d5196c68c8ccea842ca57a2ef05562
   CONTAINER_PLUGIN_COMMIT_SHA: efa4416dd148f0127499b23bb4ffa49bd417c385
   CONTAINER_PLUGIN_VERSION: 0.7.4
-  REL: "0"
+  REL: "1"
   SEMVER_MAJOR_MINOR_VERSION: "0.45"
   SEMVER_MAJOR_VERSION: "0"
   SEMVER_VERSION: 0.45.0
@@ -102,7 +102,10 @@ contents:
               - github.com/containers/buildah=github.com/containers/buildah@v1.43.2
               - github.com/sigstore/fulcio=github.com/sigstore/fulcio@v1.8.6
               - google.golang.org/grpc=google.golang.org/grpc@v1.83.2
-              - go.opentelemetry.io/otel=go.opentelemetry.io/otel@v1.44.0
+              - go.opentelemetry.io/otel=go.opentelemetry.io/otel@v1.45.0
+              - go.opentelemetry.io/otel/sdk=go.opentelemetry.io/otel/sdk@v1.45.0
+              - go.opentelemetry.io/otel/exporters/otlp/otlptrace=go.opentelemetry.io/otel/exporters/otlp/otlptrace@v1.45.0
+              - go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc=go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc@v1.45.0
               - github.com/klauspost/compress=github.com/klauspost/compress@v1.18.7
         - name: build container plugin from source
           work-dir: ${source.dir}/plugins/plugins/container
@@ -145,7 +148,7 @@ contents:
               - deb
             license: Apache-2.0
             name: falco
-            rel: 0
+            rel: 1
             url: https://github.com/falcosecurity/falco
             version: 0.45.0
 os-release:
