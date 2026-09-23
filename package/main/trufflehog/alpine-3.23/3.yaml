@@ -3,20 +3,20 @@
 image: dhi.io/pkg-trufflehog
 variant: runtime
 tags:
-  - 3.97.6-alpine3.23
-  - 3.97.6-r0-alpine3.23
+  - 3.97.8-alpine3.23
+  - 3.97.8-r0-alpine3.23
 platforms:
   - linux/amd64
   - linux/arm64
 vars:
-  COMMIT_SHA: 64d939a56362f519781c53ea09b27f8d1dc0140a
+  COMMIT_SHA: a5f3de55cc2065ae4dde8fee24076f137fd62fcf
   GOLANG_VERSION: 1.26.8-r0
   PACKAGE_NAME: trufflehog
   REL: "0"
   SEMVER_MAJOR_MINOR_VERSION: "3.97"
   SEMVER_MAJOR_VERSION: "3"
-  SEMVER_VERSION: 3.97.6
-  VERSION: 3.97.6
+  SEMVER_VERSION: 3.97.8
+  VERSION: 3.97.8
 contents:
   repositories:
     - https://dhi.io/apk/alpine/v3.23/main
@@ -38,8 +38,8 @@ contents:
           - golang-1.26-oci-config=1.26.8-r0
           - sed
         files:
-          - url: git+https://github.com/trufflesecurity/trufflehog.git#v3.97.6
-            checksum: 64d939a56362f519781c53ea09b27f8d1dc0140a
+          - url: git+https://github.com/trufflesecurity/trufflehog.git#v3.97.8
+            checksum: a5f3de55cc2065ae4dde8fee24076f137fd62fcf
             path: /go/src/github.com/trufflesecurity/trufflehog
             uid: 0
             gid: 0
@@ -66,13 +66,13 @@ contents:
           runs: |
             set -eux -o pipefail
 
-            sed -i 's/"dev"/"3.97.6"/' main.go
+            sed -i 's/"dev"/"3.97.8"/' main.go
         - name: build
           uses: go/build@v1
           with:
             fips: false
             ldflags:
-              - -X github.com/trufflesecurity/trufflehog/v3/pkg/version.BuildVersion=3.97.6
+              - -X github.com/trufflesecurity/trufflehog/v3/pkg/version.BuildVersion=3.97.8
             output: ${target.dir}/usr/bin/trufflehog
             packages: .
         - name: build dev
@@ -80,7 +80,7 @@ contents:
           with:
             fips: false
             ldflags:
-              - -X github.com/trufflesecurity/trufflehog/v3/pkg/version.BuildVersion=3.97.6
+              - -X github.com/trufflesecurity/trufflehog/v3/pkg/version.BuildVersion=3.97.8
             output: ${target.dir}/usr/bin/trufflehog-dev
             packages: .
             strip: false
@@ -99,7 +99,7 @@ contents:
                     source: usr/bin/trufflehog-dev
                 name: trufflehog-dev
             url: https://github.com/trufflesecurity/trufflehog
-            version: 3.97.6
+            version: 3.97.8
 os-release:
   name: Docker Hardened Images (Alpine)
   id: alpine
