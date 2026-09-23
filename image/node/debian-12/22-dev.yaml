@@ -11,7 +11,7 @@ platforms:
   - linux/amd64
   - linux/arm64
 vars:
-  DIGEST: sha256:2c5ca3de2b7bcc74680d98d96b819a15b81c69740c21ed6114df0a6a31e29e1b
+  DIGEST: sha256:715e8dbb079a100ef8ac8f83e4900c9ba330bb01871158417df09174fe889861
   NODEJS_VERSION_MAJOR: "22"
   NODEJS_VERSION_MAJOR_MINOR: "22.23"
   NODEJS_VERSION_MAJOR_MINOR_PATCH: 22.23.2
@@ -39,7 +39,7 @@ contents:
     - sed
     - util-linux
   artifacts:
-    - name: dhi.io/pkg-node:22.23.2-debian12@sha256:2c5ca3de2b7bcc74680d98d96b819a15b81c69740c21ed6114df0a6a31e29e1b
+    - name: dhi.io/pkg-node:22.23.2-debian12@sha256:715e8dbb079a100ef8ac8f83e4900c9ba330bb01871158417df09174fe889861
       includes:
         - opt/docker
         - opt/nodejs
