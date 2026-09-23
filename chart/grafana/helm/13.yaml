@@ -17,10 +17,10 @@ vars:
   DHI_PREFIX: ""
   DHI_REGISTRY: dhi.io
   DHI_SKIP_CONTEXT_COPY: "true"
-  GRAFANA_IMAGE_RENDERER_REFERENCE: dhi/grafana-image-renderer:5.12.3-debian13@sha256:061ee9b83d2b2247c7e7e24b4d788276c01df1fb6889ce473fbd3f7651db9619
+  GRAFANA_IMAGE_RENDERER_REFERENCE: dhi/grafana-image-renderer:5.12.4-debian13@sha256:3c416b86386c62d10ac6aef7553d334094cc6023604d40803b9289527c57361e
   GRAFANA_REFERENCE: dhi/grafana:13.2.2-debian13@sha256:1b7d321a35a9bdaa34be2dbfe57dac9a0c9c31906322b2cf41c3b7f33d0e46f9
   HELM_VERSION: 4.1.4-2
-  K8S_SIDECAR_REFERENCE: dhi/k8s-sidecar:2.11.2-debian13@sha256:2de106ec46cf6dcb96357855a3e56295bb772f385a5992823f649003a2dac54b
+  K8S_SIDECAR_REFERENCE: dhi/k8s-sidecar:2.11.2-debian13@sha256:f2e8c84e72ac8981ff33364b792044d7ad7de11018270bff0f67647a0d49d3d9
   SEMVER_MAJOR_MINOR_VERSION: "13.2"
   SEMVER_MAJOR_VERSION: "13"
   SEMVER_VERSION: 13.2.5
@@ -56,7 +56,7 @@ contents:
                 - name: grafana
                   ref: dhi/grafana:13.2.2-debian13@sha256:1b7d321a35a9bdaa34be2dbfe57dac9a0c9c31906322b2cf41c3b7f33d0e46f9
                 - name: grafana-image-renderer
-                  ref: dhi/grafana-image-renderer:5.12.3-debian13@sha256:061ee9b83d2b2247c7e7e24b4d788276c01df1fb6889ce473fbd3f7651db9619
+                  ref: dhi/grafana-image-renderer:5.12.4-debian13@sha256:3c416b86386c62d10ac6aef7553d334094cc6023604d40803b9289527c57361e
                 - name: bats
                   ref: dhi/bats:1.14.0-debian13@sha256:c440249fda7dd44def487153cfec6a40c799bc5340c87a2bb36b691e15f54a57
                 - name: busybox
@@ -64,7 +64,7 @@ contents:
                 - name: curl
                   ref: dhi/curl:8.14.1-debian13@sha256:72d53e36c61a396942c67ceeb9c3b8c78520c696108226c7b5cd68f4f4cf810b
                 - name: k8s-sidecar
-                  ref: dhi/k8s-sidecar:2.11.2-debian13@sha256:2de106ec46cf6dcb96357855a3e56295bb772f385a5992823f649003a2dac54b
+                  ref: dhi/k8s-sidecar:2.11.2-debian13@sha256:f2e8c84e72ac8981ff33364b792044d7ad7de11018270bff0f67647a0d49d3d9
               name: grafana-chart
               notes: ${source.dir}/config/NOTES.txt
               sourceUrl: https://github.com/grafana-community/helm-charts
