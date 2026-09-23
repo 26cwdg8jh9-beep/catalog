@@ -16,11 +16,11 @@ platforms:
 dates:
   release: "2025-05-20"
 vars:
-  COMMIT_SHA: e7252384d42f124c07bec5c79eebd7ea9cdd5100
+  COMMIT_SHA: 09fb046150ab94104e03ee816b95c8b7e6b04683
   SEMVER_MAJOR_MINOR_VERSION: "28.5"
   SEMVER_MAJOR_VERSION: "28"
   SEMVER_VERSION: "28.5"
-  VERSION: 28.5.0.6
+  VERSION: 28.5.0.7
 contents:
   packages:
     - '!gawk'
@@ -59,15 +59,15 @@ contents:
           - libssl-dev
           - sed
         files:
-          - url: git+https://github.com/erlang/otp.git#OTP-28.5.0.6
-            checksum: e7252384d42f124c07bec5c79eebd7ea9cdd5100
+          - url: git+https://github.com/erlang/otp.git#OTP-28.5.0.7
+            checksum: 09fb046150ab94104e03ee816b95c8b7e6b04683
             path: /usr/src/otp
             spdx:
               name: erlang-otp
-              version: 28.5.0.6
+              version: 28.5.0.7
               packages:
                 - name: erlang-otp
-                  purl: pkg:erlang/github.com/erlang/otp@28.5.0.6
+                  purl: pkg:erlang/github.com/erlang/otp@28.5.0.7
                   license: Apache-2.0
             uid: 0
             gid: 0
