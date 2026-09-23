@@ -1,32 +1,32 @@
 # syntax=dhi.io/build:2-alpine3.22
 
-name: WordPress 7.0.4 (php8.4-fpm)
+name: WordPress 7.0.6 (php8.4-fpm)
 image: dhi.io/wordpress
 variant: runtime
 flavor: php8.4-fpm
 tags:
-  - 7.0.4-alpine-php8.4-fpm
-  - 7.0.4-alpine3.22-php8.4-fpm
+  - 7.0.6-alpine-php8.4-fpm
+  - 7.0.6-alpine3.22-php8.4-fpm
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
   release: "2026-05-20"
 vars:
-  COMMIT_SHA: 16a7ab2f48969f10b1390b36866abed0d40f0f73
+  COMMIT_SHA: 7fde92a30f5d457ff91a91351769319194466f1b
   IMAGEMAGICK_COMMIT_SHA: fb965f1b54a65ddb633f8c2eac4452c782c66d7f
   IMAGEMAGICK_PREFIX: /opt/imagemagick
   IMAGEMAGICK_VERSION: 7.1.2-31
   IMAGICK_COMMIT_SHA: 70087bab33eab913e99ac77d64d04d1a2fd0b7b0
   IMAGICK_VERSION: 3.8.1
-  PHP_DEV_REFERENCE: dhi/php:8.4.25-alpine3.22-dev@sha256:4a08669d24a0557aede93a17e1e0f416bd4ab89443710013b0ae2e7dce2c86e8
-  PHP_FPM_REFERENCE: dhi/php:8.4.25-alpine3.22-fpm@sha256:6495d9e95bb94594a9044cbf5280fe73bd06f5c456033b78c4f39930893e5423
+  PHP_DEV_REFERENCE: dhi/php:8.4.25-alpine3.22-dev@sha256:9c1d8e999e2baf429d3b83c38b93f8a7eee54e7d60e8717738bd4b4c0cf6599f
+  PHP_FPM_REFERENCE: dhi/php:8.4.25-alpine3.22-fpm@sha256:f0a4b36398ca113c4ca4a4513e00b98ef1f3bfd2ebf112d244b5f4471cc6cc17
   PHP_INI_DIR: /opt/php-8.4/etc/php
   PHP_MAJOR_MINOR: "8.4"
   PHP_PREFIX: /opt/php-8.4
   PHP_SRC_DIR: /opt/php-8.4/src
   PHP_VERSION: "8.4"
-  VERSION: 7.0.4
+  VERSION: 7.0.6
   WORDPRESS_DOCKER_COMMIT_SHA: ecc7cdbdf47591bfa14954933fa2ab4fcce46428
   WORDPRESS_DOCKER_DEFAULT_CONFIG_CHECKSUM: sha256:1513f88b7252f29790f0acad201b1ef0d442f0d80e88c33e4a6d473615084162
   WORDPRESS_DOCKER_ENTRYPOINT_CHECKSUM: sha256:4e925e60ccc324f3f5df8da39d518c88a6d2e1b228113811493c5a975ae9137b
@@ -80,7 +80,7 @@ contents:
       mode: "0644"
   builds:
     - name: build php extensions
-      uses: dhi.io/php:8.4.25-alpine3.22-dev@sha256:4a08669d24a0557aede93a17e1e0f416bd4ab89443710013b0ae2e7dce2c86e8
+      uses: dhi.io/php:8.4.25-alpine3.22-dev@sha256:9c1d8e999e2baf429d3b83c38b93f8a7eee54e7d60e8717738bd4b4c0cf6599f
       shell: bash
       contents:
         repositories:
@@ -224,15 +224,15 @@ contents:
           - ca-certificates-bundle
           - busybox
         files:
-          - url: git+https://github.com/WordPress/WordPress.git#7.0.4
-            checksum: 16a7ab2f48969f10b1390b36866abed0d40f0f73
+          - url: git+https://github.com/WordPress/WordPress.git#7.0.6
+            checksum: 7fde92a30f5d457ff91a91351769319194466f1b
             path: ${source.dir}/wordpress
             spdx:
               name: wordpress
-              version: 7.0.4
+              version: 7.0.6
               packages:
                 - name: wordpress
-                  purl: pkg:github/WordPress/WordPress@7.0.4
+                  purl: pkg:github/WordPress/WordPress@7.0.6
                   license: GPL-2.0-or-later
             uid: 0
             gid: 0
@@ -258,7 +258,7 @@ contents:
           uid: 0
           gid: 0
   artifacts:
-    - name: dhi.io/php:8.4.25-alpine3.22-fpm@sha256:6495d9e95bb94594a9044cbf5280fe73bd06f5c456033b78c4f39930893e5423
+    - name: dhi.io/php:8.4.25-alpine3.22-fpm@sha256:f0a4b36398ca113c4ca4a4513e00b98ef1f3bfd2ebf112d244b5f4471cc6cc17
       includes:
         - opt/docker/sbom/php
         - opt/php-8.4
@@ -291,7 +291,7 @@ environment:
   PHP_INI_DIR: /opt/php-8.4/etc/php
   PHP_PREFIX: /opt/php-8.4
   PHP_VERSION: "8.5"
-  WORDPRESS_VERSION: 7.0.4
+  WORDPRESS_VERSION: 7.0.6
 paths:
   - type: directory
     path: /var/www/html
