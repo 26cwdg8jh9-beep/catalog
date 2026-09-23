@@ -49,10 +49,12 @@ contents:
     - '!patch'
     - base-files
     - bash
-    - build-essential
     - ca-certificates
     - coreutils
+    - g++
     - gcc
+    - libc6-dev
+    - make
   builds:
     - name: rust
       contents:
@@ -103,6 +105,8 @@ contents:
         - etc/os-release
         - etc/passwd
         - var/lib/dpkg/status
+        - var/lib/dpkg/status.d/libc-bin
+        - var/lib/dpkg/status.d/libc6
       uid: 0
       gid: 0
 accounts:

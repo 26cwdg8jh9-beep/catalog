@@ -27,7 +27,7 @@ vars:
   SEMVER_MAJOR_VERSION: "1"
   SEMVER_VERSION: 1.98.1
   SFW_ARCH: '#{ target.arch == "amd64" ? "x86_64" : "arm64" }'
-  SFW_VERSION: 1.15.1
+  SFW_VERSION: 1.15.2
   VERSION: 1.98.1
 contents:
   packages:
@@ -48,14 +48,16 @@ contents:
     - apt
     - base-files
     - bash
-    - build-essential
     - ca-certificates
     - coreutils
     - diffutils
     - dpkg
+    - g++
     - gcc
     - grep
     - libc-bin
+    - libc6-dev
+    - make
     - mawk
     - perl-base
     - sed
@@ -111,7 +113,7 @@ contents:
           - findutils
           - libstdc++6
         files:
-          - url: https://github.com/SocketDev/firewall-release/releases/download/v1.15.1/sfw-linux-${SFW_ARCH}
+          - url: https://github.com/SocketDev/firewall-release/releases/download/v1.15.2/sfw-linux-${SFW_ARCH}
             path: ${target.dir}/opt/socket/bin/sfw
             uid: 0
             gid: 0
@@ -147,6 +149,8 @@ contents:
         - etc/os-release
         - etc/passwd
         - var/lib/dpkg/status
+        - var/lib/dpkg/status.d/libc-bin
+        - var/lib/dpkg/status.d/libc6
       uid: 0
       gid: 0
 accounts:

@@ -45,14 +45,16 @@ contents:
     - apt
     - base-files
     - bash
-    - build-essential
     - ca-certificates
     - coreutils
     - diffutils
     - dpkg
+    - g++
     - gcc
     - grep
     - libc-bin
+    - libc6-dev
+    - make
     - mawk
     - perl-base
     - sed
@@ -107,6 +109,8 @@ contents:
         - etc/os-release
         - etc/passwd
         - var/lib/dpkg/status
+        - var/lib/dpkg/status.d/libc-bin
+        - var/lib/dpkg/status.d/libc6
       uid: 0
       gid: 0
 accounts:
