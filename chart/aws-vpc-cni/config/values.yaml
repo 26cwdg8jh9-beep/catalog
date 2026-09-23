@@ -1,0 +1,26 @@
+init:
+  image:
+    overrideRepository: ${amazon-k8s-cni-init.registry}/${amazon-k8s-cni-init.repository}
+    tag: ${amazon-k8s-cni-init.tag}@${amazon-k8s-cni-init.digest}
+  # The init container copies the CNI binaries onto the host and tunes node sysctls; the DHI image
+  # defaults to the nonroot user, so root is set explicitly on top of upstream's privileged: true.
+  securityContext:
+    runAsUser: 0
+    runAsGroup: 0
+    runAsNonRoot: false
+
+nodeAgent:
+  image:
+    overrideRepository: ${aws-network-policy-agent.registry}/${aws-network-policy-agent.repository}
+    tag: ${aws-network-policy-agent.tag}@${aws-network-policy-agent.digest}
+
+image:
+  overrideRepository: ${amazon-k8s-cni.registry}/${amazon-k8s-cni.repository}
+  tag: ${amazon-k8s-cni.tag}@${amazon-k8s-cni.digest}
+
+# aws-node programs host routes, ENIs and iptables from the host network namespace; the added
+# NET_ADMIN/NET_RAW capabilities only take effect for a root process, so root is set explicitly.
+securityContext:
+  runAsUser: 0
+  runAsGroup: 0
+  runAsNonRoot: false

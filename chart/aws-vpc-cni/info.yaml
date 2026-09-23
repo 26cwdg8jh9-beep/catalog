@@ -1,0 +1,7 @@
+metadata:
+  display-name: AWS VPC CNI Helm chart
+  short-description: The AWS VPC CNI plugin provides native Amazon VPC networking for Kubernetes pods on Amazon EKS and EC2 nodes.
+  featured: false
+  home-url: https://github.com/aws/amazon-vpc-cni-k8s
+  categories:
+    - networking
