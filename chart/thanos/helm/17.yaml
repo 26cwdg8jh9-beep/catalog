@@ -19,7 +19,7 @@ vars:
   SEMVER_MAJOR_MINOR_VERSION: "17.4"
   SEMVER_MAJOR_VERSION: "17"
   SEMVER_VERSION: 17.4.0
-  THANOS_REFERENCE: dhi/thanos:0.42.4-debian13@sha256:a1924eed4b66256e5fa7f538b8bbb7b3903ff1f89704f644eea04a758982a145
+  THANOS_REFERENCE: dhi/thanos:0.42.4-debian13@sha256:e1808589f57d8259f26389a8cc995a1bbc8934797225e2d9709296194bfbbc2d
   VERSION: 17.4.0
 contents:
   repositories:
@@ -51,7 +51,7 @@ contents:
               description: Docker Hardened Images Helm chart for Thanos
               images:
                 - name: thanos
-                  ref: dhi/thanos:0.42.4-debian13@sha256:a1924eed4b66256e5fa7f538b8bbb7b3903ff1f89704f644eea04a758982a145
+                  ref: dhi/thanos:0.42.4-debian13@sha256:e1808589f57d8259f26389a8cc995a1bbc8934797225e2d9709296194bfbbc2d
                 - name: bash
                   ref: dhi/bash:5.2.37-debian13@sha256:4c20bfc9afc53a1d3fcb8436e1e1b10bc03c3ad51db07da15b6a153eb6295d2f
               name: thanos-chart
