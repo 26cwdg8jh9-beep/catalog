@@ -19,7 +19,7 @@ vars:
   FLUXCD_IMAGE_AUTOMATION_CONTROLLER_REFERENCE: dhi/fluxcd-image-automation-controller:1.2.5-debian13@sha256:61da7f2b310d727659043a6f7b511d519cfb851b05f704cf1f452d990eb3da43
   FLUXCD_IMAGE_REFLECTOR_CONTROLLER_REFERENCE: dhi/fluxcd-image-reflector-controller:1.2.5-debian13@sha256:b393743c546e80b9fdf3568f46d6f56b5933321d35b06721de63ecdca38651ec
   FLUXCD_KUSTOMIZE_CONTROLLER_REFERENCE: dhi/fluxcd-kustomize-controller:1.9.5-debian13@sha256:6ae55939399f9400ef9f63cf7131f102816144578bf091777f944d6c123f8893
-  FLUXCD_NOTIFICATION_CONTROLLER_REFERENCE: dhi/fluxcd-notification-controller:1.9.4-debian13@sha256:50def92286ee676b35110bf4910d657cb441a809cf62fa537a928f6ac7e7d085
+  FLUXCD_NOTIFICATION_CONTROLLER_REFERENCE: dhi/fluxcd-notification-controller:1.9.4-debian13@sha256:9fb2dd6114adcd06e57886a6a4c9ec1795655004a81f0391ccd987d37a375c90
   FLUXCD_SOURCE_CONTROLLER_REFERENCE: dhi/fluxcd-source-controller:1.9.5-debian13@sha256:00cda2a54b850559bafcaf9648cc7edfb1fd6d30868a2fdff2cd58879883602f
   FLUXCD_SOURCE_WATCHER_REFERENCE: dhi/fluxcd-source-watcher:2.2.4-debian13@sha256:3bf59c3d7268de3dce190940077d7893e379ef82f84da9eacd7f03f628ab74ca
   HELM_VERSION: 4.1.4-2
@@ -66,7 +66,7 @@ contents:
                 - name: fluxcd-kustomize-controller
                   ref: dhi/fluxcd-kustomize-controller:1.9.5-debian13@sha256:6ae55939399f9400ef9f63cf7131f102816144578bf091777f944d6c123f8893
                 - name: fluxcd-notification-controller
-                  ref: dhi/fluxcd-notification-controller:1.9.4-debian13@sha256:50def92286ee676b35110bf4910d657cb441a809cf62fa537a928f6ac7e7d085
+                  ref: dhi/fluxcd-notification-controller:1.9.4-debian13@sha256:9fb2dd6114adcd06e57886a6a4c9ec1795655004a81f0391ccd987d37a375c90
                 - name: fluxcd-source-controller
                   ref: dhi/fluxcd-source-controller:1.9.5-debian13@sha256:00cda2a54b850559bafcaf9648cc7edfb1fd6d30868a2fdff2cd58879883602f
                 - name: fluxcd-source-watcher
