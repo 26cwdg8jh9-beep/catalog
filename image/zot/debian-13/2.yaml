@@ -6,26 +6,26 @@ variant: runtime
 tags:
   - "2"
   - "2.1"
-  - 2.1.20
+  - 2.1.21
   - 2-debian
   - 2-debian13
   - 2.1-debian
   - 2.1-debian13
-  - 2.1.20-debian
-  - 2.1.20-debian13
+  - 2.1.21-debian
+  - 2.1.21-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
   release: "2026-03-08"
 vars:
-  COMMIT_SHA: 3b5796d834e8661ea661a5fcc47add8d4405aebf
+  COMMIT_SHA: 6429ce645b13f5a72275d793ae42df51739bb0ca
   FLAVORED_SUFFIX: ""
   SEMVER_MAJOR_MINOR_VERSION: "2.1"
   SEMVER_MAJOR_VERSION: "2"
-  SEMVER_VERSION: 2.1.20
+  SEMVER_VERSION: 2.1.21
   SUFFIX: ""
-  VERSION: 2.1.20-7
+  VERSION: 2.1.21-0
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -35,7 +35,7 @@ contents:
     - base-files
     - ca-certificates-bundle
     - tzdata
-    - zot=2.1.20-7
+    - zot=2.1.21-0
 accounts:
   run-as: nonroot
   users:
