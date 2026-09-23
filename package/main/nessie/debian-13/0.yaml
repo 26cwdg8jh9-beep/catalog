@@ -3,10 +3,10 @@
 image: dhi.io/pkg-nessie
 variant: runtime
 tags:
-  - 0.108.4
-  - 0.108.4-r0
-  - 0.108.4-debian13
-  - 0.108.4-r0-debian13
+  - 0.108.8
+  - 0.108.8-r1
+  - 0.108.8-debian13
+  - 0.108.8-r1-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -18,17 +18,17 @@ vars:
   BCRNGJENT_VERSION: 1.3.6
   BCTLSFIPS_VERSION: 2.1.23
   BCUTILFIPS_VERSION: 2.1.6
-  COMMIT_SHA: 41d6986725edb95bca176c128300642b8e52d958
+  COMMIT_SHA: de530231b1c13587a1f0dc8fb2a4de62092a3ff5
   GRADLE_VERSION: 8.14.5-1
   JDK_MAJOR_VERSION: "21"
   JDK_VERSION: 21.0.12.8-0
   PACKAGE_HOME: /usr/share/nessie
   PACKAGE_NAME: nessie-0.108
-  REL: "0"
+  REL: "1"
   SEMVER_MAJOR_MINOR_VERSION: "0.108"
   SEMVER_MAJOR_VERSION: "0"
-  SEMVER_VERSION: 0.108.4
-  VERSION: 0.108.4
+  SEMVER_VERSION: 0.108.8
+  VERSION: 0.108.8
 contents:
   packages:
     - base-files
@@ -56,48 +56,77 @@ contents:
           - eclipse-temurin-21-jdk=21.0.12.8-0
           - gradle-8=8.14.5-1
         files:
-          - url: git+https://github.com/projectnessie/nessie.git#nessie-0.108.4
-            checksum: 41d6986725edb95bca176c128300642b8e52d958
+          - url: git+https://github.com/projectnessie/nessie.git#nessie-0.108.8
+            checksum: de530231b1c13587a1f0dc8fb2a4de62092a3ff5
             path: ${source.dir}/nessie
             spdx:
               name: nessie
-              version: 0.108.4
+              version: 0.108.8
               packages:
                 - name: nessie
-                  purl: pkg:github/projectnessie/nessie@0.108.4
+                  purl: pkg:github/projectnessie/nessie@0.108.8
                   license: Apache-2.0
             uid: 0
             gid: 0
       pipeline:
-        - name: force jackson-core 2.22.1 (GHSA-r7wm-3cxj-wff9, CVE-2026-54515, CVE-2026-59889)
+        - name: drop develocity and nmcp settings plugins
           uses: git/patch@v1
           work-dir: ${source.dir}/nessie
           with:
-            patch: ${source.dir}/patch/jackson-core-2.22.1.patch
-        - name: force netty 4.2.17 (multiple CVEs)
+            patch: ${source.dir}/patch/disable-develocity-nmcp.patch
+        - name: point settings repos at gcs maven central mirror
           uses: git/patch@v1
           work-dir: ${source.dir}/nessie
           with:
-            patch: ${source.dir}/patch/netty-4.2.17.patch
-        - name: force reactor-netty 1.2.18 and reactor-core 3.7.19 (CVE-2025-22227)
+            patch: ${source.dir}/patch/maven-central-mirror.patch
+        - name: force cve dependency pins
           uses: git/patch@v1
           work-dir: ${source.dir}/nessie
           with:
-            patch: ${source.dir}/patch/reactor-core-3.7.19.patch
-        - name: force opentelemetry 1.62.0 (CVE-2026-45292)
-          uses: git/patch@v1
-          work-dir: ${source.dir}/nessie
-          with:
-            patch: ${source.dir}/patch/opentelemetry-1.62.0.patch
-        - name: force postgresql 42.7.12 (CVE-2026-42198, CVE-2026-54291)
-          uses: git/patch@v1
-          work-dir: ${source.dir}/nessie
-          with:
-            patch: ${source.dir}/patch/postgresql-42.7.12.patch
+            patch: ${source.dir}/patch/cve-force-deps.patch
+        - name: configure gradle maven mirror
+          runs: |
+            set -eux -o pipefail
+
+            mkdir -p /root/.gradle
+            cat > /root/.gradle/init.gradle << 'EOF'
+            def mavenCentralMirror = uri("https://maven-central.storage-download.googleapis.com/maven2/")
+
+            def mirrorMavenCentral = { repo ->
+                if (repo instanceof org.gradle.api.artifacts.repositories.MavenArtifactRepository
+                        && (repo.url.toString() == "https://repo.maven.apache.org/maven2/"
+                            || repo.url.toString() == "https://repo1.maven.org/maven2/")) {
+                    repo.setUrl(mavenCentralMirror)
+                }
+            }
+
+            beforeSettings { settings ->
+                settings.pluginManagement.repositories.clear()
+                settings.pluginManagement.repositories.maven {
+                    name = "GCS Maven Central mirror"
+                    url = mavenCentralMirror
+                }
+                settings.pluginManagement.repositories.gradlePluginPortal()
+            }
+
+            settingsEvaluated { settings ->
+                settings.pluginManagement.repositories.configureEach(mirrorMavenCentral)
+                settings.dependencyResolutionManagement.repositories.configureEach(mirrorMavenCentral)
+            }
+
+            allprojects {
+                buildscript.repositories.configureEach(mirrorMavenCentral)
+                buildscript.repositories.whenObjectAdded(mirrorMavenCentral)
+                repositories.configureEach(mirrorMavenCentral)
+                repositories.whenObjectAdded(mirrorMavenCentral)
+            }
+            EOF
         - name: build
           privileged: true
           runs: |
             set -eux -o pipefail
+
+            unset CI
 
             export GRADLE_HOME="/usr/share/java/gradle"
             export JAVA_HOME="/usr/lib/jvm/temurin-21"
@@ -145,35 +174,25 @@ contents:
               - deb
             license: Apache-2.0
             name: nessie-0.108
-            rel: 0
+            rel: 1
             url: https://projectnessie.org/
-            version: 0.108.4
+            version: 0.108.8
       paths:
         - type: file
-          path: ${source.dir}/patch/jackson-core-2.22.1.patch
+          path: ${source.dir}/patch/disable-develocity-nmcp.patch
           uid: 0
           gid: 0
-          source: package/main/nessie/patch/jackson-core-2.22.1.patch
+          source: package/main/nessie/patch/disable-develocity-nmcp.patch
         - type: file
-          path: ${source.dir}/patch/netty-4.2.17.patch
+          path: ${source.dir}/patch/maven-central-mirror.patch
           uid: 0
           gid: 0
-          source: package/main/nessie/patch/netty-4.2.17.patch
+          source: package/main/nessie/patch/maven-central-mirror.patch
         - type: file
-          path: ${source.dir}/patch/reactor-core-3.7.19.patch
+          path: ${source.dir}/patch/cve-force-deps.patch
           uid: 0
           gid: 0
-          source: package/main/nessie/patch/reactor-core-3.7.19.patch
-        - type: file
-          path: ${source.dir}/patch/opentelemetry-1.62.0.patch
-          uid: 0
-          gid: 0
-          source: package/main/nessie/patch/opentelemetry-1.62.0.patch
-        - type: file
-          path: ${source.dir}/patch/postgresql-42.7.12.patch
-          uid: 0
-          gid: 0
-          source: package/main/nessie/patch/postgresql-42.7.12.patch
+          source: package/main/nessie/patch/cve-force-deps.patch
 os-release:
   name: Docker Hardened Images (Debian)
   id: debian
