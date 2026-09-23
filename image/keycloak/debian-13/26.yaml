@@ -6,30 +6,30 @@ variant: runtime
 tags:
   - "26"
   - "26.7"
-  - 26.7.3
+  - 26.7.4
   - 26-debian
   - 26-debian13
   - 26.7-debian
   - 26.7-debian13
-  - 26.7.3-debian
-  - 26.7.3-debian13
+  - 26.7.4-debian
+  - 26.7.4-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
   release: "2025-09-30"
 vars:
-  COMMIT_SHA: 6d238b6558037085cc25c915893c3d301a80243e
+  COMMIT_SHA: aa9fe3fba0c6cd5770f19a49378c55f4378cf544
   DEBIAN_EPOCH_MAJOR_MINOR_VERSION: "26.7"
   DEBIAN_EPOCH_MAJOR_VERSION: "26"
-  DEBIAN_EPOCH_VERSION: 26.7.3
-  JAVA_FIPS_JDK_PKG: ""
+  DEBIAN_EPOCH_VERSION: 26.7.4
   JAVA_FIPS_SUFFIX: ""
+  JAVA_HOME: /usr/lib/jvm/temurin-21
   JAVA_VARIANT: jre
   JDK_MAJOR_VERSION: "21"
-  MAVEN_REFERENCE: dhi/maven:3.9.16-jdk21-debian13-dev@sha256:ebc5985bddb0be1a7e006d1270975360f03e4efaed6c306b63c761a1430c070e
+  MAVEN_REFERENCE: dhi/maven:3.9.16-jdk21-debian13-dev@sha256:3869c98211853628827bcbb9a1720e510e7f57d8438a23dadd88846dc4160868
   MAVEN_VERSION: 3.9.16
-  VERSION: 26.7.3
+  VERSION: 26.7.4
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -48,42 +48,34 @@ contents:
     - sed
   builds:
     - name: keycloak
-      uses: dhi.io/maven:3.9.16-jdk21-debian13-dev@sha256:ebc5985bddb0be1a7e006d1270975360f03e4efaed6c306b63c761a1430c070e
+      environment:
+        JAVA_HOME: /usr/lib/jvm/temurin-21
+        MAVEN_HOME: /opt/java/apache-maven-3.9.16
       contents:
-        repositories:
-          - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
-          - deb [signed-by=/usr/share/keyrings/dhi-deb-security.gpg] http://dhi.io/deb/debian/security trixie main
-        keyring:
-          - https://dhi.io/keyring/dhi-deb-gpg.D46852F6925E9F71.key
-          - https://dhi.io/keyring/dhi-deb-sec-gpg.D46852F6925E9F71.key
         packages:
-          - coreutils
-          - findutils
-          - sed
           - bash
-          - tar
-          - gzip
-          - xmlstarlet
-          - base-files
           - ca-certificates
+          - coreutils
+          - eclipse-temurin-21-jdk
+          - findutils
           - git
-          - libc6
-          - libstdc++6
-          - mawk
+          - gzip
+          - sed
+          - xmlstarlet
           - nodejs-24
           - node-corepack
           - npm
           - yarn-classic
         files:
-          - url: git+https://github.com/keycloak/keycloak.git#26.7.3
-            checksum: 6d238b6558037085cc25c915893c3d301a80243e
+          - url: git+https://github.com/keycloak/keycloak.git#26.7.4
+            checksum: aa9fe3fba0c6cd5770f19a49378c55f4378cf544
             path: ${source.dir}/keycloak
             spdx:
               name: keycloak
-              version: 26.7.3
+              version: 26.7.4
               packages:
                 - name: keycloak
-                  purl: pkg:dhi/keycloak@26.7.3
+                  purl: pkg:dhi/keycloak@26.7.4
                   license: Apache-2.0
             uid: 0
             gid: 0
@@ -93,6 +85,13 @@ contents:
             gid: 0
           - url: https://maven-central.storage-download.googleapis.com/maven2/io/netty/netty-transport-native-epoll/4.1.137.Final/netty-transport-native-epoll-4.1.137.Final-linux-aarch_64.jar
             path: ${source.dir}/patch/deps/netty-transport-native-epoll-4.1.137.Final-linux-aarch_64.jar
+            uid: 0
+            gid: 0
+        artifacts:
+          - name: dhi.io/maven:3.9.16-jdk21-debian13-dev@sha256:3869c98211853628827bcbb9a1720e510e7f57d8438a23dadd88846dc4160868
+            includes:
+              - opt/**
+              - usr/local/bin/**
             uid: 0
             gid: 0
       pipeline:
@@ -216,7 +215,7 @@ contents:
             set -eux -o pipefail
 
             mkdir -p "${target.dir}/opt/keycloak"
-            tar -xzf "${source.dir}/keycloak/quarkus/dist/target/keycloak-26.7.3.tar.gz" -C "${target.dir}/opt/keycloak" --strip-components=1
+            tar -xzf "${source.dir}/keycloak/quarkus/dist/target/keycloak-26.7.4.tar.gz" -C "${target.dir}/opt/keycloak" --strip-components=1
 
             "${target.dir}/opt/keycloak/bin/kc.sh" build
 
