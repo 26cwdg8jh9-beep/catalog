@@ -4,21 +4,21 @@ name: Valkey Resources Helm chart 0.x
 image: dhi.io/valkey-resources-chart
 variant: helm
 tags:
-  - 0.1.3
+  - 0.2.0
 platforms:
   - linux/amd64
 vars:
-  CHART_COMMIT_SHA: 211e72fe51218249a92187e24c403dc114ee9280
+  CHART_COMMIT_SHA: 529962e052ae59b4b8369cdab06b0cd27f47c9e4
   CHART_HELM_NAME: valkey-resources-chart
   DHI_NAMESPACE: dhi
   DHI_PREFIX: ""
   DHI_REGISTRY: dhi.io
   DHI_SKIP_CONTEXT_COPY: "true"
   HELM_VERSION: 4.1.4-2
-  SEMVER_MAJOR_MINOR_VERSION: "0.1"
+  SEMVER_MAJOR_MINOR_VERSION: "0.2"
   SEMVER_MAJOR_VERSION: "0"
-  SEMVER_VERSION: 0.1.3
-  VERSION: 0.1.3
+  SEMVER_VERSION: 0.2.0
+  VERSION: 0.2.0
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -34,8 +34,8 @@ contents:
           - coreutils
           - helm=4.1.4-2
         files:
-          - url: git+https://github.com/valkey-io/valkey-helm.git#valkey-resources-0.1.3
-            checksum: 211e72fe51218249a92187e24c403dc114ee9280
+          - url: git+https://github.com/valkey-io/valkey-helm.git#valkey-resources-0.2.0
+            checksum: 529962e052ae59b4b8369cdab06b0cd27f47c9e4
             path: ${source.dir}/helm-charts
             uid: 0
             gid: 0
