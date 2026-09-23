@@ -3,26 +3,26 @@
 image: dhi.io/pkg-ktls-utils
 variant: runtime
 tags:
-  - 1.4.0
-  - 1.4.0-r0
-  - 1.4.0-debian13
-  - 1.4.0-r0-debian13
+  - 1.5.0
+  - 1.5.0-r0
+  - 1.5.0-debian13
+  - 1.5.0-r0-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 vars:
-  COMMIT_SHA: c63c04b2de994e3cd3793577576cd6027ad014bf
+  COMMIT_SHA: d0b4de1ba000fe6baf739e85f17bca33b821a16f
   REL: "0"
-  SEMVER_MAJOR_MINOR_VERSION: "1.4"
+  SEMVER_MAJOR_MINOR_VERSION: "1.5"
   SEMVER_MAJOR_VERSION: "1"
-  SEMVER_VERSION: 1.4.0
-  VERSION: 1.4.0
+  SEMVER_VERSION: 1.5.0
+  VERSION: 1.5.0
 contents:
   packages:
     - base-files
   builds:
     - name: ktls-utils
-      work-dir: ${source.dir}/ktls-utils-c63c04b2de994e3cd3793577576cd6027ad014bf
+      work-dir: ${source.dir}/ktls-utils-d0b4de1ba000fe6baf739e85f17bca33b821a16f
       contents:
         packages:
           - autoconf
@@ -45,15 +45,15 @@ contents:
           - pkg-config
           - sed
         files:
-          - url: git+https://github.com/oracle/ktls-utils.git#ktls-utils-1.4.0
-            checksum: c63c04b2de994e3cd3793577576cd6027ad014bf
-            path: ${source.dir}/ktls-utils-c63c04b2de994e3cd3793577576cd6027ad014bf
+          - url: git+https://github.com/oracle/ktls-utils.git#ktls-utils-1.5.0
+            checksum: d0b4de1ba000fe6baf739e85f17bca33b821a16f
+            path: ${source.dir}/ktls-utils-d0b4de1ba000fe6baf739e85f17bca33b821a16f
             spdx:
               name: ktls-utils
-              version: 1.4.0
+              version: 1.5.0
               packages:
                 - name: ktls-utils
-                  purl: pkg:github/oracle/ktls-utils@1.4.0
+                  purl: pkg:github/oracle/ktls-utils@1.5.0
                   license: GPL-2.0
             uid: 0
             gid: 0
@@ -91,7 +91,7 @@ contents:
             name: ktls-utils
             rel: 0
             url: https://github.com/oracle/ktls-utils
-            version: 1.4.0
+            version: 1.5.0
 os-release:
   name: Docker Hardened Images (Debian)
   id: debian
