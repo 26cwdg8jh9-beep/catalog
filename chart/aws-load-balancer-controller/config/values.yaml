@@ -1,0 +1,5 @@
+image:
+  repository: ${aws-load-balancer-controller.registry}/${aws-load-balancer-controller.repository}
+  tag: ${aws-load-balancer-controller.tag}@${aws-load-balancer-controller.digest}
+
+clusterName: "mycluster" # required placeholder, ideally should be set by user
