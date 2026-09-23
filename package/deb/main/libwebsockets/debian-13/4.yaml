@@ -3,8 +3,8 @@
 image: dhi.io/pkg-libwebsockets
 variant: runtime
 tags:
-  - 4.3.5-1-deb13u2-dhi0
-  - 4.3.5-1-deb13u2-dhi0-debian13
+  - 4.3.5-1-deb13u2-dhi1
+  - 4.3.5-1-deb13u2-dhi1-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -20,9 +20,9 @@ vars:
   DEBIAN_ORIG_FILENAME: libwebsockets_4.3.5.orig.tar.gz
   DEBIAN_ORIG_URL: https://deb.debian.org/debian/pool/main/libw/libwebsockets/libwebsockets_4.3.5.orig.tar.gz
   DEBIAN_VERSION: 4.3.5-1+deb13u2
-  DHI_REL: "0"
-  DHI_VERSION: 4.3.5-1+deb13u2+dhi0
-  TAG_VERSION: 4.3.5-1-deb13u2-dhi0
+  DHI_REL: "1"
+  DHI_VERSION: 4.3.5-1+deb13u2+dhi1
+  TAG_VERSION: 4.3.5-1-deb13u2-dhi1
   UPSTREAM_VERSION: 4.3.5
 contents:
   packages:
@@ -62,17 +62,27 @@ contents:
             path: ${source.dir}/libwebsockets_4.3.5-1+deb13u2.debian.tar.xz
             uid: 0
             gid: 0
+          - url: https://github.com/warmcat/libwebsockets/commit/824151862f37bc72f46d9a3e01d5b9408d313a0b.patch
+            checksum: sha256:c8dab8820a000a92122dbf6e8e511973789816a6f9d4207569cd4c890ffd2ba9
+            path: ${source.dir}/patch/CVE-2026-19773.patch
+            uid: 0
+            gid: 0
       pipeline:
         - uses: dpkg/source@v1
           work-dir: ${source.dir}
           with:
             file: libwebsockets_4.3.5-1+deb13u2.dsc
             path: libwebsockets
+        - uses: dpkg/patch@v1
+          with:
+            apply: true
+            patches:
+              - ${source.dir}/patch/CVE-2026-19773.patch
         - uses: dpkg/bump@v1
           with:
             changelog:
-              - DHI Rebuild
-            version: 4.3.5-1+deb13u2+dhi0
+              - Backport upstream HPACK bounds check to fix CVE-2026-19773
+            version: 4.3.5-1+deb13u2+dhi1
         - uses: dpkg/build@v1
           with:
             args: -uc -us -d
