@@ -22,7 +22,7 @@ vars:
   CODENAME: bookworm
   DISTRO_PRETTY_VERSION: Debian 12 (bookworm)
   DISTRO_VERSION: "12"
-  GOLANG_REFERENCE: dhi/golang:1.26.8-debian12-dev@sha256:6184c038a5e10eaf8b33a91082be5df686f3a0a0b7d23903b0fde2f58959c9c3
+  GOLANG_REFERENCE: dhi/golang:1.26.8-debian12-dev@sha256:b46847358288df39f6b9fe97d87b8cb230242b87d7c1dbeedc17de35da758760
   TRUST_MANAGER_COMMIT_SHA: ddeb17c70923c4c6ec44b34c36f4103a0bb798a1
   TRUST_MANAGER_VERSION: 0.25.0
 contents:
@@ -30,7 +30,7 @@ contents:
     - '!base-files'
   builds:
     - name: trust-pkg-debian-bookworm
-      uses: dhi.io/golang:1.26.8-debian12-dev@sha256:6184c038a5e10eaf8b33a91082be5df686f3a0a0b7d23903b0fde2f58959c9c3
+      uses: dhi.io/golang:1.26.8-debian12-dev@sha256:b46847358288df39f6b9fe97d87b8cb230242b87d7c1dbeedc17de35da758760
       contents:
         files:
           - url: git+https://github.com/cert-manager/trust-manager.git#v0.25.0
