@@ -13,7 +13,7 @@ dates:
   release: "2022-10-24"
   end-of-life: "2027-10-31"
 vars:
-  PKG_PYTHON_REFERENCE: dhi/pkg-python:3.11.16-debian12@sha256:a84cb4695b2f3d119304a0cbf7481a991378cee4c99eb39d650bc159af5a959a
+  PKG_PYTHON_REFERENCE: dhi/pkg-python:3.11.16-debian12@sha256:473d583c074b636015995bce096d7461d54ac82df672c7cde0259eb379d69149
   PYTHON_MAJOR_MINOR_VERSION: "3.11"
   PYTHON_MAJOR_VERSION: "3"
   PYTHON_VERSION: 3.11.16
@@ -41,7 +41,7 @@ contents:
     - tzdata
     - zlib1g
   artifacts:
-    - name: dhi.io/pkg-python:3.11.16-debian12@sha256:a84cb4695b2f3d119304a0cbf7481a991378cee4c99eb39d650bc159af5a959a
+    - name: dhi.io/pkg-python:3.11.16-debian12@sha256:473d583c074b636015995bce096d7461d54ac82df672c7cde0259eb379d69149
       includes:
         - opt/**
       uid: 0
