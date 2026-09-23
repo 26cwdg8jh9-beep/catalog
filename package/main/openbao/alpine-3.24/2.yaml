@@ -3,22 +3,22 @@
 image: dhi.io/pkg-openbao
 variant: runtime
 tags:
-  - 2.6.2-alpine3.24
-  - 2.6.2-r7-alpine3.24
+  - 2.6.3-alpine3.24
+  - 2.6.3-r0-alpine3.24
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
   release: "2026-02-05"
 vars:
-  COMMIT_SHA: dd9c19c37a878cf4a81b18efb8d6f0599c7da923
+  COMMIT_SHA: 63a65e6b907589dbb952c371a70260a065bf8bd7
   GOLANG_MAJOR_MINOR_VERSION: "1.26"
   GOLANG_VERSION: 1.26.8-r0
-  REL: "7"
+  REL: "0"
   SEMVER_MAJOR_MINOR_VERSION: "2.6"
   SEMVER_MAJOR_VERSION: "2"
-  SEMVER_VERSION: 2.6.2
-  VERSION: 2.6.2
+  SEMVER_VERSION: 2.6.3
+  VERSION: 2.6.3
 contents:
   repositories:
     - https://dhi.io/apk/alpine/v3.24/main
@@ -41,15 +41,15 @@ contents:
           - golang-1.26=1.26.8-r0
           - golang-1.26-oci-config=1.26.8-r0
         files:
-          - url: git+https://github.com/openbao/openbao.git#v2.6.2
-            checksum: dd9c19c37a878cf4a81b18efb8d6f0599c7da923
+          - url: git+https://github.com/openbao/openbao.git#v2.6.3
+            checksum: 63a65e6b907589dbb952c371a70260a065bf8bd7
             path: /go/src/github.com/openbao/openbao
             spdx:
               name: openbao
-              version: 2.6.2
+              version: 2.6.3
               packages:
                 - name: openbao
-                  purl: pkg:golang/openbao/openbao@2.6.2
+                  purl: pkg:golang/openbao/openbao@2.6.3
                   license: MPL-2.0
             uid: 0
             gid: 0
@@ -62,7 +62,6 @@ contents:
               - github.com/cloudflare/circl@v1.6.3
               - github.com/go-jose/go-jose/v3@v3.0.5
               - github.com/go-jose/go-jose/v4@v4.1.4
-              - github.com/google/cel-go@v0.30.0
               - github.com/moby/go-archive@v0.3.0
               - go.opentelemetry.io/otel/sdk@v1.45.0
               - google.golang.org/grpc@v1.83.2
@@ -101,8 +100,8 @@ contents:
           with:
             fips: false
             ldflags:
-              - -X github.com/openbao/openbao/version.fullVersion=2.6.2
-              - -X github.com/openbao/openbao/version.GitCommit=dd9c19c37a878cf4a81b18efb8d6f0599c7da923
+              - -X github.com/openbao/openbao/version.fullVersion=2.6.3
+              - -X github.com/openbao/openbao/version.GitCommit=63a65e6b907589dbb952c371a70260a065bf8bd7
               - -X github.com/openbao/openbao/version.BuildDate=$(date -u -d @${SOURCE_DATE_EPOCH} +'%FT%TZ')
             output: ${target.dir}/usr/bin/bao
         - name: build dev
@@ -111,8 +110,8 @@ contents:
           with:
             fips: false
             ldflags:
-              - -X github.com/openbao/openbao/version.fullVersion=2.6.2
-              - -X github.com/openbao/openbao/version.GitCommit=dd9c19c37a878cf4a81b18efb8d6f0599c7da923
+              - -X github.com/openbao/openbao/version.fullVersion=2.6.3
+              - -X github.com/openbao/openbao/version.GitCommit=63a65e6b907589dbb952c371a70260a065bf8bd7
               - -X github.com/openbao/openbao/version.BuildDate=$(date -u -d @${SOURCE_DATE_EPOCH} +'%FT%TZ')
             output: ${target.dir}/usr/bin/bao-dev
             packages: .
@@ -124,14 +123,14 @@ contents:
               - usr/bin/bao
             license: MPL-2.0
             name: bao
-            rel: 7
+            rel: 0
             subpackages:
               - files:
                   - path: usr/bin/bao
                     source: usr/bin/bao-dev
                 name: bao-dev
             url: https://github.com/openbao/openbao
-            version: 2.6.2
+            version: 2.6.3
 os-release:
   name: Docker Hardened Images (Alpine)
   id: alpine
