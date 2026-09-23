@@ -3,24 +3,24 @@
 image: dhi.io/pkg-wiremock-gui
 variant: runtime
 tags:
-  - 3.13.199
-  - 3.13.199-r8
-  - 3.13.199-debian13
-  - 3.13.199-r8-debian13
+  - 3.13.208
+  - 3.13.208-r0
+  - 3.13.208-debian13
+  - 3.13.208-r0-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
   release: "2023-08-23"
 vars:
-  COMMIT_SHA: 7d0aef1f28a7f5bcd0c434f511f2eb0821779101
+  COMMIT_SHA: cf39947eb11b38ccb7ebf868eff18ef689d9272f
   GRADLE_REFERENCE: dhi/gradle:8.14.5-jdk17-debian13-dev@sha256:0798299e49e5d0f54ecc991f17d4fe9d191c718892e72f6aa4dd47b874356fb9
   PACKAGE_NAME: wiremock-gui
-  REL: "8"
+  REL: "0"
   SEMVER_MAJOR_MINOR_VERSION: "3.13"
   SEMVER_MAJOR_VERSION: "3"
-  SEMVER_VERSION: 3.13.199
-  VERSION: 3.13.199
+  SEMVER_VERSION: 3.13.208
+  VERSION: 3.13.208
 contents:
   packages:
     - base-files
@@ -44,15 +44,15 @@ contents:
           - nodejs
           - npm
         files:
-          - url: git+https://github.com/holomekc/wiremock.git#3.13.199
-            checksum: 7d0aef1f28a7f5bcd0c434f511f2eb0821779101
+          - url: git+https://github.com/holomekc/wiremock.git#3.13.208
+            checksum: cf39947eb11b38ccb7ebf868eff18ef689d9272f
             path: ${source.dir}/wiremock-gui
             spdx:
               name: wiremock-gui
-              version: 3.13.199
+              version: 3.13.208
               packages:
                 - name: wiremock-gui
-                  purl: pkg:github/holomekc/wiremock@3.13.199
+                  purl: pkg:github/holomekc/wiremock@3.13.208
                   license: Apache-2.0
             uid: 0
             gid: 0
@@ -108,9 +108,9 @@ contents:
               - deb
             license: Apache-2.0
             name: wiremock-gui
-            rel: 8
+            rel: 0
             url: https://github.com/holomekc/wiremock
-            version: 3.13.199
+            version: 3.13.208
       paths:
         - type: file
           path: ${source.dir}/patch/npm-bumps.json
