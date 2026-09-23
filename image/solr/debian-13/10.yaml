@@ -20,7 +20,7 @@ dates:
   release: "2026-03-03"
 vars:
   COMMIT_SHA: 6c6c48a6f78486130682ea9c1f7a2723af5a87be
-  GRADLE_REFERENCE: dhi/gradle:8.14.5-jdk21-debian13-dev@sha256:50f428434f62dede15dc9e7df9fa4d4366ab6d53ff2159d8c46f6b04aa78ef50
+  GRADLE_REFERENCE: dhi/gradle:8.14.5-jdk21-debian13-dev@sha256:a6a1b7e1d4d79651dccaac7f8a09565026a8d1fbe149a0ef929e422b58a2b55a
   GRADLE_VERSION: 8.14.5
   JAVA_REFERENCE: dhi/eclipse-temurin:21.0.12.8-debian13@sha256:0f8d869a57951cbd51a9e346b7c57decde437f365faab227c818232f7a44045d
   JAVA_VERSION: 21.0.12.8
@@ -72,7 +72,7 @@ contents:
             uid: 0
             gid: 0
         artifacts:
-          - name: dhi.io/gradle:8.14.5-jdk21-debian13-dev@sha256:50f428434f62dede15dc9e7df9fa4d4366ab6d53ff2159d8c46f6b04aa78ef50
+          - name: dhi.io/gradle:8.14.5-jdk21-debian13-dev@sha256:a6a1b7e1d4d79651dccaac7f8a09565026a8d1fbe149a0ef929e422b58a2b55a
             includes:
               - opt/**
               - usr/local/bin/**
