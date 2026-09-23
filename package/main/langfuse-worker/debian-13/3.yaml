@@ -3,25 +3,25 @@
 image: dhi.io/pkg-langfuse-worker
 variant: runtime
 tags:
-  - 3.225.9-0
-  - 3.225.9-0-debian13
+  - 3.225.10-0
+  - 3.225.10-0-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
   release: "2024-12-09"
 vars:
-  COMMIT_SHA: 1c8991cadcb7440e55ce2d0028beb82797352657
+  COMMIT_SHA: 7fe676201a74cf5f26ca2c17cd3062ae71accd51
   DHI_REL: "0"
-  DHI_VERSION: 3.225.9-0
+  DHI_VERSION: 3.225.10-0
   NODEJS_MAJOR: "24"
   NODEJS_VERSION: 24.21.0-1
   PNPM_VERSION: 11.4.0
   SEMVER_MAJOR_MINOR_VERSION: "3.225"
   SEMVER_MAJOR_VERSION: "3"
-  SEMVER_VERSION: 3.225.9
+  SEMVER_VERSION: 3.225.10
   TURBO_VERSION: 2.9.14
-  VERSION: 3.225.9
+  VERSION: 3.225.10
 contents:
   packages:
     - '!base-files'
@@ -55,15 +55,15 @@ contents:
           - node-corepack
           - yq
         files:
-          - url: git+https://github.com/langfuse/langfuse.git#v3.225.9
-            checksum: 1c8991cadcb7440e55ce2d0028beb82797352657
+          - url: git+https://github.com/langfuse/langfuse.git#v3.225.10
+            checksum: 7fe676201a74cf5f26ca2c17cd3062ae71accd51
             path: ${source.dir}/src
             spdx:
               name: langfuse-worker
-              version: 3.225.9
+              version: 3.225.10
               packages:
                 - name: langfuse-worker
-                  purl: pkg:github/langfuse/langfuse@3.225.9
+                  purl: pkg:github/langfuse/langfuse@3.225.10
                   license: MIT
             uid: 0
             gid: 0
@@ -168,7 +168,7 @@ contents:
             mv debian/langfuse-worker.install "debian/langfuse-worker-3.install"
         - uses: dpkg/bump@v1
           with:
-            version: 3.225.9-0
+            version: 3.225.10-0
         - name: configure pnpm to allow recently-published packages
           runs: |
             set -eux -o pipefail
