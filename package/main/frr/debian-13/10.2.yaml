@@ -3,22 +3,20 @@
 image: dhi.io/pkg-frr
 variant: runtime
 tags:
-  - 10.7.1-1
-  - 10.7.1-1-debian13
+  - 10.2.6-0
+  - 10.2.6-0-debian13
 platforms:
   - linux/amd64
   - linux/arm64
-dates:
-  release: "2026-07-01"
 vars:
-  COMMIT_SHA: f8c0b08dcb0c78f9e42b9b86ae70b049e4e617c1
-  DHI_REL: "1"
-  DHI_VERSION: 10.7.1-1
-  FRR_MAJOR_MINOR: "10.7"
-  PACKAGE_NAME: frr-10.7
+  COMMIT_SHA: 99443b31b68e0f6584eafa69d55cef26fedd8ea5
+  DHI_REL: "0"
+  DHI_VERSION: 10.2.6-0
+  FRR_MAJOR_MINOR: "10.2"
+  PACKAGE_NAME: frr-10.2
   PYTHON_MINOR: "3.12"
   PYTHON_VERSION: 3.12.14-2
-  VERSION: 10.7.1
+  VERSION: 10.2.6
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -79,15 +77,15 @@ contents:
           - python3-wheel
           - sed
         files:
-          - url: git+https://github.com/FRRouting/frr.git#frr-10.7.1
-            checksum: f8c0b08dcb0c78f9e42b9b86ae70b049e4e617c1
+          - url: git+https://github.com/FRRouting/frr.git#frr-10.2.6
+            checksum: 99443b31b68e0f6584eafa69d55cef26fedd8ea5
             path: ${source.dir}/frr
             spdx:
               name: frr
-              version: 10.7.1
+              version: 10.2.6
               packages:
                 - name: frr
-                  purl: pkg:dhi/frr@10.7.1
+                  purl: pkg:dhi/frr@10.2.6
                   license: GPL-2.0
             uid: 0
             gid: 0
@@ -113,15 +111,15 @@ contents:
             set -eux -o pipefail
 
             rm -f debian/compat
-            sed -i "s/@PKG@/frr-10.7/g" debian/control.in debian/changelog
+            sed -i "s/@PKG@/frr-10.2/g" debian/control.in debian/changelog
             sed -i "s/@PYTHON_VERSION@/3.12.14-2/g" debian/control.in
             mv debian/control.in debian/control
-            mv "debian/@PKG@.install" "debian/frr-10.7.install"
+            mv "debian/@PKG@.install" "debian/frr-10.2.install"
         - uses: dpkg/bump@v1
           with:
             changelog:
               - DHI Build
-            version: 10.7.1-1
+            version: 10.2.6-0
         - uses: dpkg/build@v1
           with:
             args: -b -uc -us -d
