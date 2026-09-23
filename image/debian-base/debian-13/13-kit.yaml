@@ -47,6 +47,7 @@ contents:
     - ncurses-term
     - perl-base
     - sed
+    - sudo
     - tar
     - tzdata
     - util-linux
@@ -119,6 +120,34 @@ paths:
     gid: 65532
     mode: "0644"
   - type: directory
+    path: /etc/sudoers.d
+    uid: 0
+    gid: 0
+    mode: "0755"
+  - type: file
+    path: /etc/sudoers.d/nonroot
+    content: |
+      nonroot ALL=(ALL) NOPASSWD:ALL
+    uid: 0
+    gid: 0
+    mode: "0440"
+  - type: file
+    path: /etc/sudoers.d/proxyconfig
+    content: |
+      Defaults:nonroot env_keep += "http_proxy https_proxy no_proxy HTTP_PROXY HTTPS_PROXY NO_PROXY SSL_CERT_FILE NODE_EXTRA_CA_CERTS REQUESTS_CA_BUNDLE JAVA_TOOL_OPTIONS"
+    uid: 0
+    gid: 0
+    mode: "0440"
+  - type: file
+    path: /etc/pam.d/sudo
+    content: |
+      @include common-auth
+      @include common-account
+      @include common-session-noninteractive
+    uid: 0
+    gid: 0
+    mode: "0644"
+  - type: directory
     path: /usr/local/share/ca-certificates
     uid: 0
     gid: 0
@@ -145,7 +174,7 @@ paths:
       schemaVersion: "3"
       displayName: Debian
       author: "Docker, Inc."
-      description: Debian Sandbox Kit - Docker sandbox workload with bash, curl and git, running as nonroot / Debian 13 Base (kit, dev)
+      description: Debian Sandbox Kit - Docker sandbox workload with bash, curl and git, running as nonroot with sudo / Debian 13 Base (kit, dev)
       sourceUrl: https://dhi.io/catalog/debian-base
       licenses: [MIT]
       kind: workload
@@ -163,20 +192,20 @@ paths:
             filename: AGENTS.md
             content: |
               This is a plain shell sandbox on DHI Debian 13 (dev) with bash, curl and git.
-              It runs as the unprivileged nonroot user (uid 65532), so installing packages with apt needs root.
+              It runs as the nonroot user (uid 65532) with passwordless sudo; install more with sudo apt.
               Composed kits list their own capabilities below.
     uid: 0
     gid: 0
     mode: "0644"
 annotations:
   org.opencontainers.image.authors: Docker, Inc.
-  org.opencontainers.image.description: Debian Sandbox Kit - Docker sandbox workload with bash, curl and git, running as nonroot
+  org.opencontainers.image.description: Debian Sandbox Kit - Docker sandbox workload with bash, curl and git, running as nonroot with sudo
   org.opencontainers.image.licenses: MIT
   org.opencontainers.image.source: https://dhi.io/catalog/debian-base
   org.opencontainers.image.title: Debian
   org.opencontainers.image.version: "13"
   vnd.docker.sandbox.kit.capabilities: com.docker.sandbox/agent-context@1,com.docker.sandbox/network-policy@1,com.docker.sandbox/sbx@1
-  vnd.docker.sandbox.kit.descriptor: '{"schemaVersion":"3","displayName":"Debian","author":"Docker, Inc.","description":"Debian Sandbox Kit - Docker sandbox workload with bash, curl and git, running as nonroot / Debian 13 Base (kit, dev)","sourceUrl":"https://dhi.io/catalog/debian-base","version":"13","licenses":["MIT"],"kind":"workload","capabilities":[{"type":"com.docker.sandbox/sbx@1"},{"type":"com.docker.sandbox/network-policy@1","config":{"runtime":{"allow":["deb.debian.org","dhi.io"]}}},{"type":"com.docker.sandbox/agent-context@1","config":{"filename":"AGENTS.md","content":"This is a plain shell sandbox on DHI Debian 13 (dev) with bash, curl and git.\nIt runs as the unprivileged nonroot user (uid 65532), so installing packages with apt needs root.\nComposed kits list their own capabilities below.\n"}}]}'
+  vnd.docker.sandbox.kit.descriptor: '{"schemaVersion":"3","displayName":"Debian","author":"Docker, Inc.","description":"Debian Sandbox Kit - Docker sandbox workload with bash, curl and git, running as nonroot with sudo / Debian 13 Base (kit, dev)","sourceUrl":"https://dhi.io/catalog/debian-base","version":"13","licenses":["MIT"],"kind":"workload","capabilities":[{"type":"com.docker.sandbox/sbx@1"},{"type":"com.docker.sandbox/network-policy@1","config":{"runtime":{"allow":["deb.debian.org","dhi.io"]}}},{"type":"com.docker.sandbox/agent-context@1","config":{"filename":"AGENTS.md","content":"This is a plain shell sandbox on DHI Debian 13 (dev) with bash, curl and git.\nIt runs as the nonroot user (uid 65532) with passwordless sudo; install more with sudo apt.\nComposed kits list their own capabilities below.\n"}}]}'
   vnd.docker.sandbox.kit.schema-version: "3"
 entrypoint:
   - bash

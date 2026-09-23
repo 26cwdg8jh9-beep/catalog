@@ -32,6 +32,7 @@ contents:
     - curl
     - git
     - ssl_client=1.37.0_git20260817-r33
+    - sudo
 accounts:
   root: true
   run-as: nonroot
@@ -67,6 +68,25 @@ paths:
     gid: 65532
     mode: "0644"
   - type: directory
+    path: /etc/sudoers.d
+    uid: 0
+    gid: 0
+    mode: "0755"
+  - type: file
+    path: /etc/sudoers.d/nonroot
+    content: |
+      nonroot ALL=(ALL) NOPASSWD:ALL
+    uid: 0
+    gid: 0
+    mode: "0440"
+  - type: file
+    path: /etc/sudoers.d/proxyconfig
+    content: |
+      Defaults:nonroot env_keep += "http_proxy https_proxy no_proxy HTTP_PROXY HTTPS_PROXY NO_PROXY SSL_CERT_FILE NODE_EXTRA_CA_CERTS REQUESTS_CA_BUNDLE JAVA_TOOL_OPTIONS"
+    uid: 0
+    gid: 0
+    mode: "0440"
+  - type: directory
     path: /usr/local/share/ca-certificates
     uid: 0
     gid: 0
@@ -93,7 +113,7 @@ paths:
       schemaVersion: "3"
       displayName: Alpine
       author: "Docker, Inc."
-      description: Alpine Sandbox Kit - Docker sandbox workload with bash, curl and git, running as nonroot / Alpine 3.24 Base (kit, dev)
+      description: Alpine Sandbox Kit - Docker sandbox workload with bash, curl and git, running as nonroot with sudo / Alpine 3.24 Base (kit, dev)
       sourceUrl: https://dhi.io/catalog/alpine-base
       licenses: [MIT]
       kind: workload
@@ -110,20 +130,20 @@ paths:
             filename: AGENTS.md
             content: |
               This is a plain shell sandbox on DHI Alpine 3.24 (dev) with bash, curl and git.
-              It runs as the unprivileged nonroot user (uid 65532), so installing packages with apk needs root.
+              It runs as the nonroot user (uid 65532) with passwordless sudo; install more with sudo apk.
               Composed kits list their own capabilities below.
     uid: 0
     gid: 0
     mode: "0644"
 annotations:
   org.opencontainers.image.authors: Docker, Inc.
-  org.opencontainers.image.description: Alpine Sandbox Kit - Docker sandbox workload with bash, curl and git, running as nonroot
+  org.opencontainers.image.description: Alpine Sandbox Kit - Docker sandbox workload with bash, curl and git, running as nonroot with sudo
   org.opencontainers.image.licenses: MIT
   org.opencontainers.image.source: https://dhi.io/catalog/alpine-base
   org.opencontainers.image.title: Alpine
   org.opencontainers.image.version: "3.24"
   vnd.docker.sandbox.kit.capabilities: com.docker.sandbox/agent-context@1,com.docker.sandbox/network-policy@1,com.docker.sandbox/sbx@1
-  vnd.docker.sandbox.kit.descriptor: '{"schemaVersion":"3","displayName":"Alpine","author":"Docker, Inc.","description":"Alpine Sandbox Kit - Docker sandbox workload with bash, curl and git, running as nonroot / Alpine 3.24 Base (kit, dev)","sourceUrl":"https://dhi.io/catalog/alpine-base","version":"3.24","licenses":["MIT"],"kind":"workload","capabilities":[{"type":"com.docker.sandbox/sbx@1"},{"type":"com.docker.sandbox/network-policy@1","config":{"runtime":{"allow":["dhi.io"]}}},{"type":"com.docker.sandbox/agent-context@1","config":{"filename":"AGENTS.md","content":"This is a plain shell sandbox on DHI Alpine 3.24 (dev) with bash, curl and git.\nIt runs as the unprivileged nonroot user (uid 65532), so installing packages with apk needs root.\nComposed kits list their own capabilities below.\n"}}]}'
+  vnd.docker.sandbox.kit.descriptor: '{"schemaVersion":"3","displayName":"Alpine","author":"Docker, Inc.","description":"Alpine Sandbox Kit - Docker sandbox workload with bash, curl and git, running as nonroot with sudo / Alpine 3.24 Base (kit, dev)","sourceUrl":"https://dhi.io/catalog/alpine-base","version":"3.24","licenses":["MIT"],"kind":"workload","capabilities":[{"type":"com.docker.sandbox/sbx@1"},{"type":"com.docker.sandbox/network-policy@1","config":{"runtime":{"allow":["dhi.io"]}}},{"type":"com.docker.sandbox/agent-context@1","config":{"filename":"AGENTS.md","content":"This is a plain shell sandbox on DHI Alpine 3.24 (dev) with bash, curl and git.\nIt runs as the nonroot user (uid 65532) with passwordless sudo; install more with sudo apk.\nComposed kits list their own capabilities below.\n"}}]}'
   vnd.docker.sandbox.kit.schema-version: "3"
 entrypoint:
   - bash
