@@ -8,7 +8,7 @@ tags:
 platforms:
   - linux/amd64
 vars:
-  ARGO_EVENTS_REFERENCE: dhi/argo-events:1.9.11-debian13@sha256:17d14cc2ba8f846b3eb4c7444b3d0099645b1e5fdd95fa2f0ecf20b372c9410f
+  ARGO_EVENTS_REFERENCE: dhi/argo-events:1.9.11-debian13@sha256:0d0153482942c32666631085ee4a3f626a9ec8ab4a6d1ae7e0043e975695ac85
   CHART_COMMIT_SHA: f60d55861d0ed6052f807d981343bd84b9a5de06
   CHART_HELM_NAME: argo-events-chart
   DHI_NAMESPACE: dhi
@@ -16,7 +16,7 @@ vars:
   DHI_REGISTRY: dhi.io
   DHI_SKIP_CONTEXT_COPY: "true"
   HELM_VERSION: 4.1.4-2
-  NATS_REFERENCE: dhi/nats:2.14.7-debian13@sha256:46d5c9a5fc08b94bf3582b5e23ca8196e3a0a8870de3ffe3246379c0ca755386
+  NATS_REFERENCE: dhi/nats:2.15.0-debian13@sha256:d38da9bab1b9cf083b8dcd39ed6ced407041cc291dbbc324e86744531272528f
   NATS_SERVER_CONFIG_RELOADER_REFERENCE: dhi/nats-server-config-reloader:0.24.0-debian13@sha256:563923b339d55760342aff4bdc6869a181ea5f58bc7091a4c001aaa5642ab549
   PROMETHEUS_NATS_EXPORTER_REFERENCE: dhi/prometheus-nats-exporter:0.20.2-debian13@sha256:96cbd83717b47086c66ff5c6586e49488e872c6212914b29ff507dfa9a027fd6
   SEMVER_MAJOR_MINOR_VERSION: "2.4"
@@ -53,9 +53,9 @@ contents:
               description: Docker Hardened Images Helm chart for Argo Events
               images:
                 - name: argo-events
-                  ref: dhi/argo-events:1.9.11-debian13@sha256:17d14cc2ba8f846b3eb4c7444b3d0099645b1e5fdd95fa2f0ecf20b372c9410f
+                  ref: dhi/argo-events:1.9.11-debian13@sha256:0d0153482942c32666631085ee4a3f626a9ec8ab4a6d1ae7e0043e975695ac85
                 - name: nats
-                  ref: dhi/nats:2.14.7-debian13@sha256:46d5c9a5fc08b94bf3582b5e23ca8196e3a0a8870de3ffe3246379c0ca755386
+                  ref: dhi/nats:2.15.0-debian13@sha256:d38da9bab1b9cf083b8dcd39ed6ced407041cc291dbbc324e86744531272528f
                 - name: prometheus-nats-exporter
                   ref: dhi/prometheus-nats-exporter:0.20.2-debian13@sha256:96cbd83717b47086c66ff5c6586e49488e872c6212914b29ff507dfa9a027fd6
                 - name: nats-server-config-reloader
