@@ -148,5 +148,4 @@ annotations:
 entrypoint:
   - bash
 cmd:
-  - /bin/sh
   - -l

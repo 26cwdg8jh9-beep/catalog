@@ -210,5 +210,4 @@ annotations:
 entrypoint:
   - bash
 cmd:
-  - /bin/bash
   - -l
