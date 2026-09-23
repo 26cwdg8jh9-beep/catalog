@@ -8,10 +8,10 @@ tags:
 platforms:
   - linux/amd64
 vars:
-  AIRFLOW_REFERENCE: dhi/airflow:3.3.1-python3.13-debian13-compat@sha256:bb8d7c0cb5ef0184423e29bb5e4f6ebc17c6c29ce67cc7bbd1339391afb71979
-  APPVERSION: 3.3.1
-  APPVERSION_MATCH: 3.3.1
-  CHART_COMMIT_SHA: 3adbbe1c58e4532df1964cb7794805e763816ee8
+  AIRFLOW_REFERENCE: dhi/airflow:3.3.2-python3.13-debian13-compat@sha256:ac0d76f7107e6895428cf820f1bfca5405aa8af185f695c5b1c4e60c4efa01cc
+  APPVERSION: 3.3.2
+  APPVERSION_MATCH: 3.3.2
+  CHART_COMMIT_SHA: aa19d2dbb9ed187ec01957a92848d9b005e9ba9d
   CHART_HELM_NAME: airflow-chart
   DHI_NAMESPACE: dhi
   DHI_PREFIX: ""
@@ -44,8 +44,8 @@ contents:
           - yq-go
           - helm=4.1.4-2
         files:
-          - url: git+https://github.com/apache/airflow.git#3.3.1
-            checksum: 3adbbe1c58e4532df1964cb7794805e763816ee8
+          - url: git+https://github.com/apache/airflow.git#3.3.2
+            checksum: aa19d2dbb9ed187ec01957a92848d9b005e9ba9d
             path: ${source.dir}/helm-charts
             uid: 0
             gid: 0
@@ -65,7 +65,7 @@ contents:
               description: Docker Hardened Images Helm chart for Apache Airflow
               images:
                 - name: airflow
-                  ref: dhi/airflow:3.3.1-python3.13-debian13-compat@sha256:bb8d7c0cb5ef0184423e29bb5e4f6ebc17c6c29ce67cc7bbd1339391afb71979
+                  ref: dhi/airflow:3.3.2-python3.13-debian13-compat@sha256:ac0d76f7107e6895428cf820f1bfca5405aa8af185f695c5b1c4e60c4efa01cc
                 - name: prometheus-statsd-exporter
                   ref: dhi/prometheus-statsd-exporter:0.31.0-debian13@sha256:64f56123818ba49230e36d4908cb69c65bbd5d4952aa5c35c4f20d118c42cdab
                 - name: pgbouncer
