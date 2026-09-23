@@ -4,9 +4,9 @@ image: dhi.io/pkg-apisix
 variant: runtime
 tags:
   - 3.18.0
-  - 3.18.0-r2
+  - 3.18.0-r3
   - 3.18.0-debian13
-  - 3.18.0-r2-debian13
+  - 3.18.0-r3-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -36,7 +36,7 @@ vars:
   OPENRESTY_PREFIX: /opt/openresty
   OPENRESTY_VERSION: 1.29.2.4
   PACKAGE_NAME: apisix-3
-  REL: "2"
+  REL: "3"
   SEMVER_MAJOR_MINOR_VERSION: "3.18"
   SEMVER_MAJOR_VERSION: "3"
   SEMVER_VERSION: 3.18.0
@@ -57,8 +57,7 @@ contents:
         packages:
           - bash
           - ca-certificates
-          - libc-bin=2.41-12+deb13u4
-          - libc6=2.41-12+deb13u4
+          - libc-bin
           - cmake
           - coreutils
           - findutils
@@ -432,7 +431,7 @@ contents:
               - deb
             license: Apache-2.0
             name: apisix-3
-            rel: 2
+            rel: 3
             url: https://apisix.apache.org/
             version: 3.18.0
       paths:
