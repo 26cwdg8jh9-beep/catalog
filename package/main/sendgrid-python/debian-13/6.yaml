@@ -4,19 +4,21 @@ image: dhi.io/pkg-sendgrid-python
 variant: runtime
 tags:
   - 6.12.5
-  - 6.12.5-r5
+  - 6.12.5-r6
   - 6.12.5-debian13
-  - 6.12.5-r5-debian13
+  - 6.12.5-r6-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
   release: "2025-09-19"
 vars:
+  CARGO_VERSION: 1.97.1-0
   COMMIT_SHA: 76788e70a76b11ce2990821f190e52f887ab9ed6
   PYTHON_MINOR: "3.14"
   PYTHON_VERSION: 3.14.7-2
-  REL: "5"
+  REL: "6"
+  RUSTC_VERSION: 1.97.1-0
   SEMVER_MAJOR_MINOR_VERSION: "6.12"
   SEMVER_MAJOR_VERSION: "6"
   SEMVER_VERSION: 6.12.5
@@ -30,9 +32,13 @@ contents:
     - name: sendgrid-python
       work-dir: ${source.dir}
       environment:
+        NO_BINARY: cryptography
+        OPENSSL_NO_VENDOR: "1"
+        OPENSSL_STATIC: "0"
         UV_COMPILE_BYTECODE: "1"
       caches:
         - path: /root/.cache/uv
+        - path: /root/.cargo
       contents:
         repositories:
           - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -40,15 +46,30 @@ contents:
           - https://dhi.io/keyring/dhi-deb-gpg.D46852F6925E9F71.key
         packages:
           - bash
+          - build-essential
           - ca-certificates
+          - cargo-1.97=1.97.1-0
+          - rustc-1.97=1.97.1-0
+          - libcurl4t64
+          - libgcc-s1
+          - libsqlite3-0
+          - libstdc++6
+          - zlib1g
           - coreutils
           - findutils
           - git
+          - libffi-dev
+          - libssl-dev
+          - libzstd-dev
+          - pkg-config
+          - zlib1g-dev
           - libpython-3.14-minimal=3.14.7-2
           - libpython-3.14-stdlib=3.14.7-2
+          - libpython-3.14-dev=3.14.7-2
           - libpython-3.14=3.14.7-2
           - python-3.14-minimal=3.14.7-2
           - python-3.14=3.14.7-2
+          - python-3.14-dev=3.14.7-2
           - gzip
           - sed
           - tar
@@ -90,6 +111,7 @@ contents:
             deb:
               depends:
                 - libffi8
+                - libssl3t64
                 - libstdc++6
                 - libgcc-s1
             depends:
@@ -101,7 +123,7 @@ contents:
               - deb
             license: MIT
             name: sendgrid-python
-            rel: 5
+            rel: 6
             url: https://github.com/sendgrid/sendgrid-python
             version: 6.12.5
       paths:

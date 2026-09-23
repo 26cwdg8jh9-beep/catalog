@@ -10,11 +10,19 @@
 #                 pinned tag) and requirements.txt (pinned runtime deps)
 #   TARGET_DIR  - package root (venv lands at ${TARGET_DIR}/usr/lib/sendgrid-python)
 #   PYTHON_BIN  - interpreter path (e.g. /usr/bin/python3.14)
+#   NO_BINARY   - optional, space-separated requirements to build from source
+#                 instead of installing their wheel (cryptography on the debian
+#                 leaf, so it links the system OpenSSL)
 set -eux -o pipefail
 
 : "${SOURCE_DIR:?SOURCE_DIR is required}"
 : "${TARGET_DIR:?TARGET_DIR is required}"
 : "${PYTHON_BIN:?PYTHON_BIN is required}"
+
+NO_BINARY_ARGS=()
+for pkg in ${NO_BINARY:-}; do
+  NO_BINARY_ARGS+=(--no-binary "${pkg}")
+done
 
 VENV="${TARGET_DIR}/usr/lib/sendgrid-python"
 mkdir -p "${TARGET_DIR}/usr/lib"
@@ -26,7 +34,7 @@ uv venv --python "${PYTHON_BIN}" "${VENV}"
 # Install the runtime deps from the pinned requirements, then sendgrid itself
 # from the pinned upstream source. Both use --no-deps so nothing is resolved at
 # an unpinned "latest" — the versions in requirements.txt are the only inputs.
-uv pip install --python "${VENV}/bin/python" --no-deps -r "${SOURCE_DIR}/requirements.txt"
+uv pip install --python "${VENV}/bin/python" --no-deps "${NO_BINARY_ARGS[@]}" -r "${SOURCE_DIR}/requirements.txt"
 uv pip install --python "${VENV}/bin/python" --no-deps "${SOURCE_DIR}/src"
 
 # sendgrid's setup.py ships its own top-level `test` package; drop it (and any

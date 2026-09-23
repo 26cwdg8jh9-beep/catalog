@@ -4,7 +4,7 @@ image: dhi.io/pkg-sendgrid-python
 variant: runtime
 tags:
   - 6.12.5-alpine3.24
-  - 6.12.5-r5-alpine3.24
+  - 6.12.5-r6-alpine3.24
 platforms:
   - linux/amd64
   - linux/arm64
@@ -13,7 +13,7 @@ dates:
 vars:
   COMMIT_SHA: 76788e70a76b11ce2990821f190e52f887ab9ed6
   PYTHON_VERSION: 3.14.7-r2
-  REL: "5"
+  REL: "6"
   SEMVER_MAJOR_MINOR_VERSION: "6.12"
   SEMVER_MAJOR_VERSION: "6"
   SEMVER_VERSION: 6.12.5
@@ -92,7 +92,7 @@ contents:
               - apk
             license: MIT
             name: sendgrid-python
-            rel: 5
+            rel: 6
             url: https://github.com/sendgrid/sendgrid-python
             version: 6.12.5
       paths:
