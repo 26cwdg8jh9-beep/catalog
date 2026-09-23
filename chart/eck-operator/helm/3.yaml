@@ -15,7 +15,7 @@ vars:
   DHI_REGISTRY: dhi.io
   DHI_SKIP_CONTEXT_COPY: "true"
   ECK_OPERATOR_REFERENCE: dhi/eck-operator:3.5.0-debian13@sha256:fbd9f6939ffa2887bef2a1875e84d26bffe90394fdc407b55bd26cb215a443b3
-  ELASTICSEARCH_REFERENCE: dhi/elasticsearch:9.5.3-debian13@sha256:3a2a89baa3aa432bf1e06011bc42486e505e35ccbe9e138329fd393be52626bd
+  ELASTICSEARCH_REFERENCE: dhi/elasticsearch:9.5.4-debian13@sha256:d5c31d2a0a6e3abd316e1b9eb4015bf473bf6e378957caabb4c80fb67f8f9977
   HELM_VERSION: 4.1.4-2
   KIBANA_REFERENCE: dhi/kibana:9.5.4-debian13@sha256:99b4169a70cce80c147bc4803c4796e784d807c43fec83270c25a4f78db45b4a
   LOGSTASH_REFERENCE: dhi/logstash:9.5.4-debian13-compat@sha256:953306ef0bb5ac82615f7c71ff28ca40a2510d7512b254d13f6f2632b7f90dff
@@ -62,7 +62,7 @@ contents:
                 - name: kibana
                   ref: dhi/kibana:9.5.4-debian13@sha256:99b4169a70cce80c147bc4803c4796e784d807c43fec83270c25a4f78db45b4a
                 - name: elasticsearch
-                  ref: dhi/elasticsearch:9.5.3-debian13@sha256:3a2a89baa3aa432bf1e06011bc42486e505e35ccbe9e138329fd393be52626bd
+                  ref: dhi/elasticsearch:9.5.4-debian13@sha256:d5c31d2a0a6e3abd316e1b9eb4015bf473bf6e378957caabb4c80fb67f8f9977
               name: eck-operator-chart
               notes: ${source.dir}/config/NOTES.txt
               sourceUrl: https://github.com/elastic/cloud-on-k8s
