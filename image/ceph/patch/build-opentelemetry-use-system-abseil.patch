@@ -1,3 +1,7 @@
+Downstream build patch: make Ceph's bundled opentelemetry-cpp use the system
+Abseil rather than vendoring its own, avoiding a duplicate/ABI clash.
+Upstream build module: https://github.com/ceph/ceph (cmake/modules/BuildOpentelemetry.cmake)
+
 diff --git a/cmake/modules/BuildOpentelemetry.cmake b/cmake/modules/BuildOpentelemetry.cmake
 --- a/cmake/modules/BuildOpentelemetry.cmake
 +++ b/cmake/modules/BuildOpentelemetry.cmake

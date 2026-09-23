@@ -1,4 +1,4 @@
-## Prerequisites
+## How to use this image
 
 All examples in this guide use the public image. If you've mirrored the repository for your own use, update the commands
 to reference your mirrored image instead of the public one.
@@ -24,8 +24,7 @@ runtime components and CLI tools commonly needed by Ceph daemon pods and cluster
 The runtime image:
 
 - Runs as the `ceph` user by default
-- Has no entrypoint and defaults to `/bin/bash`; for Ceph workloads, direct `docker run` usage should still specify a
-  binary
+- Has no entrypoint and defaults to `/bin/bash`, so an explicit command such as `ceph --version` runs directly
 - Includes `/bin/sh` for minimal scripting
 - Does not include a package manager in the runtime image
 
@@ -58,7 +57,11 @@ docker run --rm dhi.io/ceph:<tag> \
 ### Deploy Ceph with the Rook Helm charts
 
 Rook separates the operator chart from the cluster chart. Install the operator first, then install the Ceph cluster and
-override the Ceph image to use the Docker Hardened Image.
+override the Ceph image to use the Docker Hardened Image. Select a Ceph tag ending in `-compat` for Rook. Rook's OSD
+containers run as UID 0, and its monitor, manager, and exporter bootstrap containers must change ownership on Ceph data
+directories. The compat flavor matches that upstream runtime contract without adding the package manager from the dev
+variant. Regular runtime tags remain nonroot and are intended for direct CLI use or custom deployments that provide
+their own bootstrap security contexts.
 
 ```bash
 helm repo add rook-release https://charts.rook.io/release
@@ -73,6 +76,8 @@ helm install --create-namespace --namespace rook-ceph \
   --set cephImage.repository=dhi.io/ceph \
   --set cephImage.tag=<tag>
 ```
+
+In this command, `<tag>` must be the complete compat tag, for example `20.3.0-debian13-compat`.
 
 ### Use a CephCluster manifest with an explicit DHI image
 
@@ -99,7 +104,7 @@ spec:
 ```
 
 This example intentionally uses the current `storage.nodes[].devices[]` schema. Avoid older examples that use the
-deprecated top-level `storage.directories` field.
+deprecated top-level `storage.directories` field. Use a complete `-compat` tag for `<tag>`.
 
 ### Run the Ceph CLI against an existing cluster
 
@@ -126,14 +131,15 @@ docker run --rm dhi.io/ceph:<tag> \
 
 ### Key differences
 
-| Feature         | Upstream `quay.io/ceph/ceph:v20.2.0` | Docker Hardened `dhi.io/ceph:<tag>`                                  |
-| --------------- | ------------------------------------ | -------------------------------------------------------------------- |
-| User            | Runs as root by default              | Runs as `ceph` by default (UID 167)                                  |
-| Default command | Starts with `/bin/bash` by default   | Also defaults to `/bin/bash`; explicit Ceph commands are recommended |
-| Shell access    | Includes `/bin/bash`                 | Includes `/bin/sh` and `/bin/bash` in current runtime                |
-| Package manager | Includes `dnf`                       | No package manager in the runtime image                              |
-| Python runtime  | System Python layout                 | Hardened Python at `/opt/python` plus runtime wrappers               |
-| Intended usage  | General-purpose upstream image       | Rook-focused runtime image plus explicit CLI invocations             |
+| Feature         | Upstream `quay.io/ceph/ceph:v20.2.2` | Docker Hardened `dhi.io/ceph:<tag>`                                     |
+| --------------- | ------------------------------------ | ----------------------------------------------------------------------- |
+| User            | Runs as root by default              | Runtime tags use UID 167; Rook compat tags explicitly use UID 0         |
+| Entrypoint      | None                                 | None                                                                    |
+| Default command | `/bin/bash`                          | `/bin/bash`; an explicit Ceph command replaces it directly              |
+| Shell access    | Includes `/bin/bash`                 | Includes `/bin/sh` and `/bin/bash` in the current Debian runtime        |
+| Package manager | Includes `dnf`                       | No package manager in runtime or compat tags                            |
+| Python runtime  | System Python layout                 | Hardened `/usr/bin/python3` with Ceph modules under `/usr/local/lib`    |
+| Intended usage  | General-purpose image for Rook       | Nonroot CLI runtime plus an explicit root compatibility flavor for Rook |
 
 ### Hardened image debugging
 
@@ -158,7 +164,13 @@ Ceph publishes runtime-oriented and development-oriented variants in this reposi
   - Run as the `ceph` user
   - Include the Ceph daemons, CLI tools, Python runtime, and `rados` binding
   - Do not include a package manager
-  - Are the right choice for Rook-managed clusters and direct CLI invocations
+  - Are the right choice for direct CLI invocations and custom nonroot deployments
+
+- Compat tags:
+
+  - Run as UID 0 to match the upstream Ceph image contract required by Rook's bootstrap and OSD containers
+  - Contain the same runtime payload and still omit the package manager
+  - Are the supported choice for Rook-managed clusters
 
 - Dev tags:
 
@@ -177,14 +189,14 @@ Ceph publishes runtime-oriented and development-oriented variants in this reposi
 If you are migrating from the upstream Ceph container to this image, focus on the behavior differences that matter for
 automation and cluster deployment.
 
-| Item               | Migration note                                                                                                                                             |
-| :----------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Image reference    | Replace upstream references such as `quay.io/ceph/ceph:v20.3.0` with the hardened image tag you want to run, for example `dhi.io/ceph:20.3.0-debian13`.    |
-| Default command    | Both images default to `/bin/bash`, but automation should still pass an explicit command such as `ceph --version` or `rados`.                              |
-| Default user       | The hardened runtime image runs as `ceph` (UID 167) instead of root. Ensure mounted files and directories are readable or writable by that user as needed. |
-| Package management | Use `-dev` variants when you need `apt` or other package-install workflows. The runtime image intentionally omits a package manager.                       |
-| Runtime shell      | The current Debian runtime image includes `/bin/sh` and `/bin/bash`, but it is still intended for explicit commands and Rook-managed operation.            |
-| TLS certificates   | Standard CA certificates are already present; you do not need to add them just to talk to TLS-enabled Ceph endpoints.                                      |
+| Item               | Migration note                                                                                                                                                |
+| :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Image reference    | For Rook, replace `quay.io/ceph/ceph:v20.3.0` with a complete compat tag such as `dhi.io/ceph:20.3.0-debian13-compat`. Use a regular runtime tag for CLI use. |
+| Default command    | Both images have no entrypoint and default to `/bin/bash`, so an explicit command such as `ceph --version` or `rados` executes directly.                      |
+| Default user       | Regular runtime tags use `ceph` (UID 167). Rook compat tags explicitly use UID 0 because upstream Rook requires root for OSD and bootstrap operations.        |
+| Package management | Use `-dev` variants when you need `apt` or package-install workflows. Runtime and compat tags intentionally omit a package manager.                           |
+| Runtime shell      | The current Debian runtime image includes `/bin/sh` and `/bin/bash`, but direct use should still pass an explicit Ceph command.                               |
+| TLS certificates   | Standard CA certificates are already present; you do not need to add them just to talk to TLS-enabled Ceph endpoints.                                         |
 
 The following steps outline the general migration process.
 
@@ -194,8 +206,8 @@ The following steps outline the general migration process.
 
 1. Update the base image in your Dockerfile or deployment manifest.
 
-   Use a runtime tag for running Ceph daemons or CLI commands, and use a `-dev` tag only when you need package-manager
-   access or an explicitly root-oriented build/debug environment.
+   Use a compat tag for Rook, a regular runtime tag for nonroot CLI use, and a `-dev` tag only when you need
+   package-manager access for build or debug workflows.
 
 1. Install additional packages only in `-dev` workflows.
 
@@ -214,9 +226,9 @@ avoids relying on image-internal utilities and matches how other minimal DHI run
 
 ### Permissions
 
-By default image variants intended for runtime, run as the nonroot user. Ensure that necessary files and directories are
-accessible to the nonroot user. You may need to copy files to different directories or change permissions so your
-application running as the nonroot user can access them.
+Regular runtime tags run as UID 167. Ensure mounted files and directories are accessible to that user. Do not use a
+regular runtime tag as a drop-in Rook image: Rook's OSD and bootstrap operations require the explicit root compat
+flavor.
 
 ### Privileged ports
 

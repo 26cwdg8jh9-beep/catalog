@@ -1,3 +1,7 @@
+Downstream build patch: make Ceph 19's bundled Apache Arrow build and its
+Python module detection succeed under the Debian 13 (trixie) toolchain.
+Upstream build module: https://github.com/ceph/ceph (cmake/modules/BuildArrow.cmake)
+
 diff --git a/cmake/modules/BuildArrow.cmake b/cmake/modules/BuildArrow.cmake
 index 8a16b9b..3b3f93a 100644
 --- a/cmake/modules/BuildArrow.cmake

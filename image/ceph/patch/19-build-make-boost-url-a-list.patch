@@ -1,3 +1,7 @@
+Downstream build patch: Ceph 19's BuildBoost.cmake needs the bundled Boost
+download URL expressed as a CMake list for the fetch to succeed in our build.
+Upstream build module: https://github.com/ceph/ceph (cmake/modules/BuildBoost.cmake)
+
 diff --git a/cmake/modules/BuildBoost.cmake b/cmake/modules/BuildBoost.cmake
 --- a/cmake/modules/BuildBoost.cmake
 +++ b/cmake/modules/BuildBoost.cmake

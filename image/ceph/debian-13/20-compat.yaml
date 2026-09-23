@@ -1,29 +1,30 @@
 # syntax=dhi.io/build:2-debian13
 
-name: Ceph 21.x (dev)
+name: Ceph 20.x (compat)
 image: dhi.io/ceph
-variant: dev
+variant: runtime
+flavor: compat
 tags:
-  - 21-dev
-  - 21.3-dev
-  - 21.3.0-dev
-  - 21-debian-dev
-  - 21-debian13-dev
-  - 21.3-debian-dev
-  - 21.3-debian13-dev
-  - 21.3.0-debian-dev
-  - 21.3.0-debian13-dev
+  - 20-compat
+  - 20.3-compat
+  - 20.3.0-compat
+  - 20-debian-compat
+  - 20-debian13-compat
+  - 20.3-debian-compat
+  - 20.3-debian13-compat
+  - 20.3.0-debian-compat
+  - 20.3.0-debian13-compat
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
-  release: "2026-03-25"
+  release: "2025-03-03"
 vars:
-  COMMIT_SHA: cc6b5e2da077eadb8bc32a25e1a33143da0b9bdb
-  SEMVER_MAJOR_MINOR_VERSION: "21.3"
-  SEMVER_MAJOR_VERSION: "21"
-  SEMVER_VERSION: 21.3.0
-  VERSION: 21.3.0
+  COMMIT_SHA: e2acaa5c8579e1ced4d71c7b14e0cd0d59a44fcf
+  SEMVER_MAJOR_MINOR_VERSION: "20.3"
+  SEMVER_MAJOR_VERSION: "20"
+  SEMVER_VERSION: 20.3.0
+  VERSION: 20.3.0
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -31,29 +32,22 @@ contents:
     - https://dhi.io/keyring/dhi-deb-gpg.D46852F6925E9F71.key
   packages:
     - '!ceph'
-    - '!gawk'
     - '!libcephfs2'
-    - '!libelogind0'
     - '!libpython3-stdlib'
     - '!libpython3.13-minimal'
     - '!libpython3.13-stdlib'
     - '!librados2'
-    - '!original-awk'
     - '!python3'
     - '!python3-minimal'
     - '!python3.13'
     - '!python3.13-minimal'
     - '!python3.13-stdlib'
-    - apt
     - base-files
     - bash
-    - ca-certificates
     - ca-certificates-bundle
     - coreutils
     - cryptsetup-bin
     - curl
-    - diffutils
-    - dpkg
     - findutils
     - gdisk
     - grep
@@ -65,7 +59,6 @@ contents:
     - libboost-filesystem1.83.0
     - libboost-program-options1.83.0
     - libboost-thread1.83.0
-    - libc-bin
     - libc6
     - libcap-ng0
     - libcap2
@@ -101,9 +94,7 @@ contents:
     - libudev1
     - logrotate
     - lvm2
-    - mawk
     - nfs-ganesha-ceph
-    - perl-base
     - python-3.13
     - sed
     - tzdata
@@ -234,15 +225,15 @@ contents:
           - xfslibs-dev
           - nasm
         files:
-          - url: git+https://github.com/ceph/ceph.git#v21.3.0
-            checksum: cc6b5e2da077eadb8bc32a25e1a33143da0b9bdb
+          - url: git+https://github.com/ceph/ceph.git#v20.3.0
+            checksum: e2acaa5c8579e1ced4d71c7b14e0cd0d59a44fcf
             path: ${source.dir}/ceph
             spdx:
               name: ceph
-              version: 21.3.0
+              version: 20.3.0
               packages:
                 - name: ceph
-                  purl: pkg:dhi/ceph@21.3.0
+                  purl: pkg:dhi/ceph@20.3.0
                   license: LGPL-2.1
             uid: 0
             gid: 0
@@ -264,11 +255,11 @@ contents:
           work-dir: ${source.dir}/ceph
           with:
             patch: ${source.dir}/patch/build-opentelemetry-jaeger-thrift-compat.patch
-        - name: patch distutils remove install layout deb for ceph 21
+        - name: patch distutils remove install layout deb for ceph 19/20
           uses: git/patch@v1
           work-dir: ${source.dir}/ceph
           with:
-            patch: ${source.dir}/patch/21-build-distutils-remove-install-layout-deb.patch
+            patch: ${source.dir}/patch/build-distutils-remove-install-layout-deb.patch
         - name: patch python source
           uses: git/patch@v1
           work-dir: ${source.dir}/ceph
@@ -406,31 +397,6 @@ contents:
           target: /opt/docker/sbom/ceph
           uid: 0
           gid: 0
-    - name: locale
-      contents:
-        packages:
-          - bash
-          - locales
-          - coreutils
-          - gzip
-      pipeline:
-        - name: install locales
-          runs: |
-            set -eux -o pipefail
-
-            ln -s /etc/locale.alias /usr/share/locale/locale.alias
-
-            echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
-            locale-gen en_US.UTF-8
-      outputs:
-        - source: /usr/share/locale
-          target: /usr/share/locale
-          uid: 0
-          gid: 0
-        - source: /usr/lib/locale
-          target: /usr/lib/locale
-          uid: 0
-          gid: 0
 accounts:
   root: true
   run-as: root
@@ -441,9 +407,6 @@ accounts:
     - name: ceph
       uid: 167
       gid: 167
-    - name: _apt
-      uid: 42
-      gid: 65532
   groups:
     - name: ceph
       gid: 167
@@ -462,10 +425,6 @@ os-release:
   home-url: https://docker.com/products/hardened-images/
   bug-report-url: https://docker.com/support/
 environment:
-  DEBIAN_FRONTEND: noninteractive
-  LANG: en_US.UTF-8
-  LANGUAGE: en_US:en
-  LC_ALL: en_US.UTF-8
   REQUESTS_CA_BUNDLE: /etc/ssl/certs/ca-certificates.crt
 paths:
   - type: directory

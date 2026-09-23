@@ -1,4 +1,4 @@
-## About Ceph
+## About Ceph (Rook)
 
 Ceph is a distributed storage platform that provides object, block, and file interfaces from a single cluster. It is
 designed for scale-out deployments and is commonly used to provide resilient storage services for Kubernetes and other
@@ -6,7 +6,9 @@ cloud-native environments.
 
 This Docker Hardened Image packages the Ceph runtime used by Rook-managed Ceph daemons together with the core CLI tools
 and Python components that Ceph expects at runtime. In this repository, the image is intended primarily for
-operator-managed Kubernetes deployments rather than as a single-container standalone Ceph appliance.
+operator-managed Kubernetes deployments rather than as a single-container standalone Ceph appliance. Regular runtime
+tags use the nonroot Ceph account for direct commands. Rook deployments use the explicit root compat flavor because
+Rook's OSD and bootstrap containers require the upstream image's UID 0 behavior.
 
 For more information, visit https://ceph.io/ and https://rook.io/.
 

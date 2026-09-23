@@ -1,3 +1,7 @@
+Downstream build patch: fix a Ceph 19 dout.h template that fails to compile
+under GCC 14 (stricter lambda handling) as shipped in Debian 13.
+Upstream source: https://github.com/ceph/ceph (src/common/dout.h)
+
 diff --git a/src/common/dout.h b/src/common/dout.h
 --- a/src/common/dout.h
 +++ b/src/common/dout.h

@@ -1,3 +1,7 @@
+Downstream build patch: fix a Thrift API incompatibility in the bundled
+opentelemetry-cpp Jaeger exporter so it builds against Debian 13's Thrift.
+Upstream source: https://github.com/open-telemetry/opentelemetry-cpp
+
 diff --git a/src/jaegertracing/opentelemetry-cpp/exporters/jaeger/src/TUDPTransport.h b/src/jaegertracing/opentelemetry-cpp/exporters/jaeger/src/TUDPTransport.h
 --- a/src/jaegertracing/opentelemetry-cpp/exporters/jaeger/src/TUDPTransport.h
 +++ b/src/jaegertracing/opentelemetry-cpp/exporters/jaeger/src/TUDPTransport.h

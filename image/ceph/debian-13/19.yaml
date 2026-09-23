@@ -30,19 +30,25 @@ contents:
   keyring:
     - https://dhi.io/keyring/dhi-deb-gpg.D46852F6925E9F71.key
   packages:
+    - '!ceph'
+    - '!libcephfs2'
+    - '!libpython-3.13-minimal'
+    - '!libpython-3.13-stdlib'
     - '!libpython3-stdlib'
-    - '!libpython3.13-minimal'
-    - '!libpython3.13-stdlib'
+    - '!librados2'
+    - '!python-3.13'
+    - '!python-3.13-minimal'
+    - '!python-3.13-stdlib'
     - '!python3'
     - '!python3-minimal'
-    - '!python3.13'
-    - '!python3.13-minimal'
-    - '!python3.13-stdlib'
     - base-files
     - bash
     - ca-certificates-bundle
     - coreutils
+    - cryptsetup-bin
+    - curl
     - findutils
+    - gdisk
     - grep
     - libabsl20240722
     - libaio1t64
@@ -86,13 +92,13 @@ contents:
     - libtinfo6
     - libudev1
     - logrotate
-    - python-3.13
-    - python-3.13-dev
-    - python3-pip
-    - python3-setuptools
-    - python3-wheel
+    - lvm2
+    - nfs-ganesha-ceph
+    - python-3.12
     - sed
     - tzdata
+    - udev
+    - util-linux
   builds:
     - name: ceph
       work-dir: ${source.dir}/ceph
@@ -101,19 +107,16 @@ contents:
       contents:
         packages:
           - '!libpython3-stdlib'
-          - '!libpython3.13-minimal'
-          - '!libpython3.13-stdlib'
+          - '!libpython-3.13-minimal'
+          - '!libpython-3.13-stdlib'
           - '!python3-minimal'
           - '!python3'
-          - '!python3.13-minimal'
-          - '!python3.13-stdlib'
-          - '!python3.13-minimal'
-          - '!python3.13'
-          - python-3.13
-          - python-3.13-dev
+          - '!python-3.13-minimal'
+          - '!python-3.13-stdlib'
+          - '!python-3.13'
+          - python-3.12
+          - python-3.12-dev
           - python3-pip
-          - python3-setuptools
-          - python3-wheel
           - build-essential
           - g++
           - gcc
@@ -129,6 +132,8 @@ contents:
           - patch
           - cpio
           - gperf
+          - rustc
+          - cargo
           - ca-certificates
           - curl
           - apt-transport-https
@@ -146,6 +151,8 @@ contents:
           - iproute2
           - jsonnet
           - gawk
+          - '!librados2'
+          - '!libcephfs2'
           - libaio-dev
           - libblkid-dev
           - libc-ares-dev
@@ -196,7 +203,7 @@ contents:
           - libyaml-cpp-dev
           - liblmdb-dev
           - libnl-genl-3-dev
-          - libxmlsec1
+          - libxmlsec1t64
           - libxmlsec1t64-nss
           - libxmlsec1t64-openssl
           - libxmlsec1-dev
@@ -234,23 +241,14 @@ contents:
           runs: |
             set -eux -o pipefail
 
-            # CMake's FindCython.cmake uses ${Python3_EXECUTABLE} -m cython --version
-            pip install --no-cache-dir Cython==3.2.4
-
-            # Install sphinx-build for documentation generation (CMake requires it)
-            # CMake looks for sphinx-build executable, install sphinx which provides it
+            pip install --no-cache-dir Cython
             pip install --no-cache-dir sphinx
-
-            # Install PyYAML - required by build scripts (y2c.py)
-            pip install --no-cache-dir PyYAML
-
-            pip install --no-cache-dir prettytable
-        - name: patch boost url list for ceph 19
+        - name: patch boost url list
           uses: git/patch@v1
           work-dir: ${source.dir}/ceph
           with:
             patch: ${source.dir}/patch/19-build-make-boost-url-a-list.patch
-        - name: patch common dout gcc14 fix for ceph 19
+        - name: patch common dout gcc14 fix
           uses: git/patch@v1
           work-dir: ${source.dir}/ceph
           with:
@@ -260,6 +258,11 @@ contents:
           work-dir: ${source.dir}/ceph
           with:
             patch: ${source.dir}/patch/19-build-arrow-and-pymodule-debian13-compat.patch
+        - name: patch ceph 19 ceph-volume importlib metadata compatibility
+          uses: git/patch@v1
+          work-dir: ${source.dir}/ceph
+          with:
+            patch: ${source.dir}/patch/19-runtime-importlib-metadata-compat.patch
         - name: patch opentelemetry to use Debian abseil
           uses: git/patch@v1
           work-dir: ${source.dir}/ceph
@@ -275,6 +278,25 @@ contents:
           work-dir: ${source.dir}/ceph
           with:
             patch: ${source.dir}/patch/build-distutils-remove-install-layout-deb.patch
+        - name: patch python source
+          uses: git/patch@v1
+          work-dir: ${source.dir}/ceph
+          with:
+            patch: ${source.dir}/patch/types.patch
+        - name: install missing mgr deps and fix bcrypt
+          work-dir: ${source.dir}/ceph/src/pybind/mgr
+          privileged: true
+          runs: |
+            set -eux -o pipefail
+
+            sed -i 's,bcrypt,bcrypt<4.0.0,' requirements-required.txt
+            sed -i 's,scipy,scipy<1.15.0,' requirements-required.txt
+            sed -i 's,cryptography,cryptography<37,' requirements-required.txt
+            sed -i 's,cherrypy,cherrypy<19,' requirements-required.txt
+            sed -i 's,setuptools,setuptools<70,' requirements-required.txt
+            echo "numpy<2" >> requirements-required.txt
+
+            pip install --ignore-installed --no-binary :all: --only-binary=scipy --no-cache-dir -r requirements-required.txt
         - name: configure and create build
           work-dir: ${source.dir}/ceph
           privileged: true
@@ -284,19 +306,14 @@ contents:
           runs: |
             set -eux -o pipefail
 
-            # Initialize git submodules like in https://github.com/ceph/ceph/blob/main/do_cmake.sh#L5
             git submodule update --init --recursive --recommend-shallow --progress
-
-            # Also create a separate build dir
             mkdir -p build
-
-            # Use RelWithDebInfo for production builds (debug builds can take up to 60GB of disk space)
-            # Create a bash array
             ARGS=(
               -GNinja
               -DCMAKE_BUILD_TYPE=Release
-              -DWITH_PYTHON3=3.13
-              -DPython3_EXECUTABLE=/usr/bin/python3
+              -DCMAKE_INSTALL_LIBDIR=/usr/lib
+              -DWITH_PYTHON3=3.12
+              -DPython3_EXECUTABLE=/usr/bin/python3.12
               -DWITH_CCACHE=ON
               -DCMAKE_CXX_COMPILER=g++
               -DCMAKE_C_COMPILER=gcc
@@ -306,105 +323,97 @@ contents:
               -DWITH_MGR_DASHBOARD_FRONTEND=OFF
               -DWITH_TESTS=OFF
               -DWITH_MANPAGE=OFF
+              -DWITH_LIBCEPHSQLITE=ON
+              -DWITH_LIBCEPHFS=ON
             )
 
-            # Generate the build files
             cmake -S . -B build "${ARGS[@]}"
         - name: build
           work-dir: ${source.dir}/ceph/build
           privileged: true
+          environment:
+            CCACHE_DIR: /ccache
+            CCACHE_MAXSIZE: 20G
           runs: |
             set -eux -o pipefail
 
-            # Build with ninja using available cores.
-            # Some C++ translation units (RGW, Boost.Asio templates) use 4-5 GiB each;
-            # ensure the builder has sufficient memory (cloud builder recommended).
-            ninja -j"$(nproc)"
+            ccache ninja -j"$(nproc)"
         - name: install
           work-dir: ${source.dir}/ceph/build
           runs: |
             set -eux -o pipefail
 
-            # Install Ceph binaries and libraries
+            mkdir -p "${target.dir}/usr"
+            ln -s "${target.dir}/usr" "${target.dir}/usr/local"
+
             DESTDIR="${target.dir}" ninja install
 
-            # Copy Python runtime dependencies from build Python into the target.
-            # prettytable is required by ceph_daemon.py (imported by the ceph CLI).
-            # It was pip-installed into the build Python during the earlier step.
-            SITE_PKG="${target.dir}/usr/local/lib/python3.13/site-packages"
-            BUILD_SITE="/usr/lib/python3.13/site-packages"
-            cp -r "${BUILD_SITE}"/prettytable "${SITE_PKG}/"
-            cp -r "${BUILD_SITE}"/prettytable-*.dist-info "${SITE_PKG}/"
-            cp -r "${BUILD_SITE}"/wcwidth "${SITE_PKG}/"
-            cp -r "${BUILD_SITE}"/wcwidth-*.dist-info "${SITE_PKG}/"
-
-            # Rook probes execute ceph with a stripped environment, so wrap the
-            # generated script to restore the Python and Ceph library search paths.
-            mv "${target.dir}/usr/local/bin/ceph" "${target.dir}/usr/local/bin/ceph.real"
-            cat > "${target.dir}/usr/local/bin/ceph-wrapper.sh" << 'EOF'
-            #!/bin/sh
-            export PYTHONPATH="/usr/local/lib/python3.13/site-packages${PYTHONPATH:+:${PYTHONPATH}}"
-            export LD_LIBRARY_PATH="/usr/local/lib:/usr/local/lib/ceph${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
-            exec /usr/bin/python3 /usr/local/bin/ceph.real "$@"
-            EOF
-            install -m 0755 "${target.dir}/usr/local/bin/ceph-wrapper.sh" "${target.dir}/usr/local/bin/ceph"
-            rm "${target.dir}/usr/local/bin/ceph-wrapper.sh"
-
-            # Configure dynamic linker to find Ceph libraries at /usr/local/lib
-            mkdir -p "${target.dir}/etc/ld.so.conf.d"
-            echo "/usr/local/lib" > "${target.dir}/etc/ld.so.conf.d/ceph.conf"
+            SITE_PKG="${target.dir}/usr/local/lib/python3.12/site-packages"
+            BUILD_SITE="/usr/lib/python3.12/site-packages"
+            cp -r "${BUILD_SITE}"/* "${SITE_PKG}/"
       paths:
         - type: file
           path: ${source.dir}/patch/19-build-make-boost-url-a-list.patch
           uid: 0
           gid: 0
-          source: image/ceph/debian-13/patch/19-build-make-boost-url-a-list.patch
+          source: image/ceph/patch/19-build-make-boost-url-a-list.patch
         - type: file
           path: ${source.dir}/patch/19-common-dout-fix-gcc14.patch
           uid: 0
           gid: 0
-          source: image/ceph/debian-13/patch/19-common-dout-fix-gcc14.patch
+          source: image/ceph/patch/19-common-dout-fix-gcc14.patch
         - type: file
           path: ${source.dir}/patch/19-build-arrow-and-pymodule-debian13-compat.patch
           uid: 0
           gid: 0
-          source: image/ceph/debian-13/patch/19-build-arrow-and-pymodule-debian13-compat.patch
+          source: image/ceph/patch/19-build-arrow-and-pymodule-debian13-compat.patch
+        - type: file
+          path: ${source.dir}/patch/19-runtime-importlib-metadata-compat.patch
+          uid: 0
+          gid: 0
+          source: image/ceph/patch/19-runtime-importlib-metadata-compat.patch
         - type: file
           path: ${source.dir}/patch/build-opentelemetry-use-system-abseil.patch
           uid: 0
           gid: 0
-          source: image/ceph/debian-13/patch/build-opentelemetry-use-system-abseil.patch
+          source: image/ceph/patch/build-opentelemetry-use-system-abseil.patch
         - type: file
           path: ${source.dir}/patch/build-opentelemetry-jaeger-thrift-compat.patch
           uid: 0
           gid: 0
-          source: image/ceph/debian-13/patch/build-opentelemetry-jaeger-thrift-compat.patch
+          source: image/ceph/patch/build-opentelemetry-jaeger-thrift-compat.patch
         - type: file
           path: ${source.dir}/patch/build-distutils-remove-install-layout-deb.patch
           uid: 0
           gid: 0
-          source: image/ceph/debian-13/patch/build-distutils-remove-install-layout-deb.patch
+          source: image/ceph/patch/build-distutils-remove-install-layout-deb.patch
         - type: file
           path: ${source.dir}/patch/21-build-distutils-remove-install-layout-deb.patch
           uid: 0
           gid: 0
-          source: image/ceph/debian-13/patch/21-build-distutils-remove-install-layout-deb.patch
+          source: image/ceph/patch/21-build-distutils-remove-install-layout-deb.patch
+        - type: file
+          path: ${source.dir}/patch/types.patch
+          uid: 0
+          gid: 0
+          source: image/ceph/patch/types.patch
       outputs:
-        - source: ${target.dir}/usr/local/bin
-          target: /usr/local/bin
+        - source: ${target.dir}/usr/bin
+          target: /usr/bin
           uid: 0
           gid: 0
           mode: "0755"
-        - source: ${target.dir}/usr/local/lib
-          target: /usr/local/lib
+        - source: ${target.dir}/usr/sbin
+          target: /usr/sbin
           uid: 0
           gid: 0
-        - source: ${target.dir}/usr/local/share/ceph
-          target: /usr/local/share/ceph
+          mode: "0755"
+        - source: ${target.dir}/usr/lib
+          target: /usr/lib
           uid: 0
           gid: 0
-        - source: ${target.dir}/etc/ld.so.conf.d/ceph.conf
-          target: /etc/ld.so.conf.d/ceph.conf
+        - source: ${target.dir}/usr/share/ceph
+          target: /usr/share/ceph
           uid: 0
           gid: 0
         - source: /opt/docker/sbom/ceph
@@ -431,11 +440,44 @@ os-release:
   home-url: https://docker.com/products/hardened-images/
   bug-report-url: https://docker.com/support/
 environment:
-  LD_LIBRARY_PATH: /usr/local/lib
-  PYTHONPATH: /usr/local/lib/python3.13/site-packages
+  REQUESTS_CA_BUNDLE: /etc/ssl/certs/ca-certificates.crt
 paths:
   - type: directory
+    path: /usr/local
+    uid: 167
+    gid: 167
+  - type: symlink
+    path: /usr/local/bin
+    uid: 0
+    gid: 0
+    source: /usr/bin
+  - type: symlink
+    path: /usr/local/sbin
+    uid: 0
+    gid: 0
+    source: /usr/sbin
+  - type: symlink
+    path: /usr/local/lib
+    uid: 0
+    gid: 0
+    source: /usr/lib
+  - type: symlink
+    path: /usr/local/share
+    uid: 0
+    gid: 0
+    source: /usr/share
+  - type: directory
     path: /var/lib/ceph
+    uid: 167
+    gid: 167
+    mode: "0755"
+  - type: directory
+    path: /var/lib/ceph/osd
+    uid: 167
+    gid: 167
+    mode: "0755"
+  - type: directory
+    path: /var/lib/logrotate
     uid: 167
     gid: 167
     mode: "0755"
@@ -451,6 +493,11 @@ paths:
     mode: "0755"
   - type: directory
     path: /run/ceph
+    uid: 167
+    gid: 167
+    mode: "0755"
+  - type: directory
+    path: /etc/logrotate.d
     uid: 167
     gid: 167
     mode: "0755"

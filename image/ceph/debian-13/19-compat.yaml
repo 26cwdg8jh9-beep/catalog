@@ -1,29 +1,30 @@
 # syntax=dhi.io/build:2-debian13
 
-name: Ceph 21.x (dev)
+name: Ceph 19.x (compat)
 image: dhi.io/ceph
-variant: dev
+variant: runtime
+flavor: compat
 tags:
-  - 21-dev
-  - 21.3-dev
-  - 21.3.0-dev
-  - 21-debian-dev
-  - 21-debian13-dev
-  - 21.3-debian-dev
-  - 21.3-debian13-dev
-  - 21.3.0-debian-dev
-  - 21.3.0-debian13-dev
+  - 19-compat
+  - 19.3-compat
+  - 19.3.0-compat
+  - 19-debian-compat
+  - 19-debian13-compat
+  - 19.3-debian-compat
+  - 19.3-debian13-compat
+  - 19.3.0-debian-compat
+  - 19.3.0-debian13-compat
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
-  release: "2026-03-25"
+  release: "2023-12-04"
 vars:
-  COMMIT_SHA: cc6b5e2da077eadb8bc32a25e1a33143da0b9bdb
-  SEMVER_MAJOR_MINOR_VERSION: "21.3"
-  SEMVER_MAJOR_VERSION: "21"
-  SEMVER_VERSION: 21.3.0
-  VERSION: 21.3.0
+  COMMIT_SHA: 6850bc28ae3fc583b01c56a0c95b424227ca3820
+  SEMVER_MAJOR_MINOR_VERSION: "19.3"
+  SEMVER_MAJOR_VERSION: "19"
+  SEMVER_VERSION: 19.3.0
+  VERSION: 19.3.0
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -31,29 +32,22 @@ contents:
     - https://dhi.io/keyring/dhi-deb-gpg.D46852F6925E9F71.key
   packages:
     - '!ceph'
-    - '!gawk'
     - '!libcephfs2'
-    - '!libelogind0'
+    - '!libpython-3.13-minimal'
+    - '!libpython-3.13-stdlib'
     - '!libpython3-stdlib'
-    - '!libpython3.13-minimal'
-    - '!libpython3.13-stdlib'
     - '!librados2'
-    - '!original-awk'
+    - '!python-3.13'
+    - '!python-3.13-minimal'
+    - '!python-3.13-stdlib'
     - '!python3'
     - '!python3-minimal'
-    - '!python3.13'
-    - '!python3.13-minimal'
-    - '!python3.13-stdlib'
-    - apt
     - base-files
     - bash
-    - ca-certificates
     - ca-certificates-bundle
     - coreutils
     - cryptsetup-bin
     - curl
-    - diffutils
-    - dpkg
     - findutils
     - gdisk
     - grep
@@ -65,7 +59,6 @@ contents:
     - libboost-filesystem1.83.0
     - libboost-program-options1.83.0
     - libboost-thread1.83.0
-    - libc-bin
     - libc6
     - libcap-ng0
     - libcap2
@@ -101,10 +94,8 @@ contents:
     - libudev1
     - logrotate
     - lvm2
-    - mawk
     - nfs-ganesha-ceph
-    - perl-base
-    - python-3.13
+    - python-3.12
     - sed
     - tzdata
     - udev
@@ -117,19 +108,16 @@ contents:
       contents:
         packages:
           - '!libpython3-stdlib'
-          - '!libpython3.13-minimal'
-          - '!libpython3.13-stdlib'
+          - '!libpython-3.13-minimal'
+          - '!libpython-3.13-stdlib'
           - '!python3-minimal'
           - '!python3'
-          - '!python3.13-minimal'
-          - '!python3.13-stdlib'
-          - '!python3.13-minimal'
-          - '!python3.13'
-          - python-3.13
-          - python-3.13-dev
+          - '!python-3.13-minimal'
+          - '!python-3.13-stdlib'
+          - '!python-3.13'
+          - python-3.12
+          - python-3.12-dev
           - python3-pip
-          - python3-setuptools
-          - python3-wheel
           - build-essential
           - g++
           - gcc
@@ -145,6 +133,8 @@ contents:
           - patch
           - cpio
           - gperf
+          - rustc
+          - cargo
           - ca-certificates
           - curl
           - apt-transport-https
@@ -234,15 +224,15 @@ contents:
           - xfslibs-dev
           - nasm
         files:
-          - url: git+https://github.com/ceph/ceph.git#v21.3.0
-            checksum: cc6b5e2da077eadb8bc32a25e1a33143da0b9bdb
+          - url: git+https://github.com/ceph/ceph.git#v19.3.0
+            checksum: 6850bc28ae3fc583b01c56a0c95b424227ca3820
             path: ${source.dir}/ceph
             spdx:
               name: ceph
-              version: 21.3.0
+              version: 19.3.0
               packages:
                 - name: ceph
-                  purl: pkg:dhi/ceph@21.3.0
+                  purl: pkg:dhi/ceph@19.3.0
                   license: LGPL-2.1
             uid: 0
             gid: 0
@@ -252,8 +242,28 @@ contents:
           runs: |
             set -eux -o pipefail
 
-            pip install --no-cache-dir Cython==3.2.4
+            pip install --no-cache-dir Cython
             pip install --no-cache-dir sphinx
+        - name: patch boost url list
+          uses: git/patch@v1
+          work-dir: ${source.dir}/ceph
+          with:
+            patch: ${source.dir}/patch/19-build-make-boost-url-a-list.patch
+        - name: patch common dout gcc14 fix
+          uses: git/patch@v1
+          work-dir: ${source.dir}/ceph
+          with:
+            patch: ${source.dir}/patch/19-common-dout-fix-gcc14.patch
+        - name: patch ceph 19 arrow and pymodule debian13 compatibility
+          uses: git/patch@v1
+          work-dir: ${source.dir}/ceph
+          with:
+            patch: ${source.dir}/patch/19-build-arrow-and-pymodule-debian13-compat.patch
+        - name: patch ceph 19 ceph-volume importlib metadata compatibility
+          uses: git/patch@v1
+          work-dir: ${source.dir}/ceph
+          with:
+            patch: ${source.dir}/patch/19-runtime-importlib-metadata-compat.patch
         - name: patch opentelemetry to use Debian abseil
           uses: git/patch@v1
           work-dir: ${source.dir}/ceph
@@ -264,11 +274,11 @@ contents:
           work-dir: ${source.dir}/ceph
           with:
             patch: ${source.dir}/patch/build-opentelemetry-jaeger-thrift-compat.patch
-        - name: patch distutils remove install layout deb for ceph 21
+        - name: patch distutils remove install layout deb for ceph 19/20
           uses: git/patch@v1
           work-dir: ${source.dir}/ceph
           with:
-            patch: ${source.dir}/patch/21-build-distutils-remove-install-layout-deb.patch
+            patch: ${source.dir}/patch/build-distutils-remove-install-layout-deb.patch
         - name: patch python source
           uses: git/patch@v1
           work-dir: ${source.dir}/ceph
@@ -281,6 +291,11 @@ contents:
             set -eux -o pipefail
 
             sed -i 's,bcrypt,bcrypt<4.0.0,' requirements-required.txt
+            sed -i 's,scipy,scipy<1.15.0,' requirements-required.txt
+            sed -i 's,cryptography,cryptography<37,' requirements-required.txt
+            sed -i 's,cherrypy,cherrypy<19,' requirements-required.txt
+            sed -i 's,setuptools,setuptools<70,' requirements-required.txt
+            echo "numpy<2" >> requirements-required.txt
 
             pip install --ignore-installed --no-binary :all: --only-binary=scipy --no-cache-dir -r requirements-required.txt
         - name: configure and create build
@@ -298,8 +313,8 @@ contents:
               -GNinja
               -DCMAKE_BUILD_TYPE=Release
               -DCMAKE_INSTALL_LIBDIR=/usr/lib
-              -DWITH_PYTHON3=3.13
-              -DPython3_EXECUTABLE=/usr/bin/python3
+              -DWITH_PYTHON3=3.12
+              -DPython3_EXECUTABLE=/usr/bin/python3.12
               -DWITH_CCACHE=ON
               -DCMAKE_CXX_COMPILER=g++
               -DCMAKE_C_COMPILER=gcc
@@ -334,8 +349,8 @@ contents:
 
             DESTDIR="${target.dir}" ninja install
 
-            SITE_PKG="${target.dir}/usr/local/lib/python3.13/site-packages"
-            BUILD_SITE="/usr/lib/python3.13/site-packages"
+            SITE_PKG="${target.dir}/usr/local/lib/python3.12/site-packages"
+            BUILD_SITE="/usr/lib/python3.12/site-packages"
             cp -r "${BUILD_SITE}"/* "${SITE_PKG}/"
       paths:
         - type: file
@@ -406,31 +421,6 @@ contents:
           target: /opt/docker/sbom/ceph
           uid: 0
           gid: 0
-    - name: locale
-      contents:
-        packages:
-          - bash
-          - locales
-          - coreutils
-          - gzip
-      pipeline:
-        - name: install locales
-          runs: |
-            set -eux -o pipefail
-
-            ln -s /etc/locale.alias /usr/share/locale/locale.alias
-
-            echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
-            locale-gen en_US.UTF-8
-      outputs:
-        - source: /usr/share/locale
-          target: /usr/share/locale
-          uid: 0
-          gid: 0
-        - source: /usr/lib/locale
-          target: /usr/lib/locale
-          uid: 0
-          gid: 0
 accounts:
   root: true
   run-as: root
@@ -441,9 +431,6 @@ accounts:
     - name: ceph
       uid: 167
       gid: 167
-    - name: _apt
-      uid: 42
-      gid: 65532
   groups:
     - name: ceph
       gid: 167
@@ -462,10 +449,6 @@ os-release:
   home-url: https://docker.com/products/hardened-images/
   bug-report-url: https://docker.com/support/
 environment:
-  DEBIAN_FRONTEND: noninteractive
-  LANG: en_US.UTF-8
-  LANGUAGE: en_US:en
-  LC_ALL: en_US.UTF-8
   REQUESTS_CA_BUNDLE: /etc/ssl/certs/ca-certificates.crt
 paths:
   - type: directory

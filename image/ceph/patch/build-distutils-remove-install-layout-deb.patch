@@ -1,3 +1,8 @@
+Downstream build patch: drop the hardcoded --install-layout=deb from Ceph's
+Distutils.cmake so the Python bits install under /usr/local (this is a
+from-source /usr/local build, not a dpkg layout).
+Upstream build module: https://github.com/ceph/ceph (cmake/modules/Distutils.cmake)
+
 diff --git a/cmake/modules/Distutils.cmake b/cmake/modules/Distutils.cmake
 index daaae4b..e606e38 100644
 --- a/cmake/modules/Distutils.cmake
