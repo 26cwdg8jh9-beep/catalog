@@ -14,7 +14,7 @@ dates:
   release: "2025-05-06"
   end-of-life: "2028-04-30"
 vars:
-  DIGEST: sha256:ac3abf9eb082b27a6723c2a8a9dedecf6a1e587bd52c4843778e2aed581c2792
+  DIGEST: sha256:2880d765cee928650376ba06b9b7dfc63f13f583b160c1a142d84a208272c25d
   NODEJS_VERSION_MAJOR: "24"
   NODEJS_VERSION_MAJOR_MINOR: "24.21"
   NODEJS_VERSION_MAJOR_MINOR_PATCH: 24.21.0
@@ -40,7 +40,7 @@ contents:
           - busybox
           - coreutils
         artifacts:
-          - name: dhi.io/pkg-node:24.21.0-alpine3.22@sha256:ac3abf9eb082b27a6723c2a8a9dedecf6a1e587bd52c4843778e2aed581c2792
+          - name: dhi.io/pkg-node:24.21.0-alpine3.22@sha256:2880d765cee928650376ba06b9b7dfc63f13f583b160c1a142d84a208272c25d
             includes:
               - opt/docker
               - opt/nodejs
