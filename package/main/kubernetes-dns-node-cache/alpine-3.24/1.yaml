@@ -3,21 +3,21 @@
 image: dhi.io/pkg-kubernetes-dns-node-cache
 variant: runtime
 tags:
-  - 1.26.8-alpine3.24
-  - 1.26.8-r7-alpine3.24
+  - 1.27.0-alpine3.24
+  - 1.27.0-r0-alpine3.24
 platforms:
   - linux/amd64
   - linux/arm64
 vars:
-  COMMIT_SHA: 9aa70b8f97dc751445a7370960cd45e411506003
+  COMMIT_SHA: 404c6dc8bb65977dcebd481127d5f88208c34ba6
   GOLANG_MAJOR_MINOR_VERSION: "1.27"
   GOLANG_VERSION: 1.27.1-r0
   PACKAGE_NAME: kubernetes-dns-node-cache
-  REL: "7"
-  SEMVER_MAJOR_MINOR_VERSION: "1.26"
+  REL: "0"
+  SEMVER_MAJOR_MINOR_VERSION: "1.27"
   SEMVER_MAJOR_VERSION: "1"
-  SEMVER_VERSION: 1.26.8
-  VERSION: 1.26.8
+  SEMVER_VERSION: 1.27.0
+  VERSION: 1.27.0
 contents:
   repositories:
     - https://dhi.io/apk/alpine/v3.24/main
@@ -39,8 +39,8 @@ contents:
           - golang-1.27=1.27.1-r0
           - golang-1.27-oci-config=1.27.1-r0
         files:
-          - url: git+https://github.com/kubernetes-sigs/node-local-dns.git#1.26.8
-            checksum: 9aa70b8f97dc751445a7370960cd45e411506003
+          - url: git+https://github.com/kubernetes-sigs/node-local-dns.git#1.27.0
+            checksum: 404c6dc8bb65977dcebd481127d5f88208c34ba6
             path: /go/src/k8s.io/dns
             uid: 0
             gid: 0
@@ -53,7 +53,6 @@ contents:
               - golang.org/x/mod@v0.40.0
               - golang.org/x/net@v0.58.0
               - golang.org/x/sys@v0.47.0
-              - go.opentelemetry.io/otel/sdk@v1.43.0
               - google.golang.org/grpc@v1.85.0-dev.0.20260825072537-93e31b48545e
               - github.com/coredns/coredns@v1.14.7
             download: true
@@ -72,10 +71,10 @@ contents:
           with:
             fips: false
             ldflags:
-              - -X k8s.io/client-go/pkg/version.gitVersion=1.26.8
-              - -X k8s.io/client-go/pkg/version.gitCommit=9aa70b8f97dc751445a7370960cd45e411506003
+              - -X k8s.io/client-go/pkg/version.gitVersion=1.27.0
+              - -X k8s.io/client-go/pkg/version.gitCommit=404c6dc8bb65977dcebd481127d5f88208c34ba6
               - -X k8s.io/client-go/pkg/version.BuildDate=$(date -u -d @${SOURCE_DATE_EPOCH} +'%FT%TZ')
-              - -X k8s.io/dns/pkg/version.VERSION=1.26.8
+              - -X k8s.io/dns/pkg/version.VERSION=1.27.0
             output: ${target.dir}/usr/bin/node-cache
             packages: ./cmd/node-cache
         - name: build dev
@@ -83,10 +82,10 @@ contents:
           with:
             fips: false
             ldflags:
-              - -X k8s.io/client-go/pkg/version.gitVersion=1.26.8
-              - -X k8s.io/client-go/pkg/version.gitCommit=9aa70b8f97dc751445a7370960cd45e411506003
+              - -X k8s.io/client-go/pkg/version.gitVersion=1.27.0
+              - -X k8s.io/client-go/pkg/version.gitCommit=404c6dc8bb65977dcebd481127d5f88208c34ba6
               - -X k8s.io/client-go/pkg/version.BuildDate=$(date -u -d @${SOURCE_DATE_EPOCH} +'%FT%TZ')
-              - -X k8s.io/dns/pkg/version.VERSION=1.26.8
+              - -X k8s.io/dns/pkg/version.VERSION=1.27.0
             output: ${target.dir}/usr/bin/node-cache-dev
             packages: ./cmd/node-cache
             strip: false
@@ -97,14 +96,14 @@ contents:
               - usr/bin/node-cache
             license: Apache-2.0
             name: kubernetes-dns-node-cache
-            rel: 7
+            rel: 0
             subpackages:
               - files:
                   - path: usr/bin/node-cache
                     source: usr/bin/node-cache-dev
                 name: kubernetes-dns-node-cache-dev
             url: https://github.com/kubernetes-sigs/node-local-dns
-            version: 1.26.8
+            version: 1.27.0
 os-release:
   name: Docker Hardened Images (Alpine)
   id: alpine
