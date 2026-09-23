@@ -52,7 +52,7 @@
   },
   {
     "package": "nodemailer",
-    "version": "9.0.1"
+    "version": "9.1.1"
   },
   {
     "package": "form-data",
