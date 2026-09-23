@@ -3,16 +3,16 @@
 image: dhi.io/pkg-ruby
 variant: runtime
 tags:
-  - 3.3.12-53
-  - 3.3.12-53-debian13
+  - 3.3.12-54
+  - 3.3.12-54-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 vars:
-  DHI_REL: "53"
-  DHI_VERSION: 3.3.12-53
+  DHI_REL: "54"
+  DHI_VERSION: 3.3.12-54
   PACKAGE_NAME: ruby-3.3
-  RUBY_REFERENCE: dhi/ruby:3.4.10-debian13-dev@sha256:3ecae77ba176c48d3cb79750a84fef7ffa919cdd6bf84751b2aeeb54ba2e7b20
+  RUBY_REFERENCE: dhi/ruby:3.4.10-debian13-dev@sha256:c4986396a0e390cb007648afb7fb7d3cab2a8828cf0b720231eaaa44d126dc3d
   SEMVER_MAJOR_MINOR_VERSION: "3.3"
   SHA256: 873e3297990b8cff7a5436f6e510a3a7a18c74e5f2c794e4162e605fe0a743b3
   VERSION: 3.3.12
@@ -84,7 +84,7 @@ contents:
             uid: 0
             gid: 0
         artifacts:
-          - name: dhi.io/ruby:3.4.10-debian13-dev@sha256:3ecae77ba176c48d3cb79750a84fef7ffa919cdd6bf84751b2aeeb54ba2e7b20
+          - name: dhi.io/ruby:3.4.10-debian13-dev@sha256:c4986396a0e390cb007648afb7fb7d3cab2a8828cf0b720231eaaa44d126dc3d
             includes:
               - usr/bin/ruby
               - usr/lib/libruby.so.3.4
@@ -187,7 +187,7 @@ contents:
               - Upgrade bundled net-imap default gem to fix CVE-2025-43857
               - Backport erb default gem def_method fix for CVE-2026-41316 (3.3, 3.4)
               - Backport json default gem 2.19.9 to fix CVE-2026-33210 and CVE-2026-54696 (3.4, 4.0)
-            version: 3.3.12-53
+            version: 3.3.12-54
         - uses: dpkg/build@v1
           with:
             args: -b -uc -us -d
