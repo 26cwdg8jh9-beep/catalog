@@ -3,8 +3,8 @@
 image: dhi.io/pkg-iptables
 variant: runtime
 tags:
-  - 1.8.11-2-dhi0
-  - 1.8.11-2-dhi0-debian13
+  - 1.8.11-2-dhi1
+  - 1.8.11-2-dhi1-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -22,9 +22,9 @@ vars:
   DEBIAN_ORIG_FILENAME: iptables_1.8.11.orig.tar.xz
   DEBIAN_ORIG_URL: https://deb.debian.org/debian/pool/main/i/iptables/iptables_1.8.11.orig.tar.xz
   DEBIAN_VERSION: 1.8.11-2
-  DHI_REL: "0"
-  DHI_VERSION: 1.8.11-2+dhi0
-  TAG_VERSION: 1.8.11-2-dhi0
+  DHI_REL: "1"
+  DHI_VERSION: 1.8.11-2+dhi1
+  TAG_VERSION: 1.8.11-2-dhi1
   UPSTREAM_VERSION: 1.8.11
 contents:
   packages:
@@ -73,10 +73,15 @@ contents:
           with:
             changelog:
               - DHI Rebuild
-            version: 1.8.11-2+dhi0
+            version: 1.8.11-2+dhi1
+        - name: remove debian update-alternatives removal of symlinks
+          runs: |
+            set -eux -o pipefail
+
+            sed -i -z 's,rm debian/tmp/usr/sbin/.*\n,,' ${source.dir}/iptables/debian/rules
         - uses: dpkg/build@v1
           with:
-            args: -uc -us -d
+            args: -uc -us -d upgrade
             options: nocheck
 os-release:
   name: Docker Hardened Images (Debian)
