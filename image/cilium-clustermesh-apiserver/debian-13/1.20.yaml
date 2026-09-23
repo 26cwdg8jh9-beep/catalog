@@ -17,7 +17,7 @@ dates:
   release: "2026-07-29"
 vars:
   COMMIT_SHA: e0dc92bd6dac33d7ba3b5eace82a0448bbb13aac
-  ETCD_REFERENCE: dhi/etcd:3.7.1-debian13-dev@sha256:9a2f2d727ad58737f90dbbd8184f1f7c4f5b84aca81dd7570f2fd8f03c7e95e3
+  ETCD_REFERENCE: dhi/etcd:3.7.1-debian13-dev@sha256:3844b5f4042ddbd8b1e04924f30e90b2e62bb6cf89a2d6e4d10f686d4faa23ee
   FLAVORED_SUFFIX: ""
   GOPS_VERSION: 0.3.29-4
   SEMVER_MAJOR_MINOR_VERSION: "1.20"
@@ -99,7 +99,7 @@ contents:
           uid: 0
           gid: 0
   artifacts:
-    - name: dhi.io/etcd:3.7.1-debian13-dev@sha256:9a2f2d727ad58737f90dbbd8184f1f7c4f5b84aca81dd7570f2fd8f03c7e95e3
+    - name: dhi.io/etcd:3.7.1-debian13-dev@sha256:3844b5f4042ddbd8b1e04924f30e90b2e62bb6cf89a2d6e4d10f686d4faa23ee
       includes:
         - usr/local/bin/etcd
       uid: 0
