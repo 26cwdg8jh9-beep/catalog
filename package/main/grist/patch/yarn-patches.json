@@ -1,13 +1,5 @@
 [
   {
-    "package": "axios",
-    "version": "1.18.0"
-  },
-  {
-    "package": "handlebars",
-    "version": "4.7.9"
-  },
-  {
     "package": "basic-ftp",
     "version": "5.3.1",
     "resolutions": [ "basic-ftp" ]
@@ -34,10 +26,6 @@
     "package": "path-to-regexp",
     "version": "0.1.13",
     "resolutions": [ "express/path-to-regexp" ]
-  },
-  {
-    "package": "piscina",
-    "version": "4.9.3"
   },
   {
     "package": "bn.js",
@@ -80,10 +68,6 @@
     "version": "2.4.7"
   },
   {
-    "package": "i18next-http-middleware",
-    "version": "3.9.7"
-  },
-  {
     "package": "brace-expansion",
     "version": "2.1.4",
     "resolutions": [
@@ -114,22 +98,6 @@
     "resolutions": [ "follow-redirects" ]
   },
   {
-    "package": "morgan",
-    "version": "1.11.0"
-  },
-  {
-    "package": "multiparty",
-    "version": "4.3.0"
-  },
-  {
-    "package": "morgan",
-    "version": "1.11.0"
-  },
-  {
-    "package": "ws",
-    "version": "8.21.0"
-  },
-  {
     "package": "ws",
     "version": "8.21.0",
     "resolutions": [
@@ -137,10 +105,6 @@
       "engine.io/ws",
       "jsdom/ws"
     ]
-  },
-  {
-    "package": "tar",
-    "version": "7.5.21"
   },
   {
     "package": "tar",
@@ -173,26 +137,8 @@
   },
   {
     "package": "typeorm",
-    "version": "0.3.31"
-  },
-  {
-    "package": "typeorm",
     "version": "0.3.31",
     "resolutions": [ "typeorm" ]
-  },
-  {
-    "package": "engine.io",
-    "version": "6.6.7"
-  },
-  {
-    "package": "engine.io",
-    "version": "6.6.7",
-    "resolutions": [ "**/engine.io" ]
-  },
-  {
-    "package": "linkify-it",
-    "version": "5.0.2",
-    "resolutions": [ "**/linkify-it" ]
   },
   {
     "package": "body-parser",
