@@ -4,11 +4,11 @@ name: Crossplane Helm chart 2.x
 image: dhi.io/crossplane-chart
 variant: helm
 tags:
-  - 2.4.1
+  - 2.4.2
 platforms:
   - linux/amd64
 vars:
-  CHART_COMMIT_SHA: 077bf2f5ff70724111d53017bfa7e08e0a938248
+  CHART_COMMIT_SHA: bf8ffd4048a0bb1b408b8b745e31960c717009cb
   CHART_HELM_NAME: crossplane-chart
   CROSSPLANE_REFERENCE: dhi/crossplane:2.4.1-debian13@sha256:63d189d34d78bdcf59f5cd9e4ab41f9f61dad00dd08048cb465d25a00c78734e
   DHI_NAMESPACE: dhi
@@ -18,8 +18,8 @@ vars:
   HELM_VERSION: 4.1.4-2
   SEMVER_MAJOR_MINOR_VERSION: "2.4"
   SEMVER_MAJOR_VERSION: "2"
-  SEMVER_VERSION: 2.4.1
-  VERSION: 2.4.1
+  SEMVER_VERSION: 2.4.2
+  VERSION: 2.4.2
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -34,8 +34,8 @@ contents:
           - coreutils
           - helm=4.1.4-2
         files:
-          - url: git+https://github.com/crossplane/crossplane.git#v2.4.1
-            checksum: 077bf2f5ff70724111d53017bfa7e08e0a938248
+          - url: git+https://github.com/crossplane/crossplane.git#v2.4.2
+            checksum: bf8ffd4048a0bb1b408b8b745e31960c717009cb
             path: ${source.dir}/helm-charts
             uid: 0
             gid: 0
