@@ -22,6 +22,7 @@ DERBYSHARED="${PATCH_DIR}/derbyshared-10.17.1.0.jar"
 DERBYTOOLS="${PATCH_DIR}/derbytools-10.17.1.0.jar"
 LIBTHRIFT="${PATCH_DIR}/libthrift-0.24.0.jar"
 HIVE_JDBC_313="${PATCH_DIR}/hive-jdbc-3.1.3.jar"
+HIVE_EXEC_401_CORE="${PATCH_DIR}/hive-exec-4.0.1-core.jar"
 COMMONS_LANG3="${PATCH_DIR}/commons-lang3-3.18.0.jar"
 NIMBUS_JOSE_JWT="${PATCH_DIR}/nimbus-jose-jwt-10.0.2.jar"
 
@@ -29,7 +30,7 @@ for jar in \
     "$JACKSON_CORE" "$JACKSON_DATABIND" "$JACKSON_ANNOTATIONS" \
     "$COMMONS_CONFIGURATION2" "$JLINE_REMOTE_TELNET" \
     "$DERBY" "$DERBYSHARED" "$DERBYTOOLS" "$LIBTHRIFT" \
-    "$HIVE_JDBC_313" "$COMMONS_LANG3" "$NIMBUS_JOSE_JWT"; do
+    "$HIVE_JDBC_313" "$HIVE_EXEC_401_CORE" "$COMMONS_LANG3" "$NIMBUS_JOSE_JWT"; do
     if [ ! -f "$jar" ]; then
         echo "missing patch dependency: $jar" >&2
         exit 1
@@ -148,6 +149,10 @@ install -T -m 0644 "$LIBTHRIFT" "${JARS_DIR}/libthrift-0.24.0.jar"
 # Spark pins hive-jdbc-2.3.10.jar; install the fixed JDBC driver under that
 # name so the distribution classpath layout stays stable.
 replace_loose_jar "hive-jdbc-2.3.10.jar" "$HIVE_JDBC_313"
+
+# Spark ships hive-exec-2.3.10-core.jar from the Hive 2.3 profile; swap in
+# the fixed core artifact while keeping the legacy filename on the classpath.
+replace_loose_jar "hive-exec-2.3.10-core.jar" "$HIVE_EXEC_401_CORE"
 
 HADOOP_JAR="$(find "${JARS_DIR}" -maxdepth 1 -name 'hadoop-client-runtime-*.jar' -print -quit)"
 if [ -n "$HADOOP_JAR" ] && [ -f "$HADOOP_JAR" ]; then
