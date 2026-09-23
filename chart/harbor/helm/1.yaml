@@ -17,7 +17,7 @@ vars:
   HARBOR_CORE_REFERENCE: dhi/harbor-core:2.15.2-debian13@sha256:dc5c700d3f46eadc4ef23e31deb5b068a4da78cb4a857e12a3005414024bfaa7
   HARBOR_DB_REFERENCE: dhi/harbor-db:2.15.2-debian13@sha256:904f9ce7202861e82bc1f5c606f9551086ac6237a40cd46877b4a7a535356be5
   HARBOR_EXPORTER_REFERENCE: dhi/harbor-exporter:2.15.2-debian13@sha256:2c3df1b1b813ce8ae0d837b73ecba53e871b09fb73139bc9bf2881ef6df1d3e0
-  HARBOR_JOBSERVICE_REFERENCE: dhi/harbor-jobservice:2.15.2-debian13@sha256:b1f3cb9588cedd762cd67c6a1fa7b814c7752afe6d99eb7eb4ff5c868d27c32a
+  HARBOR_JOBSERVICE_REFERENCE: dhi/harbor-jobservice:2.15.2-debian13@sha256:f0d135299771bc66b7632d8592832eb5512a82be2eb2b4393340afc6e3c80e6e
   HARBOR_PORTAL_REFERENCE: dhi/harbor-portal:2.15.2-debian13@sha256:ed4b38917861f2009e8d73ad9eb17bcd47a3f194a0f5bd7688141952be705909
   HARBOR_REDIS_REFERENCE: dhi/harbor-redis:2.15.2-debian13@sha256:5c8f183ad9a8fa7d00bff8bfe23eb5cdb4e0802a1f0069009fd8bc499a8223ee
   HARBOR_REGISTRY_REFERENCE: dhi/harbor-registry:2.15.2-debian13@sha256:e47e46b44b5e122ad1b45f638e466c85794284e58aa1b3ad61fc94b97de16d4d
@@ -61,7 +61,7 @@ contents:
                 - name: harbor-core
                   ref: dhi/harbor-core:2.15.2-debian13@sha256:dc5c700d3f46eadc4ef23e31deb5b068a4da78cb4a857e12a3005414024bfaa7
                 - name: harbor-jobservice
-                  ref: dhi/harbor-jobservice:2.15.2-debian13@sha256:b1f3cb9588cedd762cd67c6a1fa7b814c7752afe6d99eb7eb4ff5c868d27c32a
+                  ref: dhi/harbor-jobservice:2.15.2-debian13@sha256:f0d135299771bc66b7632d8592832eb5512a82be2eb2b4393340afc6e3c80e6e
                 - name: harbor-registry
                   ref: dhi/harbor-registry:2.15.2-debian13@sha256:e47e46b44b5e122ad1b45f638e466c85794284e58aa1b3ad61fc94b97de16d4d
                 - name: harbor-registryctl
