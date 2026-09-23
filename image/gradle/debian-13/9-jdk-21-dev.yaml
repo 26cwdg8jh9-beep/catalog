@@ -19,8 +19,8 @@ platforms:
 dates:
   release: "2025-07-31"
 vars:
-  EXPAT_DIGEST: sha256:c65b804918cdd61d0575c1d46cd86cf8f39b71d89e9ad127ac6ff9fa79b94f5d
-  EXPAT_VERSION: 2.8.4
+  EXPAT_DIGEST: sha256:475566989eba46b344d215d8e4b5144b9175061a513b0f91275798f41034bb7c
+  EXPAT_VERSION: 2.8.5
   GRADLE_DIGEST: sha256:3aece75f6d4365f2af7604821ed2fa5f6fefe5dbf274c1a725a62da70fde4cb4
   GRADLE_MAJOR_MINOR_VERSION: "9.7"
   GRADLE_MAJOR_VERSION: "9"
@@ -64,7 +64,7 @@ contents:
         - usr/local/bin/**
       uid: 0
       gid: 0
-    - name: dhi.io/pkg-expat:2.8.4-debian13@sha256:c65b804918cdd61d0575c1d46cd86cf8f39b71d89e9ad127ac6ff9fa79b94f5d
+    - name: dhi.io/pkg-expat:2.8.5-debian13@sha256:475566989eba46b344d215d8e4b5144b9175061a513b0f91275798f41034bb7c
       includes:
         - usr/**
         - var/lib/dpkg/status.d
