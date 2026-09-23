@@ -16,17 +16,17 @@ vars:
   DHI_REGISTRY: dhi.io
   DHI_SKIP_CONTEXT_COPY: "true"
   HELM_VERSION: 4.1.4-2
-  JUPYTERHUB_K8S_HUB_REFERENCE: dhi/jupyterhub-k8s-hub:4.4.2-debian13@sha256:39ae6c7e6f9f1662b82e3e0d52ff9bf5ef848039d7ffa25402f845521909da5d
+  JUPYTERHUB_K8S_HUB_REFERENCE: dhi/jupyterhub-k8s-hub:4.4.2-debian13@sha256:4afb561ea3650ed3faa1cbde3ed3d5271a4f6a1c6ee3dd09e82d34bd1fbe0217
   JUPYTERHUB_K8S_IMAGE_AWAITER_REFERENCE: dhi/jupyterhub-k8s-image-awaiter:4.4.2-alpine3.24@sha256:201046070e707909027cc17f23eb38dc87b31c4f557353261d8bfadb83bb0693
   JUPYTERHUB_K8S_NETWORK_TOOLS_REFERENCE: dhi/jupyterhub-k8s-network-tools:4.4.2-alpine3.24@sha256:0e29789dc9aaa5e26c2b7bae704690ca2ce64e61f4e2e0252f17cc7802fc1ec8
-  JUPYTERHUB_K8S_SECRET_SYNC_REFERENCE: dhi/jupyterhub-k8s-secret-sync:4.4.2-debian13@sha256:58612c664af3529ed56e28a0da7e6d7cc56effba8952445d176e01a2eb7597cd
-  JUPYTERHUB_K8S_SINGLEUSER_SAMPLE_REFERENCE: dhi/jupyterhub-k8s-singleuser-sample:4.4.2-debian13-compat@sha256:5fa4982befb47412aaabc8606a1fa87b51d7bb3bfa27e655301d89e8984726ef
+  JUPYTERHUB_K8S_SECRET_SYNC_REFERENCE: dhi/jupyterhub-k8s-secret-sync:4.4.2-debian13@sha256:9ed8b41e7d60d1f76a10b38aa1476015ed29da58299bffe69cc351af314f143f
+  JUPYTERHUB_K8S_SINGLEUSER_SAMPLE_REFERENCE: dhi/jupyterhub-k8s-singleuser-sample:4.4.2-debian13-compat@sha256:d206f8a6aeee954e987a77caf9f2dd362e01754ea714222e0193e3d1cfbe7120
   KUBE_SCHEDULER_REFERENCE: dhi/kube-scheduler:1.37.0-debian13@sha256:926166ca980fba1edc8222ec9f19b4ee4ebc05ded4f7e1dc27348be88f69a0c9
   KUBERNETES_PAUSE_REFERENCE: dhi/kubernetes-pause:3.10.2-debian13@sha256:c907abf800427d0ae19f1001dbe59b6eea47ad87a4a9a4d03c5540f1814f674d
   SEMVER_MAJOR_MINOR_VERSION: "4.4"
   SEMVER_MAJOR_VERSION: "4"
   SEMVER_VERSION: 4.4.2
-  TRAEFIK_REFERENCE: dhi/traefik:3.7.13-debian13@sha256:0490a8aa9b95dc2018e44e038ef11c2a005b7233c9b183ee39f0fbfe5b3e3622
+  TRAEFIK_REFERENCE: dhi/traefik:3.7.13-debian13@sha256:9db70c28672de7489684f490a2b45a468b88832a73dc95822710801c45ebf449
   VERSION: 4.4.2
 contents:
   repositories:
@@ -57,15 +57,15 @@ contents:
               description: Docker Hardened Images Helm chart for Zero to JupyterHub on Kubernetes
               images:
                 - name: hub
-                  ref: dhi/jupyterhub-k8s-hub:4.4.2-debian13@sha256:39ae6c7e6f9f1662b82e3e0d52ff9bf5ef848039d7ffa25402f845521909da5d
+                  ref: dhi/jupyterhub-k8s-hub:4.4.2-debian13@sha256:4afb561ea3650ed3faa1cbde3ed3d5271a4f6a1c6ee3dd09e82d34bd1fbe0217
                 - name: chp
                   ref: dhi/configurable-http-proxy:5.3.0-debian13@sha256:c8408561f1dd2c3b12d433267d834c4d9f4f250ecbf0da752944d74b3c3c1ac9
                 - name: secret-sync
-                  ref: dhi/jupyterhub-k8s-secret-sync:4.4.2-debian13@sha256:58612c664af3529ed56e28a0da7e6d7cc56effba8952445d176e01a2eb7597cd
+                  ref: dhi/jupyterhub-k8s-secret-sync:4.4.2-debian13@sha256:9ed8b41e7d60d1f76a10b38aa1476015ed29da58299bffe69cc351af314f143f
                 - name: network-tools
                   ref: dhi/jupyterhub-k8s-network-tools:4.4.2-alpine3.24@sha256:0e29789dc9aaa5e26c2b7bae704690ca2ce64e61f4e2e0252f17cc7802fc1ec8
                 - name: singleuser
-                  ref: dhi/jupyterhub-k8s-singleuser-sample:4.4.2-debian13-compat@sha256:5fa4982befb47412aaabc8606a1fa87b51d7bb3bfa27e655301d89e8984726ef
+                  ref: dhi/jupyterhub-k8s-singleuser-sample:4.4.2-debian13-compat@sha256:d206f8a6aeee954e987a77caf9f2dd362e01754ea714222e0193e3d1cfbe7120
                 - name: image-awaiter
                   ref: dhi/jupyterhub-k8s-image-awaiter:4.4.2-alpine3.24@sha256:201046070e707909027cc17f23eb38dc87b31c4f557353261d8bfadb83bb0693
                 - name: pause
@@ -73,7 +73,7 @@ contents:
                 - name: kube-scheduler
                   ref: dhi/kube-scheduler:1.37.0-debian13@sha256:926166ca980fba1edc8222ec9f19b4ee4ebc05ded4f7e1dc27348be88f69a0c9
                 - name: traefik
-                  ref: dhi/traefik:3.7.13-debian13@sha256:0490a8aa9b95dc2018e44e038ef11c2a005b7233c9b183ee39f0fbfe5b3e3622
+                  ref: dhi/traefik:3.7.13-debian13@sha256:9db70c28672de7489684f490a2b45a468b88832a73dc95822710801c45ebf449
               name: zero-to-jupyterhub-k8s-chart
               notes: ${source.dir}/config/NOTES.txt
               sourceUrl: https://github.com/jupyterhub/zero-to-jupyterhub-k8s
