@@ -19,7 +19,7 @@ platforms:
 dates:
   release: "2026-09-11"
 vars:
-  COMMIT_SHA: 9e2a55efad054eda661beef35e0b6ac9d9e2a1b4
+  COMMIT_SHA: 540b91da031aa8b7d53d3784693bb451e2be980a
   SEMVER_MAJOR_MINOR_VERSION: "1.152"
   SEMVER_MAJOR_VERSION: "1"
   SEMVER_VERSION: 1.152.0
@@ -63,7 +63,7 @@ contents:
           - sed
         files:
           - url: git+https://github.com/VictoriaMetrics/VictoriaMetrics.git#v1.152.0
-            checksum: 9e2a55efad054eda661beef35e0b6ac9d9e2a1b4
+            checksum: 540b91da031aa8b7d53d3784693bb451e2be980a
             path: /go/src/github.com/VictoriaMetrics/VictoriaMetrics
             spdx:
               name: victoriametrics-vmalert
