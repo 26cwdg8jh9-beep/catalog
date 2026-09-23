@@ -3,25 +3,25 @@
 image: dhi.io/pkg-flink-kubernetes-operator
 variant: runtime
 tags:
-  - 1.16.0-alpine3.24
-  - 1.16.0-r3-alpine3.24
+  - 1.16.1-alpine3.24
+  - 1.16.1-r0-alpine3.24
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
   release: "2026-05-07"
 vars:
-  COMMIT_SHA: b395d61c17f95dcd66d10ee727c9fa718204eb2d
+  COMMIT_SHA: 1c895a326b3306e29d57334041d685c5cd9194c9
   FLINK_HOME: /opt/flink
   MAVEN_REFERENCE: dhi/maven:3.9.16-jdk17-debian13-dev@sha256:854bcc160f9c54e0022cfac488c5012b5be1cad65c3bbf2a00ace08feabcb3a5
   MAVEN_VERSION: 3.9.16
   OPERATOR_HOME: /flink-kubernetes-operator
   PACKAGE_NAME: flink-kubernetes-operator
-  REL: "3"
+  REL: "0"
   SEMVER_MAJOR_MINOR_VERSION: "1.16"
   SEMVER_MAJOR_VERSION: "1"
-  SEMVER_VERSION: 1.16.0
-  VERSION: 1.16.0
+  SEMVER_VERSION: 1.16.1
+  VERSION: 1.16.1
 contents:
   repositories:
     - https://dhi.io/apk/alpine/v3.24/main
@@ -48,15 +48,15 @@ contents:
           - ca-certificates
           - coreutils
         files:
-          - url: git+https://github.com/apache/flink-kubernetes-operator.git#release-1.16.0
-            checksum: b395d61c17f95dcd66d10ee727c9fa718204eb2d
+          - url: git+https://github.com/apache/flink-kubernetes-operator.git#release-1.16.1
+            checksum: 1c895a326b3306e29d57334041d685c5cd9194c9
             path: ${source.dir}/flink-kubernetes-operator
             spdx:
               name: flink-kubernetes-operator
-              version: 1.16.0
+              version: 1.16.1
               packages:
                 - name: flink-kubernetes-operator
-                  purl: pkg:github/apache/flink-kubernetes-operator@release-1.16.0
+                  purl: pkg:github/apache/flink-kubernetes-operator@release-1.16.1
                   license: Apache-2.0
             uid: 0
             gid: 0
@@ -142,14 +142,14 @@ contents:
             install -d "${target.dir}/opt/flink/plugins"
 
             install -m 0644 \
-              "flink-kubernetes-operator/target/flink-kubernetes-operator-1.16.0-shaded.jar" \
-              "${target.dir}/flink-kubernetes-operator/flink-kubernetes-operator-1.16.0-shaded.jar"
+              "flink-kubernetes-operator/target/flink-kubernetes-operator-1.16.1-shaded.jar" \
+              "${target.dir}/flink-kubernetes-operator/flink-kubernetes-operator-1.16.1-shaded.jar"
             install -m 0644 \
-              "flink-kubernetes-webhook/target/flink-kubernetes-webhook-1.16.0-shaded.jar" \
-              "${target.dir}/flink-kubernetes-operator/flink-kubernetes-webhook-1.16.0-shaded.jar"
+              "flink-kubernetes-webhook/target/flink-kubernetes-webhook-1.16.1-shaded.jar" \
+              "${target.dir}/flink-kubernetes-operator/flink-kubernetes-webhook-1.16.1-shaded.jar"
             install -m 0644 \
-              "flink-kubernetes-standalone/target/flink-kubernetes-standalone-1.16.0.jar" \
-              "${target.dir}/flink-kubernetes-operator/flink-kubernetes-standalone-1.16.0.jar"
+              "flink-kubernetes-standalone/target/flink-kubernetes-standalone-1.16.1.jar" \
+              "${target.dir}/flink-kubernetes-operator/flink-kubernetes-standalone-1.16.1.jar"
 
             cp -a flink-kubernetes-operator/target/plugins/. "${target.dir}/opt/flink/plugins/"
             cp -a flink-kubernetes-operator/target/log4j/. "${target.dir}/opt/flink/log/log4j/"
@@ -173,9 +173,9 @@ contents:
               - opt/flink
             license: Apache-2.0
             name: flink-kubernetes-operator
-            rel: 3
+            rel: 0
             url: https://github.com/apache/flink-kubernetes-operator
-            version: 1.16.0
+            version: 1.16.1
       paths:
         - type: file
           path: ${source.dir}/patch/mvn-dependencies.json
