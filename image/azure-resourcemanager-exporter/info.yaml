@@ -1,0 +1,7 @@
+metadata:
+  display-name: Azure ResourceManager Exporter
+  short-description: Prometheus exporter for Azure Resource Manager quotas, costs, resource health, IAM, and Defender security metrics.
+  featured: false
+  home-url: https://github.com/webdevops/azure-resourcemanager-exporter
+  categories:
+    - monitoring-and-observability
