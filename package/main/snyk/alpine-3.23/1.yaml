@@ -3,8 +3,8 @@
 image: dhi.io/pkg-snyk
 variant: runtime
 tags:
-  - 1.1307.3-alpine3.23
-  - 1.1307.3-r0-alpine3.23
+  - 1.1307.4-alpine3.23
+  - 1.1307.4-r0-alpine3.23
 platforms:
   - linux/amd64
   - linux/arm64
@@ -12,12 +12,12 @@ vars:
   REL: "0"
   SEMVER_MAJOR_MINOR_VERSION: "1.1307"
   SEMVER_MAJOR_VERSION: "1"
-  SEMVER_VERSION: 1.1307.3
-  SNYK_AMD64_CHECKSUM: sha256:5f1285cb1ab04ece5c65e7403b6933661b871674dbc4855ab19c2b293421e37e
-  SNYK_ARM64_CHECKSUM: sha256:124da613aea911ec82b7adfcd41fce71f0ce6123d86bf0326d17611af43e2628
+  SEMVER_VERSION: 1.1307.4
+  SNYK_AMD64_CHECKSUM: sha256:be18bf047d9a15f7ff5b31f515d214f53f9510e620edb628459f9b10637c5cdb
+  SNYK_ARM64_CHECKSUM: sha256:324b7aff778bc3df5ea7d6d085cc6ec6a0c6951acb545fad028afd970cf441f4
   SNYK_ASSET: '#{ target.arch == "arm64" ? "snyk-alpine-arm64" : "snyk-alpine" }'
-  SNYK_CHECKSUM: '#{ target.arch == "arm64" ? "sha256:124da613aea911ec82b7adfcd41fce71f0ce6123d86bf0326d17611af43e2628" : "sha256:5f1285cb1ab04ece5c65e7403b6933661b871674dbc4855ab19c2b293421e37e" }'
-  VERSION: 1.1307.3
+  SNYK_CHECKSUM: '#{ target.arch == "arm64" ? "sha256:324b7aff778bc3df5ea7d6d085cc6ec6a0c6951acb545fad028afd970cf441f4" : "sha256:be18bf047d9a15f7ff5b31f515d214f53f9510e620edb628459f9b10637c5cdb" }'
+  VERSION: 1.1307.4
 contents:
   repositories:
     - https://dhi.io/apk/alpine/v3.23/main
@@ -34,7 +34,7 @@ contents:
         packages:
           - busybox
         files:
-          - url: https://github.com/snyk/cli/releases/download/v1.1307.3/${SNYK_ASSET}
+          - url: https://github.com/snyk/cli/releases/download/v1.1307.4/${SNYK_ASSET}
             checksum: ${SNYK_CHECKSUM}
             path: ${source.dir}/${SNYK_ASSET}
             uid: 0
@@ -59,7 +59,7 @@ contents:
             name: snyk
             rel: 0
             url: https://github.com/snyk/cli
-            version: 1.1307.3
+            version: 1.1307.4
 os-release:
   name: Docker Hardened Images (Alpine)
   id: alpine
