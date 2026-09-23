@@ -3,22 +3,22 @@
 image: dhi.io/pkg-mongodb-mcp
 variant: runtime
 tags:
-  - 2.1.1
-  - 2.1.1-r2
-  - 2.1.1-debian13
-  - 2.1.1-r2-debian13
+  - 2.1.2
+  - 2.1.2-r0
+  - 2.1.2-debian13
+  - 2.1.2-r0-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
   release: "2026-07-31"
 vars:
-  COMMIT_SHA: 2e8eae98d1301ca48f1e81273a3f3d5c5820f216
-  REL: "2"
+  COMMIT_SHA: aa95f17c0f3ae19eb4dba140373d435430389cd1
+  REL: "0"
   SEMVER_MAJOR_MINOR_VERSION: "2.1"
   SEMVER_MAJOR_VERSION: "2"
-  SEMVER_VERSION: 2.1.1
-  VERSION: 2.1.1
+  SEMVER_VERSION: 2.1.2
+  VERSION: 2.1.2
 contents:
   packages:
     - base-files
@@ -49,15 +49,15 @@ contents:
           - yarn-classic
           - yq
         files:
-          - url: git+https://github.com/mongodb-js/mongodb-mcp-server.git#v2.1.1
-            checksum: 2e8eae98d1301ca48f1e81273a3f3d5c5820f216
+          - url: git+https://github.com/mongodb-js/mongodb-mcp-server.git#v2.1.2
+            checksum: aa95f17c0f3ae19eb4dba140373d435430389cd1
             path: ${source.dir}/mongodb-mcp-server
             spdx:
               name: mongodb-mcp-server
-              version: 2.1.1
+              version: 2.1.2
               packages:
                 - name: mongodb-mcp-server
-                  purl: pkg:dhi/mongodb-mcp@2.1.1
+                  purl: pkg:dhi/mongodb-mcp@2.1.2
                   license: Apache-2.0
             uid: 0
             gid: 0
@@ -123,9 +123,9 @@ contents:
               - deb
             license: Apache-2.0
             name: mongodb-mcp
-            rel: 2
+            rel: 0
             url: https://github.com/mongodb-js/mongodb-mcp-server
-            version: 2.1.1
+            version: 2.1.2
 os-release:
   name: Docker Hardened Images (Debian)
   id: debian
