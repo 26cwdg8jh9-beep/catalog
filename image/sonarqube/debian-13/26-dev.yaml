@@ -34,7 +34,7 @@ vars:
   JDK_MAJOR_VERSION: "21"
   LOG4J_API_25_VERSION: 2.25.5
   LOG4J_API_26_VERSION: 2.26.1
-  MAVEN_REF: dhi/maven:3.9.16-jdk21-debian13-dev@sha256:f7c32cd2d4afdb64802e092c0d1a5156d0b54a70757d2b9d46a430af0fe6cf5e
+  MAVEN_REF: dhi/maven:3.9.16-jdk21-debian13-dev@sha256:3869c98211853628827bcbb9a1720e510e7f57d8438a23dadd88846dc4160868
   MAVEN_VERSION: 3.9.16
   NETTY_VERSION: 4.1.137.Final
   REACTOR_NETTY_VERSION: 1.2.8
@@ -254,7 +254,7 @@ contents:
             uid: 0
             gid: 0
         artifacts:
-          - name: dhi.io/maven:3.9.16-jdk21-debian13-dev@sha256:f7c32cd2d4afdb64802e092c0d1a5156d0b54a70757d2b9d46a430af0fe6cf5e
+          - name: dhi.io/maven:3.9.16-jdk21-debian13-dev@sha256:3869c98211853628827bcbb9a1720e510e7f57d8438a23dadd88846dc4160868
             includes:
               - opt/**
               - usr/local/bin/**
