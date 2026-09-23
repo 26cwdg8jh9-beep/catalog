@@ -3,20 +3,20 @@
 image: dhi.io/pkg-aws-sdk-cpp
 variant: runtime
 tags:
-  - 1.11.897
-  - 1.11.897-r0
-  - 1.11.897-debian13
-  - 1.11.897-r0-debian13
+  - 1.11.898
+  - 1.11.898-r0
+  - 1.11.898-debian13
+  - 1.11.898-r0-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 vars:
-  COMMIT_SHA: 21a24bf000b0a5dfeb1d7b79020d336a281fd7f9
+  COMMIT_SHA: 1a8e3c7ffc6243fd94e70b386f863ed4e85d5d57
   REL: "0"
   SEMVER_MAJOR_MINOR_VERSION: "1.11"
   SEMVER_MAJOR_VERSION: "1"
-  SEMVER_VERSION: 1.11.897
-  VERSION: 1.11.897
+  SEMVER_VERSION: 1.11.898
+  VERSION: 1.11.898
 contents:
   packages:
     - base-files
@@ -40,15 +40,15 @@ contents:
           - libssl-dev
           - zlib1g-dev
         files:
-          - url: git+https://github.com/aws/aws-sdk-cpp.git#1.11.897
-            checksum: 21a24bf000b0a5dfeb1d7b79020d336a281fd7f9
+          - url: git+https://github.com/aws/aws-sdk-cpp.git#1.11.898
+            checksum: 1a8e3c7ffc6243fd94e70b386f863ed4e85d5d57
             path: ${source.dir}/aws-sdk-cpp
             spdx:
               name: aws-sdk-cpp
-              version: 1.11.897
+              version: 1.11.898
               packages:
                 - name: aws-sdk-cpp
-                  purl: pkg:generic/aws/aws-sdk-cpp@1.11.897
+                  purl: pkg:generic/aws/aws-sdk-cpp@1.11.898
                   license: Apache-2.0
             uid: 0
             gid: 0
@@ -83,7 +83,7 @@ contents:
             name: aws-sdk-cpp
             rel: 0
             url: https://github.com/aws/aws-sdk-cpp
-            version: 1.11.897
+            version: 1.11.898
 os-release:
   name: Docker Hardened Images (Debian)
   id: debian
