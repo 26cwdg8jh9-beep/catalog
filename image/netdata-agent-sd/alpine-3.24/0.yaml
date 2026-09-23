@@ -17,7 +17,7 @@ dates:
   release: "2024-10-02"
 vars:
   COMMIT_SHA: 73f83dfd5f84221455606ad7c3813d4f0ec1330d
-  GOLANG_REFERENCE: dhi/golang:1.27.1-alpine3.24-dev@sha256:47e6ff9623d7f90f2f6e1cd4b0fb129775d8c26e599c4d5da4d66fae1438181d
+  GOLANG_REFERENCE: dhi/golang:1.27.1-alpine3.24-dev@sha256:8690ed7def62c94fec567dcd9803922f7c77fcfbd87f51106233c3ee2c81c705
   SEMVER_MAJOR_MINOR_VERSION: "0.2"
   SEMVER_MAJOR_VERSION: "0"
   SEMVER_VERSION: 0.2.10
@@ -34,7 +34,7 @@ contents:
     - ca-certificates-bundle
   builds:
     - name: netdata-agent-sd
-      uses: dhi.io/golang:1.27.1-alpine3.24-dev@sha256:47e6ff9623d7f90f2f6e1cd4b0fb129775d8c26e599c4d5da4d66fae1438181d
+      uses: dhi.io/golang:1.27.1-alpine3.24-dev@sha256:8690ed7def62c94fec567dcd9803922f7c77fcfbd87f51106233c3ee2c81c705
       work-dir: /go/src/github.com/netdata/sd
       caches:
         - path: /go/pkg/mod
