@@ -4,7 +4,7 @@ image: dhi.io/pkg-sendgrid-python
 variant: runtime
 tags:
   - 6.12.5-alpine3.24
-  - 6.12.5-r4-alpine3.24
+  - 6.12.5-r5-alpine3.24
 platforms:
   - linux/amd64
   - linux/arm64
@@ -12,8 +12,8 @@ dates:
   release: "2025-09-19"
 vars:
   COMMIT_SHA: 76788e70a76b11ce2990821f190e52f887ab9ed6
-  PYTHON_VERSION: 3.14.7-r1
-  REL: "4"
+  PYTHON_VERSION: 3.14.7-r2
+  REL: "5"
   SEMVER_MAJOR_MINOR_VERSION: "6.12"
   SEMVER_MAJOR_VERSION: "6"
   SEMVER_VERSION: 6.12.5
@@ -42,7 +42,7 @@ contents:
           - bash
           - coreutils
           - git
-          - python-3.14=3.14.7-r1
+          - python-3.14=3.14.7-r2
         files:
           - url: https://github.com/astral-sh/uv/releases/download/0.12.17/uv-${UV_ARCH}.tar.gz
             checksum: https://github.com/astral-sh/uv/releases/download/0.12.17/uv-${UV_ARCH}.tar.gz.sha256
@@ -92,7 +92,7 @@ contents:
               - apk
             license: MIT
             name: sendgrid-python
-            rel: 4
+            rel: 5
             url: https://github.com/sendgrid/sendgrid-python
             version: 6.12.5
       paths:
