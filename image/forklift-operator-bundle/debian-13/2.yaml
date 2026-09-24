@@ -6,13 +6,13 @@ variant: runtime
 tags:
   - "2"
   - "2.12"
-  - 2.12.8
+  - 2.12.9
   - 2-debian
   - 2-debian13
   - 2.12-debian
   - 2.12-debian13
-  - 2.12.8-debian
-  - 2.12.8-debian13
+  - 2.12.9-debian
+  - 2.12.9-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -22,7 +22,7 @@ vars:
   API_IMAGE: dhi.io/forklift-api:2
   CHANNEL: release-v2.12
   CLI_DOWNLOAD_IMAGE: dhi.io/forklift-cli-download:2
-  COMMIT_SHA: 5393e5f0e5d96716e32ec3d5c4dfa77897ad183e
+  COMMIT_SHA: 3f4e469cff3cbb8bdf38accb0c8cff30991c5778
   CONTROLLER_IMAGE: dhi.io/forklift-controller:2
   DEFAULT_CHANNEL: release-v2.12
   HYPERV_PROVIDER_SERVER_IMAGE: dhi.io/forklift-hyperv-provider-server:2
@@ -37,10 +37,10 @@ vars:
   POPULATOR_CONTROLLER_IMAGE: dhi.io/populator-controller:2
   SEMVER_MAJOR_MINOR_VERSION: "2.12"
   SEMVER_MAJOR_VERSION: "2"
-  SEMVER_VERSION: 2.12.8
+  SEMVER_VERSION: 2.12.9
   UI_PLUGIN_IMAGE: dhi.io/forklift-console-plugin:2
   VALIDATION_IMAGE: dhi.io/forklift-validation:2
-  VERSION: 2.12.8
+  VERSION: 2.12.9
   VIRT_V2V_IMAGE: dhi.io/forklift-virt-v2v:2
   VIRT_V2V_IMAGE_RHEL9: dhi.io/forklift-virt-v2v:2
   VSPHERE_COPY_OFFLOAD_POPULATOR_IMAGE: dhi.io/vsphere-copy-offload-populator:2
@@ -69,15 +69,15 @@ contents:
           - kustomize=5.8.1-5
           - operator-sdk=1.42.3-2
         files:
-          - url: git+https://github.com/kubev2v/forklift.git#v2.12.8
-            checksum: 5393e5f0e5d96716e32ec3d5c4dfa77897ad183e
+          - url: git+https://github.com/kubev2v/forklift.git#v2.12.9
+            checksum: 3f4e469cff3cbb8bdf38accb0c8cff30991c5778
             path: ${source.dir}/forklift
             spdx:
               name: forklift-operator-bundle
-              version: 2.12.8
+              version: 2.12.9
               packages:
                 - name: forklift-operator-bundle
-                  purl: pkg:github/kubev2v/forklift@v2.12.8
+                  purl: pkg:github/kubev2v/forklift@v2.12.9
                   license: Apache-2.0
             uid: 0
             gid: 0
@@ -86,7 +86,7 @@ contents:
           runs: |
             set -eux -o pipefail
 
-            grep -qxF 'MTV_VERSION=2.12.8' ../build/release.conf
+            grep -qxF 'MTV_VERSION=2.12.9' ../build/release.conf
             grep -qxF 'CHANNEL=release-v2.12' ../build/release.conf
             grep -qxF 'DEFAULT_CHANNEL=release-v2.12' ../build/release.conf
         - name: generate bundle
@@ -96,7 +96,7 @@ contents:
             cp PROJECT PROJECT.template
             PROJECT_NAME=forklift-operator envsubst < PROJECT.template > PROJECT
 
-            export VERSION='2.12.8'
+            export VERSION='2.12.9'
             export CONTROLLER_IMAGE='dhi.io/forklift-controller:2'
             export API_IMAGE='dhi.io/forklift-api:2'
             export VIRT_V2V_IMAGE='dhi.io/forklift-virt-v2v:2'
@@ -120,7 +120,7 @@ contents:
                 -q \
                 --overwrite \
                 --extra-service-accounts forklift-controller,forklift-api,forklift-populator-controller \
-                --version '2.12.8' \
+                --version '2.12.9' \
                 --channels 'release-v2.12' \
                 --default-channel 'release-v2.12' \
                 --output-dir build
