@@ -22,7 +22,7 @@ dates:
 vars:
   ARCH: '#{ target.arch == "amd64" ? "x86_64" : "aarch64" }'
   COMMIT_SHA: 33743ff3beda0c31dd95fd9ef3c1cb3617c37e5c
-  GRADLE_REFERENCE: dhi/gradle:8.14.5-jdk21-debian13-dev@sha256:50f428434f62dede15dc9e7df9fa4d4366ab6d53ff2159d8c46f6b04aa78ef50
+  GRADLE_REFERENCE: dhi/gradle:8.14.5-jdk21-debian13-dev@sha256:a6a1b7e1d4d79651dccaac7f8a09565026a8d1fbe149a0ef929e422b58a2b55a
   GRADLE_VERSION: 8.14.5
   JAVA_FIPS_SUFFIX: ""
   JDK_MAJOR_VERSION: "21"
@@ -72,7 +72,7 @@ contents:
             uid: 0
             gid: 0
         artifacts:
-          - name: dhi.io/gradle:8.14.5-jdk21-debian13-dev@sha256:50f428434f62dede15dc9e7df9fa4d4366ab6d53ff2159d8c46f6b04aa78ef50
+          - name: dhi.io/gradle:8.14.5-jdk21-debian13-dev@sha256:a6a1b7e1d4d79651dccaac7f8a09565026a8d1fbe149a0ef929e422b58a2b55a
             includes:
               - opt/**
               - usr/local/bin/**
@@ -611,7 +611,7 @@ contents:
             uid: 0
             gid: 0
         artifacts:
-          - name: dhi.io/gradle:8.14.5-jdk21-debian13-dev@sha256:50f428434f62dede15dc9e7df9fa4d4366ab6d53ff2159d8c46f6b04aa78ef50
+          - name: dhi.io/gradle:8.14.5-jdk21-debian13-dev@sha256:a6a1b7e1d4d79651dccaac7f8a09565026a8d1fbe149a0ef929e422b58a2b55a
             includes:
               - opt/**
               - usr/local/bin/**
