@@ -47,10 +47,6 @@
     "version": "1.30.0"
   },
   {
-    "package": "compression",
-    "version": "1.8.1"
-  },
-  {
     "package": "nodemailer",
     "version": "9.1.1"
   },
