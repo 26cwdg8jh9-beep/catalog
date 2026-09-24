@@ -7,9 +7,9 @@ tags:
   - 1-alpine-dev
   - 1.35-alpine-dev
   - 1-alpine3.23-dev
-  - 1.35.8-alpine-dev
+  - 1.35.9-alpine-dev
   - 1.35-alpine3.23-dev
-  - 1.35.8-alpine3.23-dev
+  - 1.35.9-alpine3.23-dev
 platforms:
   - linux/amd64
   - linux/arm64
@@ -17,12 +17,12 @@ dates:
   release: "2025-12-17"
   end-of-life: "2027-02-28"
 vars:
-  COMMIT_SHA: 1c2e10a409eb1b03f2f28f401ce935312e20d9fb
+  COMMIT_SHA: 329000efd0b26bd78155e51e4df449130f0fca00
   GOLANG_REFERENCE: dhi/golang:1.27.1-alpine3.23-dev@sha256:0d95d4f9889abcf60c182228d28fa83fde3e0dc2330bb1365e5960273b43ed57
   SEMVER_MAJOR_MINOR_VERSION: "1.35"
   SEMVER_MAJOR_VERSION: "1"
-  SEMVER_VERSION: 1.35.8
-  VERSION: 1.35.8
+  SEMVER_VERSION: 1.35.9
+  VERSION: 1.35.9
 contents:
   repositories:
     - https://dl-cdn.alpinelinux.org/alpine/v3.23/main
@@ -47,15 +47,15 @@ contents:
           - ca-certificates-bundle
           - git
         files:
-          - url: git+https://github.com/kubernetes/kubernetes.git#v1.35.8
-            checksum: 1c2e10a409eb1b03f2f28f401ce935312e20d9fb
+          - url: git+https://github.com/kubernetes/kubernetes.git#v1.35.9
+            checksum: 329000efd0b26bd78155e51e4df449130f0fca00
             path: /go/src/k8s.io/kubernetes
             spdx:
               name: kubernetes
-              version: 1.35.8
+              version: 1.35.9
               packages:
                 - name: kubernetes
-                  purl: pkg:golang/k8s.io/kubernetes@1.35.8
+                  purl: pkg:golang/k8s.io/kubernetes@1.35.9
                   license: Apache-2.0
             uid: 0
             gid: 0
@@ -76,12 +76,12 @@ contents:
             ldflags:
               - -X k8s.io/client-go/pkg/version.buildDate=$(date -ud @${SOURCE_DATE_EPOCH} +'%Y-%m-%dT%H:%M:%SZ')
               - -X k8s.io/component-base/version.buildDate=$(date -ud @${SOURCE_DATE_EPOCH} +'%Y-%m-%dT%H:%M:%SZ')
-              - -X k8s.io/client-go/pkg/version.gitCommit=1c2e10a409eb1b03f2f28f401ce935312e20d9fb
-              - -X k8s.io/component-base/version.gitCommit=1c2e10a409eb1b03f2f28f401ce935312e20d9fb
+              - -X k8s.io/client-go/pkg/version.gitCommit=329000efd0b26bd78155e51e4df449130f0fca00
+              - -X k8s.io/component-base/version.gitCommit=329000efd0b26bd78155e51e4df449130f0fca00
               - -X k8s.io/client-go/pkg/version.gitTreeState=clean
               - -X k8s.io/component-base/version.gitTreeState=clean
-              - -X k8s.io/client-go/pkg/version.gitVersion=v1.35.8
-              - -X k8s.io/component-base/version.gitVersion=v1.35.8
+              - -X k8s.io/client-go/pkg/version.gitVersion=v1.35.9
+              - -X k8s.io/component-base/version.gitVersion=v1.35.9
               - -X k8s.io/client-go/pkg/version.gitMajor=${KUBERNETES_MAJOR_VERSION}
               - -X k8s.io/component-base/version.gitMajor=${KUBERNETES_MAJOR_VERSION}
               - -X k8s.io/client-go/pkg/version.gitMinor=${KUBERNETES_MINOR_VERSION}
@@ -94,12 +94,12 @@ contents:
             ldflags:
               - -X k8s.io/client-go/pkg/version.buildDate=$(date -ud @${SOURCE_DATE_EPOCH} +'%Y-%m-%dT%H:%M:%SZ')
               - -X k8s.io/component-base/version.buildDate=$(date -ud @${SOURCE_DATE_EPOCH} +'%Y-%m-%dT%H:%M:%SZ')
-              - -X k8s.io/client-go/pkg/version.gitCommit=1c2e10a409eb1b03f2f28f401ce935312e20d9fb
-              - -X k8s.io/component-base/version.gitCommit=1c2e10a409eb1b03f2f28f401ce935312e20d9fb
+              - -X k8s.io/client-go/pkg/version.gitCommit=329000efd0b26bd78155e51e4df449130f0fca00
+              - -X k8s.io/component-base/version.gitCommit=329000efd0b26bd78155e51e4df449130f0fca00
               - -X k8s.io/client-go/pkg/version.gitTreeState=clean
               - -X k8s.io/component-base/version.gitTreeState=clean
-              - -X k8s.io/client-go/pkg/version.gitVersion=v1.35.8
-              - -X k8s.io/component-base/version.gitVersion=v1.35.8
+              - -X k8s.io/client-go/pkg/version.gitVersion=v1.35.9
+              - -X k8s.io/component-base/version.gitVersion=v1.35.9
               - -X k8s.io/client-go/pkg/version.gitMajor=${KUBERNETES_MAJOR_VERSION}
               - -X k8s.io/component-base/version.gitMajor=${KUBERNETES_MAJOR_VERSION}
               - -X k8s.io/client-go/pkg/version.gitMinor=${KUBERNETES_MINOR_VERSION}
