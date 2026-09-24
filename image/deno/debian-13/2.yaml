@@ -19,7 +19,7 @@ platforms:
 dates:
   release: "2025-09-10"
 vars:
-  BASE_REFERENCE: dhi/static:20250419-glibc-debian13@sha256:5065c23b431a823160fd35e1b59fc38f97d8f11bf89d347d2ae95f3c84acd87a
+  BASE_REFERENCE: dhi/static:20250419-glibc-debian13@sha256:235b1831903e5ed82142b85b8b8b940d548d92af57cba0021afec39f17ffac00
   BINUTILS_DIGEST: sha256:069179316afd8be7ba10ffb968dce13db5f4a349516553a98d77bfb85051f31d
   BINUTILS_VERSION: "2.46"
   COMMIT_SHA: e518fbd66dda5debcbdefc0beb0b3756b37b64fa
@@ -115,7 +115,7 @@ contents:
         - var/lib/dpkg/status.d/gcc-14-base
       uid: 0
       gid: 0
-    - name: dhi.io/static:20250419-glibc-debian13@sha256:5065c23b431a823160fd35e1b59fc38f97d8f11bf89d347d2ae95f3c84acd87a
+    - name: dhi.io/static:20250419-glibc-debian13@sha256:235b1831903e5ed82142b85b8b8b940d548d92af57cba0021afec39f17ffac00
       includes:
         - bin
         - etc
