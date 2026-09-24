@@ -8,7 +8,7 @@ tags:
 platforms:
   - linux/amd64
 vars:
-  BASH_REFERENCE: dhi/bash:5.2.37-debian13@sha256:4c20bfc9afc53a1d3fcb8436e1e1b10bc03c3ad51db07da15b6a153eb6295d2f
+  BASH_REFERENCE: dhi/bash:5.2.37-debian13@sha256:3d6ff50706cfe3ec56722ec5de67be7280619b43eff997749b8bfd44eab658ae
   CHART_COMMIT_SHA: cd04b0e93380dcb987c52a214b20cd6864362d9d
   CHART_HELM_NAME: thanos-chart
   DHI_NAMESPACE: dhi
@@ -53,7 +53,7 @@ contents:
                 - name: thanos
                   ref: dhi/thanos:0.42.4-debian13@sha256:e1808589f57d8259f26389a8cc995a1bbc8934797225e2d9709296194bfbbc2d
                 - name: bash
-                  ref: dhi/bash:5.2.37-debian13@sha256:4c20bfc9afc53a1d3fcb8436e1e1b10bc03c3ad51db07da15b6a153eb6295d2f
+                  ref: dhi/bash:5.2.37-debian13@sha256:3d6ff50706cfe3ec56722ec5de67be7280619b43eff997749b8bfd44eab658ae
               name: thanos-chart
               notes: ${source.dir}/config/NOTES.txt
               sourceUrl: https://github.com/docker-hardened-images/helm-charts
