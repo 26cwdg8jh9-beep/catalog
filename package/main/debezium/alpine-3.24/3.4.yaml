@@ -4,7 +4,7 @@ image: dhi.io/pkg-debezium
 variant: runtime
 tags:
   - 3.4.3-alpine3.24
-  - 3.4.3-r7-alpine3.24
+  - 3.4.3-r0-alpine3.24
 platforms:
   - linux/amd64
   - linux/arm64
@@ -12,12 +12,13 @@ dates:
   release: "2025-12-18"
 vars:
   COMMIT_SHA: 508459f9f6f9c654fe5be2d686ce7ca045dfe2c0
+  FINAL_VERSION: 3.4.3.Final
   MAVEN_REFERENCE: dhi/maven:3.9.16-jdk21-debian13-dev@sha256:3869c98211853628827bcbb9a1720e510e7f57d8438a23dadd88846dc4160868
-  REL: "7"
+  REL: "0"
   SEMVER_MAJOR_MINOR_VERSION: "3.4"
   SEMVER_MAJOR_VERSION: "3"
   SEMVER_VERSION: 3.4.3
-  VERSION: 3.4.3.Final
+  VERSION: 3.4.3
 contents:
   repositories:
     - https://dhi.io/apk/alpine/v3.24/main
@@ -264,7 +265,7 @@ contents:
               - apk
             license: Apache-2.0
             name: debezium-connector-mysql
-            rel: 7
+            rel: 0
             subpackages:
               - files:
                   - path: usr/share/kafka/connect/debezium-connector-mariadb
@@ -288,7 +289,7 @@ contents:
                   - path: usr/share/kafka/connect/debezium-scripting
                 name: debezium-scripting
             url: https://debezium.io/
-            version: 3.4.3.Final
+            version: 3.4.3
       paths:
         - type: file
           path: ${source.dir}/patch/mvn-dependencies.json
