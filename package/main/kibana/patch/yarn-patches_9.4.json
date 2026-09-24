@@ -227,25 +227,24 @@
   },
   {
     "package": "js-yaml",
-    "version": "^4.3.1"
+    "version": "^4.3.1",
+    "resolutions": [
+      "@redocly/openapi-core/js-yaml",
+      "@apidevtools/json-schema-ref-parser/js-yaml",
+      "@langchain/community/js-yaml",
+      "langchain/js-yaml",
+      "@seriousme/openapi-schema-validator/js-yaml",
+      "eslint/js-yaml",
+      "mocha/js-yaml",
+      "@eslint/eslintrc/js-yaml",
+      "cosmiconfig/js-yaml"
+    ]
   },
   {
     "package": "undici",
     "version": "^7.29.0",
     "resolutions": [
       "**/@elastic/transport/undici"
-    ]
-  },
-  {
-    "package": "nodemailer",
-    "version": "9.0.1"
-  },
-  {
-    "package": "nodemailer",
-    "version": "9.0.1",
-    "resolutions": [
-      "nodemailer",
-      "**/nodemailer"
     ]
   }
 ]
