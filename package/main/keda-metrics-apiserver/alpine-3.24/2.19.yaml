@@ -15,7 +15,7 @@ vars:
   GOLANG_MAJOR_MINOR_VERSION: "1.26"
   GOLANG_VERSION: 1.26.8-r0
   PACKAGE_NAME: keda-metrics-apiserver-2.19
-  REL: "2"
+  REL: "3"
   SEMVER_MAJOR_MINOR_VERSION: "2.19"
   SEMVER_MAJOR_VERSION: "2"
   SEMVER_VERSION: 2.19.0
@@ -80,11 +80,12 @@ contents:
               - github.com/klauspost/compress@v1.18.7
               - github.com/valyala/fasthttp@v1.70.0
               - go.etcd.io/etcd/client/pkg/v3@v3.6.14
-              - google.golang.org/grpc@v1.82.1
+              - google.golang.org/grpc@v1.83.2
               - go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetrichttp@v1.43.0
             download: true
             replaces:
               - github.com/google/cel-go=github.com/google/cel-go@v0.30.0
+              - google.golang.org/grpc=google.golang.org/grpc@v1.83.2
               - github.com/prometheus/client_golang=github.com/prometheus/client_golang@v1.23.2
               - github.com/prometheus/client_model=github.com/prometheus/client_model@v0.6.2
               - github.com/prometheus/common=github.com/prometheus/common@v0.66.1
@@ -121,7 +122,7 @@ contents:
               - usr/bin/keda-adapter
             license: Apache-2.0
             name: keda-metrics-apiserver-2.19
-            rel: 2
+            rel: 3
             subpackages:
               - files:
                   - path: usr/bin/keda-adapter
