@@ -8,7 +8,7 @@ tags:
 platforms:
   - linux/amd64
 vars:
-  ARGO_ROLLOUTS_REFERENCE: dhi/argo-rollouts:1.10.0-debian13@sha256:6dc8f756be9f09fc8d2c09eb0284c5254b780d9c51ca8a21754e8daddbdc58d6
+  ARGO_ROLLOUTS_REFERENCE: dhi/argo-rollouts:1.10.0-debian13@sha256:b0e0f8a6523ac1154473fba9400cc48fd9951bdf16fa6621094dd43a72b58a10
   CHART_COMMIT_SHA: 45e454310013b928e4abd49a09ccd407d54eb5d7
   CHART_HELM_NAME: argo-rollouts-chart
   DHI_NAMESPACE: dhi
@@ -51,7 +51,7 @@ contents:
               description: Docker Hardened Images Helm chart for Argo Rollouts
               images:
                 - name: argo-rollouts
-                  ref: dhi/argo-rollouts:1.10.0-debian13@sha256:6dc8f756be9f09fc8d2c09eb0284c5254b780d9c51ca8a21754e8daddbdc58d6
+                  ref: dhi/argo-rollouts:1.10.0-debian13@sha256:b0e0f8a6523ac1154473fba9400cc48fd9951bdf16fa6621094dd43a72b58a10
                 - name: kubectl-argo-rollouts
                   ref: dhi/kubectl-argo-rollouts:1.10.0-debian13@sha256:59f704ffe7de75210e96cb2d202d35084896a10c069758e141762b1a51b63118
               name: argo-rollouts-chart
