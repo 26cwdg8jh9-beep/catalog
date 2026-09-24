@@ -6,24 +6,24 @@ variant: dev
 tags:
   - 1-dev
   - 1.16-dev
-  - 1.16.3-dev
+  - 1.16.4-dev
   - 1-debian-dev
   - 1-debian13-dev
   - 1.16-debian-dev
   - 1.16-debian13-dev
-  - 1.16.3-debian-dev
-  - 1.16.3-debian13-dev
+  - 1.16.4-debian-dev
+  - 1.16.4-debian13-dev
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
   release: "2026-08-26"
 vars:
-  COMMIT_SHA: 42121cd5ca5e1ab1d37e286540ce11acf70e290a
+  COMMIT_SHA: 6ee8af215a535cfca08bf729ff1017d4221d6667
   SEMVER_MAJOR_MINOR_VERSION: "1.16"
   SEMVER_MAJOR_VERSION: "1"
-  SEMVER_VERSION: 1.16.3
-  VERSION: 1.16.3
+  SEMVER_VERSION: 1.16.4
+  VERSION: 1.16.4
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -68,15 +68,15 @@ contents:
           - mawk
           - sed
         files:
-          - url: git+https://github.com/hashicorp/terraform.git#v1.16.3
-            checksum: 42121cd5ca5e1ab1d37e286540ce11acf70e290a
+          - url: git+https://github.com/hashicorp/terraform.git#v1.16.4
+            checksum: 6ee8af215a535cfca08bf729ff1017d4221d6667
             path: /go/src/github.com/hashicorp/terraform
             spdx:
               name: terraform
-              version: 1.16.3
+              version: 1.16.4
               packages:
                 - name: terraform
-                  purl: pkg:golang/github.com/hashicorp/terraform@v1.16.3
+                  purl: pkg:golang/github.com/hashicorp/terraform@v1.16.4
                   license: BUSL-1.1
             uid: 65532
             gid: 65532
