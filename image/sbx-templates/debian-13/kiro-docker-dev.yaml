@@ -8,20 +8,20 @@ flavor: docker
 tags:
   - kiro-docker
   - kiro-2-docker
-  - kiro-2.22-docker
-  - kiro-2.22.1-docker
+  - kiro-2.24-docker
+  - kiro-2.24.0-docker
 platforms:
   - linux/amd64
   - linux/arm64
 vars:
-  CENTERED_KIT_NAME: '           kiro docker 2.22.1'
+  CENTERED_KIT_NAME: '           kiro docker 2.24.0'
   DHI_TAGS_OVERWRITE: "true"
   KIT_NAME: kiro
   SANDBOXES_COMMIT_SHA: 54a695035350bab5f126a88c892a9bc3b5ae162a
-  SEMVER_MAJOR_MINOR_VERSION: "2.22"
+  SEMVER_MAJOR_MINOR_VERSION: "2.24"
   SEMVER_MAJOR_VERSION: "2"
-  SEMVER_VERSION: 2.22.1
-  VERSION: 2.22.1
+  SEMVER_VERSION: 2.24.0
+  VERSION: 2.24.0
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -113,6 +113,7 @@ contents:
           - coreutils
           - findutils
           - curl
+          - gawk
           - sed
           - grep
           - unzip
@@ -859,7 +860,7 @@ paths:
                   \033[36m*****\033[0m         \033[96m+*****#*******\033[0m
                     \033[36m+****+\033[0m    \033[96m+*\033[0m     \033[96m:***\033[0m  $_dhi_vmid
                       \033[36m.**********\033[0m    \033[96m:***\033[0m
-                        \033[36m.****.       \033[96m=+\033[0m             kiro docker 2.22.1
+                        \033[36m.****.       \033[96m=+\033[0m             kiro docker 2.24.0
 
       EOF
       )"
@@ -869,31 +870,55 @@ paths:
     uid: 0
     gid: 0
     mode: "0755"
+  - type: delete
+    path: /usr/sbin/iptables
+    uid: 0
+    gid: 0
   - type: symlink
     path: /usr/sbin/iptables
     uid: 0
     gid: 0
     source: iptables-nft
+  - type: delete
+    path: /usr/sbin/iptables-save
+    uid: 0
+    gid: 0
   - type: symlink
     path: /usr/sbin/iptables-save
     uid: 0
     gid: 0
     source: iptables-nft-save
+  - type: delete
+    path: /usr/sbin/iptables-restore
+    uid: 0
+    gid: 0
   - type: symlink
     path: /usr/sbin/iptables-restore
     uid: 0
     gid: 0
     source: iptables-nft-restore
+  - type: delete
+    path: /usr/sbin/ip6tables
+    uid: 0
+    gid: 0
   - type: symlink
     path: /usr/sbin/ip6tables
     uid: 0
     gid: 0
     source: ip6tables-nft
+  - type: delete
+    path: /usr/sbin/ip6tables-save
+    uid: 0
+    gid: 0
   - type: symlink
     path: /usr/sbin/ip6tables-save
     uid: 0
     gid: 0
     source: ip6tables-nft-save
+  - type: delete
+    path: /usr/sbin/ip6tables-restore
+    uid: 0
+    gid: 0
   - type: symlink
     path: /usr/sbin/ip6tables-restore
     uid: 0
