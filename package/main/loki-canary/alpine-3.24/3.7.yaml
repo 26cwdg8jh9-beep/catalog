@@ -4,7 +4,7 @@ image: dhi.io/pkg-loki-canary
 variant: runtime
 tags:
   - 3.7.8-alpine3.24
-  - 3.7.8-r1-alpine3.24
+  - 3.7.8-r2-alpine3.24
 platforms:
   - linux/amd64
   - linux/arm64
@@ -15,7 +15,7 @@ vars:
   GOLANG_MAJOR_MINOR_VERSION: "1.26"
   GOLANG_VERSION: 1.26.8-r0
   PACKAGE_NAME: loki-canary-3.7
-  REL: "1"
+  REL: "2"
   SEMVER_MAJOR_MINOR_VERSION: "3.7"
   SEMVER_MAJOR_VERSION: "3"
   SEMVER_VERSION: 3.7.8
@@ -85,10 +85,6 @@ contents:
             go get github.com/go-openapi/testify/enable/yaml/v2@v2.5.1
             go mod tidy
             go mod vendor
-        - name: update go dependencies
-          uses: go/bump@v1
-          with:
-            deps: []
         - name: build loki-canary (3.x)
           uses: go/build@v1
           work-dir: /go/src/github.com/grafana/loki
@@ -127,7 +123,7 @@ contents:
               - usr/bin/loki-canary
             license: AGPL-3.0
             name: loki-canary-3.7
-            rel: 1
+            rel: 2
             subpackages:
               - files:
                   - path: usr/bin/loki-canary
