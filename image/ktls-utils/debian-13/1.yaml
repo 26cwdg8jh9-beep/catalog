@@ -5,22 +5,22 @@ image: dhi.io/ktls-utils
 variant: runtime
 tags:
   - "1"
-  - "1.4"
-  - 1.4.0
+  - "1.5"
+  - 1.5.0
   - 1-debian
   - 1-debian13
-  - 1.4-debian
-  - 1.4-debian13
-  - 1.4.0-debian
-  - 1.4.0-debian13
+  - 1.5-debian
+  - 1.5-debian13
+  - 1.5.0-debian
+  - 1.5.0-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 vars:
-  SEMVER_MAJOR_MINOR_VERSION: "1.4"
+  SEMVER_MAJOR_MINOR_VERSION: "1.5"
   SEMVER_MAJOR_VERSION: "1"
-  SEMVER_VERSION: 1.4.0
-  VERSION: 1.4.0-0
+  SEMVER_VERSION: 1.5.0
+  VERSION: 1.5.0-0
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -31,7 +31,7 @@ contents:
     - '!mawk'
     - '!original-awk'
     - base-files
-    - ktls-utils=1.4.0-0
+    - ktls-utils=1.5.0-0
     - libglib2.0-0t64
     - libgnutls30t64
     - libkeyutils1
@@ -59,7 +59,7 @@ os-release:
   home-url: https://docker.com/products/hardened-images/
   bug-report-url: https://docker.com/support/
 environment:
-  KTLS_UTILS_VERSION: 1.4.0
+  KTLS_UTILS_VERSION: 1.5.0
 annotations:
   org.opencontainers.image.description: A minimal ktls-utils image
   org.opencontainers.image.licenses: GPL-2.0
