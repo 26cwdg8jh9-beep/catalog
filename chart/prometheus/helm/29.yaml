@@ -18,7 +18,7 @@ vars:
   HELM_VERSION: 4.1.4-2
   KUBE_STATE_METRICS_CHART_REFERENCE: dhi/kube-state-metrics-chart:8.5.0@sha256:a6f7f5259635944a2fbebe93af4ccbc14a8e8a252005794456d6fc5a6a24fba2
   NODE_EXPORTER_CHART_REFERENCE: dhi/node-exporter-chart:4.57.0@sha256:aac7535b131614caf06f5506caaac14a7c4ddbb0e5e3eef5459fa73703fcdd19
-  PROMETHEUS_CONFIG_RELOADER_REFERENCE: dhi/prometheus-config-reloader:0.94.0-debian13@sha256:91b3b2f375e5139a89184c0afcf3d08e07345db784003af0bc0aca41fedc192f
+  PROMETHEUS_CONFIG_RELOADER_REFERENCE: dhi/prometheus-config-reloader:0.94.1-debian13@sha256:afbd440eec83830706c1ef26d24e37ecf6ba256f95004b0bc7136b8cd15845ec
   PROMETHEUS_REFERENCE: dhi/prometheus:3.14.0-debian13@sha256:475cf0b0c4716f3d7ade5ef9552a9b11ef882b9cdd4c128c01dde9e3d4a0d1b4
   PUSHGATEWAY_CHART_REFERENCE: dhi/pushgateway-chart:3.9.0@sha256:ffe91d0b3b5405f3808c063b2ab4882a235660e6e70a09ab385e2a4268aa6200
   SEMVER_MAJOR_MINOR_VERSION: "29.33"
@@ -73,7 +73,7 @@ contents:
                 - name: prometheus
                   ref: dhi/prometheus:3.14.0-debian13@sha256:475cf0b0c4716f3d7ade5ef9552a9b11ef882b9cdd4c128c01dde9e3d4a0d1b4
                 - name: prometheus-config-reloader
-                  ref: dhi/prometheus-config-reloader:0.94.0-debian13@sha256:91b3b2f375e5139a89184c0afcf3d08e07345db784003af0bc0aca41fedc192f
+                  ref: dhi/prometheus-config-reloader:0.94.1-debian13@sha256:afbd440eec83830706c1ef26d24e37ecf6ba256f95004b0bc7136b8cd15845ec
               name: prometheus-chart
               notes: ${source.dir}/config/NOTES.txt
               sourceUrl: https://github.com/prometheus-community/helm-charts
