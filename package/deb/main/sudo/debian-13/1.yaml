@@ -3,8 +3,8 @@
 image: dhi.io/pkg-sudo
 variant: runtime
 tags:
-  - 1.9.16p2-3-deb13u2-dhi2
-  - 1.9.16p2-3-deb13u2-dhi2-debian13
+  - 1.9.16p2-3-deb13u2-dhi3
+  - 1.9.16p2-3-deb13u2-dhi3-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -22,9 +22,9 @@ vars:
   DEBIAN_ORIG_FILENAME: sudo_1.9.16p2.orig.tar.gz
   DEBIAN_ORIG_URL: https://deb.debian.org/debian/pool/main/s/sudo/sudo_1.9.16p2.orig.tar.gz
   DEBIAN_VERSION: 1.9.16p2-3+deb13u2
-  DHI_REL: "2"
-  DHI_VERSION: 1.9.16p2-3+deb13u2+dhi2
-  TAG_VERSION: 1.9.16p2-3-deb13u2-dhi2
+  DHI_REL: "3"
+  DHI_VERSION: 1.9.16p2-3+deb13u2+dhi3
+  TAG_VERSION: 1.9.16p2-3-deb13u2-dhi3
   UPSTREAM_VERSION: 1.9.16p2
 contents:
   packages:
@@ -86,11 +86,13 @@ contents:
             apply: true
             patches:
               - ${source.dir}/patch/CVE-2026-82474.patch
+              - ${source.dir}/patch/CVE-2026-96512.patch
         - uses: dpkg/bump@v1
           with:
             changelog:
               - Backport upstream fix for CVE-2026-82474 (execveat intercept policy bypass)
-            version: 1.9.16p2-3+deb13u2+dhi2
+              - Backport upstream fix for CVE-2026-96512 (NOTBEFORE/NOTAFTER TZ handling)
+            version: 1.9.16p2-3+deb13u2+dhi3
         - uses: dpkg/build@v1
           environment:
             DEB_BUILD_OPTIONS: parallel=1
@@ -105,6 +107,11 @@ contents:
           uid: 0
           gid: 0
           source: package/deb/main/sudo/patch/CVE-2026-82474.patch
+        - type: file
+          path: ${source.dir}/patch/CVE-2026-96512.patch
+          uid: 0
+          gid: 0
+          source: package/deb/main/sudo/patch/CVE-2026-96512.patch
 os-release:
   name: Docker Hardened Images (Debian)
   id: debian
