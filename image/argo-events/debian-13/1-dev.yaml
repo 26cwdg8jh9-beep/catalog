@@ -19,7 +19,7 @@ platforms:
 dates:
   release: "2026-01-21"
 vars:
-  ARGOCLI_REF: dhi/argocli:3.7.18-debian13@sha256:9318a8bed0b6ca084b6ad47ff81a935192b459e3dd136a0c6277fd13a99628dc
+  ARGOCLI_REF: dhi/argocli:3.7.18-debian13@sha256:d885cb0418a08a742bc58923bd5f44a8c3299f9622643075ab7904b8d648d6b2
   COMMIT_SHA: d13fde07d944c081c25574305911908c80faa98e
   SEMVER_MAJOR_MINOR_VERSION: "1.9"
   SEMVER_MAJOR_VERSION: "1"
@@ -117,7 +117,7 @@ contents:
           uid: 0
           gid: 0
   artifacts:
-    - name: dhi.io/argocli:3.7.18-debian13@sha256:9318a8bed0b6ca084b6ad47ff81a935192b459e3dd136a0c6277fd13a99628dc
+    - name: dhi.io/argocli:3.7.18-debian13@sha256:d885cb0418a08a742bc58923bd5f44a8c3299f9622643075ab7904b8d648d6b2
       includes:
         - usr/local/bin/argo
       uid: 0
