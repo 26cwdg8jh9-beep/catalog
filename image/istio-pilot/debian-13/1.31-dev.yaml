@@ -1,26 +1,30 @@
 # syntax=dhi.io/build:2-debian13
 
-name: Istio Pilot 1.30.x (dev)
+name: Istio Pilot 1.31.x (dev)
 image: dhi.io/istio-pilot
 variant: dev
 tags:
-  - 1.30-dev
-  - 1.30.4-dev
-  - 1.30-debian-dev
-  - 1.30-debian13-dev
-  - 1.30.4-debian-dev
-  - 1.30.4-debian13-dev
+  - 1-dev
+  - 1.31-dev
+  - 1.31.1-dev
+  - 1-debian-dev
+  - 1-debian13-dev
+  - 1.31-debian-dev
+  - 1.31-debian13-dev
+  - 1.31.1-debian-dev
+  - 1.31.1-debian13-dev
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
-  release: "2026-05-18"
+  release: "2026-08-31"
+  end-of-life: "2027-02-28"
 vars:
   PACKAGE_SUFFIX: -dev
-  SEMVER_MAJOR_MINOR_VERSION: "1.30"
+  SEMVER_MAJOR_MINOR_VERSION: "1.31"
   SEMVER_MAJOR_VERSION: "1"
-  SEMVER_VERSION: 1.30.4
-  VERSION: 1.30.4-0
+  SEMVER_VERSION: 1.31.1
+  VERSION: 1.31.1-1
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -40,7 +44,7 @@ contents:
     - dpkg
     - findutils
     - grep
-    - istio-pilot-dev=1.30.4-0
+    - istio-pilot-dev=1.31.1-1
     - libc-bin
     - mawk
     - perl-base
