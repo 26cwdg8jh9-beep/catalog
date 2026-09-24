@@ -37,10 +37,16 @@ else
   sed -i '/^\[tool\.poetry\.dependencies\]/a idna = ">=3.15"' pyproject.toml
 fi
 
-if grep -q '^pip = ' pyproject.toml; then
-  sed -i 's/^pip = "[^"]*"$/pip = ">=26.1"/' pyproject.toml
+if grep -q '^requests = ' pyproject.toml; then
+  sed -i 's/^requests = "[^"]*"$/requests = ">=2.33.0"/' pyproject.toml
 else
-  sed -i '/^\[tool\.poetry\.dependencies\]/a pip = ">=26.1"' pyproject.toml
+  sed -i '/^\[tool\.poetry\.dependencies\]/a requests = ">=2.33.0"' pyproject.toml
+fi
+
+if grep -q '^pip = ' pyproject.toml; then
+  sed -i 's/^pip = "[^"]*"$/pip = ">=26.2.0"/' pyproject.toml
+else
+  sed -i '/^\[tool\.poetry\.dependencies\]/a pip = ">=26.2.0"' pyproject.toml
 fi
 
 if grep -q '^pyjwt = ' pyproject.toml; then
@@ -95,7 +101,19 @@ export POETRY_VIRTUALENVS_IN_PROJECT=true
 export CPPFLAGS="${CPPFLAGS:-} $("${PYTHON_BIN}-config" --includes)"
 export LDFLAGS="${LDFLAGS:-} $("${PYTHON_BIN}-config" --ldflags)"
 poetry lock
-poetry install
+poetry install --without test --with grpc --with grpc-runtime
+
+VENV="${SRC}/.venv"
+SITE_PACKAGES="$("${VENV}/bin/python" -c 'import site; print(site.getsitepackages()[0])')"
+"${VENV}/bin/python" -m pip install --upgrade 'urllib3>=2.7.0'       # CVE-2025-66471, CVE-2025-66418, CVE-2026-21441, CVE-2026-44431
+"${VENV}/bin/python" -m pip install --upgrade 'requests>=2.33.0'     # CVE-2026-25645
+"${VENV}/bin/python" -m pip install --upgrade 'idna>=3.15'           # CVE-2026-45409
+"${VENV}/bin/python" -m pip install --upgrade 'setuptools>=83.0.0'   # CVE-2026-59890
+"${VENV}/bin/python" -m pip install --upgrade 'pygments>=2.20.0'     # CVE-2026-4539
+"${VENV}/bin/python" -m pip uninstall -y pip
+rm -rf "${SITE_PACKAGES}/botocore/vendored"
+find "${SITE_PACKAGES}/virtualenv/seed/wheels/embed" -name 'pip-26.0*.whl' -delete 2>/dev/null || true
+find "${SITE_PACKAGES}/virtualenv/seed/wheels/embed" -name 'pip-26.1*.whl' -delete 2>/dev/null || true
 
 cp -a .venv "${PKG_ROOT}/.venv"
 cp pyproject.toml "${PKG_ROOT}/pyproject.toml"
