@@ -9,7 +9,7 @@ platforms:
   - linux/amd64
 vars:
   ALERTMANAGER_REFERENCE: dhi/alertmanager:0.31.1-debian13@sha256:c879b6be51b415b07a39a041f4fd15dbba6a3848297c49617a7483b88df9021a
-  BUSYBOX_REFERENCE: dhi/busybox:1.37.0-debian13@sha256:abcd06d567c6ecda4aae78cff5334a231bd3e663b69b671612566d4a4c949899
+  BUSYBOX_REFERENCE: dhi/busybox:1.37.0-debian13@sha256:8197d3ca6c46d836a9c336e1c3522fff421ea348798a84ade503fb43672d1599
   CHART_COMMIT_SHA: 3eafe12613fffe3deb5a7f4c2251bec83bc064ed
   CHART_HELM_NAME: kube-prometheus-stack-chart
   DHI_NAMESPACE: dhi
@@ -20,7 +20,7 @@ vars:
   HELM_VERSION: 4.1.4-2
   KUBE_STATE_METRICS_CHART_REFERENCE: dhi/kube-state-metrics-chart:7.2.2@sha256:350b93e7950f105926104bdd12ff446a325bb2bc06704c07bf50320f20644893
   KUBE_WEBHOOK_CERTGEN_REFERENCE: dhi/kube-webhook-certgen:1.8.8-debian13@sha256:769451713e86dc834087cc4accc221452e016b859bf43a99a3354336b17f09b1
-  KUBECTL_REFERENCE: dhi/kubectl:1.37.0-debian13@sha256:b1165982728a3de0941878713eead61dfeed329abb43caae6e33a86332dd3700
+  KUBECTL_REFERENCE: dhi/kubectl:1.37.0-debian13@sha256:86e72dd2f7630f959fcc8eea3cfb3ce1ae0a777cce8fed44398717cbe99b3246
   NODE_EXPORTER_CHART_REFERENCE: dhi/node-exporter-chart:4.53.1@sha256:b2affdb982fd469419ef8f5b48203d416bc53691ee09844f9ac0096b3edeb98d
   PROMETHEUS_CONFIG_RELOADER_REFERENCE: dhi/prometheus-config-reloader:0.89.0-debian13@sha256:a3081c112bdd2a293294112cbe7ddb12a20c02ec2fd911b81b6d2f4332335d62
   PROMETHEUS_OPERATOR_ADMISSION_WEBHOOK_REFERENCE: dhi/prometheus-operator-admission-webhook:0.89.0-debian13@sha256:eabcf22d4c192f70d89889dc8549212fcd467afdd6bf8577a6fd4aa6b2b1d5b3
@@ -77,9 +77,9 @@ contents:
               description: Docker Hardened Images Helm chart for Kube Prometheus Stack
               images:
                 - name: busybox
-                  ref: dhi/busybox:1.37.0-debian13@sha256:abcd06d567c6ecda4aae78cff5334a231bd3e663b69b671612566d4a4c949899
+                  ref: dhi/busybox:1.37.0-debian13@sha256:8197d3ca6c46d836a9c336e1c3522fff421ea348798a84ade503fb43672d1599
                 - name: kubectl
-                  ref: dhi/kubectl:1.37.0-debian13@sha256:b1165982728a3de0941878713eead61dfeed329abb43caae6e33a86332dd3700
+                  ref: dhi/kubectl:1.37.0-debian13@sha256:86e72dd2f7630f959fcc8eea3cfb3ce1ae0a777cce8fed44398717cbe99b3246
                 - name: alertmanager
                   ref: dhi/alertmanager:0.31.1-debian13@sha256:c879b6be51b415b07a39a041f4fd15dbba6a3848297c49617a7483b88df9021a
                 - name: prometheus-operator-admission-webhook
