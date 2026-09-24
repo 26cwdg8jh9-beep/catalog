@@ -4,9 +4,9 @@ image: dhi.io/pkg-ollama
 variant: runtime
 tags:
   - 0.34.4
-  - 0.34.4-r1
+  - 0.34.4-r2
   - 0.34.4-debian13
-  - 0.34.4-r1-debian13
+  - 0.34.4-r2-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -23,7 +23,7 @@ vars:
   LLAMA_CPP_VERSION: b11081
   NVIDIA_ARCH: '#{ target.arch == "amd64" ? "x86_64" : "sbsa" }'
   PACKAGE_NAME: ollama
-  REL: "1"
+  REL: "2"
   SEMVER_MAJOR_MINOR_VERSION: "0.34"
   SEMVER_MAJOR_VERSION: "0"
   SEMVER_VERSION: 0.34.4
@@ -90,6 +90,8 @@ contents:
               - github.com/klauspost/compress@v1.18.7
         - uses: go/hermetic@v1
         - name: test
+          environment:
+            GODEBUG: ""
           runs: |
             set -eux -o pipefail
 
@@ -108,6 +110,7 @@ contents:
               -DFETCHCONTENT_SOURCE_DIR_LLAMA_CPP=${source.dir}/llama-cpp
             cmake --build build/llama-server --target llama-server --target llama-quantize -- -j "$(nproc)"
             cmake --install build/llama-server --component llama-server --strip --prefix "${target.dir}/usr"
+            cp -a "${target.dir}/usr/lib/ollama" "${target.dir}/usr/lib/ollama-dev"
         - name: build ollama
           uses: go/build@v1
           environment:
@@ -147,7 +150,7 @@ contents:
               - deb
             license: MIT
             name: ollama
-            rel: 1
+            rel: 2
             subpackages:
               - depends:
                   - libc6
@@ -156,9 +159,9 @@ contents:
                 files:
                   - path: usr/bin/ollama
                     source: usr/bin/ollama-dev
+                  - path: usr/lib/ollama
+                    source: usr/lib/ollama-dev
                 name: ollama-dev
-                replaces:
-                  - ollama
             url: https://ollama.com
             version: 0.34.4
     - name: ollama-cuda-backend
@@ -235,7 +238,7 @@ contents:
           with:
             deb:
               depends:
-                - ollama = $pkg_full_version
+                - ollama | ollama-fips | ollama-dev | ollama-fips-dev
             depends:
               - libc6
               - libstdc++6
@@ -247,7 +250,7 @@ contents:
               - deb
             license: MIT
             name: ollama-cuda-backend
-            rel: 1
+            rel: 2
             url: https://ollama.com
             version: 0.34.4
 os-release:
