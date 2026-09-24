@@ -4,7 +4,7 @@ image: dhi.io/pkg-gitea
 variant: runtime
 tags:
   - 1.27.3-alpine3.24
-  - 1.27.3-r3-alpine3.24
+  - 1.27.3-r4-alpine3.24
 platforms:
   - linux/amd64
   - linux/arm64
@@ -15,7 +15,7 @@ vars:
   GO_BUILD_TAGS: bindata,timetzdata,sqlite,sqlite_unlock_notify
   GOLANG_VERSION: 1.26.8-r0
   PACKAGE_NAME: gitea
-  REL: "3"
+  REL: "4"
   SEMVER_MAJOR_MINOR_VERSION: "1.27"
   SEMVER_MAJOR_VERSION: "1"
   SEMVER_VERSION: 1.27.3
@@ -96,7 +96,8 @@ contents:
             #   postcss 8.5.23 (CVE-2026-41305, CVE-2026-69153, GHSA-r28c-9q8g-f849; lock 8.5.15),
             #   js-yaml 4.3.1 (CVE-2026-59869, GHSA-5p4m-2wfm-xmqj; lock 4.2.0),
             #   nanoid 3.3.18 (CVE-2026-67213, CVE-2026-67214; lock 3.3.12),
-            #   mermaid 11.16.1 (CVE-2026-50159, CVE-2026-71436–71439; lock 11.15.0).
+            #   mermaid 11.16.1 (CVE-2026-50159, CVE-2026-71436–71439; lock 11.15.0),
+            #   postcss-selector-parser 6.1.3 (CVE-2026-9358; lock 6.1.2 via tailwindcss).
             node -e '
               const fs = require("fs");
               const path = "pnpm-workspace.yaml";
@@ -110,6 +111,7 @@ contents:
                 "js-yaml": "4.3.1",
                 "nanoid": "3.3.18",
                 "mermaid": "11.16.1",
+                "postcss-selector-parser": "6.1.3",
               };
               const block =
                 "overrides:\n" +
@@ -178,7 +180,7 @@ contents:
               - usr/bin/gitea
             license: MIT
             name: gitea
-            rel: 3
+            rel: 4
             subpackages:
               - files:
                   - path: usr/bin/gitea
