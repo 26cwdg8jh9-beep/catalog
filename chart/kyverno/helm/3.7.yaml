@@ -16,7 +16,7 @@ vars:
   DHI_REGISTRY: dhi.io
   DHI_SKIP_CONTEXT_COPY: "true"
   HELM_VERSION: 4.1.4-2
-  KUBECTL_REFERENCE: dhi/kubectl:1.35.8-debian13@sha256:c8034e53067ba36fe7cfd8fd274de199eeb4b265052d8bb826ccc11c2e2cefd7
+  KUBECTL_REFERENCE: dhi/kubectl:1.35.8-debian13@sha256:fbc428147df046c851b3a41fd72f75b13d0a0f674f2334c8ccfe161145bd4aec
   KYVERNO_BACKGROUND_CONTROLLER_REFERENCE: dhi/kyverno-background-controller:1.17.2-debian13@sha256:c4421d380b4a647b0563f2e8f9d4f3bd81322c9a6697d7735569c37c2ac6dabd
   KYVERNO_CLEANUP_CONTROLLER_REFERENCE: dhi/kyverno-cleanup-controller:1.17.2-debian13@sha256:fdcb3cf3eaaf48b2027d3595c0c1d74a2f57aaebf9eb6889b1c0d4d6acbd5708
   KYVERNO_CLI_REFERENCE: dhi/kyverno-cli:1.17.2-debian13@sha256:1a8299c263563fbf8681c4ba8a6f9af4931c0a4eaee1ff33825bc3a5b4192746
@@ -81,7 +81,7 @@ contents:
                 - name: kyverno-readiness-checker
                   ref: dhi/kyverno-readiness-checker:1.17.2-debian13@sha256:41b0828ec4aa3a4dd4bf99d24d4edc64936ac59c22a785bb395c2f9a253202a9
                 - name: kubectl
-                  ref: dhi/kubectl:1.35.8-debian13@sha256:c8034e53067ba36fe7cfd8fd274de199eeb4b265052d8bb826ccc11c2e2cefd7
+                  ref: dhi/kubectl:1.35.8-debian13@sha256:fbc428147df046c851b3a41fd72f75b13d0a0f674f2334c8ccfe161145bd4aec
                 - name: kyverno-init
                   ref: dhi/kyverno-init:1.17.2-debian13@sha256:bfbc9f42af0a77aa1abf6f2c9fead5a81ea9ae0626fe98a02d0d9220f6d1c97f
                 - name: kyverno-background-controller
