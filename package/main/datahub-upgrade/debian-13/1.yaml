@@ -187,7 +187,9 @@ contents:
 
             find . \( -name '*.gradle' -o -name '*.gradle.kts' -o -name 'gradle.lockfile' \) -print0 \
               | xargs -0 sed -i \
-                -e 's|at\.yawk\.lz4:lz4-java:1\.10\.1|at.yawk.lz4:lz4-java:1.11.1|g'
+                -e 's|at\.yawk\.lz4:lz4-java:1\.10\.1|at.yawk.lz4:lz4-java:1.11.1|g' \
+                -e 's|org\.jline:jline:4\.2\.1|org.jline:jline:4.3.1|g' \
+                -e 's|org\.jline:\([^:]*\):4\.2\.1|org.jline:\1:4.3.1|g'
 
             cat >> build.gradle << 'GRADLE'
 
@@ -195,6 +197,7 @@ contents:
                 configurations.configureEach {
                     resolutionStrategy {
                         force 'at.yawk.lz4:lz4-java:1.11.1'
+                        force 'org.jline:jline:4.3.1'
                         eachDependency { details ->
                         def req = details.requested
                         if (req.group == 'io.netty'
@@ -284,6 +287,10 @@ contents:
                                 && req.version == '1.84') {
                             details.useVersion '1.85'
                             details.because 'DHI CVE remediation: CVE-2026-8763, CVE-2026-13506'
+                        }
+                        if (req.group == 'org.jline') {
+                            details.useVersion '4.3.1'
+                            details.because 'DHI CVE remediation: CVE-2026-77420, CVE-2026-77421, CVE-2026-77422'
                         }
                         }
                     }

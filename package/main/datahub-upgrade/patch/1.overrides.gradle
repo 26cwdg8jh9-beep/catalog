@@ -15,6 +15,7 @@ allprojects {
 
     configurations.all {
         resolutionStrategy {
+            force 'org.jline:jline:4.3.1'
             eachDependency { details ->
             def grp = details.requested.group
             def name = details.requested.name
@@ -71,12 +72,12 @@ allprojects {
                 details.because("CVE remediation: CVE-2026-41731, CVE-2026-41726")
             }
 
-            // jline bundle -> 4.2.1 (GHSA-47qp-hqvx-6r3f, GHSA-2r2c-cx56-8933)
+            // jline bundle -> 4.3.1 (CVE-2026-77420, CVE-2026-77421, CVE-2026-77422)
             // remote-telnet ships inside BOOT-INF/lib/jline-*.jar; overriding
             // jline-remote-telnet alone leaves the fat jar at 3.25.1.
-            if (grp == "org.jline" && name == "jline") {
-                details.useVersion("4.2.1")
-                details.because("CVE remediation: GHSA-47qp-hqvx-6r3f, GHSA-2r2c-cx56-8933")
+            if (grp == "org.jline") {
+                details.useVersion("4.3.1")
+                details.because("CVE remediation: CVE-2026-77420, CVE-2026-77421, CVE-2026-77422, GHSA-47qp-hqvx-6r3f, GHSA-2r2c-cx56-8933")
             }
 
             // postgresql 42.7.11 -> 42.7.12 (CVE-2026-54291)
