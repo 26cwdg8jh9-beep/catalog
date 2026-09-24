@@ -6,8 +6,18 @@
   },
   {
     "groupId": "org.jline",
+    "artifactId": "jline-builtins",
+    "version": "4.3.1"
+  },
+  {
+    "groupId": "org.jline",
+    "artifactId": "jline-reader",
+    "version": "4.3.1"
+  },
+  {
+    "groupId": "org.jline",
     "artifactId": "jline-remote-telnet",
-    "version": "4.2.1"
+    "version": "4.3.1"
   },
   {
     "groupId": "com.fasterxml.jackson.core",
