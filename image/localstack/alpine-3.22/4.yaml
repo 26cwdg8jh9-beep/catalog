@@ -15,9 +15,9 @@ platforms:
   - linux/arm64
 vars:
   COMMIT_SHA: 3d5a0c70e0fe2eb0864447c882454d33b406ba8a
-  PYTHON_BUILD_REFERENCE: dhi/python:3.13.15-alpine3.22-dev@sha256:b0b8b187b52ac192f3c72ead70b97c5aaa0e1b9559944b536146dbe03d44c133
+  PYTHON_BUILD_REFERENCE: dhi/python:3.13.15-alpine3.22-dev@sha256:e3f438aa5c4cc2b21c4ec2e0c45b7bb722fd239a84032f38085c119b9cc4cda6
   PYTHON_MAJOR_MINOR_VERSION: "3.13"
-  PYTHON_REFERENCE: dhi/python:3.13.15-alpine3.22@sha256:175ff33dbec8ddc67602d37343ece136c08069b297b3c492fe6b6de774fcb24f
+  PYTHON_REFERENCE: dhi/python:3.13.15-alpine3.22@sha256:fd26cbc1b1650f0bb9a867b2df94b24ed78dfd0107c4cca0d912bee9ea68606c
   PYTHON_VERSION: 3.13.15
   SEMVER_MAJOR_MINOR_VERSION: "4.14"
   SEMVER_MAJOR_VERSION: "4"
@@ -34,7 +34,7 @@ contents:
     - unzip
   builds:
     - name: localstack
-      uses: dhi.io/python:3.13.15-alpine3.22-dev@sha256:b0b8b187b52ac192f3c72ead70b97c5aaa0e1b9559944b536146dbe03d44c133
+      uses: dhi.io/python:3.13.15-alpine3.22-dev@sha256:e3f438aa5c4cc2b21c4ec2e0c45b7bb722fd239a84032f38085c119b9cc4cda6
       contents:
         repositories:
           - https://dl-cdn.alpinelinux.org/alpine/v3.22/main
@@ -176,7 +176,7 @@ contents:
           uid: 0
           gid: 0
   artifacts:
-    - name: dhi.io/python:3.13.15-alpine3.22@sha256:175ff33dbec8ddc67602d37343ece136c08069b297b3c492fe6b6de774fcb24f
+    - name: dhi.io/python:3.13.15-alpine3.22@sha256:fd26cbc1b1650f0bb9a867b2df94b24ed78dfd0107c4cca0d912bee9ea68606c
       includes:
         - opt/**
         - usr/**
