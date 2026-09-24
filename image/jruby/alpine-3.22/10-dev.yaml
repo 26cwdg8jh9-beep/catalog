@@ -82,8 +82,8 @@ contents:
             # update uri for CVE-2025-61594
             ${source.dir}/patches/patch.sh uri 1.0.4
 
-            # update uri for CVE-2026-0636 and CVE-2026-5588
-            ${source.dir}/patches/patch.sh jruby-openssl 0.16.0
+            # update jruby-openssl for CVE-2026-0636, CVE-2026-5588, CVE-2026-8763, CVE-2026-13506
+            ${source.dir}/patches/patch.sh jruby-openssl 0.16.3
 
             # update net-imap for CVE-2026-42246, CVE-2026-42258, CVE-2026-42257, CVE-2026-42256, CVE-2026-42245, CVE-2026-47240, CVE-2026-47241, CVE-2026-47242
             # update erb for CVE-2026-41316
