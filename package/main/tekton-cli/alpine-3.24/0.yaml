@@ -3,23 +3,23 @@
 image: dhi.io/pkg-tekton-cli
 variant: runtime
 tags:
-  - 0.46.0-alpine3.24
-  - 0.46.0-r7-alpine3.24
+  - 0.46.1-alpine3.24
+  - 0.46.1-r0-alpine3.24
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
   release: "2026-07-27"
 vars:
-  COMMIT_SHA: a5be122db5668429f5140e914ab9d9a87ddf3b51
+  COMMIT_SHA: f88b13cffa7d1f6fe4d41ea61452e98fc4df3ad8
   GOLANG_MAJOR_MINOR_VERSION: "1.26"
   GOLANG_VERSION: 1.26.8-r0
   PACKAGE_NAME: tekton-cli
-  REL: "7"
+  REL: "0"
   SEMVER_MAJOR_MINOR_VERSION: "0.46"
   SEMVER_MAJOR_VERSION: "0"
-  SEMVER_VERSION: 0.46.0
-  VERSION: 0.46.0
+  SEMVER_VERSION: 0.46.1
+  VERSION: 0.46.1
 contents:
   repositories:
     - https://dhi.io/apk/alpine/v3.24/main
@@ -41,15 +41,15 @@ contents:
           - golang-1.26=1.26.8-r0
           - golang-1.26-oci-config=1.26.8-r0
         files:
-          - url: git+https://github.com/tektoncd/cli.git#v0.46.0
-            checksum: a5be122db5668429f5140e914ab9d9a87ddf3b51
+          - url: git+https://github.com/tektoncd/cli.git#v0.46.1
+            checksum: f88b13cffa7d1f6fe4d41ea61452e98fc4df3ad8
             path: /go/src/github.com/tektoncd/cli
             spdx:
               name: tekton-cli
-              version: 0.46.0
+              version: 0.46.1
               packages:
                 - name: tekton-cli
-                  purl: pkg:golang/github.com/tektoncd/cli@0.46.0
+                  purl: pkg:golang/github.com/tektoncd/cli@0.46.1
                   license: Apache-2.0
             uid: 0
             gid: 0
@@ -84,7 +84,7 @@ contents:
           with:
             fips: false
             ldflags:
-              - -X github.com/tektoncd/cli/pkg/cmd/version.clientVersion=0.46.0
+              - -X github.com/tektoncd/cli/pkg/cmd/version.clientVersion=0.46.1
             output: ${target.dir}/usr/bin/tkn
             packages: ./cmd/tkn
         - name: build tkn dev
@@ -92,7 +92,7 @@ contents:
           with:
             fips: false
             ldflags:
-              - -X github.com/tektoncd/cli/pkg/cmd/version.clientVersion=0.46.0
+              - -X github.com/tektoncd/cli/pkg/cmd/version.clientVersion=0.46.1
             output: ${target.dir}/usr/bin/tkn-dev
             packages: ./cmd/tkn
             strip: false
@@ -108,14 +108,14 @@ contents:
               - usr/bin/tkn
             license: Apache-2.0
             name: tekton-cli
-            rel: 7
+            rel: 0
             subpackages:
               - files:
                   - path: usr/bin/tkn
                     source: usr/bin/tkn-dev
                 name: tekton-cli-dev
             url: https://github.com/tektoncd/cli
-            version: 0.46.0
+            version: 0.46.1
 os-release:
   name: Docker Hardened Images (Alpine)
   id: alpine
