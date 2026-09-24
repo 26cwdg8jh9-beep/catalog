@@ -5,10 +5,10 @@ variant: runtime
 tags:
   - "1.12"
   - 1.12.14
-  - 1.12.14-r20
+  - 1.12.14-r21
   - 1.12-debian13
   - 1.12.14-debian13
-  - 1.12.14-r20-debian13
+  - 1.12.14-r21-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -19,7 +19,7 @@ vars:
   COMMIT_SHA: 4ce8b3a7d97edbe40b616df7c2404adff1d2cb77
   MAVEN_REFERENCE: dhi/maven:3.9.16-jdk21-debian13-dev@sha256:ebc5985bddb0be1a7e006d1270975360f03e4efaed6c306b63c761a1430c070e
   PACKAGE_NAME: openmetadata-server-1.12
-  REL: "20"
+  REL: "21"
   SEMVER_MAJOR_MINOR_VERSION: "1.12"
   SEMVER_MAJOR_VERSION: "1"
   SEMVER_VERSION: 1.12.14
@@ -111,6 +111,12 @@ contents:
           with:
             dependencies: ${source.dir}/patch/mvn-calcite-dependencies.json
             mvn-root: ${source.dir}/OpenMetadata/openmetadata-service
+        - name: patch bouncycastle dependencies
+          uses: mvn/patch@v1
+          with:
+            dependencies: ${source.dir}/patch/mvn-bouncycastle-dependencies-1.12.json
+            dependencies-key: dependencyManagement.dependencies
+            mvn-root: ${source.dir}/OpenMetadata
         - name: test
           privileged: true
           runs: |
@@ -151,7 +157,7 @@ contents:
               - usr/bin/openmetadata-start
             license: Apache-2.0
             name: openmetadata-server-1.12
-            rel: 20
+            rel: 21
             url: https://open-metadata.org/
             version: 1.12.14
       paths:
@@ -215,6 +221,11 @@ contents:
           uid: 0
           gid: 0
           source: package/main/openmetadata-server/patch/mvn-calcite-dependencies.json
+        - type: file
+          path: ${source.dir}/patch/mvn-bouncycastle-dependencies-1.12.json
+          uid: 0
+          gid: 0
+          source: package/main/openmetadata-server/patch/mvn-bouncycastle-dependencies-1.12.json
         - type: file
           path: ${source.dir}/patch/mvn-dependencies-2.0.json
           uid: 0
