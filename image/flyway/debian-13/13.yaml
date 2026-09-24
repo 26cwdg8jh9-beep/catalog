@@ -1,22 +1,22 @@
 # syntax=dhi.io/build:2-debian13
 
-name: Flyway 13.7.x
+name: Flyway 13.8.x
 image: dhi.io/flyway
 variant: runtime
 tags:
-  - "13.7"
-  - 13.7.0
-  - 13.7-debian
-  - 13.7-debian13
-  - 13.7.0-debian
-  - 13.7.0-debian13
+  - "13.8"
+  - 13.8.0
+  - 13.8-debian
+  - 13.8-debian13
+  - 13.8.0-debian
+  - 13.8.0-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
   release: "2026-07-20"
 vars:
-  COMMIT_SHA: 4e9e435c5f98a62c892dbdaa75def65253622c68
+  COMMIT_SHA: 894946447bd6b4e3acab81a1dd3abfa6fe8b96df
   GITHUB_USERNAME: docker-hardened-images
   JDK_DIGEST: sha256:1fbc09d023f6fa08248856cc8c5957745cede8171ae5263e3efe4c7dd12fc03a
   JDK_MAJOR_VERSION: "23"
@@ -26,10 +26,10 @@ vars:
   JRE_VERSION: 23.0.2.7
   MAVEN_DIGEST: sha256:97e4283d662a0a0dd680bc67c7cfa519d9cf6ef21567f0a727d050a760df3ff8
   MAVEN_VERSION: 3.9.11
-  SEMVER_MAJOR_MINOR_VERSION: "13.7"
+  SEMVER_MAJOR_MINOR_VERSION: "13.8"
   SEMVER_MAJOR_VERSION: "13"
-  SEMVER_VERSION: 13.7.0
-  VERSION: 13.7.0
+  SEMVER_VERSION: 13.8.0
+  VERSION: 13.8.0
 contents:
   packages:
     - '!libelogind0'
@@ -51,15 +51,15 @@ contents:
           - findutils
           - yq
         files:
-          - url: git+https://github.com/flyway/flyway.git#flyway-13.7.0
-            checksum: 4e9e435c5f98a62c892dbdaa75def65253622c68
+          - url: git+https://github.com/flyway/flyway.git#flyway-13.8.0
+            checksum: 894946447bd6b4e3acab81a1dd3abfa6fe8b96df
             path: ${source.dir}/src/flyway
             spdx:
               name: flyway
-              version: 13.7.0
+              version: 13.8.0
               packages:
                 - name: flyway
-                  purl: pkg:dhi/flyway@13.7.0
+                  purl: pkg:dhi/flyway@13.8.0
                   license: Apache-2.0
             uid: 0
             gid: 0
@@ -156,8 +156,8 @@ contents:
               --global-settings "${source.dir}/gpr-settings.xml"
 
             cp \
-              "flyway-commandline/target/flyway-commandline-13.7.0.jar" \
-              "${target.dir}/flyway/lib/flyway/flyway-commandline-13.7.0.jar"
+              "flyway-commandline/target/flyway-commandline-13.8.0.jar" \
+              "${target.dir}/flyway/lib/flyway/flyway-commandline-13.8.0.jar"
 
             mvn dependency:copy-dependencies \
               -pl flyway-commandline \
@@ -409,7 +409,7 @@ paths:
     path: /flyway/flyway.jar
     uid: 0
     gid: 0
-    source: /flyway/lib/flyway/flyway-commandline-13.7.0.jar
+    source: /flyway/lib/flyway/flyway-commandline-13.8.0.jar
   - type: symlink
     path: /opt/flyway
     uid: 0
