@@ -4,9 +4,9 @@ image: dhi.io/pkg-cassandra
 variant: runtime
 tags:
   - 4.1.12
-  - 4.1.12-r3
+  - 4.1.12-r4
   - 4.1.12-debian13
-  - 4.1.12-r3-debian13
+  - 4.1.12-r4-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -19,10 +19,10 @@ vars:
   BCTLSFIPS_VERSION: 2.1.23
   BCUTILFIPS_VERSION: 2.1.6
   COMMIT_SHA: 2ddb92091c05f8cde2c8c28e1abda43788c3117f
-  ECLIPSE_TEMURIN_VERSION: 11.0.32.9-0
+  ECLIPSE_TEMURIN_VERSION: 1:11.0.32.1+1-2
   JDK_MAJOR_VERSION: "11"
   PACKAGE_NAME: cassandra-4.1
-  REL: "3"
+  REL: "4"
   SEMVER_MAJOR_MINOR_VERSION: "4.1"
   SEMVER_MAJOR_VERSION: "4"
   SEMVER_VERSION: 4.1.12
@@ -49,8 +49,8 @@ contents:
           - ca-certificates
           - coreutils
           - curl
-          - eclipse-temurin-11-jdk=11.0.32.9-0
-          - eclipse-temurin-11-jdk-oci-config=11.0.32.9-0
+          - eclipse-temurin-11-jdk=1:11.0.32.1+1-2
+          - eclipse-temurin-11-jdk-oci-config=1:11.0.32.1+1-2
           - findutils
           - gpg
           - grep
@@ -189,7 +189,7 @@ contents:
               - deb
             license: Apache-2.0
             name: cassandra-4.1
-            rel: 3
+            rel: 4
             subpackages:
               - files:
                   - path: usr/share/cassandra
