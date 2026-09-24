@@ -7,16 +7,16 @@ tags:
   - 2-alpine
   - 2.12-alpine
   - 2-alpine3.24
-  - 2.12.8-alpine
+  - 2.12.9-alpine
   - 2.12-alpine3.24
-  - 2.12.8-alpine3.24
+  - 2.12.9-alpine3.24
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
   release: "2026-08-26"
 vars:
-  COMMIT_SHA: d508f8c70f061534c2611aeea3fb2f9bdb1bad43
+  COMMIT_SHA: 869ab59cb994994764ba42a6bd3e828a93f1d2f1
   DHI_TAGS_OVERWRITE: "true"
   FLAVORED_SUFFIX: ""
   GRPC_HEALTH_PROBE_FIPS_VERSION: 0.4.57-r0
@@ -28,9 +28,9 @@ vars:
   OPM_VERSION: 1.74.0-r3
   SEMVER_MAJOR_MINOR_VERSION: "2.12"
   SEMVER_MAJOR_VERSION: "2"
-  SEMVER_VERSION: 2.12.8
+  SEMVER_VERSION: 2.12.9
   SUFFIX: ""
-  VERSION: 2.12.8
+  VERSION: 2.12.9
 contents:
   repositories:
     - https://dhi.io/apk/alpine/v3.24/main
@@ -58,15 +58,15 @@ contents:
           - coreutils
           - opm=1.74.0-r3
         files:
-          - url: git+https://github.com/kubev2v/mtv-fbc.git#d508f8c70f061534c2611aeea3fb2f9bdb1bad43
-            checksum: d508f8c70f061534c2611aeea3fb2f9bdb1bad43
+          - url: git+https://github.com/kubev2v/mtv-fbc.git#869ab59cb994994764ba42a6bd3e828a93f1d2f1
+            checksum: 869ab59cb994994764ba42a6bd3e828a93f1d2f1
             path: ${source.dir}/mtv-fbc
             spdx:
               name: mtv-fbc
-              version: 2.12.8
+              version: 2.12.9
               packages:
                 - name: mtv-fbc
-                  purl: pkg:github/kubev2v/mtv-fbc@d508f8c70f061534c2611aeea3fb2f9bdb1bad43
+                  purl: pkg:github/kubev2v/mtv-fbc@869ab59cb994994764ba42a6bd3e828a93f1d2f1
                   license: Apache-2.0
             uid: 0
             gid: 0
