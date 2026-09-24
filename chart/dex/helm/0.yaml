@@ -11,7 +11,7 @@ vars:
   CHART_COMMIT_SHA: 205e521e31cdf74fbcd7ab51ad0f3a43eb6ada1c
   CHART_HELM_NAME: dex-chart
   DEX_IMAGE_TAG: 2.44.0
-  DEX_REFERENCE: dhi/dex:2.45.1-debian13@sha256:ea054466320916346e97345f6e67a347395ee065011b891f414661c64ab9c2e4
+  DEX_REFERENCE: dhi/dex:2.45.1-debian13@sha256:4bf4ddeefa9766814df8bb2fd543ab12c25f188eb99c9640be1fdba5f8a3a90e
   DHI_NAMESPACE: dhi
   DHI_PREFIX: ""
   DHI_REGISTRY: dhi.io
@@ -50,7 +50,7 @@ contents:
               description: Docker Hardened Images Helm chart for Dex
               images:
                 - name: dex
-                  ref: dhi/dex:2.45.1-debian13@sha256:ea054466320916346e97345f6e67a347395ee065011b891f414661c64ab9c2e4
+                  ref: dhi/dex:2.45.1-debian13@sha256:4bf4ddeefa9766814df8bb2fd543ab12c25f188eb99c9640be1fdba5f8a3a90e
               name: dex-chart
               notes: ${source.dir}/config/NOTES.txt
               sourceUrl: https://github.com/dexidp/helm-charts
