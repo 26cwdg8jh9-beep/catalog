@@ -26,13 +26,13 @@ vars:
   ERLFMT_VERSION: 1.8.0
   GOSU_VERSION: 1.19-9
   NODEJS_VERSION: 24.21.0-1
-  NPM_VERSION: 11.19.1-0
+  NPM_VERSION: 11.20.0-0
   PACKAGE_NAME: couchdb-3.4
   PYTHON_MINOR: "3.13"
   PYTHON_VERSION: 3.13.15-2
   REBAR_COMMIT_SHA: b92fc3ceff0dc4b4097c337f6797b4285e3a9bca
   REBAR_VERSION: 3.27.1
-  REL: "9"
+  REL: "10"
   SEMVER_MAJOR_MINOR_VERSION: "3.4"
   SEMVER_MAJOR_VERSION: "3"
   SEMVER_VERSION: 3.4.3
@@ -84,7 +84,7 @@ contents:
           - make
           - mesa-utils
           - nodejs-24=24.21.0-1
-          - npm=11.19.1-0
+          - npm=11.20.0-0
           - perl
           - passwd
           - pkg-config
@@ -309,7 +309,7 @@ contents:
               - deb
             license: Apache-2.0
             name: couchdb-3.4
-            rel: 9
+            rel: 10
             url: https://couchdb.apache.org/
             version: 3.4.3
 os-release:
