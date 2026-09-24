@@ -144,6 +144,13 @@ allprojects {
                 details.useVersion("1.23.1")
                 details.because("CVE remediation: CVE-2026-71497")
             }
+
+            // jline 3.21.0 -> 3.30.15 (elasticsearch-sql-cli fat jar embeds
+            // org.jline:jline-reader; bump all jline modules together)
+            if (grp == "org.jline" && ver == "3.21.0") {
+                details.useVersion("3.30.15")
+                details.because("CVE remediation: CVE-2026-77420")
+            }
         }
     }
 }
