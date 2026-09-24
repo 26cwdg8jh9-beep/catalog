@@ -1,7 +1,7 @@
 [
   {
     "package": "fast-uri",
-    "version": "3.1.5",
+    "version": "3.1.6",
     "resolutions": [
       "fast-uri"
     ]
@@ -22,7 +22,7 @@
   },
   {
     "package": "js-yaml",
-    "version": "4.3.1",
+    "version": "4.3.2",
     "resolutions": [
       "**/js-yaml",
       "js-yaml"

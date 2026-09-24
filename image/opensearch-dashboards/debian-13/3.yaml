@@ -306,7 +306,7 @@ contents:
           run-as: opensearch-dashboards
           privileged: true
           with:
-            bumps: ${source.dir}/patches/no-bumps.json
+            bumps: ${source.dir}/patches/dashboards-alerting-bumps.json
             yarn-root: ${source.dir}/opensearch-dashboards/plugins/alertingDashboards
         - name: patch securityAnalyticsDashboards
           uses: yarn/bump@v2
@@ -469,6 +469,12 @@ contents:
             rm -rf ${source.dir}/tmp/plugins/opensearch-dashboards
             cp -r ${source.dir}/tmp/plugins ${target.dir}/opensearch-dashboards/plugins
       paths:
+        - type: file
+          path: /src/patches/dashboards-alerting-bumps.json
+          uid: 1000
+          gid: 1000
+          mode: "0600"
+          source: image/opensearch-dashboards/patch/dashboards-alerting-bumps.json
         - type: file
           path: /src/patches/dashboards-assistant-bumps.json
           uid: 1000
