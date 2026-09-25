@@ -4,7 +4,7 @@ image: dhi.io/pkg-kubernetes-dns-node-cache
 variant: runtime
 tags:
   - 1.27.0-alpine3.24
-  - 1.27.0-r0-alpine3.24
+  - 1.27.0-r1-alpine3.24
 platforms:
   - linux/amd64
   - linux/arm64
@@ -13,7 +13,7 @@ vars:
   GOLANG_MAJOR_MINOR_VERSION: "1.27"
   GOLANG_VERSION: 1.27.1-r0
   PACKAGE_NAME: kubernetes-dns-node-cache
-  REL: "0"
+  REL: "1"
   SEMVER_MAJOR_MINOR_VERSION: "1.27"
   SEMVER_MAJOR_VERSION: "1"
   SEMVER_VERSION: 1.27.0
@@ -71,10 +71,7 @@ contents:
           with:
             fips: false
             ldflags:
-              - -X k8s.io/client-go/pkg/version.gitVersion=1.27.0
-              - -X k8s.io/client-go/pkg/version.gitCommit=404c6dc8bb65977dcebd481127d5f88208c34ba6
-              - -X k8s.io/client-go/pkg/version.BuildDate=$(date -u -d @${SOURCE_DATE_EPOCH} +'%FT%TZ')
-              - -X k8s.io/dns/pkg/version.VERSION=1.27.0
+              - -X sigs.k8s.io/node-local-dns/pkg/version.VERSION=1.27.0
             output: ${target.dir}/usr/bin/node-cache
             packages: ./cmd/node-cache
         - name: build dev
@@ -82,10 +79,7 @@ contents:
           with:
             fips: false
             ldflags:
-              - -X k8s.io/client-go/pkg/version.gitVersion=1.27.0
-              - -X k8s.io/client-go/pkg/version.gitCommit=404c6dc8bb65977dcebd481127d5f88208c34ba6
-              - -X k8s.io/client-go/pkg/version.BuildDate=$(date -u -d @${SOURCE_DATE_EPOCH} +'%FT%TZ')
-              - -X k8s.io/dns/pkg/version.VERSION=1.27.0
+              - -X sigs.k8s.io/node-local-dns/pkg/version.VERSION=1.27.0
             output: ${target.dir}/usr/bin/node-cache-dev
             packages: ./cmd/node-cache
             strip: false
@@ -96,7 +90,7 @@ contents:
               - usr/bin/node-cache
             license: Apache-2.0
             name: kubernetes-dns-node-cache
-            rel: 0
+            rel: 1
             subpackages:
               - files:
                   - path: usr/bin/node-cache
