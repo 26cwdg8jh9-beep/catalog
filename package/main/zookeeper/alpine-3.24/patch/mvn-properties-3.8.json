@@ -13,5 +13,10 @@
         "property": "logback-version",
         "value": "1.5.35",
         "comment": "CVE-2025-11226, CVE-2026-9828, CVE-2026-10532"
+    },
+    {
+        "property": "jline.version",
+        "value": "3.30.15",
+        "comment": "CVE-2026-77420, CVE-2026-77421, CVE-2026-77422"
     }
 ]
