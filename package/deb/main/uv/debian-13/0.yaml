@@ -3,17 +3,17 @@
 image: dhi.io/pkg-uv
 variant: runtime
 tags:
-  - 0.12.18-0
-  - 0.12.18-0-debian13
+  - 0.12.19-0
+  - 0.12.19-0-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 vars:
-  COMMIT_SHA: 01cb90c1a4f88af09906cb60de9766d2add4a062
+  COMMIT_SHA: bea138450f0e620a4ce5765b0e38cff7b9f0799f
   DHI_REL: "0"
-  DHI_VERSION: 0.12.18-0
+  DHI_VERSION: 0.12.19-0
   RUST_MAJOR_MINOR: "1.97"
-  VERSION: 0.12.18
+  VERSION: 0.12.19
 contents:
   packages:
     - '!base-files'
@@ -45,18 +45,18 @@ contents:
           - liblzma-dev
           - libzstd-dev
         files:
-          - url: git+https://github.com/astral-sh/uv.git#0.12.18
-            checksum: 01cb90c1a4f88af09906cb60de9766d2add4a062
+          - url: git+https://github.com/astral-sh/uv.git#0.12.19
+            checksum: bea138450f0e620a4ce5765b0e38cff7b9f0799f
             path: ${source.dir}/uv
             spdx:
               name: uv
-              version: 0.12.18
+              version: 0.12.19
               packages:
                 - name: uv
-                  purl: pkg:cargo/uv@0.12.18
+                  purl: pkg:cargo/uv@0.12.19
                   license: MIT
                 - name: uv
-                  purl: pkg:pypi/uv@0.12.18
+                  purl: pkg:pypi/uv@0.12.19
                   license: MIT
             uid: 0
             gid: 0
@@ -67,7 +67,7 @@ contents:
             ln -s ../debian .
         - uses: dpkg/bump@v1
           with:
-            version: 0.12.18-0
+            version: 0.12.19-0
         - uses: dpkg/build@v1
           privileged: true
           with:
