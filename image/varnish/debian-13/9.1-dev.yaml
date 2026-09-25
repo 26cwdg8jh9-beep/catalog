@@ -1,31 +1,31 @@
 # syntax=dhi.io/build:2-debian13
 
-name: Varnish Cache 8.0.x
+name: Varnish Cache 9.1.x (dev)
 image: dhi.io/varnish
-variant: runtime
+variant: dev
 tags:
-  - "8"
-  - "8.0"
-  - 8.0.0
-  - 8-debian
-  - 8-debian13
-  - 8.0-debian
-  - 8.0-debian13
-  - 8.0.0-debian
-  - 8.0.0-debian13
+  - 9-dev
+  - 9.1-dev
+  - 9.1.0-dev
+  - 9-debian-dev
+  - 9-debian13-dev
+  - 9.1-debian-dev
+  - 9.1-debian13-dev
+  - 9.1.0-debian-dev
+  - 9.1.0-debian13-dev
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
-  release: "2025-09-15"
-  end-of-life: "2026-09-15"
+  release: "2026-09-16"
+  end-of-life: "2027-09-16"
 vars:
   BINUTILS_ARCH: '#{ target.arch == "amd64" ? "x86-64" : "aarch64" }'
-  PACKAGE_NAME: varnish-8.0
-  SEMVER_MAJOR_MINOR_VERSION: "8.0"
-  SEMVER_MAJOR_VERSION: "8"
-  SEMVER_VERSION: 8.0.0
-  VERSION: 8.0.0-0
+  PACKAGE_NAME: varnish-9.1
+  SEMVER_MAJOR_MINOR_VERSION: "9.1"
+  SEMVER_MAJOR_VERSION: "9"
+  SEMVER_VERSION: 9.1.0
+  VERSION: 9.1.0-0
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -36,18 +36,30 @@ contents:
     - '!binutils-aarch64-linux-gnu'
     - '!binutils-common'
     - '!binutils-x86-64-linux-gnu'
+    - '!gawk'
     - '!libbinutils'
     - '!libctf-nobfd0'
     - '!libctf0'
+    - '!libelogind0'
     - '!libgprofng0'
     - '!libsframe1'
+    - '!original-awk'
+    - apt
     - base-files
+    - bash
     - binutils-latest
     - binutils-latest-${BINUTILS_ARCH}-linux-gnu
+    - ca-certificates
     - ca-certificates-bundle
     - coreutils
     - dash
+    - diffutils
+    - dpkg
+    - findutils
     - gcc
+    - gcc-14-base
+    - grep
+    - libc-bin
     - libc6
     - libc6-dev
     - libctf-nobfd0-latest
@@ -61,8 +73,12 @@ contents:
     - libssl3t64
     - libtinfo6
     - libunwind8
+    - mawk
+    - perl-base
+    - sed
     - tzdata
-    - varnish-8.0=8.0.0-0
+    - util-linux
+    - varnish-9.1=9.1.0-0
   builds:
     - name: legacy usr-local lib symlinks
       contents:
@@ -73,7 +89,7 @@ contents:
         packages:
           - bash
           - coreutils
-          - varnish-8.0=8.0.0-0
+          - varnish-9.1=9.1.0-0
       pipeline:
         - runs: |
             set -eux -o pipefail
@@ -90,10 +106,14 @@ contents:
           uid: 0
           gid: 0
 accounts:
-  run-as: nonroot
+  root: true
+  run-as: root
   users:
     - name: nonroot
       uid: 65532
+      gid: 65532
+    - name: _apt
+      uid: 42
       gid: 65532
   groups:
     - name: nonroot
@@ -109,6 +129,8 @@ os-release:
   home-url: https://docker.com/products/hardened-images/
   bug-report-url: https://docker.com/support/
 work-dir: /var/lib/varnish
+environment:
+  DEBIAN_FRONTEND: noninteractive
 paths:
   - type: directory
     path: /etc/varnish
