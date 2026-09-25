@@ -1,16 +1,16 @@
 # syntax=dhi.io/build:2-helm3
 
-name: Kube Prometheus Stack Helm chart 88.x
+name: Kube Prometheus Stack Helm chart 91.x
 image: dhi.io/kube-prometheus-stack-chart
 variant: helm
 tags:
-  - 88.6.5
+  - 91.5.0
 platforms:
   - linux/amd64
 vars:
   ALERTMANAGER_REFERENCE: dhi/alertmanager:0.34.1-debian13@sha256:27303170985c20614926ace079f7a91e27a4b88934998ce9e955c8c644e058f9
   BUSYBOX_REFERENCE: dhi/busybox:1.37.0-debian13@sha256:abcd06d567c6ecda4aae78cff5334a231bd3e663b69b671612566d4a4c949899
-  CHART_COMMIT_SHA: 9277e8a4c01febd37625c466c6d760fc07280f32
+  CHART_COMMIT_SHA: 6e181ddf380b0981072791dcf002d601871ec3d2
   CHART_HELM_NAME: kube-prometheus-stack-chart
   DHI_NAMESPACE: dhi
   DHI_PREFIX: ""
@@ -26,11 +26,11 @@ vars:
   PROMETHEUS_OPERATOR_ADMISSION_WEBHOOK_REFERENCE: dhi/prometheus-operator-admission-webhook:0.94.0-debian13@sha256:9ea88bec4bfb0db003f967c7dd96670c0226427b606678025d79c324c8456898
   PROMETHEUS_OPERATOR_REFERENCE: dhi/prometheus-operator:0.94.0-debian13@sha256:765033f781bea18501303dfacba09e1f4a545799086da426b8bc43955bb5ac0e
   PROMETHEUS_REFERENCE: dhi/prometheus:3.14.0-debian13@sha256:475cf0b0c4716f3d7ade5ef9552a9b11ef882b9cdd4c128c01dde9e3d4a0d1b4
-  SEMVER_MAJOR_MINOR_VERSION: "88.6"
-  SEMVER_MAJOR_VERSION: "88"
-  SEMVER_VERSION: 88.6.5
+  SEMVER_MAJOR_MINOR_VERSION: "91.5"
+  SEMVER_MAJOR_VERSION: "91"
+  SEMVER_VERSION: 91.5.0
   THANOS_REFERENCE: dhi/thanos:0.42.4-debian13@sha256:e1808589f57d8259f26389a8cc995a1bbc8934797225e2d9709296194bfbbc2d
-  VERSION: 88.6.5
+  VERSION: 91.5.0
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -46,8 +46,8 @@ contents:
           - yq-go
           - helm=4.1.4-2
         files:
-          - url: git+https://github.com/prometheus-community/helm-charts.git#kube-prometheus-stack-88.6.5
-            checksum: 9277e8a4c01febd37625c466c6d760fc07280f32
+          - url: git+https://github.com/prometheus-community/helm-charts.git#kube-prometheus-stack-91.5.0
+            checksum: 6e181ddf380b0981072791dcf002d601871ec3d2
             path: ${source.dir}/helm-charts
             uid: 0
             gid: 0
