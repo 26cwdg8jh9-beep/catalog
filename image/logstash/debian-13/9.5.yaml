@@ -212,51 +212,51 @@ contents:
                   license: Apache-2.0
             uid: 0
             gid: 0
-          - url: https://repo1.maven.org/maven2/org/bouncycastle/bcprov-jdk18on/1.84/bcprov-jdk18on-1.84.jar
-            checksum: sha256:64d6c5a6121fcd927152dd182cbed39afe0fda641a970d9bcc0c9cb1858b2731
-            path: ${source.dir}/patch/deps/bcprov-jdk18on-1.84.jar
+          - url: https://repo1.maven.org/maven2/org/bouncycastle/bcprov-jdk18on/1.85/bcprov-jdk18on-1.85.jar
+            checksum: sha256:20af26bf6060bb8005cc2389916812c1e0e998dc48d2ced7131b89461b54cff7
+            path: ${source.dir}/patch/deps/bcprov-jdk18on-1.85.jar
             spdx:
               name: bcprov-jdk18on
-              version: "1.84"
+              version: "1.85"
               packages:
                 - name: bcprov-jdk18on
-                  purl: pkg:maven/org.bouncycastle/bcprov-jdk18on@1.84
+                  purl: pkg:maven/org.bouncycastle/bcprov-jdk18on@1.85
                   license: MIT
             uid: 0
             gid: 0
-          - url: https://repo1.maven.org/maven2/org/bouncycastle/bcpkix-jdk18on/1.84/bcpkix-jdk18on-1.84.jar
-            checksum: sha256:c87f16ed9e5ec61bc94151e9f3646ac44e50cd448121ce84367fa4b7ec7ec1bb
-            path: ${source.dir}/patch/deps/bcpkix-jdk18on-1.84.jar
+          - url: https://repo1.maven.org/maven2/org/bouncycastle/bcpkix-jdk18on/1.85/bcpkix-jdk18on-1.85.jar
+            checksum: sha256:c9f82b2d4e99c4bbdfccf684e52cc06ea06a0b567bfd0d08f9c5a3f417055996
+            path: ${source.dir}/patch/deps/bcpkix-jdk18on-1.85.jar
             spdx:
               name: bcpkix-jdk18on
-              version: "1.84"
+              version: "1.85"
               packages:
                 - name: bcpkix-jdk18on
-                  purl: pkg:maven/org.bouncycastle/bcpkix-jdk18on@1.84
+                  purl: pkg:maven/org.bouncycastle/bcpkix-jdk18on@1.85
                   license: MIT
             uid: 0
             gid: 0
-          - url: https://repo1.maven.org/maven2/org/bouncycastle/bcutil-jdk18on/1.84/bcutil-jdk18on-1.84.jar
-            checksum: sha256:b374e16963421fb9cfb01cc20d7ad8fd2f8b8188e3eef0ec0a8965e245f7619a
-            path: ${source.dir}/patch/deps/bcutil-jdk18on-1.84.jar
+          - url: https://repo1.maven.org/maven2/org/bouncycastle/bcutil-jdk18on/1.85/bcutil-jdk18on-1.85.jar
+            checksum: sha256:590f55ed5d68529239898a4a5c4f730b6e37f45d1cfa3fbe51f8485abe32c42d
+            path: ${source.dir}/patch/deps/bcutil-jdk18on-1.85.jar
             spdx:
               name: bcutil-jdk18on
-              version: "1.84"
+              version: "1.85"
               packages:
                 - name: bcutil-jdk18on
-                  purl: pkg:maven/org.bouncycastle/bcutil-jdk18on@1.84
+                  purl: pkg:maven/org.bouncycastle/bcutil-jdk18on@1.85
                   license: MIT
             uid: 0
             gid: 0
-          - url: https://repo1.maven.org/maven2/org/bouncycastle/bctls-jdk18on/1.84/bctls-jdk18on-1.84.jar
-            checksum: sha256:a0591da70ced0f637f1b7e2df431dd91c3cb7c8511e6f75267e7850b2e293ccc
-            path: ${source.dir}/patch/deps/bctls-jdk18on-1.84.jar
+          - url: https://repo1.maven.org/maven2/org/bouncycastle/bctls-jdk18on/1.85/bctls-jdk18on-1.85.jar
+            checksum: sha256:ab9f1d3e517ea4b37e16c5ab7b3054f87b8930ae48dbc65c66ac4c7db26996ab
+            path: ${source.dir}/patch/deps/bctls-jdk18on-1.85.jar
             spdx:
               name: bctls-jdk18on
-              version: "1.84"
+              version: "1.85"
               packages:
                 - name: bctls-jdk18on
-                  purl: pkg:maven/org.bouncycastle/bctls-jdk18on@1.84
+                  purl: pkg:maven/org.bouncycastle/bctls-jdk18on@1.85
                   license: MIT
             uid: 0
             gid: 0
@@ -488,15 +488,15 @@ contents:
                   license: MIT
             uid: 0
             gid: 0
-          - url: https://rubygems.org/downloads/faraday-2.14.3.gem
-            checksum: sha256:1882247e6766615c8220b4392bf1d27f6ebb63d8e28267587cef1fb0bf37f278
-            path: ${source.dir}/patch/deps/faraday-2.14.3.gem
+          - url: https://rubygems.org/downloads/faraday-2.14.4.gem
+            checksum: sha256:9bb4408c44621b0dbaaaa39e5dbfc4dbe58cc6751b6eb94d16ae9e1f2f2fab6e
+            path: ${source.dir}/patch/deps/faraday-2.14.4.gem
             spdx:
               name: faraday
-              version: 2.14.3
+              version: 2.14.4
               packages:
                 - name: faraday
-                  purl: pkg:gem/faraday@2.14.3
+                  purl: pkg:gem/faraday@2.14.4
                   license: MIT
             uid: 0
             gid: 0
@@ -811,8 +811,8 @@ contents:
               exit 1
             fi
 
-            replace_jars "*/org/bouncycastle/bcprov-jdk18on/*/bcprov-jdk18on-*.jar" "${source.dir}/patch/deps/bcprov-jdk18on-1.84.jar"
-            replace_jars "*/org/bouncycastle/bcpkix-jdk18on/*/bcpkix-jdk18on-*.jar" "${source.dir}/patch/deps/bcpkix-jdk18on-1.84.jar"
+            replace_jars "*/org/bouncycastle/bcprov-jdk18on/*/bcprov-jdk18on-*.jar" "${source.dir}/patch/deps/bcprov-jdk18on-1.85.jar"
+            replace_jars "*/org/bouncycastle/bcpkix-jdk18on/*/bcpkix-jdk18on-*.jar" "${source.dir}/patch/deps/bcpkix-jdk18on-1.85.jar"
             replace_jars "*/tools/jackson/core/jackson-core/*/jackson-core-*.jar" "${source.dir}/patch/deps/tools-jackson-core-3.1.6.jar"
             # CVE-2026-54512, CVE-2026-54513, CVE-2026-54514, CVE-2026-54515, CVE-2026-54516, CVE-2026-54517, CVE-2026-54518
             # CVE-2026-59888, CVE-2026-59889, GHSA-mhm7-754m-9p8w
@@ -1249,10 +1249,10 @@ contents:
               install_fixed_gem "${source.dir}/patch/deps/concurrent-ruby-1.3.7.gem" concurrent-ruby concurrent-ruby-1.3.7 true
               sed -i 's/concurrent-ruby (1\.1\.[0-9]\+)/concurrent-ruby (1.3.7)/' "${target.dir}/usr/share/logstash/Gemfile.lock"
             fi
-            # CVE-2026-54297 - faraday 2.14.2 -> 2.14.3
-            install_fixed_gem "${source.dir}/patch/deps/faraday-2.14.3.gem" faraday faraday-2.14.3 true
+            # CVE-2026-54297 - faraday 2.14.2 -> 2.14.4 (8.19.22+ locks 2.14.4 upstream)
+            install_fixed_gem "${source.dir}/patch/deps/faraday-2.14.4.gem" faraday faraday-2.14.4 true
             install_fixed_gem "${source.dir}/patch/deps/faraday-net_http-3.4.4.gem" faraday-net_http faraday-net_http-3.4.4 true
-            sed -i 's/faraday (2\.14\.[0-2])/faraday (2.14.3)/' "${target.dir}/usr/share/logstash/Gemfile.lock"
+            sed -i 's/faraday (2\.14\.[0-3])/faraday (2.14.4)/' "${target.dir}/usr/share/logstash/Gemfile.lock"
             sed -i 's/faraday-net_http (3\.4\.[0-3])/faraday-net_http (3.4.4)/' "${target.dir}/usr/share/logstash/Gemfile.lock"
             # GHSA-5prr-v3j2-97mh, GHSA-5v8h-3h3q-446p, GHSA-8678-w3jw-xfc2, GHSA-9cv2-cfxc-v4v2,
             # GHSA-p67v-3w7g-wjg7, GHSA-phwj-rprq-35pp, GHSA-wfpw-mmfh-qq69, GHSA-wjv4-x9w8-wm3h - nokogiri 1.19.3 -> 1.19.4
@@ -1292,18 +1292,18 @@ contents:
 
             replace_bouncycastle_jar() {
               artifact="$1"
-              fixed="${source.dir}/patch/deps/${artifact}-1.84.jar"
+              fixed="${source.dir}/patch/deps/${artifact}-1.85.jar"
 
               find "$base" -path "*/org/bouncycastle/$artifact/*/${artifact}-*.jar" -type f | while read -r old_jar; do
                 old_version_dir=$(dirname "$old_jar")
                 artifact_dir=$(dirname "$old_version_dir")
-                fixed_dir="$artifact_dir/1.84"
+                fixed_dir="$artifact_dir/1.85"
 
-                echo "Replacing $old_jar with $fixed_dir/${artifact}-1.84.jar"
+                echo "Replacing $old_jar with $fixed_dir/${artifact}-1.85.jar"
                 rm "$old_jar"
                 rmdir "$old_version_dir" 2> /dev/null || true
                 mkdir -p "$fixed_dir"
-                cp "$fixed" "$fixed_dir/${artifact}-1.84.jar"
+                cp "$fixed" "$fixed_dir/${artifact}-1.85.jar"
               done
             }
 
@@ -1312,7 +1312,7 @@ contents:
             replace_bouncycastle_jar bcutil-jdk18on
             replace_bouncycastle_jar bctls-jdk18on
 
-            find "$base" -path "*/jopenssl/version.rb" -type f -exec sed -i "s/BOUNCY_CASTLE_VERSION = '[0-9.]*'/BOUNCY_CASTLE_VERSION = '1.84'/" {} +
+            find "$base" -path "*/jopenssl/version.rb" -type f -exec sed -i "s/BOUNCY_CASTLE_VERSION = '[0-9.]*'/BOUNCY_CASTLE_VERSION = '1.85'/" {} +
       paths:
         - type: directory
           path: ${source.dir}/patch
