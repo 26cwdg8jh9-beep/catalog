@@ -1,23 +1,23 @@
 # syntax=dhi.io/build:2-debian13
 
-name: Azul Platform Prime 21.x
+name: Azul Platform Prime 27.x
 image: dhi.io/azul
 variant: runtime
 tags:
-  - 21-jdk-zulu
-  - 21-jdk-zulu-debian
-  - 21-jdk-zulu-debian13
+  - 27-jdk-zulu
+  - 27-jdk-zulu-debian
+  - 27-jdk-zulu-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
-  release: "2023-09-19"
-  end-of-life: "2031-09-30"
+  release: "2026-09-15"
+  end-of-life: "2027-03-31"
 vars:
   DHI_SKIP_PACKAGE_CHECK: "true"
-  JAVA_MAJOR_VERSION: "21"
-  JAVA_VERSION: 21.0.0
-  VERSION: 21.52.203.0
+  JAVA_MAJOR_VERSION: "27"
+  JAVA_VERSION: 27.0.0
+  VERSION: 27.28.103.0
   ZLIB1G_VERSION: 1:1.3.dfsg+really1.3.1-1+dhi4
 contents:
   repositories:
@@ -42,9 +42,9 @@ contents:
           - bash
           - coreutils
           - findutils
-          - zulu21-jdk
+          - zulu27-jdk
         mappings:
-          zulu21.0.0-jdk: pkg:deb/azul/zulu21-jdk@21.52.203.0?os_name=debian&os_version=13
+          zulu27.0.0-jdk: pkg:deb/azul/zulu27-jdk@27.28.103.0?os_name=debian&os_version=13
       pipeline:
         - name: install
           runs: |
@@ -59,7 +59,7 @@ contents:
             fi
             ZULU_JDK_DIR=$(find "${target.dir}/opt/zulu" -type d -name "zulu*" -print)
             ZULU_JDK_DIR_BASENAME=$(basename "${ZULU_JDK_DIR}")
-            ln -s "/opt/zulu/${ZULU_JDK_DIR_BASENAME}" "${target.dir}/opt/zulu/zulu-jdk21"
+            ln -s "/opt/zulu/${ZULU_JDK_DIR_BASENAME}" "${target.dir}/opt/zulu/zulu-jdk27"
       outputs:
         - source: ${target.dir}/opt/zulu
           target: /opt/zulu
@@ -114,11 +114,11 @@ os-release:
   home-url: https://docker.com/products/hardened-images/
   bug-report-url: https://docker.com/support/
 environment:
-  JAVA_HOME: /opt/zulu/zulu-jdk21
+  JAVA_HOME: /opt/zulu/zulu-jdk27
   LANG: en_US.UTF-8
   LANGUAGE: en_US:en
   LC_ALL: en_US.UTF-8
-  PATH: /opt/zulu/zulu-jdk21/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+  PATH: /opt/zulu/zulu-jdk27/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 annotations:
   org.opencontainers.image.description: A minimal Azul Platform Prime image
 cmd:
