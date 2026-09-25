@@ -24,8 +24,8 @@ vars:
   PG_MAJOR_VERSION: "18"
   PG_VERSION: "18.6"
   PGDATA: /var/lib/postgresql/18/data
-  POSTGRES_BUILD_REFERENCE: dhi/postgres:18.6-debian13-dev@sha256:9e11a3d1876e0a8a27090b503aa8e48b2137895be7c17c46417e4fae4e2eb55f
-  POSTGRES_RUNTIME_REFERENCE: dhi/postgres:18.6-debian13@sha256:f9af95af8393322816bdcf7e0e5d0be22187d2de43c2e56e66934f32ed942c6a
+  POSTGRES_BUILD_REFERENCE: dhi/postgres:18.6-debian13-dev@sha256:2f40e388810025cca70d41d764bac13e3edfd1f3b02fd4fc26b97fede75eb2fb
+  POSTGRES_RUNTIME_REFERENCE: dhi/postgres:18.6-debian13@sha256:02a92785519ad3359cab36d9efe0f4f1d0de5e96c17a0280e5a19d7709dd5b73
   SEMVER_MAJOR_MINOR_VERSION: "0.8"
   SEMVER_MAJOR_VERSION: "0"
   SEMVER_VERSION: 0.8.6
@@ -68,7 +68,6 @@ contents:
     - zlib1g
   builds:
     - name: pgvector
-      uses: dhi.io/postgres:18.6-debian13-dev@sha256:9e11a3d1876e0a8a27090b503aa8e48b2137895be7c17c46417e4fae4e2eb55f
       work-dir: ${source.dir}/pgvector
       contents:
         packages:
@@ -90,6 +89,14 @@ contents:
                 - name: pgvector
                   purl: pkg:github/pgvector/pgvector@0.8.6
                   license: PostgreSQL
+            uid: 0
+            gid: 0
+        artifacts:
+          - name: dhi.io/postgres:18.6-debian13-dev@sha256:2f40e388810025cca70d41d764bac13e3edfd1f3b02fd4fc26b97fede75eb2fb
+            includes:
+              - opt/postgresql/18/**
+              - usr/bin/pg_config
+              - usr/lib/postgresql/18/**
             uid: 0
             gid: 0
       pipeline:
@@ -139,16 +146,18 @@ contents:
           uid: 0
           gid: 0
   artifacts:
-    - name: dhi.io/postgres:18.6-debian13@sha256:f9af95af8393322816bdcf7e0e5d0be22187d2de43c2e56e66934f32ed942c6a
+    - name: dhi.io/postgres:18.6-debian13@sha256:02a92785519ad3359cab36d9efe0f4f1d0de5e96c17a0280e5a19d7709dd5b73
       excludes:
         - etc/os-release
         - var/lib/dpkg/status
+        - var/lock
       uid: 0
       gid: 0
-    - name: dhi.io/postgres:18.6-debian13-dev@sha256:9e11a3d1876e0a8a27090b503aa8e48b2137895be7c17c46417e4fae4e2eb55f
+    - name: dhi.io/postgres:18.6-debian13-dev@sha256:2f40e388810025cca70d41d764bac13e3edfd1f3b02fd4fc26b97fede75eb2fb
       excludes:
         - etc/os-release
         - var/lib/dpkg/status
+        - var/lock
       uid: 0
       gid: 0
 accounts:

@@ -57,7 +57,6 @@ contents:
     - zlib1g
   builds:
     - name: pgvector
-      uses: dhi.io/postgres:15.19-debian13-dev@sha256:322abbda8a0b4a68043ccc86d4f32ce18bac97a8176191fe098be09275c72c51
       work-dir: ${source.dir}/pgvector
       contents:
         packages:
@@ -79,6 +78,14 @@ contents:
                 - name: pgvector
                   purl: pkg:github/pgvector/pgvector@0.8.6
                   license: PostgreSQL
+            uid: 0
+            gid: 0
+        artifacts:
+          - name: dhi.io/postgres:15.19-debian13-dev@sha256:322abbda8a0b4a68043ccc86d4f32ce18bac97a8176191fe098be09275c72c51
+            includes:
+              - opt/postgresql/15/**
+              - usr/bin/pg_config
+              - usr/lib/postgresql/15/**
             uid: 0
             gid: 0
       pipeline:
@@ -132,6 +139,7 @@ contents:
       excludes:
         - etc/os-release
         - var/lib/dpkg/status
+        - var/lock
       uid: 0
       gid: 0
 accounts:
