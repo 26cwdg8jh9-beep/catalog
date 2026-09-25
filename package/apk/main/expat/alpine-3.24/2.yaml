@@ -3,21 +3,21 @@
 image: dhi.io/pkg-expat
 variant: runtime
 tags:
-  - 2.8.4-alpine3.24
-  - 2.8.4-r0-alpine3.24
+  - 2.8.5-alpine3.24
+  - 2.8.5-r0-alpine3.24
 platforms:
   - linux/amd64
   - linux/arm64
 vars:
-  COMMIT_SHA: 08d1eb8641965d3807628f6a4ff15914be5b79ae
-  DHI_TEST_APK_PACKAGES: expat-2.8.4-r0 libexpat-2.8.4-r0
+  COMMIT_SHA: 41a9605db84bb52cd65c6349e5e087c2c7fe9efb
+  DHI_TEST_APK_PACKAGES: expat-2.8.5-r0 libexpat-2.8.5-r0
   PACKAGE_NAME: main/expat
   REL: "0"
   SEMVER_MAJOR_MINOR_VERSION: "2.8"
   SEMVER_MAJOR_VERSION: "2"
-  SEMVER_VERSION: 2.8.4
-  TAGVER: R_2_8_4
-  VERSION: 2.8.4
+  SEMVER_VERSION: 2.8.5
+  TAGVER: R_2_8_5
+  VERSION: 2.8.5
 contents:
   repositories:
     - https://dhi.io/apk/alpine/v3.24/main
@@ -35,12 +35,12 @@ contents:
         packages:
           - bash
         files:
-          - url: git+https://github.com/alpinelinux/aports.git#08d1eb8641965d3807628f6a4ff15914be5b79ae
+          - url: git+https://github.com/alpinelinux/aports.git#41a9605db84bb52cd65c6349e5e087c2c7fe9efb
             path: ${source.dir}/aports
             uid: 0
             gid: 0
-          - url: https://github.com/libexpat/libexpat/releases/download/R_2_8_4/expat-2.8.4.tar.xz
-            path: /var/cache/distfiles/expat-2.8.4.tar.xz
+          - url: https://github.com/libexpat/libexpat/releases/download/R_2_8_5/expat-2.8.5.tar.xz
+            path: /var/cache/distfiles/expat-2.8.5.tar.xz
             uid: 0
             gid: 0
       pipeline:
@@ -48,7 +48,7 @@ contents:
         - uses: abuild/bump@v1
           with:
             rel: 0
-            version: 2.8.4
+            version: 2.8.5
         - uses: abuild/build@v1
           with:
             command: checksum
