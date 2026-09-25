@@ -3,10 +3,10 @@
 image: dhi.io/pkg-haproxy
 variant: runtime
 tags:
-  - 3.0.27
-  - 3.0.27-r1
-  - 3.0.27-debian13
-  - 3.0.27-r1-debian13
+  - 3.0.28
+  - 3.0.28-r0
+  - 3.0.28-debian13
+  - 3.0.28-r0-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -17,12 +17,12 @@ vars:
   OPENSSL_ARCH: '#{ target.arch == "amd64" ? "x86_64" : "aarch64" }'
   OPENSSL_FIPS_VERSION: 3.5.7-1~deb13u2+fips+dhi0
   PACKAGE_NAME: haproxy-3.0
-  REL: "1"
+  REL: "0"
   SEMVER_MAJOR_MINOR_VERSION: "3.0"
   SEMVER_MAJOR_VERSION: "3"
-  SEMVER_VERSION: 3.0.27
-  SHA256: sha256:c200b72ed5078d99d4bd658834478058409420b45d08dcec7e7a015e9c7b1dd1
-  VERSION: 3.0.27
+  SEMVER_VERSION: 3.0.28
+  SHA256: sha256:dcad28378e69561920f1524a15a0f7713e138f05145c7a6ab7626740d06cb1ea
+  VERSION: 3.0.28
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -52,15 +52,15 @@ contents:
           - openssl
           - tar
         files:
-          - url: https://www.haproxy.org/download/3.0/src/haproxy-3.0.27.tar.gz
-            checksum: sha256:c200b72ed5078d99d4bd658834478058409420b45d08dcec7e7a015e9c7b1dd1
+          - url: https://www.haproxy.org/download/3.0/src/haproxy-3.0.28.tar.gz
+            checksum: sha256:dcad28378e69561920f1524a15a0f7713e138f05145c7a6ab7626740d06cb1ea
             path: ${source.dir}/haproxy.tar.gz
             spdx:
               name: haproxy
-              version: 3.0.27
+              version: 3.0.28
               packages:
                 - name: haproxy
-                  purl: pkg:dhi/haproxy@3.0.27
+                  purl: pkg:dhi/haproxy@3.0.28
                   license: GPL-2.0-only
             uid: 0
             gid: 0
@@ -75,7 +75,7 @@ contents:
             set -eux -o pipefail
 
             nproc="$(nproc)"
-            make -C "haproxy-3.0.27" -j "$nproc" \
+            make -C "haproxy-3.0.28" -j "$nproc" \
               TARGET=linux-glibc \
               CC=gcc \
               \
@@ -92,7 +92,7 @@ contents:
           runs: |
             set -eux -o pipefail
 
-            make -C "haproxy-3.0.27" \
+            make -C "haproxy-3.0.28" \
               \
               PREFIX="${target.dir}/usr" \
               SBINDIR="${target.dir}/usr/sbin" \
@@ -113,9 +113,9 @@ contents:
               - deb
             license: GPL-2.0-only
             name: haproxy-3.0
-            rel: 1
+            rel: 0
             url: https://www.haproxy.org/
-            version: 3.0.27
+            version: 3.0.28
 os-release:
   name: Docker Hardened Images (Debian)
   id: debian
