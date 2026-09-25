@@ -4,11 +4,8 @@ name: KEDA Metrics API Server 2.20.x (dev)
 image: dhi.io/keda-metrics-apiserver
 variant: dev
 tags:
-  - 2-dev
   - 2.20-dev
   - 2.20.2-dev
-  - 2-debian-dev
-  - 2-debian13-dev
   - 2.20-debian-dev
   - 2.20-debian13-dev
   - 2.20.2-debian-dev
@@ -98,7 +95,7 @@ contents:
               - github.com/valyala/fasthttp@v1.70.0
               - go.etcd.io/etcd/client/pkg/v3@v3.6.14
               - go.opentelemetry.io/otel@v1.44.0
-              - google.golang.org/grpc@v1.83.2
+              - google.golang.org/grpc@v1.84.0
             download: true
             replaces:
               - github.com/google/cel-go=github.com/google/cel-go@v0.30.0

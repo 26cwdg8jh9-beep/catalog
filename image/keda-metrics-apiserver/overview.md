@@ -1,3 +1,8 @@
+## About KEDA Metrics API Server
+
+The KEDA metrics API server (adapter) exposes external metrics to the Kubernetes metrics API so the Horizontal Pod
+Autoscaler and `kubectl get --raw` can scale workloads from KEDA `ScaledObject` triggers.
+
 ## About KEDA
 
 Kubernetes Event-driven Autoscaling (KEDA) is an open-source project that provides event-driven autoscaling for
