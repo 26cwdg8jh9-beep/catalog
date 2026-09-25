@@ -3,20 +3,20 @@
 image: dhi.io/pkg-containerd
 variant: runtime
 tags:
-  - 2.4.0-alpine3.23
-  - 2.4.0-r0-alpine3.23
+  - 2.4.1-alpine3.23
+  - 2.4.1-r0-alpine3.23
 platforms:
   - linux/amd64
   - linux/arm64
 vars:
-  COMMIT_SHA: a7fe631d96c08fb14cf8eff0afdc280e99c30a94
+  COMMIT_SHA: f2551031d7276a770f65f98c9b52e57e7dad07e8
   GOLANG_VERSION: 1.26.8-r0
   PACKAGE_NAME: containerd
   REL: "0"
   SEMVER_MAJOR_MINOR_VERSION: "2.4"
   SEMVER_MAJOR_VERSION: "2"
-  SEMVER_VERSION: 2.4.0
-  VERSION: 2.4.0
+  SEMVER_VERSION: 2.4.1
+  VERSION: 2.4.1
 contents:
   repositories:
     - https://dhi.io/apk/alpine/v3.23/main
@@ -37,15 +37,15 @@ contents:
           - golang-1.26=1.26.8-r0
           - golang-1.26-oci-config=1.26.8-r0
         files:
-          - url: git+https://github.com/containerd/containerd.git#v2.4.0
-            checksum: a7fe631d96c08fb14cf8eff0afdc280e99c30a94
+          - url: git+https://github.com/containerd/containerd.git#v2.4.1
+            checksum: f2551031d7276a770f65f98c9b52e57e7dad07e8
             path: /go/src/github.com/containerd/containerd/v2
             spdx:
               name: containerd
-              version: 2.4.0
+              version: 2.4.1
               packages:
                 - name: containerd
-                  purl: pkg:golang/github.com/containerd/containerd/v2@2.4.0
+                  purl: pkg:golang/github.com/containerd/containerd/v2@2.4.1
                   license: Apache-2.0
             uid: 0
             gid: 0
@@ -72,8 +72,8 @@ contents:
           with:
             fips: false
             ldflags:
-              - -X 'github.com/containerd/containerd/v2/version.Version=v2.4.0'
-              - -X 'github.com/containerd/containerd/v2/version.Revision=a7fe631d96c08fb14cf8eff0afdc280e99c30a94'
+              - -X 'github.com/containerd/containerd/v2/version.Version=v2.4.1'
+              - -X 'github.com/containerd/containerd/v2/version.Revision=f2551031d7276a770f65f98c9b52e57e7dad07e8'
             output: ${target.dir}/usr/bin/containerd
             packages: ./cmd/containerd
         - name: build containerd-shim-runc-v2
@@ -100,8 +100,8 @@ contents:
           with:
             fips: false
             ldflags:
-              - -X 'github.com/containerd/containerd/v2/version.Version=v2.4.0'
-              - -X 'github.com/containerd/containerd/v2/version.Revision=a7fe631d96c08fb14cf8eff0afdc280e99c30a94'
+              - -X 'github.com/containerd/containerd/v2/version.Version=v2.4.1'
+              - -X 'github.com/containerd/containerd/v2/version.Revision=f2551031d7276a770f65f98c9b52e57e7dad07e8'
             output: ${target.dir}/usr/bin/containerd-dev
             packages: ./cmd/containerd
             strip: false
@@ -155,7 +155,7 @@ contents:
                     source: etc/containerd/config-dev.toml
                 name: containerd-dev
             url: https://github.com/containerd/containerd
-            version: 2.4.0
+            version: 2.4.1
 os-release:
   name: Docker Hardened Images (Alpine)
   id: alpine
