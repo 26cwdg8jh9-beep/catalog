@@ -3,26 +3,26 @@
 image: dhi.io/pkg-containerd-io
 variant: runtime
 tags:
-  - 2.3.5
-  - 2.3.5-r2
-  - 2.3.5-debian13
-  - 2.3.5-r2-debian13
+  - 2.3.6
+  - 2.3.6-r0
+  - 2.3.6-debian13
+  - 2.3.6-r0-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
   release: "2026-04-30"
 vars:
-  COMMIT_SHA: 1294c24a7da8e5a793ed378161673abe94118892
+  COMMIT_SHA: ee2735368117d2eb259779949d5e75cdafec9761
   GOLANG_MAJOR_MINOR_VERSION: "1.26"
   GOLANG_VERSION: 1.26.8-0
-  REL: "2"
+  REL: "0"
   RUNC_COMMIT_SHA: bb14dabeb7185bb72c8c86735d090dcb20f36587
   RUNC_VERSION: 1.4.3
   SEMVER_MAJOR_MINOR_VERSION: "2.3"
   SEMVER_MAJOR_VERSION: "2"
-  SEMVER_VERSION: 2.3.5
-  VERSION: 2.3.5
+  SEMVER_VERSION: 2.3.6
+  VERSION: 2.3.6
 contents:
   packages:
     - base-files
@@ -47,15 +47,15 @@ contents:
           - libseccomp-dev
           - pkg-config
         files:
-          - url: git+https://github.com/containerd/containerd.git#v2.3.5
-            checksum: 1294c24a7da8e5a793ed378161673abe94118892
+          - url: git+https://github.com/containerd/containerd.git#v2.3.6
+            checksum: ee2735368117d2eb259779949d5e75cdafec9761
             path: /go/src/github.com/containerd/containerd/v2
             spdx:
               name: containerd
-              version: 2.3.5
+              version: 2.3.6
               packages:
                 - name: containerd
-                  purl: pkg:golang/github.com/containerd/containerd/v2@2.3.5
+                  purl: pkg:golang/github.com/containerd/containerd/v2@2.3.6
                   license: Apache-2.0
             uid: 0
             gid: 0
@@ -119,8 +119,8 @@ contents:
             cgo_enabled: 1
             extra-args: -buildmode=pie
             ldflags:
-              - -X github.com/containerd/containerd/v2/version.Version=v2.3.5
-              - -X github.com/containerd/containerd/v2/version.Revision=1294c24a7da8e5a793ed378161673abe94118892
+              - -X github.com/containerd/containerd/v2/version.Version=v2.3.6
+              - -X github.com/containerd/containerd/v2/version.Revision=ee2735368117d2eb259779949d5e75cdafec9761
               - -X github.com/containerd/containerd/v2/version.Package=github.com/containerd/containerd/v2
             output: ${target.dir}/usr/bin/containerd
             packages: ./cmd/containerd
@@ -132,8 +132,8 @@ contents:
             cgo_enabled: 1
             extra-args: -buildmode=pie
             ldflags:
-              - -X github.com/containerd/containerd/v2/version.Version=v2.3.5
-              - -X github.com/containerd/containerd/v2/version.Revision=1294c24a7da8e5a793ed378161673abe94118892
+              - -X github.com/containerd/containerd/v2/version.Version=v2.3.6
+              - -X github.com/containerd/containerd/v2/version.Revision=ee2735368117d2eb259779949d5e75cdafec9761
               - -X github.com/containerd/containerd/v2/version.Package=github.com/containerd/containerd/v2
             output: ${target.dir}/usr/bin/ctr
             packages: ./cmd/ctr
@@ -144,8 +144,8 @@ contents:
           with:
             cgo_enabled: 1
             ldflags:
-              - -X github.com/containerd/containerd/v2/version.Version=v2.3.5
-              - -X github.com/containerd/containerd/v2/version.Revision=1294c24a7da8e5a793ed378161673abe94118892
+              - -X github.com/containerd/containerd/v2/version.Version=v2.3.6
+              - -X github.com/containerd/containerd/v2/version.Revision=ee2735368117d2eb259779949d5e75cdafec9761
               - -X github.com/containerd/containerd/v2/version.Package=github.com/containerd/containerd/v2
               - -extldflags=-static
             output: ${target.dir}/usr/bin/containerd-shim-runc-v2
@@ -188,10 +188,10 @@ contents:
             license: Apache-2.0
             name: containerd.io
             provides: containerd, runc
-            rel: 2
+            rel: 0
             replaces: containerd, runc
             url: https://containerd.io
-            version: 2.3.5
+            version: 2.3.6
       paths:
         - type: directory
           path: ${source.dir}/assets
