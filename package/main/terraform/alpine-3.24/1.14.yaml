@@ -5,7 +5,7 @@ variant: runtime
 tags:
   - 1.14-alpine3.24
   - 1.14.9-alpine3.24
-  - 1.14.9-r2-alpine3.24
+  - 1.14.9-r3-alpine3.24
 platforms:
   - linux/amd64
   - linux/arm64
@@ -16,7 +16,7 @@ vars:
   GOLANG_MAJOR_MINOR_VERSION: "1.26"
   GOLANG_VERSION: 1.26.8-r0
   PACKAGE_NAME: terraform-1.14
-  REL: "2"
+  REL: "3"
   SEMVER_MAJOR_MINOR_VERSION: "1.14"
   SEMVER_MAJOR_VERSION: "1"
   SEMVER_VERSION: 1.14.9
@@ -72,9 +72,20 @@ contents:
               - github.com/Azure/go-ntlmssp@v0.1.1
               - github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream@v1.7.8
               - github.com/aws/aws-sdk-go-v2/service/s3@v1.97.3
-              - go.opentelemetry.io/otel/sdk@v1.43.0
               - github.com/hashicorp/go-getter@v1.8.6
-              - go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp@v1.43.0
+              - go.opentelemetry.io/otel@v1.46.0
+              - go.opentelemetry.io/otel/sdk@v1.46.0
+              - go.opentelemetry.io/otel/metric@v1.46.0
+              - go.opentelemetry.io/otel/trace@v1.46.0
+              - go.opentelemetry.io/otel/log@v0.21.0
+              - go.opentelemetry.io/otel/sdk/log@v0.21.0
+              - go.opentelemetry.io/otel/exporters/otlp/otlptrace@v1.46.0
+              - go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp@v1.46.0
+              - go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc@v1.46.0
+              - go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploggrpc@v0.21.0
+              - go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploghttp@v0.21.0
+              - go.opentelemetry.io/otel/exporters/stdout/stdoutlog@v0.21.0
+              - google.golang.org/grpc@v1.85.0-dev.0.20260825072537-93e31b48545e
             download: true
             replaces:
               - go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc=go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc@v0.60.0
@@ -112,7 +123,7 @@ contents:
               - usr/bin/terraform
             license: BUSL-1.1
             name: terraform-1.14
-            rel: 2
+            rel: 3
             subpackages:
               - files:
                   - path: usr/bin/terraform
