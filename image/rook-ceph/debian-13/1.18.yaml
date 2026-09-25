@@ -16,7 +16,7 @@ platforms:
 dates:
   release: "2025-08-20"
 vars:
-  CEPH_REFERENCE: dhi/ceph:19.3.0-debian13@sha256:b762479d23ef59e33cd9c951d4770c26a0716d8b0dfc68d61d14a6c959d11cb4
+  CEPH_REFERENCE: dhi/ceph:19.3.0-debian13@sha256:7e3a121bc2565e25078fb0b87330423702293248393ebd1d7bad0c5116e78c04
   COMMIT_SHA: 8059413c805f8ed3a0992af0113c002b0250805e
   ROOK_GO_BUILD_TAGS: ""
   S5CMD_COMMIT_SHA: 991c9fbc16709341b4bac04513232a1445941f63
@@ -109,7 +109,7 @@ contents:
             cgo_enabled: 0
             ldflags:
               - -X github.com/rook/rook/pkg/version.Version=1.18.11
-            output: ${target.dir}/usr/local/bin/rook
+            output: ${target.dir}/usr/bin/rook
             packages: ./cmd/rook
             tags: null
         - name: stage rook helper assets
@@ -117,8 +117,8 @@ contents:
           runs: |
             set -eux -o pipefail
 
-            install -D -m 0755 images/ceph/toolbox.sh "${target.dir}/usr/local/bin/toolbox.sh"
-            install -D -m 0755 images/ceph/set-ceph-debug-level "${target.dir}/usr/local/bin/set-ceph-debug-level"
+            install -D -m 0755 images/ceph/toolbox.sh "${target.dir}/usr/bin/toolbox.sh"
+            install -D -m 0755 images/ceph/set-ceph-debug-level "${target.dir}/usr/bin/set-ceph-debug-level"
 
             mkdir -p "${target.dir}/etc/ceph-monitoring"
             cp -a deploy/examples/monitoring/. "${target.dir}/etc/ceph-monitoring/"
@@ -132,18 +132,18 @@ contents:
           gid: 0
           source: image/rook-ceph/patch
       outputs:
-        - source: ${target.dir}/usr/local/bin/rook
-          target: /usr/local/bin/rook
+        - source: ${target.dir}/usr/bin/rook
+          target: /usr/bin/rook
           uid: 0
           gid: 0
           mode: "0755"
-        - source: ${target.dir}/usr/local/bin/toolbox.sh
-          target: /usr/local/bin/toolbox.sh
+        - source: ${target.dir}/usr/bin/toolbox.sh
+          target: /usr/bin/toolbox.sh
           uid: 0
           gid: 0
           mode: "0755"
-        - source: ${target.dir}/usr/local/bin/set-ceph-debug-level
-          target: /usr/local/bin/set-ceph-debug-level
+        - source: ${target.dir}/usr/bin/set-ceph-debug-level
+          target: /usr/bin/set-ceph-debug-level
           uid: 0
           gid: 0
           mode: "0755"
@@ -201,10 +201,10 @@ contents:
             GOFLAGS: -buildvcs=false
           with:
             cgo_enabled: 0
-            output: ${target.dir}/usr/local/bin/s5cmd
+            output: ${target.dir}/usr/bin/s5cmd
       outputs:
-        - source: ${target.dir}/usr/local/bin/s5cmd
-          target: /usr/local/bin/s5cmd
+        - source: ${target.dir}/usr/bin/s5cmd
+          target: /usr/bin/s5cmd
           uid: 0
           gid: 0
           mode: "0755"
@@ -213,7 +213,7 @@ contents:
           uid: 0
           gid: 0
   artifacts:
-    - name: dhi.io/ceph:19.3.0-debian13@sha256:b762479d23ef59e33cd9c951d4770c26a0716d8b0dfc68d61d14a6c959d11cb4
+    - name: dhi.io/ceph:19.3.0-debian13@sha256:7e3a121bc2565e25078fb0b87330423702293248393ebd1d7bad0c5116e78c04
       includes:
         - etc/ld.so.conf.d/ceph.conf
         - etc/logrotate.d/ceph
@@ -259,7 +259,7 @@ os-release:
 environment:
   LD_LIBRARY_PATH: /usr/local/lib
   PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-  PYTHONPATH: /usr/local/lib/python3.13/site-packages
+  PYTHONPATH: /usr/local/lib/python3.12/site-packages:/usr/local/lib/python3.13/site-packages
 paths:
   - type: directory
     path: /etc/ceph
