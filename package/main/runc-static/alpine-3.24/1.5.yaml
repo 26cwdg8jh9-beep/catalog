@@ -3,20 +3,20 @@
 image: dhi.io/pkg-runc-static
 variant: runtime
 tags:
-  - 1.4.3-alpine3.24
-  - 1.4.3-r0-alpine3.24
+  - 1.5.1-alpine3.24
+  - 1.5.1-r0-alpine3.24
 platforms:
   - linux/amd64
   - linux/arm64
 vars:
-  COMMIT_SHA: bb14dabeb7185bb72c8c86735d090dcb20f36587
+  COMMIT_SHA: 8f2685a471d3347a686ad3909783d8aafc6bb208
   GOLANG_VERSION: 1.26.8-r0
-  PACKAGE_NAME: runc-static-1.4
+  PACKAGE_NAME: runc-static-1.5
   REL: "0"
-  SEMVER_MAJOR_MINOR_VERSION: "1.4"
+  SEMVER_MAJOR_MINOR_VERSION: "1.5"
   SEMVER_MAJOR_VERSION: "1"
-  SEMVER_VERSION: 1.4.3
-  VERSION: 1.4.3
+  SEMVER_VERSION: 1.5.1
+  VERSION: 1.5.1
 contents:
   repositories:
     - https://dhi.io/apk/alpine/v3.24/main
@@ -28,7 +28,7 @@ contents:
   packages:
     - alpine-baselayout-data
   builds:
-    - name: runc-static-1.4
+    - name: runc-static-1.5
       work-dir: /go/src/github.com/opencontainers/runc
       contents:
         packages:
@@ -43,15 +43,15 @@ contents:
           - golang-1.26=1.26.8-r0
           - golang-1.26-oci-config=1.26.8-r0
         files:
-          - url: git+https://github.com/opencontainers/runc.git#v1.4.3
-            checksum: bb14dabeb7185bb72c8c86735d090dcb20f36587
+          - url: git+https://github.com/opencontainers/runc.git#v1.5.1
+            checksum: 8f2685a471d3347a686ad3909783d8aafc6bb208
             path: /go/src/github.com/opencontainers/runc
             spdx:
               name: runc
-              version: 1.4.3
+              version: 1.5.1
               packages:
                 - name: runc
-                  purl: pkg:golang/github.com/opencontainers/runc@1.4.3
+                  purl: pkg:golang/github.com/opencontainers/runc@1.5.1
                   license: Apache-2.0
             uid: 0
             gid: 0
@@ -80,7 +80,7 @@ contents:
             ldflags:
               - -linkmode=external
               - -extldflags=-static-pie
-              - -X main.gitCommit=bb14dabeb7185bb72c8c86735d090dcb20f36587
+              - -X main.gitCommit=8f2685a471d3347a686ad3909783d8aafc6bb208
             output: ${target.dir}/usr/bin/runc
             packages: .
             tags: seccomp,urfave_cli_no_docs,netgo,osusergo
@@ -93,7 +93,7 @@ contents:
             ldflags:
               - -linkmode=external
               - -extldflags=-static-pie
-              - -X main.gitCommit=bb14dabeb7185bb72c8c86735d090dcb20f36587
+              - -X main.gitCommit=8f2685a471d3347a686ad3909783d8aafc6bb208
             output: ${target.dir}/usr/bin/runc-dev
             packages: .
             strip: false
@@ -105,7 +105,7 @@ contents:
             file "${target.dir}/usr/bin/runc" > /tmp/runc-file.txt
             grep -qE "statically linked|static-pie linked" /tmp/runc-file.txt
             GODEBUG="" "${target.dir}/usr/bin/runc" --version > /tmp/runc-version.txt
-            grep -qF "runc version 1.4.3" /tmp/runc-version.txt
+            grep -qF "runc version 1.5.1" /tmp/runc-version.txt
             grep -qF "seccomp" /tmp/runc-version.txt
         - uses: dhi/build-pkg:0
           with:
@@ -113,7 +113,7 @@ contents:
             files:
               - usr/bin/runc
             license: Apache-2.0
-            name: runc-static-1.4
+            name: runc-static-1.5
             provides: runc-static=$pkg_full_version
             rel: 0
             replaces: runc-static
@@ -121,9 +121,9 @@ contents:
               - files:
                   - path: usr/bin/runc
                     source: usr/bin/runc-dev
-                name: runc-static-1.4-dev
+                name: runc-static-1.5-dev
             url: https://github.com/opencontainers/runc
-            version: 1.4.3
+            version: 1.5.1
 os-release:
   name: Docker Hardened Images (Alpine)
   id: alpine
