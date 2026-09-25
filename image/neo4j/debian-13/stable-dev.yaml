@@ -22,7 +22,7 @@ vars:
   GOSU_REFERENCE: dhi/pkg-gosu:1.19-debian13@sha256:a4046334ab89599751b3ccbcbbfd539a6b1365b493686ebb2c09c427f2fef55b
   JAVA_HOME: /usr/lib/jvm/temurin-21
   JDK_MAJOR_VERSION: "21"
-  MAVEN_REFERENCE: dhi/maven:3.9.16-jdk21-debian13-dev@sha256:3869c98211853628827bcbb9a1720e510e7f57d8438a23dadd88846dc4160868
+  MAVEN_REFERENCE: dhi/maven:3.9.16-jdk21-debian13-dev@sha256:d39bbcbeba4fa7fa7b60d5d6a9f820780f1266cf8035861e70c67f37f846f587
   MAVEN_VERSION: 3.9.16
   MVN_PROPS_VARIANT: stable
   NEO4J_HOME: /var/lib/neo4j
@@ -98,7 +98,7 @@ contents:
             uid: 0
             gid: 0
         artifacts:
-          - name: dhi.io/maven:3.9.16-jdk21-debian13-dev@sha256:3869c98211853628827bcbb9a1720e510e7f57d8438a23dadd88846dc4160868
+          - name: dhi.io/maven:3.9.16-jdk21-debian13-dev@sha256:d39bbcbeba4fa7fa7b60d5d6a9f820780f1266cf8035861e70c67f37f846f587
             includes:
               - opt/**
               - usr/local/bin/**
