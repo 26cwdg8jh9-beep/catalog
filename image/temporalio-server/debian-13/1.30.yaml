@@ -62,8 +62,10 @@ contents:
               - github.com/jackc/pgx/v5@v5.9.2
               - github.com/klauspost/compress@v1.18.7
               - go.opentelemetry.io/otel@v1.44.0
-              - go.opentelemetry.io/otel/sdk@v1.43.0
-              - google.golang.org/grpc@v1.83.2
+              - go.opentelemetry.io/otel/sdk@v1.45.0
+              - go.opentelemetry.io/otel/exporters/otlp/otlptrace@v1.45.0
+              - google.golang.org/grpc@v1.85.0-dev.0.20260825072537-93e31b48545e
+              - go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc@v1.45.0
             download: true
         - name: unit test
           runs: |
@@ -117,7 +119,7 @@ contents:
             mkdir -p '${target.dir}/etc/temporal'
             install -m 755 docker/scripts/sh/entrypoint.sh '${target.dir}/etc/temporal/entrypoint.sh'
       paths:
-        - type: directory
+        - type: file
           path: /src/patch/entrypoint-getent_hostname.30.patch
           uid: 0
           gid: 0
