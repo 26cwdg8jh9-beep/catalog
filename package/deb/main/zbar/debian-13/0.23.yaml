@@ -3,8 +3,8 @@
 image: dhi.io/pkg-zbar
 variant: runtime
 tags:
-  - 0.23.93-8-dhi0
-  - 0.23.93-8-dhi0-debian13
+  - 0.23.93-8-dhi1
+  - 0.23.93-8-dhi1-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -20,9 +20,9 @@ vars:
   DEBIAN_ORIG_FILENAME: zbar_0.23.93.orig.tar.gz
   DEBIAN_ORIG_URL: https://deb.debian.org/debian/pool/main/z/zbar/zbar_0.23.93.orig.tar.gz
   DEBIAN_VERSION: 0.23.93-8
-  DHI_REL: "0"
-  DHI_VERSION: 0.23.93-8+dhi0
-  TAG_VERSION: 0.23.93-8-dhi0
+  DHI_REL: "1"
+  DHI_VERSION: 0.23.93-8+dhi1
+  TAG_VERSION: 0.23.93-8-dhi1
   UPSTREAM_VERSION: 0.23.93
 contents:
   packages:
@@ -77,16 +77,27 @@ contents:
           with:
             file: zbar_0.23.93-8.dsc
             path: zbar
+        - uses: dpkg/patch@v1
+          with:
+            apply: true
+            patches:
+              - ${source.dir}/patch/CVE-2026-95516.patch
         - uses: dpkg/bump@v1
           with:
             changelog:
-              - DHI Rebuild
-            version: 0.23.93-8+dhi0
+              - Backport Debian fix for CVE-2026-95516
+            version: 0.23.93-8+dhi1
         - uses: dpkg/build@v1
           environment:
             XML_CATALOG_FILES: /etc/xml/catalog /usr/share/xml/docbook/stylesheet/docbook-xsl/catalog.xml /usr/share/xml/docbook/schema/dtd/4.5/catalog.xml
           with:
             args: -uc -us -d
+      paths:
+        - type: file
+          path: ${source.dir}/patch/CVE-2026-95516.patch
+          uid: 0
+          gid: 0
+          source: package/deb/main/zbar/patch/CVE-2026-95516.patch
 os-release:
   name: Docker Hardened Images (Debian)
   id: debian
