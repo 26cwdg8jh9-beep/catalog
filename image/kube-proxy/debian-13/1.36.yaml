@@ -38,6 +38,36 @@ contents:
     - iptables
     - kube-proxy-1.36=1.36.4-6
     - tzdata
+  builds:
+    - name: setcap iptables
+      contents:
+        packages:
+          - bash
+          - base-files
+          - coreutils
+          - libcap2-bin
+          - iptables
+      pipeline:
+        - name: setcap
+          runs: |
+            set -eux -o pipefail
+
+            setcap cap_net_admin,cap_net_raw+ep /usr/sbin/xtables-legacy-multi
+            setcap cap_net_admin,cap_net_raw+ep /usr/sbin/xtables-nft-multi
+            setcap cap_net_admin,cap_net_raw+ep /usr/sbin/iptables-apply
+      outputs:
+        - source: /usr/sbin/xtables-legacy-multi
+          target: /usr/sbin/xtables-legacy-multi
+          uid: 0
+          gid: 0
+        - source: /usr/sbin/xtables-nft-multi
+          target: /usr/sbin/xtables-nft-multi
+          uid: 0
+          gid: 0
+        - source: /usr/sbin/iptables-apply
+          target: /usr/sbin/iptables-apply
+          uid: 0
+          gid: 0
 accounts:
   run-as: nonroot
   users:
@@ -67,36 +97,6 @@ paths:
     uid: 0
     gid: 0
     source: /usr/bin/kube-proxy
-  - type: symlink
-    path: /usr/sbin/iptables
-    uid: 0
-    gid: 0
-    source: /usr/sbin/iptables-nft
-  - type: symlink
-    path: /usr/sbin/iptables-save
-    uid: 0
-    gid: 0
-    source: /usr/sbin/iptables-nft-save
-  - type: symlink
-    path: /usr/sbin/iptables-restore
-    uid: 0
-    gid: 0
-    source: /usr/sbin/iptables-nft-restore
-  - type: symlink
-    path: /usr/sbin/ip6tables
-    uid: 0
-    gid: 0
-    source: /usr/sbin/ip6tables-nft
-  - type: symlink
-    path: /usr/sbin/ip6tables-save
-    uid: 0
-    gid: 0
-    source: /usr/sbin/ip6tables-nft-save
-  - type: symlink
-    path: /usr/sbin/ip6tables-restore
-    uid: 0
-    gid: 0
-    source: /usr/sbin/ip6tables-nft-restore
   - type: directory
     path: /run/kubernetes
     uid: 65532
