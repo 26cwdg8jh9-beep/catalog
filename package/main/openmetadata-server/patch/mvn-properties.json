@@ -12,5 +12,10 @@
         "property": "postgres.connector.version",
         "value": "42.7.12",
         "comment": "CVE-2026-54291"
+    },
+    {
+        "property": "freemarker.version",
+        "value": "2.3.35",
+        "comment": "CVE-2026-84939"
     }
 ]

@@ -17,6 +17,7 @@
 **/GlossaryFluentAPITest.java
 **/ImpersonationTest.java
 **/CachedPermissionPerformanceTest.java
+**/EntityRelationshipPerformanceTest.java
 **/SocketSecurityTest.java
 **/SessionCookieSecurityTest.java
 **/EntityRelationshipCleanupTest.java

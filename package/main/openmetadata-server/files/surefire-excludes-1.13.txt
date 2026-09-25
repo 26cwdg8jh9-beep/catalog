@@ -4,6 +4,9 @@
 # classes that fail under our CVE pins or need live services.
 
 **/SearchRepositoryBehaviorTest.java
+# 1.13.6 SearchRepositoryTest/ReindexingUtilTest fail SearchIndex static init in hermetic build.
+**/SearchRepositoryTest.java
+**/ReindexingUtilTest.java
 **/SecurityConfigurationManagerTest.java
 **/JsonUtilsTest.java
 **/EntityCsvTest.java

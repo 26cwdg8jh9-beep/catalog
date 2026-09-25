@@ -5,10 +5,10 @@ variant: runtime
 tags:
   - "1.12"
   - 1.12.14
-  - 1.12.14-r21
+  - 1.12.14-r22
   - 1.12-debian13
   - 1.12.14-debian13
-  - 1.12.14-r21-debian13
+  - 1.12.14-r22-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -19,7 +19,7 @@ vars:
   COMMIT_SHA: 4ce8b3a7d97edbe40b616df7c2404adff1d2cb77
   MAVEN_REFERENCE: dhi/maven:3.9.16-jdk21-debian13-dev@sha256:ebc5985bddb0be1a7e006d1270975360f03e4efaed6c306b63c761a1430c070e
   PACKAGE_NAME: openmetadata-server-1.12
-  REL: "21"
+  REL: "22"
   SEMVER_MAJOR_MINOR_VERSION: "1.12"
   SEMVER_MAJOR_VERSION: "1"
   SEMVER_VERSION: 1.12.14
@@ -157,7 +157,7 @@ contents:
               - usr/bin/openmetadata-start
             license: Apache-2.0
             name: openmetadata-server-1.12
-            rel: 21
+            rel: 22
             url: https://open-metadata.org/
             version: 1.12.14
       paths:
