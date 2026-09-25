@@ -4,24 +4,25 @@ image: dhi.io/pkg-clickhouse-server
 variant: runtime
 tags:
   - "26.9"
-  - 26.9.1
-  - 26.9.1-r0
+  - 26.9.2
+  - 26.9.2-r0
   - 26.9-debian13
-  - 26.9.1-debian13
-  - 26.9.1-r0-debian13
+  - 26.9.2-debian13
+  - 26.9.2-r0-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 vars:
   DEBIAN_EPOCH_MAJOR_MINOR_VERSION: "26.9"
   DEBIAN_EPOCH_MAJOR_VERSION: "26"
-  DEBIAN_EPOCH_VERSION: 26.9.1
+  DEBIAN_EPOCH_VERSION: 26.9.2
   PACKAGE_NAME: clickhouse-server-26.9
   REL: "0"
+  RELEASE_SUFFIX: stable
   SEMVER_MAJOR_MINOR_VERSION: "26.9"
   SEMVER_MAJOR_VERSION: "26"
-  SEMVER_VERSION: 26.9.1
-  VERSION: 26.9.1.1629
+  SEMVER_VERSION: 26.9.2
+  VERSION: 26.9.2.8
 contents:
   packages:
     - base-files
@@ -37,15 +38,16 @@ contents:
           - bash
           - ca-certificates
           - coreutils
+          - curl
           - debconf
           - diffutils
           - dpkg
           - findutils
           - locales
         mappings:
-          clickhouse-client: pkg:deb/clickhouse/clickhouse-client@26.9.1.1629?os_name=debian&os_version=13
-          clickhouse-common-static: pkg:deb/clickhouse/clickhouse-common-static@26.9.1.1629?os_name=debian&os_version=13
-          clickhouse-server: pkg:deb/clickhouse/clickhouse-server@26.9.1.1629?os_name=debian&os_version=13
+          clickhouse-client: pkg:deb/clickhouse/clickhouse-client@26.9.2.8?os_name=debian&os_version=13
+          clickhouse-common-static: pkg:deb/clickhouse/clickhouse-common-static@26.9.2.8?os_name=debian&os_version=13
+          clickhouse-server: pkg:deb/clickhouse/clickhouse-server@26.9.2.8?os_name=debian&os_version=13
       pipeline:
         - name: install and stage clickhouse packages
           privileged: true
@@ -54,12 +56,12 @@ contents:
 
             apt-get update
             mkdir -p "${source.dir}/debs"
+            release_url="https://github.com/ClickHouse/ClickHouse/releases/download/v26.9.2.8-stable"
             (
               cd "${source.dir}/debs"
-              apt-get download \
-                "clickhouse-client=26.9.1.1629" \
-                "clickhouse-server=26.9.1.1629" \
-                "clickhouse-common-static=26.9.1.1629"
+              for pkg in clickhouse-client clickhouse-server clickhouse-common-static; do
+                curl -fsSL -O "${release_url}/${pkg}_26.9.2.8_${target.arch}.deb"
+              done
             )
 
             for deb in "${source.dir}/debs/"*.deb; do
@@ -111,7 +113,7 @@ contents:
             name: clickhouse-server-26.9
             rel: 0
             url: https://clickhouse.com/
-            version: 26.9.1.1629
+            version: 26.9.2.8
 os-release:
   name: Docker Hardened Images (Debian)
   id: debian
