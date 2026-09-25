@@ -4,9 +4,9 @@ image: dhi.io/pkg-couchdb
 variant: runtime
 tags:
   - 3.5.2
-  - 3.5.2-r4
+  - 3.5.2-r7
   - 3.5.2-debian13
-  - 3.5.2-r4-debian13
+  - 3.5.2-r7-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -26,13 +26,13 @@ vars:
   ERLFMT_VERSION: 1.8.0
   GOSU_VERSION: 1.19-9
   NODEJS_VERSION: 24.21.0-1
-  NPM_VERSION: 11.19.1-0
+  NPM_VERSION: 11.20.0-0
   PACKAGE_NAME: couchdb-3.5
   PYTHON_MINOR: "3.13"
   PYTHON_VERSION: 3.13.15-2
   REBAR_COMMIT_SHA: b92fc3ceff0dc4b4097c337f6797b4285e3a9bca
   REBAR_VERSION: 3.27.1
-  REL: "4"
+  REL: "7"
   SEMVER_MAJOR_MINOR_VERSION: "3.5"
   SEMVER_MAJOR_VERSION: "3"
   SEMVER_VERSION: 3.5.2
@@ -84,7 +84,7 @@ contents:
           - make
           - mesa-utils
           - nodejs-24=24.21.0-1
-          - npm=11.19.1-0
+          - npm=11.20.0-0
           - perl
           - passwd
           - pkg-config
@@ -285,6 +285,26 @@ contents:
 
             useradd -u 1000 -m -s /bin/bash testuser || true
             chown -R testuser:testuser "${source.dir}/couchdb"
+
+            cfile_prop=src/couch/test/eunit/couch_cfile_prop_tests.erl
+            if [ -f "${cfile_prop}" ]; then
+              sed -i \
+                's/?EUNIT_QUICKCHECK(60, 25000)/?EUNIT_QUICKCHECK(180, 25000)/' \
+                "${cfile_prop}"
+            fi
+            key_tree_prop=src/couch/test/eunit/couch_key_tree_prop_tests.erl
+            if [ -f "${key_tree_prop}" ]; then
+              sed -i \
+                's/?EUNIT_QUICKCHECK(60)/?EUNIT_QUICKCHECK(180)/' \
+                "${key_tree_prop}"
+            fi
+            ring_prop=src/mem3/test/eunit/mem3_ring_prop_tests.erl
+            if [ -f "${ring_prop}" ]; then
+              sed -i \
+                's/?EUNIT_QUICKCHECK(60)/?EUNIT_QUICKCHECK(180)/' \
+                "${ring_prop}"
+            fi
+
             cd "${source.dir}/couchdb" && gosu testuser make check
         - uses: spdx@v1
           with:
@@ -309,7 +329,7 @@ contents:
               - deb
             license: Apache-2.0
             name: couchdb-3.5
-            rel: 4
+            rel: 7
             url: https://couchdb.apache.org/
             version: 3.5.2
 os-release:

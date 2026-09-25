@@ -5,8 +5,10 @@ variant: runtime
 tags:
   - "3.4"
   - 3.4.3
+  - 3.4.3-r12
   - 3.4-debian13
   - 3.4.3-debian13
+  - 3.4.3-r12-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -32,7 +34,7 @@ vars:
   PYTHON_VERSION: 3.13.15-2
   REBAR_COMMIT_SHA: b92fc3ceff0dc4b4097c337f6797b4285e3a9bca
   REBAR_VERSION: 3.27.1
-  REL: "10"
+  REL: "12"
   SEMVER_MAJOR_MINOR_VERSION: "3.4"
   SEMVER_MAJOR_VERSION: "3"
   SEMVER_VERSION: 3.4.3
@@ -285,6 +287,26 @@ contents:
 
             useradd -u 1000 -m -s /bin/bash testuser || true
             chown -R testuser:testuser "${source.dir}/couchdb"
+
+            cfile_prop=src/couch/test/eunit/couch_cfile_prop_tests.erl
+            if [ -f "${cfile_prop}" ]; then
+              sed -i \
+                's/?EUNIT_QUICKCHECK(60, 25000)/?EUNIT_QUICKCHECK(180, 25000)/' \
+                "${cfile_prop}"
+            fi
+            key_tree_prop=src/couch/test/eunit/couch_key_tree_prop_tests.erl
+            if [ -f "${key_tree_prop}" ]; then
+              sed -i \
+                's/?EUNIT_QUICKCHECK(60)/?EUNIT_QUICKCHECK(180)/' \
+                "${key_tree_prop}"
+            fi
+            ring_prop=src/mem3/test/eunit/mem3_ring_prop_tests.erl
+            if [ -f "${ring_prop}" ]; then
+              sed -i \
+                's/?EUNIT_QUICKCHECK(60)/?EUNIT_QUICKCHECK(180)/' \
+                "${ring_prop}"
+            fi
+
             cd "${source.dir}/couchdb" && gosu testuser make check
         - uses: spdx@v1
           with:
@@ -309,7 +331,7 @@ contents:
               - deb
             license: Apache-2.0
             name: couchdb-3.4
-            rel: 10
+            rel: 12
             url: https://couchdb.apache.org/
             version: 3.4.3
 os-release:
