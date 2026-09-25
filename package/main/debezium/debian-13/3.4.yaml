@@ -4,9 +4,9 @@ image: dhi.io/pkg-debezium
 variant: runtime
 tags:
   - 3.4.3
-  - 3.4.3-r1
+  - 3.4.3-r2
   - 3.4.3-debian13
-  - 3.4.3-r1-debian13
+  - 3.4.3-r2-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -16,10 +16,10 @@ vars:
   COMMIT_SHA: 508459f9f6f9c654fe5be2d686ce7ca045dfe2c0
   FINAL_VERSION: 3.4.3.Final
   JDK_MAJOR_VERSION: "21"
-  JDK_VERSION: 1:21.0.12.1+1-2
+  JDK_VERSION: 1:21.0.12.1+1-3
   MAVEN_REFERENCE: dhi/maven:3.9.16-jdk21-debian13-dev@sha256:d39bbcbeba4fa7fa7b60d5d6a9f820780f1266cf8035861e70c67f37f846f587
   MAVEN_VERSION: 3.9.16
-  REL: "1"
+  REL: "2"
   SEMVER_MAJOR_MINOR_VERSION: "3.4"
   SEMVER_MAJOR_VERSION: "3"
   SEMVER_VERSION: 3.4.3
@@ -45,7 +45,7 @@ contents:
           - bash
           - ca-certificates
           - coreutils
-          - eclipse-temurin-21-jdk=1:21.0.12.1+1-2
+          - eclipse-temurin-21-jdk=1:21.0.12.1+1-3
           - findutils
           - grep
           - gzip
@@ -273,7 +273,7 @@ contents:
               - deb
             license: Apache-2.0
             name: debezium-connector-mysql
-            rel: 1
+            rel: 2
             subpackages:
               - files:
                   - path: usr/share/kafka/connect/debezium-connector-mariadb
