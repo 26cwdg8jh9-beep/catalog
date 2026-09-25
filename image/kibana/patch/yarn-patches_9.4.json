@@ -231,5 +231,9 @@
     "resolutions": [
       "**/@elastic/transport/undici"
     ]
+  },
+  {
+    "package": "adm-zip",
+    "version": "0.6.1"
   }
 ]

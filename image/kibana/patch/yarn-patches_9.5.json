@@ -96,5 +96,16 @@
     "resolutions": [
       "bn.js"
     ]
+  },
+  {
+    "package": "adm-zip",
+    "version": "0.6.1"
+  },
+  {
+    "package": "smol-toml",
+    "version": "1.7.1",
+    "resolutions": [
+      "**/smol-toml"
+    ]
   }
 ]
