@@ -4,9 +4,9 @@ image: dhi.io/pkg-debezium
 variant: runtime
 tags:
   - 3.4.3
-  - 3.4.3-r0
+  - 3.4.3-r1
   - 3.4.3-debian13
-  - 3.4.3-r0-debian13
+  - 3.4.3-r1-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -15,8 +15,11 @@ dates:
 vars:
   COMMIT_SHA: 508459f9f6f9c654fe5be2d686ce7ca045dfe2c0
   FINAL_VERSION: 3.4.3.Final
-  MAVEN_REFERENCE: dhi/maven:3.9.16-jdk21-debian13-dev@sha256:ebc5985bddb0be1a7e006d1270975360f03e4efaed6c306b63c761a1430c070e
-  REL: "0"
+  JDK_MAJOR_VERSION: "21"
+  JDK_VERSION: 1:21.0.12.1+1-2
+  MAVEN_REFERENCE: dhi/maven:3.9.16-jdk21-debian13-dev@sha256:d39bbcbeba4fa7fa7b60d5d6a9f820780f1266cf8035861e70c67f37f846f587
+  MAVEN_VERSION: 3.9.16
+  REL: "1"
   SEMVER_MAJOR_MINOR_VERSION: "3.4"
   SEMVER_MAJOR_VERSION: "3"
   SEMVER_VERSION: 3.4.3
@@ -26,18 +29,27 @@ contents:
     - base-files
   builds:
     - name: debezium
-      uses: dhi.io/maven:3.9.16-jdk21-debian13-dev@sha256:ebc5985bddb0be1a7e006d1270975360f03e4efaed6c306b63c761a1430c070e
       work-dir: ${source.dir}/debezium
       environment:
+        JAVA_HOME: /usr/lib/jvm/temurin-21
         MAVEN_ARGS: --batch-mode --no-transfer-progress
+        MAVEN_HOME: /opt/java/apache-maven-3.9.16
       caches:
         - path: /root/.m2/repository
       contents:
+        repositories:
+          - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
+        keyring:
+          - https://dhi.io/keyring/dhi-deb-gpg.D46852F6925E9F71.key
         packages:
           - bash
           - ca-certificates
           - coreutils
+          - eclipse-temurin-21-jdk=1:21.0.12.1+1-2
+          - findutils
+          - grep
           - gzip
+          - sed
         files:
           - url: git+https://github.com/debezium/debezium.git#v3.4.3.Final
             checksum: 508459f9f6f9c654fe5be2d686ce7ca045dfe2c0
@@ -70,6 +82,15 @@ contents:
                 - name: debezium-scripting
                   purl: pkg:maven/io.debezium/debezium-scripting@3.4.3.Final
                   license: Apache-2.0
+            uid: 0
+            gid: 0
+        artifacts:
+          - name: dhi.io/maven:3.9.16-jdk21-debian13-dev@sha256:d39bbcbeba4fa7fa7b60d5d6a9f820780f1266cf8035861e70c67f37f846f587
+            includes:
+              - opt/**
+              - usr/local/bin/**
+            excludes:
+              - var/lock
             uid: 0
             gid: 0
       pipeline:
@@ -252,7 +273,7 @@ contents:
               - deb
             license: Apache-2.0
             name: debezium-connector-mysql
-            rel: 0
+            rel: 1
             subpackages:
               - files:
                   - path: usr/share/kafka/connect/debezium-connector-mariadb
