@@ -20,9 +20,9 @@ vars:
   SEMVER_MAJOR_VERSION: "0"
   SEMVER_VERSION: 0.34.1
   VAULT_CSI_PROVIDER_REFERENCE: dhi/vault-csi-provider:1.7.4-debian13@sha256:8013a16b85224e2308904ab23ce01172032aa15f6e1df9e885eb6de23d6a2566
-  VAULT_HELM_REFERENCE: dhi/vault:2.1.1-debian13-helm@sha256:84cd90f2ba372cf5ec6892ccb6d87aa3bb57a0f1d16a3ac00b09ca164a90549f
+  VAULT_HELM_REFERENCE: dhi/vault:2.1.1-debian13-helm@sha256:fcde3b591554f6096b7dee0adfa6326fd93ddbcf96b938d3f05dd63e62651344
   VAULT_K8S_REFERENCE: dhi/vault-k8s:1.7.6-debian13@sha256:aa19fab6416aa0f08b2f0b174c6e9c8bf643af9b473a599a244151a2e972e770
-  VAULT_REFERENCE: dhi/vault:2.1.1-debian13@sha256:05cfdd89a5e78a83fb3b299320470483e58a5b3ff2ebbb33cd27e7d07bc82f18
+  VAULT_REFERENCE: dhi/vault:2.1.1-debian13@sha256:8964bbc9aa4960c87a41bb89ab149c6b3621c79b23053d1dac1ece71725bf3e4
   VERSION: 0.34.1
 contents:
   repositories:
@@ -53,9 +53,9 @@ contents:
               description: Docker Hardened Images Helm chart for Vault
               images:
                 - name: vault
-                  ref: dhi/vault:2.1.1-debian13@sha256:05cfdd89a5e78a83fb3b299320470483e58a5b3ff2ebbb33cd27e7d07bc82f18
+                  ref: dhi/vault:2.1.1-debian13@sha256:8964bbc9aa4960c87a41bb89ab149c6b3621c79b23053d1dac1ece71725bf3e4
                 - name: vault-helm
-                  ref: dhi/vault:2.1.1-debian13-helm@sha256:84cd90f2ba372cf5ec6892ccb6d87aa3bb57a0f1d16a3ac00b09ca164a90549f
+                  ref: dhi/vault:2.1.1-debian13-helm@sha256:fcde3b591554f6096b7dee0adfa6326fd93ddbcf96b938d3f05dd63e62651344
                 - name: vault-k8s
                   ref: dhi/vault-k8s:1.7.6-debian13@sha256:aa19fab6416aa0f08b2f0b174c6e9c8bf643af9b473a599a244151a2e972e770
                 - name: vault-csi-provider
