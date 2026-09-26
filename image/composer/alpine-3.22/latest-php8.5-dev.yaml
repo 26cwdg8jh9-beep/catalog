@@ -17,8 +17,8 @@ vars:
   PHP_INI_DIR: /opt/php-8.5/etc/php
   PHP_MAJOR_MINOR_VERSION: "8.5"
   PHP_PREFIX: /opt/php-8.5
-  PHP_REFERENCE: dhi/php:8.5.10-alpine3.22@sha256:c2c5f8011d7578b689c27fd45aad7a8a2d2c7b61664ecb09ada87efe58c171f8
-  PHP_VERSION: 8.5.10
+  PHP_REFERENCE: dhi/php:8.5.11-alpine3.22@sha256:6277618949a1e46a6d17f40d9ec705a7f501af380c6cabda2d3681f38e905f96
+  PHP_VERSION: 8.5.11
   SEMVER_MAJOR_MINOR_VERSION: "2.10"
   SEMVER_MAJOR_VERSION: "2"
   SEMVER_VERSION: 2.10.3
@@ -94,7 +94,7 @@ contents:
           uid: 0
           gid: 0
   artifacts:
-    - name: dhi.io/php:8.5.10-alpine3.22@sha256:c2c5f8011d7578b689c27fd45aad7a8a2d2c7b61664ecb09ada87efe58c171f8
+    - name: dhi.io/php:8.5.11-alpine3.22@sha256:6277618949a1e46a6d17f40d9ec705a7f501af380c6cabda2d3681f38e905f96
       includes:
         - opt/docker/sbom/php
         - opt/php-8.5
