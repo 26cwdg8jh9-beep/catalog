@@ -24,8 +24,8 @@ vars:
   PG_MAJOR_VERSION: "17"
   PG_VERSION: "17.11"
   PGDATA: /var/lib/postgresql/17/data
-  POSTGRES_BUILD_REFERENCE: dhi/postgres:17.11-debian13-dev@sha256:7076ab0c87bbd09157d9ed441b176b073fe211af431bd522a2f64a96e303c6d9
-  POSTGRES_RUNTIME_REFERENCE: dhi/postgres:17.11-debian13@sha256:adc9f5d137bb715345f80677a76812ea51caa3db38372cbd1fb00c408ade7dc2
+  POSTGRES_BUILD_REFERENCE: dhi/postgres:17.11-debian13-dev@sha256:7671d95fde71c90a2afa5fc12175776e01eda0fff902da473a76cfb21a30c459
+  POSTGRES_RUNTIME_REFERENCE: dhi/postgres:17.11-debian13@sha256:c8807ed9c21d4a1c7038e5bbff65ccf9cc05ca3c8857c99d71f2cb27b0e573c6
   SEMVER_MAJOR_MINOR_VERSION: "0.8"
   SEMVER_MAJOR_VERSION: "0"
   SEMVER_VERSION: 0.8.6
@@ -81,7 +81,7 @@ contents:
             uid: 0
             gid: 0
         artifacts:
-          - name: dhi.io/postgres:17.11-debian13-dev@sha256:7076ab0c87bbd09157d9ed441b176b073fe211af431bd522a2f64a96e303c6d9
+          - name: dhi.io/postgres:17.11-debian13-dev@sha256:7671d95fde71c90a2afa5fc12175776e01eda0fff902da473a76cfb21a30c459
             includes:
               - opt/postgresql/17/**
               - usr/bin/pg_config
@@ -135,7 +135,7 @@ contents:
           uid: 0
           gid: 0
   artifacts:
-    - name: dhi.io/postgres:17.11-debian13@sha256:adc9f5d137bb715345f80677a76812ea51caa3db38372cbd1fb00c408ade7dc2
+    - name: dhi.io/postgres:17.11-debian13@sha256:c8807ed9c21d4a1c7038e5bbff65ccf9cc05ca3c8857c99d71f2cb27b0e573c6
       excludes:
         - etc/os-release
         - var/lib/dpkg/status
