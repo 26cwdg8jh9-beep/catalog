@@ -3,23 +3,23 @@
 image: dhi.io/pkg-terraform
 variant: runtime
 tags:
-  - 1.16.3-alpine3.24
-  - 1.16.3-r4-alpine3.24
+  - 1.16.4-alpine3.24
+  - 1.16.4-r0-alpine3.24
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
   release: "2026-08-26"
 vars:
-  COMMIT_SHA: 42121cd5ca5e1ab1d37e286540ce11acf70e290a
+  COMMIT_SHA: 6ee8af215a535cfca08bf729ff1017d4221d6667
   GOLANG_MAJOR_MINOR_VERSION: "1.26"
   GOLANG_VERSION: 1.26.8-r0
   PACKAGE_NAME: terraform-1.16
-  REL: "4"
+  REL: "0"
   SEMVER_MAJOR_MINOR_VERSION: "1.16"
   SEMVER_MAJOR_VERSION: "1"
-  SEMVER_VERSION: 1.16.3
-  VERSION: 1.16.3
+  SEMVER_VERSION: 1.16.4
+  VERSION: 1.16.4
 contents:
   repositories:
     - https://dhi.io/apk/alpine/v3.24/main
@@ -49,15 +49,15 @@ contents:
           - golang-1.26=1.26.8-r0
           - golang-1.26-oci-config=1.26.8-r0
         files:
-          - url: git+https://github.com/hashicorp/terraform.git#v1.16.3
-            checksum: 42121cd5ca5e1ab1d37e286540ce11acf70e290a
+          - url: git+https://github.com/hashicorp/terraform.git#v1.16.4
+            checksum: 6ee8af215a535cfca08bf729ff1017d4221d6667
             path: /go/src/github.com/hashicorp/terraform
             spdx:
               name: terraform
-              version: 1.16.3
+              version: 1.16.4
               packages:
                 - name: terraform
-                  purl: pkg:golang/github.com/hashicorp/terraform@v1.16.3
+                  purl: pkg:golang/github.com/hashicorp/terraform@v1.16.4
                   license: BUSL-1.1
             uid: 65532
             gid: 65532
@@ -122,14 +122,14 @@ contents:
               - usr/bin/terraform
             license: BUSL-1.1
             name: terraform-1.16
-            rel: 4
+            rel: 0
             subpackages:
               - files:
                   - path: usr/bin/terraform
                     source: usr/bin/terraform-dev
                 name: terraform-1.16-dev
             url: https://developer.hashicorp.com/terraform
-            version: 1.16.3
+            version: 1.16.4
       accounts:
         root: true
         run-as: root
