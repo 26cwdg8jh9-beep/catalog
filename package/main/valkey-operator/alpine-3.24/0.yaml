@@ -4,7 +4,7 @@ image: dhi.io/pkg-valkey-operator
 variant: runtime
 tags:
   - 0.6.0-alpine3.24
-  - 0.6.0-r8-alpine3.24
+  - 0.6.0-r9-alpine3.24
 platforms:
   - linux/amd64
   - linux/arm64
@@ -13,12 +13,12 @@ vars:
   GOLANG_MAJOR_MINOR_VERSION: "1.26"
   GOLANG_VERSION: 1.26.8-r0
   PACKAGE_NAME: valkey-operator
-  REDIS_EXPORTER_REFERENCE: dhi/redis-exporter:1.91.1-debian13@sha256:259e97a410c556e4c575a66a360cd49d715c9049df4cfa7716ee620e576ffb5d
-  REL: "8"
+  REDIS_EXPORTER_REFERENCE: dhi/redis-exporter:1.92.0-debian13@sha256:6093b0708f46ae7f18d1cc27182109d96b9c34922b637108b97c10243ee3daa5
+  REL: "9"
   SEMVER_MAJOR_MINOR_VERSION: "0.6"
   SEMVER_MAJOR_VERSION: "0"
   SEMVER_VERSION: 0.6.0
-  VALKEY_REFERENCE: dhi/valkey:9.1.2-debian13@sha256:57e7b695ba75857fc3e47572cd764671b7a182c400638d722cf5211f6a1b868b
+  VALKEY_REFERENCE: dhi/valkey:9.1.2-debian13@sha256:1fa5d345e6a7af5bd8a7cea72f84c24796ac938b27fb831dac2a55b5cae55a1a
   VERSION: 0.6.0
 contents:
   repositories:
@@ -68,8 +68,8 @@ contents:
           runs: |
             set -eux -o pipefail
 
-            export VALKEY_REFERENCE="dhi/valkey:9.1.2-debian13@sha256:57e7b695ba75857fc3e47572cd764671b7a182c400638d722cf5211f6a1b868b"
-            export REDIS_EXPORTER_REFERENCE="dhi/redis-exporter:1.91.1-debian13@sha256:259e97a410c556e4c575a66a360cd49d715c9049df4cfa7716ee620e576ffb5d"
+            export VALKEY_REFERENCE="dhi/valkey:9.1.2-debian13@sha256:1fa5d345e6a7af5bd8a7cea72f84c24796ac938b27fb831dac2a55b5cae55a1a"
+            export REDIS_EXPORTER_REFERENCE="dhi/redis-exporter:1.92.0-debian13@sha256:6093b0708f46ae7f18d1cc27182109d96b9c34922b637108b97c10243ee3daa5"
 
             file=internal/controller/valkeycluster_controller.go
             envsubst '$VALKEY_REFERENCE $REDIS_EXPORTER_REFERENCE' < "$file" > "$file.tmp"
@@ -120,7 +120,7 @@ contents:
               - usr/bin/manager
             license: Apache-2.0
             name: valkey-operator
-            rel: 8
+            rel: 9
             subpackages:
               - files:
                   - path: usr/bin/manager
