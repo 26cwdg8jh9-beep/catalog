@@ -3,22 +3,22 @@
 image: dhi.io/pkg-perplexity-mcp
 variant: runtime
 tags:
-  - 1.2.1
-  - 1.2.1-r3
-  - 1.2.1-debian13
-  - 1.2.1-r3-debian13
+  - 1.3.0
+  - 1.3.0-r0
+  - 1.3.0-debian13
+  - 1.3.0-r0-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
   release: "2026-03-23"
 vars:
-  COMMIT_SHA: c73c8561bbc2d9eb666334a53c311b50f4f4cf76
-  REL: "3"
-  SEMVER_MAJOR_MINOR_VERSION: "1.2"
+  COMMIT_SHA: c58e4ad254608952606f09a40934ab6cca65bfad
+  REL: "0"
+  SEMVER_MAJOR_MINOR_VERSION: "1.3"
   SEMVER_MAJOR_VERSION: "1"
-  SEMVER_VERSION: 1.2.1
-  VERSION: 1.2.1
+  SEMVER_VERSION: 1.3.0
+  VERSION: 1.3.0
 contents:
   packages:
     - base-files
@@ -47,15 +47,15 @@ contents:
           - sed
           - yarn-classic
         files:
-          - url: git+https://github.com/perplexityai/modelcontextprotocol.git#c73c8561bbc2d9eb666334a53c311b50f4f4cf76
-            checksum: c73c8561bbc2d9eb666334a53c311b50f4f4cf76
+          - url: git+https://github.com/perplexityai/modelcontextprotocol.git#c58e4ad254608952606f09a40934ab6cca65bfad
+            checksum: c58e4ad254608952606f09a40934ab6cca65bfad
             path: ${source.dir}/modelcontextprotocol
             spdx:
               name: perplexity-mcp
-              version: 1.2.1
+              version: 1.3.0
               packages:
                 - name: '@perplexity-ai/mcp-server'
-                  purl: pkg:npm/%40perplexity-ai/mcp-server@1.2.1
+                  purl: pkg:npm/%40perplexity-ai/mcp-server@1.3.0
                   license: MIT
             uid: 0
             gid: 0
@@ -90,9 +90,9 @@ contents:
               - deb
             license: MIT
             name: perplexity-mcp
-            rel: 3
+            rel: 0
             url: https://github.com/perplexityai/modelcontextprotocol
-            version: 1.2.1
+            version: 1.3.0
       paths:
         - type: file
           path: ${source.dir}/patch/npm-bump.json
