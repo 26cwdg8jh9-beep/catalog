@@ -18,8 +18,8 @@ vars:
   DHI_SKIP_CONTEXT_COPY: "true"
   HAPROXY_CHART_REFERENCE: dhi/haproxy-chart:1.30.2@sha256:4dd95b865bcca1ac81e211398b4a6b86ab58ef405e5a77cd6d68e6e3810e6b03
   HELM_VERSION: 4.1.4-2
-  REDIS_CHART_REFERENCE: dhi/redis-chart:23.0.7@sha256:f5b3c59b034dd7a142f09319ce50708fa55411c21446f513f82f5d132b20d338
-  REDIS_EXPORTER_REFERENCE: dhi/redis-exporter:1.92.0-debian13@sha256:6093b0708f46ae7f18d1cc27182109d96b9c34922b637108b97c10243ee3daa5
+  REDIS_CHART_REFERENCE: dhi/redis-chart:23.0.7@sha256:1bee9ed2f5fbe3dd77624b15042a9221826ec0a9542ed865afb5d32d99116ceb
+  REDIS_EXPORTER_REFERENCE: dhi/redis-exporter:1.92.0-debian13@sha256:4e4d51c887e102e688dbe31b62174f5edc0f6429e5d88a47a7939b595d81a03b
   REDIS_REFERENCE: dhi/redis:8.10.2-debian13-compat@sha256:9008acf6e2804fe8da637172fe789309be542079359804e50ace38596647d2d2
   SEMVER_MAJOR_MINOR_VERSION: "10.9"
   SEMVER_MAJOR_VERSION: "10"
@@ -57,7 +57,7 @@ contents:
                 - alias: redis-ha
                   condition: redis-ha.enabled
                   name: redis-ha
-                  ref: dhi/redis-chart:23.0.7@sha256:f5b3c59b034dd7a142f09319ce50708fa55411c21446f513f82f5d132b20d338
+                  ref: dhi/redis-chart:23.0.7@sha256:1bee9ed2f5fbe3dd77624b15042a9221826ec0a9542ed865afb5d32d99116ceb
                 - alias: haproxy
                   condition: haproxy.enabled
                   name: haproxy
@@ -71,7 +71,7 @@ contents:
                 - name: redis
                   ref: dhi/redis:8.10.2-debian13-compat@sha256:9008acf6e2804fe8da637172fe789309be542079359804e50ace38596647d2d2
                 - name: redis-exporter
-                  ref: dhi/redis-exporter:1.92.0-debian13@sha256:6093b0708f46ae7f18d1cc27182109d96b9c34922b637108b97c10243ee3daa5
+                  ref: dhi/redis-exporter:1.92.0-debian13@sha256:4e4d51c887e102e688dbe31b62174f5edc0f6429e5d88a47a7939b595d81a03b
               name: argocd-chart
               notes: ${source.dir}/config/NOTES.txt
               sourceUrl: https://github.com/argoproj/argo-helm
