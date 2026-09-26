@@ -4,9 +4,9 @@ image: dhi.io/pkg-cloud-sdk-emulators
 variant: runtime
 tags:
   - 586.0.0
-  - 586.0.0-r0
+  - 586.0.0-r1
   - 586.0.0-debian13
-  - 586.0.0-r0-debian13
+  - 586.0.0-r1-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -15,9 +15,9 @@ dates:
 vars:
   BETA_SHA256: 0034138f7ee8d13690dae0a1443a09ecbdae1e45497360c14dabd2c57a79c8a2
   BETA_TGZ: google-cloud-sdk-beta-20260920154507.tar.gz
-  BIGTABLE_EMULATOR_VERSION: 1.57.0
+  BIGTABLE_EMULATOR_VERSION: 1.58.0
   BIGTABLE_SUBID: bigtable-linux-${GCLOUD_ARCH}
-  COMMIT_SHA: e8737c3e327fd35ed0b93379fbf0889e94efb673
+  COMMIT_SHA: 967a532a6d1f3ffe5210c7f972b82b20ef663c2d
   COMP_BASE: https://dl.google.com/dl/cloudsdk/channels/rapid/components
   COMPONENTS2_SHA256: b7d4f7244bb6c06c37cf6bd497a48ba6bc519e23b902dda5c6ad530bfefd5d76
   DATASTORE_SHA256: 8a04a91169264f831ef8ab01507b505579f9216c223d16f33429c39be5a16ce2
@@ -35,7 +35,7 @@ vars:
   PUBSUB_SHA256: cecdba7a47f302de548d02fd26dd878b62d279c50eeff4c731ed24a682fbbfee
   PUBSUB_TGZ: google-cloud-sdk-pubsub-emulator-20260920154507.tar.gz
   PUBSUB_VERSION: 0.8.36
-  REL: "0"
+  REL: "1"
   SEMVER_MAJOR_MINOR_VERSION: "586.0"
   SEMVER_MAJOR_VERSION: "586"
   SEMVER_VERSION: 586.0.0
@@ -126,15 +126,15 @@ contents:
                   license: Apache-2.0
             uid: 0
             gid: 0
-          - url: git+https://github.com/googleapis/google-cloud-go.git#bigtable/v1.57.0
-            checksum: e8737c3e327fd35ed0b93379fbf0889e94efb673
+          - url: git+https://github.com/googleapis/google-cloud-go.git#bigtable/v1.58.0
+            checksum: 967a532a6d1f3ffe5210c7f972b82b20ef663c2d
             path: /go/src/google-cloud-go
             spdx:
               name: cbtemulator
-              version: 1.57.0
+              version: 1.58.0
               packages:
                 - name: cbtemulator
-                  purl: pkg:golang/cloud.google.com/go/bigtable@v1.57.0
+                  purl: pkg:golang/cloud.google.com/go/bigtable@v1.58.0
                   license: Apache-2.0
             uid: 0
             gid: 0
@@ -264,7 +264,7 @@ contents:
               - deb
             license: Apache-2.0
             name: cloud-sdk-emulators
-            rel: 0
+            rel: 1
             url: https://cloud.google.com/sdk
             version: 586.0.0
 os-release:
