@@ -4,9 +4,9 @@ image: dhi.io/pkg-opensearch
 variant: runtime
 tags:
   - 3.8.0
-  - 3.8.0-r7
+  - 3.8.0-r8
   - 3.8.0-debian13
-  - 3.8.0-r7-debian13
+  - 3.8.0-r8-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -36,7 +36,7 @@ vars:
   JACKSON_ANNOTATIONS_PATCH_VERSION: "2.22"
   JACKSON_PATCH_VERSION: 2.22.1
   JDK_MAJOR_VERSION: "21"
-  JDK_VERSION: 1:21.0.12.1+1-2
+  JDK_VERSION: 1:21.0.12.1+1-4
   JOB_SCHEDULER_COMMIT_SHA: 273ee9abc2eb77a7b82099999b6caf9b17974bc6
   JOB_SCHEDULER_VERSION: 3.8.0.0
   K_NN_COMMIT_SHA: 2d78545e5f940120db44816f12f21089d0dc26aa
@@ -65,7 +65,7 @@ vars:
   PERFORMANCE_ANALYZER_VERSION: 3.8.0.0
   QUERY_INSIGHTS_COMMIT_SHA: 0bbb49b991448451705f9205839440a32fe16b9c
   QUERY_INSIGHTS_VERSION: 3.8.0.0
-  REL: "7"
+  REL: "8"
   REPORTING_COMMIT_SHA: 2262792cd3f8f7b5c615f9973d0a1288c7ea80be
   REPORTING_VERSION: 3.8.0.0
   SEARCH_RELEVANCE_COMMIT_SHA: 1f7402c43c42dea388626d995521b37092db4412
@@ -110,7 +110,7 @@ contents:
           - unzip
           - xz-utils
           - zip
-          - eclipse-temurin-21-jdk=1:21.0.12.1+1-2
+          - eclipse-temurin-21-jdk=1:21.0.12.1+1-4
           - gradle-9=9.7.1-0
         files:
           - url: git+https://github.com/opensearch-project/OpenSearch.git#3.8.0
@@ -901,7 +901,7 @@ contents:
               - deb
             license: Apache-2.0
             name: opensearch
-            rel: 7
+            rel: 8
             url: https://opensearch.org/
             version: 3.8.0
       paths:
