@@ -4,11 +4,11 @@ name: Kube State Metrics Helm chart 8.x
 image: dhi.io/kube-state-metrics-chart
 variant: helm
 tags:
-  - 8.5.0
+  - 8.6.0
 platforms:
   - linux/amd64
 vars:
-  CHART_COMMIT_SHA: b114d7fe2fc17448ca6c66043aef56de29e11250
+  CHART_COMMIT_SHA: 6b7721c46a827de2ad5f7d052d896a691c7a3147
   CHART_HELM_NAME: kube-state-metrics-chart
   DHI_NAMESPACE: dhi
   DHI_PREFIX: ""
@@ -17,10 +17,10 @@ vars:
   HELM_VERSION: 4.1.4-2
   KUBE_RBAC_PROXY_REFERENCE: dhi/kube-rbac-proxy:0.22.1-debian13@sha256:f511095881c5ea4a625414ca89f9690e10dbfb3be4e14474f6f0e7caf3085191
   KUBE_STATE_METRICS_REFERENCE: dhi/kube-state-metrics:2.20.0-debian13@sha256:bcc1129b2b9504ddb5635854eadf4a57d231ae5b018a2d44947df96000f89dba
-  SEMVER_MAJOR_MINOR_VERSION: "8.5"
+  SEMVER_MAJOR_MINOR_VERSION: "8.6"
   SEMVER_MAJOR_VERSION: "8"
-  SEMVER_VERSION: 8.5.0
-  VERSION: 8.5.0
+  SEMVER_VERSION: 8.6.0
+  VERSION: 8.6.0
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -35,8 +35,8 @@ contents:
           - coreutils
           - helm=4.1.4-2
         files:
-          - url: git+https://github.com/prometheus-community/helm-charts.git#kube-state-metrics-8.5.0
-            checksum: b114d7fe2fc17448ca6c66043aef56de29e11250
+          - url: git+https://github.com/prometheus-community/helm-charts.git#kube-state-metrics-8.6.0
+            checksum: 6b7721c46a827de2ad5f7d052d896a691c7a3147
             path: ${source.dir}/helm-charts
             uid: 0
             gid: 0
