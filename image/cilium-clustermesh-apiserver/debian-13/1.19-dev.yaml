@@ -17,7 +17,7 @@ dates:
   release: "2026-02-03"
 vars:
   COMMIT_SHA: 5791d208dda456da8d08e9389c3d22514dc2db77
-  ETCD_VERSION: 3.7.1-8
+  ETCD_VERSION: 3.7.2-0
   FLAVORED_SUFFIX: -dev
   GOPS_VERSION: 0.3.29-4
   SEMVER_MAJOR_MINOR_VERSION: "1.19"
@@ -44,7 +44,7 @@ contents:
     - coreutils
     - diffutils
     - dpkg
-    - etcd-3.7-dev=3.7.1-8
+    - etcd-3.7-dev=3.7.2-0
     - findutils
     - gops-dev=0.3.29-4
     - grep
