@@ -16,7 +16,7 @@ vars:
   DHI_SKIP_CONTEXT_COPY: "true"
   ETCD_REFERENCE: dhi/etcd:3.5.32-debian13@sha256:4e09ba8e4ea9036ba42cdbab098482f1df9123fc0ca9ae68ec003d86fb45b4c2
   HELM_VERSION: 4.1.4-2
-  KUBECTL_REFERENCE: dhi/kubectl:1.37.0-debian13-compat@sha256:305656b9219895fc681c0d509dddd3f470915b05db03b87b3c1157a1ec9bef82
+  KUBECTL_REFERENCE: dhi/kubectl:1.37.1-debian13-compat@sha256:dd3ec370eba7e0af13ce9604ea8870c2f3be4dc2ba433d97cf4da871b2db59a8
   KYVERNO_REPORTS_SERVER_REFERENCE: dhi/kyverno-reports-server:0.1.7-debian13@sha256:955e20e5c5346ece55988f93a68917f2662052be6b4845aab20636db7607e30f
   SEMVER_MAJOR_MINOR_VERSION: "0.1"
   SEMVER_MAJOR_VERSION: "0"
@@ -57,7 +57,7 @@ contents:
                 - name: kyverno-reports-server
                   ref: dhi/kyverno-reports-server:0.1.7-debian13@sha256:955e20e5c5346ece55988f93a68917f2662052be6b4845aab20636db7607e30f
                 - name: kubectl
-                  ref: dhi/kubectl:1.37.0-debian13-compat@sha256:305656b9219895fc681c0d509dddd3f470915b05db03b87b3c1157a1ec9bef82
+                  ref: dhi/kubectl:1.37.1-debian13-compat@sha256:dd3ec370eba7e0af13ce9604ea8870c2f3be4dc2ba433d97cf4da871b2db59a8
                 - name: etcd
                   ref: dhi/etcd:3.5.32-debian13@sha256:4e09ba8e4ea9036ba42cdbab098482f1df9123fc0ca9ae68ec003d86fb45b4c2
               name: kyverno-reports-server-chart
