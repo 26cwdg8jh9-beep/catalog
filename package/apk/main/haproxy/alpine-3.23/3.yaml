@@ -3,19 +3,19 @@
 image: dhi.io/pkg-haproxy
 variant: runtime
 tags:
-  - 3.2.23-alpine3.23
-  - 3.2.23-r0-alpine3.23
+  - 3.2.24-alpine3.23
+  - 3.2.24-r0-alpine3.23
 platforms:
   - linux/amd64
   - linux/arm64
 vars:
-  COMMIT_SHA: 392357912ca67ad4bc39710cb675ee77e92b8d32
+  COMMIT_SHA: c561a81e0938c98d8e359b78c50561033ca2b266
   PACKAGE_NAME: main/haproxy
   REL: "0"
   SEMVER_MAJOR_MINOR_VERSION: "3.2"
   SEMVER_MAJOR_VERSION: "3"
-  SEMVER_VERSION: 3.2.23
-  VERSION: 3.2.23
+  SEMVER_VERSION: 3.2.24
+  VERSION: 3.2.24
 contents:
   repositories:
     - https://dhi.io/apk/alpine/v3.23/main
@@ -36,12 +36,12 @@ contents:
           - lua5.4-dev
           - zlib-dev
         files:
-          - url: git+https://github.com/alpinelinux/aports.git#392357912ca67ad4bc39710cb675ee77e92b8d32
+          - url: git+https://github.com/alpinelinux/aports.git#c561a81e0938c98d8e359b78c50561033ca2b266
             path: ${source.dir}/aports
             uid: 0
             gid: 0
-          - url: https://www.haproxy.org/download/3.2/src/haproxy-3.2.23.tar.gz
-            path: /var/cache/distfiles/haproxy-3.2.23.tar.gz
+          - url: https://www.haproxy.org/download/3.2/src/haproxy-3.2.24.tar.gz
+            path: /var/cache/distfiles/haproxy-3.2.24.tar.gz
             uid: 0
             gid: 0
       pipeline:
