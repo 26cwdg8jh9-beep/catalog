@@ -15,7 +15,7 @@ dates:
   end-of-life: "2027-02-28"
 vars:
   COMMIT_SHA: 329000efd0b26bd78155e51e4df449130f0fca00
-  GOLANG_REFERENCE: dhi/golang:1.26.8-alpine3.22-dev@sha256:ff89b772369e8a26540d8de16c9c9aba39402daa9c07239c6bb374d382bc6e97
+  GOLANG_REFERENCE: dhi/golang:1.26.8-alpine3.22-dev@sha256:425dda3251ea2d7cdc631c5347d329e20d78f1e972a463606d1eff2437ff396f
   SEMVER_MAJOR_MINOR_VERSION: "1.35"
   SEMVER_MAJOR_VERSION: "1"
   SEMVER_VERSION: 1.35.9
@@ -31,7 +31,7 @@ contents:
     - ca-certificates-bundle
   builds:
     - name: kubectl
-      uses: dhi.io/golang:1.26.8-alpine3.22-dev@sha256:ff89b772369e8a26540d8de16c9c9aba39402daa9c07239c6bb374d382bc6e97
+      uses: dhi.io/golang:1.26.8-alpine3.22-dev@sha256:425dda3251ea2d7cdc631c5347d329e20d78f1e972a463606d1eff2437ff396f
       work-dir: /go/src/k8s.io/kubernetes
       contents:
         packages:
