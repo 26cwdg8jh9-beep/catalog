@@ -16,7 +16,7 @@ vars:
   DHI_REGISTRY: dhi.io
   DHI_SKIP_CONTEXT_COPY: "true"
   HELM_VERSION: 4.1.4-2
-  KUBECTL_ARGO_ROLLOUTS_REFERENCE: dhi/kubectl-argo-rollouts:1.10.0-debian13@sha256:59f704ffe7de75210e96cb2d202d35084896a10c069758e141762b1a51b63118
+  KUBECTL_ARGO_ROLLOUTS_REFERENCE: dhi/kubectl-argo-rollouts:1.10.0-debian13@sha256:1bfdc83652a41487d2b6840b5e2d926884cd60a929bd587d49da28cc137fa8e7
   SEMVER_MAJOR_MINOR_VERSION: "2.43"
   SEMVER_MAJOR_VERSION: "2"
   SEMVER_VERSION: 2.43.2
@@ -53,7 +53,7 @@ contents:
                 - name: argo-rollouts
                   ref: dhi/argo-rollouts:1.10.0-debian13@sha256:b0e0f8a6523ac1154473fba9400cc48fd9951bdf16fa6621094dd43a72b58a10
                 - name: kubectl-argo-rollouts
-                  ref: dhi/kubectl-argo-rollouts:1.10.0-debian13@sha256:59f704ffe7de75210e96cb2d202d35084896a10c069758e141762b1a51b63118
+                  ref: dhi/kubectl-argo-rollouts:1.10.0-debian13@sha256:1bfdc83652a41487d2b6840b5e2d926884cd60a929bd587d49da28cc137fa8e7
               name: argo-rollouts-chart
               notes: ${source.dir}/config/NOTES.txt
               sourceUrl: https://github.com/argoproj/argo-helm
