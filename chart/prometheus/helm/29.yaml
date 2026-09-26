@@ -4,12 +4,12 @@ name: Prometheus Helm chart 29.x
 image: dhi.io/prometheus-chart
 variant: helm
 tags:
-  - 29.33.0
+  - 29.33.1
 platforms:
   - linux/amd64
 vars:
-  ALERTMANAGER_CHART_REFERENCE: dhi/alertmanager-chart:1.43.3@sha256:7f8934ee818725585b326a17438e91007a76b8adcd4d1a8913c94b16081eff5a
-  CHART_COMMIT_SHA: 6eced96822b9ad2cb3ba54c19c83372a6aab2289
+  ALERTMANAGER_CHART_REFERENCE: dhi/alertmanager-chart:1.43.3@sha256:1bfd8cc6f450bab96cfde738496782370d2081f4e08e047076bb68a618a6967b
+  CHART_COMMIT_SHA: 05e56a85a59983eb4769de9807222d4299c04d79
   CHART_HELM_NAME: prometheus-chart
   DHI_NAMESPACE: dhi
   DHI_PREFIX: ""
@@ -23,8 +23,8 @@ vars:
   PUSHGATEWAY_CHART_REFERENCE: dhi/pushgateway-chart:3.9.0@sha256:ffe91d0b3b5405f3808c063b2ab4882a235660e6e70a09ab385e2a4268aa6200
   SEMVER_MAJOR_MINOR_VERSION: "29.33"
   SEMVER_MAJOR_VERSION: "29"
-  SEMVER_VERSION: 29.33.0
-  VERSION: 29.33.0
+  SEMVER_VERSION: 29.33.1
+  VERSION: 29.33.1
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -39,8 +39,8 @@ contents:
           - coreutils
           - helm=4.1.4-2
         files:
-          - url: git+https://github.com/prometheus-community/helm-charts.git#prometheus-29.33.0
-            checksum: 6eced96822b9ad2cb3ba54c19c83372a6aab2289
+          - url: git+https://github.com/prometheus-community/helm-charts.git#prometheus-29.33.1
+            checksum: 05e56a85a59983eb4769de9807222d4299c04d79
             path: ${source.dir}/helm-charts
             uid: 0
             gid: 0
@@ -55,7 +55,7 @@ contents:
                 - alias: alertmanager
                   condition: alertmanager.enabled
                   name: alertmanager
-                  ref: dhi/alertmanager-chart:1.43.3@sha256:7f8934ee818725585b326a17438e91007a76b8adcd4d1a8913c94b16081eff5a
+                  ref: dhi/alertmanager-chart:1.43.3@sha256:1bfd8cc6f450bab96cfde738496782370d2081f4e08e047076bb68a618a6967b
                 - alias: kube-state-metrics
                   condition: kube-state-metrics.enabled
                   name: kube-state-metrics
