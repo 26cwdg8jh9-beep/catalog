@@ -4,15 +4,15 @@ name: Clickhouse Operator Helm chart 0.x
 image: dhi.io/clickhouse-operator-chart
 variant: helm
 tags:
-  - 0.27.3
+  - 0.27.4
 platforms:
   - linux/amd64
 vars:
-  CHART_COMMIT_SHA: 6c412fd12c67963eb78dc560706133fbf838d5f7
+  CHART_COMMIT_SHA: 82498653e845a14ec9a114841ca322a127dc12fd
   CHART_HELM_NAME: clickhouse-operator-chart
   CLICKHOUSE_METRICS_EXPORTER_REFERENCE: dhi/clickhouse-metrics-exporter:0.25.6-debian13@sha256:aaa9366a81b09146be6476df22c25fcacb86a4ae97b79dcfb3251d23b136812f
   CLICKHOUSE_OPERATOR_REFERENCE: dhi/clickhouse-operator:0.25.6-debian13@sha256:a24eef05c8d58ec419d405fc942ee066a30202433656edbbc2756fb631891996
-  CLICKHOUSE_SERVER_REFERENCE: dhi/clickhouse-server:25.8.33-debian13@sha256:75f95a4e3d1a3e0ab899e565bf036f2f5ffa3fc9ff8d8f821a08151e8b43b180
+  CLICKHOUSE_SERVER_REFERENCE: dhi/clickhouse-server:25.8.33-debian13@sha256:3f6216c6084005117c1c9500e7d0957b9491fb4b552acb692981a9f23c22162d
   DHI_NAMESPACE: dhi
   DHI_PREFIX: ""
   DHI_REGISTRY: dhi.io
@@ -21,8 +21,8 @@ vars:
   KUBECTL_REFERENCE: dhi/kubectl:1.34.12-alpine3.22-dev@sha256:ed6b96db9cd5f30a93c85cb5b23b8ab55d22bf439a3c2ce55bbea1abd7838fa3
   SEMVER_MAJOR_MINOR_VERSION: "0.27"
   SEMVER_MAJOR_VERSION: "0"
-  SEMVER_VERSION: 0.27.3
-  VERSION: 0.27.3
+  SEMVER_VERSION: 0.27.4
+  VERSION: 0.27.4
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -37,8 +37,8 @@ contents:
           - coreutils
           - helm=4.1.4-2
         files:
-          - url: git+https://github.com/Altinity/clickhouse-operator.git#release-0.27.3
-            checksum: 6c412fd12c67963eb78dc560706133fbf838d5f7
+          - url: git+https://github.com/Altinity/clickhouse-operator.git#release-0.27.4
+            checksum: 82498653e845a14ec9a114841ca322a127dc12fd
             path: ${source.dir}/helm-charts
             uid: 0
             gid: 0
@@ -56,7 +56,7 @@ contents:
                 - name: clickhouse-metrics-exporter
                   ref: dhi/clickhouse-metrics-exporter:0.25.6-debian13@sha256:aaa9366a81b09146be6476df22c25fcacb86a4ae97b79dcfb3251d23b136812f
                 - name: clickhouse-server
-                  ref: dhi/clickhouse-server:25.8.33-debian13@sha256:75f95a4e3d1a3e0ab899e565bf036f2f5ffa3fc9ff8d8f821a08151e8b43b180
+                  ref: dhi/clickhouse-server:25.8.33-debian13@sha256:3f6216c6084005117c1c9500e7d0957b9491fb4b552acb692981a9f23c22162d
                 - name: kubectl
                   ref: dhi/kubectl:1.34.12-alpine3.22-dev@sha256:ed6b96db9cd5f30a93c85cb5b23b8ab55d22bf439a3c2ce55bbea1abd7838fa3
               name: clickhouse-operator-chart
