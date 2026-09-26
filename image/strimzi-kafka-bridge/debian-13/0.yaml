@@ -21,7 +21,7 @@ vars:
   JAVA_FIPS_SUFFIX: ""
   JAVA_VARIANT: jre
   JDK_MAJOR_VERSION: "17"
-  MAVEN_REFERENCE: dhi/maven:3.9.16-jdk17-debian13-dev@sha256:1e8d814be18b0674762263435fce5b525baa1d860b80384c672091ca5c6c06ec
+  MAVEN_REFERENCE: dhi/maven:3.9.16-jdk17-debian13-dev@sha256:0bf416bc75708bf8b300903e7af7914c556174791057d316db78df385fe47b53
   MAVEN_VERSION: 3.9.16
   SEMVER_MAJOR_MINOR_VERSION: "0.33"
   SEMVER_MAJOR_VERSION: "0"
@@ -75,7 +75,7 @@ contents:
             uid: 0
             gid: 0
         artifacts:
-          - name: dhi.io/maven:3.9.16-jdk17-debian13-dev@sha256:1e8d814be18b0674762263435fce5b525baa1d860b80384c672091ca5c6c06ec
+          - name: dhi.io/maven:3.9.16-jdk17-debian13-dev@sha256:0bf416bc75708bf8b300903e7af7914c556174791057d316db78df385fe47b53
             includes:
               - opt/**
               - usr/lib/jvm/**
