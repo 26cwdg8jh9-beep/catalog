@@ -4,9 +4,9 @@ image: dhi.io/pkg-strimzi-operator
 variant: runtime
 tags:
   - 1.2.0
-  - 1.2.0-r2
+  - 1.2.0-r3
   - 1.2.0-debian13
-  - 1.2.0-r2-debian13
+  - 1.2.0-r3-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -15,11 +15,11 @@ dates:
 vars:
   COMMIT_SHA: 6c7b43c4af0db547c10463ba09d1dfa6f5e156a0
   JDK_MAJOR_VERSION: "21"
-  JDK_VERSION: 1:21.0.12.1+1-2
+  JDK_VERSION: 1:21.0.12.1+1-4
   MAVEN_VERSION: 3.9.16
   PACKAGE_HOME: /usr/share/strimzi-operator
   PACKAGE_NAME: strimzi-operator
-  REL: "2"
+  REL: "3"
   SEMVER_MAJOR_MINOR_VERSION: "1.2"
   SEMVER_MAJOR_VERSION: "1"
   SEMVER_VERSION: 1.2.0
@@ -50,7 +50,7 @@ contents:
           - gzip
           - sed
           - unzip
-          - eclipse-temurin-21-jdk=1:21.0.12.1+1-2
+          - eclipse-temurin-21-jdk=1:21.0.12.1+1-4
         files:
           - url: git+https://github.com/strimzi/strimzi-kafka-operator.git#1.2.0
             checksum: 6c7b43c4af0db547c10463ba09d1dfa6f5e156a0
@@ -152,7 +152,7 @@ contents:
               - deb
             license: Apache-2.0
             name: strimzi-operator
-            rel: 2
+            rel: 3
             url: https://strimzi.io/
             version: 1.2.0
       paths:
