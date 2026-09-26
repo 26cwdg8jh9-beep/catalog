@@ -15,7 +15,7 @@ vars:
   COMMIT_SHA: 36cf8bbe8792c000ceae5382e71f9072abbe2cd8
   JAVA_FIPS_SUFFIX: ""
   JAVA_VARIANT: jre
-  JAVA_VERSION: 21.0.12.8-r0
+  JAVA_VERSION: 21.0.12.8.1.1-r2
   JDK_MAJOR_VERSION: "21"
   MAVEN_VERSION: 3.9.16-r0
   SEMVER_MAJOR_MINOR_VERSION: "10.1"
@@ -34,8 +34,8 @@ contents:
     - bash
     - ca-certificates-bundle
     - coreutils
-    - eclipse-temurin-21-jre-oci-config=21.0.12.8-r0
-    - eclipse-temurin-21-jre=21.0.12.8-r0
+    - eclipse-temurin-21-jre-oci-config=21.0.12.8.1.1-r2
+    - eclipse-temurin-21-jre=21.0.12.8.1.1-r2
     - libgcc
     - libstdc++
     - musl
@@ -47,7 +47,7 @@ contents:
       contents:
         packages:
           - bash
-          - eclipse-temurin-21-jdk=21.0.12.8-r0
+          - eclipse-temurin-21-jdk=21.0.12.8.1.1-r2
           - maven=3.9.16-r0
         files:
           - url: git+https://github.com/jruby/jruby.git#10.1.2.0
