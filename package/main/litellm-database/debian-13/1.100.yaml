@@ -3,25 +3,25 @@
 image: dhi.io/pkg-litellm-database
 variant: runtime
 tags:
-  - 1.100.2
-  - 1.100.2-r0
-  - 1.100.2-debian13
-  - 1.100.2-r0-debian13
+  - 1.100.3
+  - 1.100.3-r0
+  - 1.100.3-debian13
+  - 1.100.3-r0-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
   release: "2026-09-06"
 vars:
-  COMMIT_SHA: 9c1216a4278a4b8224ac1c8bfa922a110cdcd678
+  COMMIT_SHA: 385266c14d6a4cb069751fd3525692e0a760ec57
   NODEJS_VERSION: 24.21.0-1
   PACKAGE_NAME: litellm-database-1.100
   REL: "0"
   RUST_LINKER: '#{ target.arch == "amd64" ? "x86_64-linux-gnu-gcc-14" : "aarch64-linux-gnu-gcc-14" }'
   SEMVER_MAJOR_MINOR_VERSION: "1.100"
   SEMVER_MAJOR_VERSION: "1"
-  SEMVER_VERSION: 1.100.2
-  VERSION: 1.100.2
+  SEMVER_VERSION: 1.100.3
+  VERSION: 1.100.3
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -72,15 +72,15 @@ contents:
           - rustc-1.98
           - sed
         files:
-          - url: git+https://github.com/BerriAI/litellm.git#v1.100.2
-            checksum: 9c1216a4278a4b8224ac1c8bfa922a110cdcd678
+          - url: git+https://github.com/BerriAI/litellm.git#v1.100.3
+            checksum: 385266c14d6a4cb069751fd3525692e0a760ec57
             path: ${source.dir}/litellm-src
             spdx:
               name: litellm
-              version: 1.100.2
+              version: 1.100.3
               packages:
                 - name: litellm
-                  purl: pkg:pypi/litellm@1.100.2
+                  purl: pkg:pypi/litellm@1.100.3
                   license: MIT
             uid: 0
             gid: 0
@@ -231,7 +231,7 @@ contents:
             name: litellm-database-1.100
             rel: 0
             url: https://github.com/BerriAI/litellm
-            version: 1.100.2
+            version: 1.100.3
 os-release:
   name: Docker Hardened Images (Debian)
   id: debian
