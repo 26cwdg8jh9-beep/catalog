@@ -14,8 +14,8 @@ vars:
   DEBIAN_VERSION: "12"
   DOCKERIZE_COMMIT_SHA: 90dbb4fc2ef9098acd41e8c3ca98d2f730c741d6
   DOCKERIZE_VERSION: 0.9.5
-  GOLANG_REFERENCE: dhi/golang:1.26.8-debian12-dev@sha256:b46847358288df39f6b9fe97d87b8cb230242b87d7c1dbeedc17de35da758760
-  NODE_REFERENCE: dhi/node:24.21.0-debian12-dev@sha256:e9ed1935294eff56726d4fd500fb645a4c417c20d7980f0b19234b607040359c
+  GOLANG_REFERENCE: dhi/golang:1.26.8-debian12-dev@sha256:56713ab3bd7aa7c930b1c2a9325db983bd8baa86d4ca62ab7c5c4161ef324371
+  NODE_REFERENCE: dhi/node:24.21.0-debian12-dev@sha256:83e10e3e55c9e1444670f7737f05a77a70f8308f0f945602676183a0f879a436
   NODE_VERSION: 24.21.0
   SEMVER_MAJOR_MINOR_VERSION: "2.54"
   SEMVER_MAJOR_VERSION: "2"
@@ -31,7 +31,7 @@ contents:
     - tzdata
   builds:
     - name: build-ui
-      uses: dhi.io/golang:1.26.8-debian12-dev@sha256:b46847358288df39f6b9fe97d87b8cb230242b87d7c1dbeedc17de35da758760
+      uses: dhi.io/golang:1.26.8-debian12-dev@sha256:56713ab3bd7aa7c930b1c2a9325db983bd8baa86d4ca62ab7c5c4161ef324371
       environment:
         HUSKY: "0"
       contents:
@@ -51,7 +51,7 @@ contents:
             uid: 0
             gid: 0
         artifacts:
-          - name: dhi.io/node:24.21.0-debian12-dev@sha256:e9ed1935294eff56726d4fd500fb645a4c417c20d7980f0b19234b607040359c
+          - name: dhi.io/node:24.21.0-debian12-dev@sha256:83e10e3e55c9e1444670f7737f05a77a70f8308f0f945602676183a0f879a436
             includes:
               - opt/nodejs
               - usr/local/bin
@@ -167,7 +167,7 @@ contents:
           uid: 0
           gid: 0
     - name: build-base-dockerize
-      uses: dhi.io/golang:1.26.8-debian12-dev@sha256:b46847358288df39f6b9fe97d87b8cb230242b87d7c1dbeedc17de35da758760
+      uses: dhi.io/golang:1.26.8-debian12-dev@sha256:56713ab3bd7aa7c930b1c2a9325db983bd8baa86d4ca62ab7c5c4161ef324371
       contents:
         packages:
           - bash
