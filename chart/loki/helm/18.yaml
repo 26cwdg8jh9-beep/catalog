@@ -19,12 +19,12 @@ vars:
   GRAFANA_ROLLOUT_OPERATOR_CHART_REFERENCE: dhi/grafana-rollout-operator-chart:0.52.0@sha256:e484e7fdca1209078aff2f6927f57705281a0fef8c99cc77d6d2d028652a158b
   HELM_VERSION: 4.1.4-2
   K8S_SIDECAR_REFERENCE: dhi/k8s-sidecar:2.11.2-debian13@sha256:55efa603548a7de53d5d81fa5feec0b96a0749abbc7ad73f7bf5363d13e2a4a2
-  KUBECTL_REFERENCE: dhi/kubectl:1.37.0-debian13@sha256:86e72dd2f7630f959fcc8eea3cfb3ce1ae0a777cce8fed44398717cbe99b3246
-  LOKI_CANARY_REFERENCE: dhi/loki-canary:3.7.8-debian13@sha256:e16b8dd85a7dcb464a9503341ccdce4634cf8c223360a88dec2a8ae01655bf3b
+  KUBECTL_REFERENCE: dhi/kubectl:1.37.1-debian13@sha256:eddf0c318a6775800875a1ddc5bf2cf8dc110bf038069c7f8a97a3aaee04aed0
+  LOKI_CANARY_REFERENCE: dhi/loki-canary:3.7.8-debian13@sha256:c37242e1525375952da1108d9d07ce6340b054a6ea13fcf806dd4a522a6db62a
   LOKI_HELM_TEST_REFERENCE: dhi/loki-helm-test:3.7.8-debian13@sha256:3854ade0c504ffe0194f8cf95e719d8b637cae44af895b2140b35c2dfe415f6b
   LOKI_REFERENCE: dhi/loki:3.7.8-debian13@sha256:602ba15bb7e10e71ead719821672516deb671e4e95bdbba9dc979c3d49da6316
   MEMCACHED_EXPORTER_REFERENCE: dhi/memcached-exporter:0.17.0-debian13@sha256:079826ea980ce9d923f82bb06e6a3dc116e75f5c7bd6bc1073c00bb93972e77b
-  MEMCACHED_REFERENCE: dhi/memcached:1.6.45-debian13@sha256:5362eaac6f1f9d5ba63c38dab4f11ae9b4f622e991fe104e5802937ff06d5501
+  MEMCACHED_REFERENCE: dhi/memcached:1.6.45-debian13@sha256:383cf720e65a8348f507fd2bc72b045a5e29dc488c4a22d3a336771f3fb56946
   NGINX_REFERENCE: dhi/nginx:1.31.6-debian13@sha256:d5dc4b34846069e0ebc5778f631c9e47cd8b778b5e89f4d4c4097e4db34fd405
   SEMVER_MAJOR_MINOR_VERSION: "18.13"
   SEMVER_MAJOR_VERSION: "18"
@@ -68,7 +68,7 @@ contents:
                 - name: loki
                   ref: dhi/loki:3.7.8-debian13@sha256:602ba15bb7e10e71ead719821672516deb671e4e95bdbba9dc979c3d49da6316
                 - name: loki-canary
-                  ref: dhi/loki-canary:3.7.8-debian13@sha256:e16b8dd85a7dcb464a9503341ccdce4634cf8c223360a88dec2a8ae01655bf3b
+                  ref: dhi/loki-canary:3.7.8-debian13@sha256:c37242e1525375952da1108d9d07ce6340b054a6ea13fcf806dd4a522a6db62a
                 - name: loki-helm-test
                   ref: dhi/loki-helm-test:3.7.8-debian13@sha256:3854ade0c504ffe0194f8cf95e719d8b637cae44af895b2140b35c2dfe415f6b
                 - name: nginx
@@ -76,13 +76,13 @@ contents:
                 - name: k8s-sidecar
                   ref: dhi/k8s-sidecar:2.11.2-debian13@sha256:55efa603548a7de53d5d81fa5feec0b96a0749abbc7ad73f7bf5363d13e2a4a2
                 - name: memcached
-                  ref: dhi/memcached:1.6.45-debian13@sha256:5362eaac6f1f9d5ba63c38dab4f11ae9b4f622e991fe104e5802937ff06d5501
+                  ref: dhi/memcached:1.6.45-debian13@sha256:383cf720e65a8348f507fd2bc72b045a5e29dc488c4a22d3a336771f3fb56946
                 - name: memcached-exporter
                   ref: dhi/memcached-exporter:0.17.0-debian13@sha256:079826ea980ce9d923f82bb06e6a3dc116e75f5c7bd6bc1073c00bb93972e77b
                 - name: access-log-exporter
                   ref: dhi/access-log-exporter:0.4.17-debian13@sha256:1f2e150ddb70ca0e7f101739dc9b3581af6177a3f0ea4128b7044939f9af77b3
                 - name: kubectl
-                  ref: dhi/kubectl:1.37.0-debian13@sha256:86e72dd2f7630f959fcc8eea3cfb3ce1ae0a777cce8fed44398717cbe99b3246
+                  ref: dhi/kubectl:1.37.1-debian13@sha256:eddf0c318a6775800875a1ddc5bf2cf8dc110bf038069c7f8a97a3aaee04aed0
               name: loki-chart
               notes: ${source.dir}/config/NOTES.txt
               sourceUrl: https://github.com/grafana/loki
