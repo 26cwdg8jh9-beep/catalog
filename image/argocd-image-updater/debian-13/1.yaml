@@ -19,8 +19,8 @@ platforms:
 dates:
   release: "2025-12-15"
 vars:
-  AWSCLI_REFERENCE: dhi/awscli:2.37.1-debian13@sha256:ba97bf66049864cc8dab8b39544c3118c567fa0e5305faf1e3a70fb4d1916a45
-  AWSCLI_VERSION: 2.37.1
+  AWSCLI_REFERENCE: dhi/awscli:2.37.3-debian13@sha256:f192b41efd3766b2e9229655b4be35c381b0870ab583146cc6c01f0ca62a90cc
+  AWSCLI_VERSION: 2.37.3
   FLAVORED_SUFFIX: ""
   SEMVER_MAJOR_MINOR_VERSION: "1.3"
   SEMVER_MAJOR_VERSION: "1"
@@ -45,7 +45,7 @@ contents:
     - tini
     - tzdata
   artifacts:
-    - name: dhi.io/awscli:2.37.1-debian13@sha256:ba97bf66049864cc8dab8b39544c3118c567fa0e5305faf1e3a70fb4d1916a45
+    - name: dhi.io/awscli:2.37.3-debian13@sha256:f192b41efd3766b2e9229655b4be35c381b0870ab583146cc6c01f0ca62a90cc
       includes:
         - opt/aws-cli
         - opt/docker/sbom/awscli
@@ -73,7 +73,7 @@ os-release:
   bug-report-url: https://docker.com/support/
 work-dir: /app
 environment:
-  AWS_CLI_VERSION: 2.37.1
+  AWS_CLI_VERSION: 2.37.3
   PATH: /opt/aws-cli/bin:/usr/sbin:/sbin:/usr/bin:/bin
 paths:
   - type: directory
