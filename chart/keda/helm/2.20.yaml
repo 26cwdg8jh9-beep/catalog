@@ -16,7 +16,7 @@ vars:
   DHI_SKIP_CONTEXT_COPY: "true"
   HELM_VERSION: 4.1.4-2
   KEDA_ADMISSION_WEBHOOKS_REFERENCE: dhi/keda-admission-webhooks:2.20.2-debian13@sha256:a9ea925188e8623cc813c06b5b41ff46d1069981bdbe4f230db63fd78b5b2223
-  KEDA_METRICS_APISERVER_REFERENCE: dhi/keda-metrics-apiserver:2.20.2-debian13@sha256:cc517476d3f1f035664c1a10527f90c4f78a0f1725ff595fa8c0093bad7e8fee
+  KEDA_METRICS_APISERVER_REFERENCE: dhi/keda-metrics-apiserver:2.20.2-debian13@sha256:1a75563e357083e3b7c6f759f924cc36d7de56fb71aa95764b049272bfeb46b6
   KEDA_REFERENCE: dhi/keda:2.20.2-debian13@sha256:f65147f4b896d46a1bb2e00e9a7277818b65a76107c70aef41400ade66690ecf
   SEMVER_MAJOR_MINOR_VERSION: "2.20"
   SEMVER_MAJOR_VERSION: "2"
@@ -55,7 +55,7 @@ contents:
                 - name: keda-admission-webhooks
                   ref: dhi/keda-admission-webhooks:2.20.2-debian13@sha256:a9ea925188e8623cc813c06b5b41ff46d1069981bdbe4f230db63fd78b5b2223
                 - name: keda-metrics-apiserver
-                  ref: dhi/keda-metrics-apiserver:2.20.2-debian13@sha256:cc517476d3f1f035664c1a10527f90c4f78a0f1725ff595fa8c0093bad7e8fee
+                  ref: dhi/keda-metrics-apiserver:2.20.2-debian13@sha256:1a75563e357083e3b7c6f759f924cc36d7de56fb71aa95764b049272bfeb46b6
               name: keda-chart
               notes: ${source.dir}/config/NOTES.txt
               sourceUrl: https://github.com/kedacore/charts
