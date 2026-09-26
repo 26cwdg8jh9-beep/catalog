@@ -1,4 +1,4 @@
-### About Cilium Operator AWS
+## About Cilium Operator AWS
 
 The Cilium Operator AWS is a specialized component of the Cilium networking and security platform designed to integrate
 seamlessly with Amazon Web Services infrastructure. It manages AWS-specific operations and resources required for

@@ -19,14 +19,13 @@ platforms:
 dates:
   release: "2026-07-29"
 vars:
-  COMMIT_SHA: e0dc92bd6dac33d7ba3b5eace82a0448bbb13aac
   FLAVORED_SUFFIX: -dev
   GOPS_VERSION: 0.3.29-4
   SEMVER_MAJOR_MINOR_VERSION: "1.20"
   SEMVER_MAJOR_VERSION: "1"
   SEMVER_VERSION: 1.20.2
   SUFFIX: -dev
-  VERSION: 1.20.2
+  VERSION: 1.20.2-1
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -41,6 +40,7 @@ contents:
     - bash
     - ca-certificates
     - ca-certificates-bundle
+    - cilium-operator-azure-1.20-dev=1.20.2-1
     - coreutils
     - diffutils
     - dpkg
@@ -53,68 +53,6 @@ contents:
     - sed
     - tzdata
     - util-linux
-  builds:
-    - name: cilium-operator-azure
-      work-dir: /go/src/github.com/cilium/cilium
-      caches:
-        - path: /go/pkg/mod
-      contents:
-        packages:
-          - bash
-          - ca-certificates-bundle
-          - coreutils
-          - golang-1.26
-          - findutils
-          - mawk
-          - sed
-        files:
-          - url: git+https://github.com/cilium/cilium.git#v1.20.2
-            checksum: e0dc92bd6dac33d7ba3b5eace82a0448bbb13aac
-            path: /go/src/github.com/cilium/cilium
-            spdx:
-              name: cilium-operator-azure
-              version: 1.20.2
-              packages:
-                - name: cilium-operator-azure
-                  purl: pkg:golang/github.com/cilium/cilium@1.20.2
-                  license: Apache-2.0
-            uid: 0
-            gid: 0
-      pipeline:
-        - name: update go dependencies (1.20 only)
-          uses: go/bump@v2
-          with:
-            deps:
-              - golang.org/x/text@v0.39.0
-              - github.com/google/cel-go@v0.29.0
-              - github.com/klauspost/compress@v1.18.7
-              - github.com/osrg/gobgp/v4@v4.7.0
-            download: true
-        - name: test
-          runs: |
-            set -eux -o pipefail
-
-            # Skip TestRouterIDAllocation due to race condition in upstream cilium
-            # that causes resource version conflicts on arm64 builds.
-            CGO_ENABLED=0 go test -mod=vendor -v -skip 'TestRouterIDAllocation' ./operator/...
-        - name: build
-          uses: go/build@v1
-          with:
-            extra-args: -mod=vendor
-            ldflags:
-              - -X github.com/cilium/cilium/pkg/version.ciliumVersion=v1.20.2
-            output: ${target.dir}/usr/local/bin/cilium-operator-azure
-            packages: ./operator
-            tags: osusergo,ipam_provider_azure
-      outputs:
-        - source: ${target.dir}/usr/local/bin/cilium-operator-azure
-          target: /usr/local/bin/cilium-operator-azure
-          uid: 0
-          gid: 0
-        - source: /opt/docker/sbom/cilium-operator-azure
-          target: /opt/docker/sbom/cilium-operator-azure
-          uid: 0
-          gid: 0
 accounts:
   root: true
   run-as: root
@@ -146,12 +84,21 @@ paths:
     path: /home/gops
     uid: 65532
     gid: 65532
-    mode: "0777"
+    mode: "0770"
   - type: directory
     path: /run/cilium
     uid: 65532
     gid: 65532
-    mode: "0777"
+    mode: "0770"
+  - type: directory
+    path: /usr/local/bin
+    uid: 0
+    gid: 0
+  - type: symlink
+    path: /usr/local/bin/cilium-operator-azure
+    uid: 0
+    gid: 0
+    source: /usr/bin/cilium-operator-azure
 annotations:
   org.opencontainers.image.description: A minimal Cilium Operator Azure image
   org.opencontainers.image.licenses: Apache-2.0

@@ -23,7 +23,7 @@ management across all nodes in the cluster.
 > deployment. The standalone Docker command below displays the available configuration options.
 
 ```bash
-docker run --rm -it dhi.io/dhi-cilium-operator-azure:<tag> --help
+docker run --rm -it <your-namespace>/dhi-cilium-operator-azure:<tag> --help
 ```
 
 ## Common use cases
@@ -89,8 +89,8 @@ or mount debugging tools with the Image Mount feature:
 
 ```
 docker run --rm -it --pid container:my-container \
-  --mount=type=image,source=dhi.io/dhi-busybox,destination=/dbg,ro \
-  dhi.io/dhi-cilium-operator-azure:<tag> /dbg/bin/sh
+  --mount=type=image,source=<your-namespace>/dhi-busybox,destination=/dbg,ro \
+  <your-namespace>/dhi-cilium-operator-azure:<tag> /dbg/bin/sh
 ```
 
 ## Image variants
@@ -134,7 +134,7 @@ commands and arguments are compatible.
    Replace the image reference in your Docker run command or Compose file, for example:
 
    - From: `cilium/cilium-operator-azure:<tag>`
-   - To: `dhi.io/dhi-cilium-operator-azure:<tag>`
+   - To: `<your-namespace>/dhi-cilium-operator-azure:<tag>`
 
 1. All your existing command-line arguments, environment variables, port mappings, and network settings remain the same.
 

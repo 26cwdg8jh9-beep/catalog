@@ -16,14 +16,13 @@ platforms:
 dates:
   release: "2025-07-29"
 vars:
-  COMMIT_SHA: 0a5b4195ff0bfc4d5d6e707a24f57e1047166ab4
   FLAVORED_SUFFIX: ""
   GOPS_VERSION: 0.3.29-4
   SEMVER_MAJOR_MINOR_VERSION: "1.18"
   SEMVER_MAJOR_VERSION: "1"
   SEMVER_VERSION: 1.18.14
   SUFFIX: ""
-  VERSION: 1.18.14
+  VERSION: 1.18.14-0
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -32,84 +31,9 @@ contents:
   packages:
     - base-files
     - ca-certificates-bundle
+    - cilium-operator-aws-1.18=1.18.14-0
     - gops=0.3.29-4
     - tzdata
-  builds:
-    - name: cilium-operator-aws
-      work-dir: /go/src/github.com/cilium/cilium
-      caches:
-        - path: /go/pkg/mod
-      contents:
-        packages:
-          - bash
-          - ca-certificates-bundle
-          - coreutils
-          - golang-1.26
-          - findutils
-          - mawk
-          - sed
-        files:
-          - url: git+https://github.com/cilium/cilium.git#v1.18.14
-            checksum: 0a5b4195ff0bfc4d5d6e707a24f57e1047166ab4
-            path: /go/src/github.com/cilium/cilium
-            spdx:
-              name: cilium-operator-aws
-              version: 1.18.14
-              packages:
-                - name: cilium-operator-aws
-                  purl: pkg:golang/github.com/cilium/cilium@1.18.14
-                  license: Apache-2.0
-            uid: 0
-            gid: 0
-      pipeline:
-        - name: update go dependencies (1.18 only)
-          uses: go/bump@v2
-          with:
-            deps:
-              - github.com/cilium/ebpf@v0.22.0
-              - github.com/gopacket/gopacket@v1.6.1
-              - go.etcd.io/etcd/client/pkg/v3@v3.6.14
-              - go.mongodb.org/mongo-driver@v1.17.7
-              - google.golang.org/grpc@v1.83.2
-              - go.etcd.io/etcd/api/v3@v3.6.14
-              - go.etcd.io/etcd/client/v3@v3.6.14
-            download: true
-            replaces:
-              - go.etcd.io/etcd/api/v3=go.etcd.io/etcd/api/v3@v3.6.14
-              - go.etcd.io/etcd/client/pkg/v3=go.etcd.io/etcd/client/pkg/v3@v3.6.14
-              - go.etcd.io/etcd/client/v3=go.etcd.io/etcd/client/v3@v3.6.14
-        - name: test
-          runs: |
-            set -eux -o pipefail
-
-            # Skip TestRouterIDAllocation: race condition in upstream cilium's BGP
-            # test fake client that causes resource-version conflicts on a random
-            # build target each run. Same skip as cilium-operator-azure.
-            # Skip TestUpdateUsedCIDIsReverted on 1.18 - upstream test bug fixed in
-            # https://github.com/cilium/cilium/pull/41739 but not backported to 1.18.x
-            SKIP_PATTERN=""
-            if [ "1.18" = "1.18" ]; then
-              SKIP_PATTERN="-run !TestUpdateUsedCIDIsReverted"
-            fi
-            CGO_ENABLED=0 go test -mod=vendor -v ${SKIP_PATTERN} -skip 'TestRouterIDAllocation' ./operator/...
-        - name: build
-          uses: go/build@v1
-          with:
-            extra-args: -mod=vendor
-            ldflags:
-              - -X github.com/cilium/cilium/pkg/version.ciliumVersion=v1.18.14
-            output: ${target.dir}/usr/local/bin/cilium-operator-aws
-            packages: ./operator
-            tags: osusergo,ipam_provider_aws
-      outputs:
-        - source: ${target.dir}/usr/local/bin/cilium-operator-aws
-          target: /usr/local/bin/cilium-operator-aws
-          uid: 0
-          gid: 0
-        - source: /opt/docker/sbom/cilium-operator-aws
-          target: /opt/docker/sbom/cilium-operator-aws
-          uid: 0
-          gid: 0
 accounts:
   run-as: nonroot
   users:
@@ -142,6 +66,15 @@ paths:
     uid: 65532
     gid: 65532
     mode: "0770"
+  - type: directory
+    path: /usr/local/bin
+    uid: 0
+    gid: 0
+  - type: symlink
+    path: /usr/local/bin/cilium-operator-aws
+    uid: 0
+    gid: 0
+    source: /usr/bin/cilium-operator-aws
 annotations:
   org.opencontainers.image.description: A minimal Cilium Operator AWS image
   org.opencontainers.image.licenses: Apache-2.0

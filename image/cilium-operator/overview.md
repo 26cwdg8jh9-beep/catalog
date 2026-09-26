@@ -1,4 +1,4 @@
-### About Cilium Operator
+## About Cilium Operator
 
 The Cilium Operator is a specialized component of the Cilium networking and security platform designed to handle
 cluster-wide operations and resource management. It manages Cilium-specific operations and resources required for

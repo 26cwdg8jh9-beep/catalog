@@ -8,3 +8,5 @@ metadata:
   included-tools:
     - name: cilium-operator-azure
       description: The cilium operator Azure server
+    - name: gops
+      description: A command to list and diagnose Go processes

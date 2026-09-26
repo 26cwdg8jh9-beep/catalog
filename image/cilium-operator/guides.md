@@ -86,8 +86,8 @@ or mount debugging tools with the Image Mount feature:
 
 ```
 docker run --rm -it --pid container:my-container \
-  --mount=type=image,source=dhi.io/dhi-busybox,destination=/dbg,ro \
-  dhi.io/dhi-cilium-operator:<tag> /dbg/bin/sh
+  --mount=type=image,source=<your-namespace>/dhi-busybox,destination=/dbg,ro \
+  <your-namespace>/dhi-cilium-operator:<tag> /dbg/bin/sh
 ```
 
 ## Image variants

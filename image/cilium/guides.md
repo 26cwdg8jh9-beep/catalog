@@ -10,6 +10,14 @@ For example:
 
 For the examples, you must first use `docker login dhi.io` to authenticate to the registry to pull the images.
 
+### What's included in this Cilium Hardened Image
+
+This Docker Hardened Cilium image includes cilium-agent, the main daemon that manages the eBPF datapath, network policy
+enforcement, and service load balancing. It also includes the companion tools cilium-dbg (CLI client for the agent API),
+cilium-health and cilium-health-responder (cluster-wide connectivity health checks), cilium-bugtool (diagnostic log
+collection), cilium-mount (BPF filesystem mount management), and cilium-sysctlfix (kernel sysctl adjustments required by
+Cilium).
+
 ### Run a cilium container and display help information
 
 The following command runs the container, displays the help information, and automatically removes the container when it
