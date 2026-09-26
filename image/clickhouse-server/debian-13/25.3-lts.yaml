@@ -20,7 +20,7 @@ vars:
   PACKAGE_NAME: clickhouse-server-25.3
   RELEASE_TYPE: lts
   SEMVER_VERSION: 25.3.14.14
-  VERSION: 25.3.14.14-0
+  VERSION: 25.3.14.14-1
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -34,7 +34,7 @@ contents:
     - base-files
     - bash
     - ca-certificates-bundle
-    - clickhouse-server-25.3=25.3.14.14-0
+    - clickhouse-server-25.3=25.3.14.14-1
     - coreutils
     - findutils
     - locales
@@ -48,7 +48,7 @@ contents:
           - https://dhi.io/keyring/dhi-deb-gpg.D46852F6925E9F71.key
         packages:
           - base-files
-          - clickhouse-server-25.3=25.3.14.14-0
+          - clickhouse-server-25.3=25.3.14.14-1
           - bash
           - coreutils
           - findutils
