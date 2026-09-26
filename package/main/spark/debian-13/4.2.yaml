@@ -4,9 +4,9 @@ image: dhi.io/pkg-spark
 variant: runtime
 tags:
   - 4.2.0
-  - 4.2.0-r5
+  - 4.2.0-r6
   - 4.2.0-debian13
-  - 4.2.0-r5-debian13
+  - 4.2.0-r6-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -14,11 +14,11 @@ vars:
   BUILD_ENTITLEMENT: ""
   COMMIT_SHA: 32f7299601108917fb01920a54e084595b7b3bf8
   JDK_MAJOR_VERSION: "21"
-  JDK_VERSION: 1:21.0.12.1+1-2
+  JDK_VERSION: 1:21.0.12.1+1-4
   MAVEN_VERSION: 3.9.16
   PACKAGE_HOME: /usr/share/spark
   PACKAGE_NAME: spark-4.2
-  REL: "5"
+  REL: "6"
   SCALA_VERSION: "2.13"
   SEMVER_MAJOR_MINOR_VERSION: "4.2"
   SEMVER_MAJOR_VERSION: "4"
@@ -53,7 +53,7 @@ contents:
           - tar
           - libstdc++6
           - zip
-          - eclipse-temurin-21-jdk=1:21.0.12.1+1-2
+          - eclipse-temurin-21-jdk=1:21.0.12.1+1-4
         files:
           - url: git+https://github.com/apache/spark.git#v4.2.0
             checksum: 32f7299601108917fb01920a54e084595b7b3bf8
@@ -271,7 +271,7 @@ contents:
               - deb
             license: Apache-2.0
             name: spark-4.2
-            rel: 5
+            rel: 6
             url: https://spark.apache.org/
             version: 4.2.0
       paths:
