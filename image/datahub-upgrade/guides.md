@@ -193,8 +193,8 @@ services:
 The FIPS variant (`dhi.io/datahub-upgrade:<tag>-fips`) enables FIPS 140-validated cryptography for the Java workload:
 
 - The image installs the FIPS-validated Temurin JRE from the `eclipse-temurin-21-jre-fips` Debian package.
-- BouncyCastle FIPS jars (`bc-fips`, `bctls-fips`, `bcutil-fips`, `bcpkix-fips`, `bc-rng-jent`) are bundled under
-  `/usr/lib/bouncycastle/` and wired in at JVM bootstrap via
+- BouncyCastle FIPS jars (`bc-fips`, `bctls-fips`, `bcutil-fips`, `bcpkix-fips`, `bc-rng-jent`) are provided through
+  stable links under `/usr/lib/bouncycastle/current/` and wired in at JVM bootstrap via
   `JDK_JAVA_OPTIONS=@/datahub/datahub-upgrade/scripts/datahub-fips.properties`. The properties file prepends the
   BouncyCastle jars to the boot classpath (`-Xbootclasspath/a:`), enables `org.bouncycastle.fips.approved_only=true`,
   and sets the JVM trust store to the BCFKS store shipped by the FIPS Temurin package
