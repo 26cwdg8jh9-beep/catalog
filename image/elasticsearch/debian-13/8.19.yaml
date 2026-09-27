@@ -6,13 +6,13 @@ variant: runtime
 tags:
   - "8"
   - "8.19"
-  - 8.19.21
+  - 8.19.22
   - 8-debian
   - 8-debian13
   - 8.19-debian
   - 8.19-debian13
-  - 8.19.21-debian
-  - 8.19.21-debian13
+  - 8.19.22-debian
+  - 8.19.22-debian13
 platforms:
   - linux/amd64
   - linux/arm64
@@ -21,7 +21,7 @@ dates:
   end-of-life: "2027-07-15"
 vars:
   ARCH: '#{ target.arch == "amd64" ? "amd64" : "arm64" }'
-  ELASTICSEARCH_COMMIT_SHA: 4fe44c255c3d0da06779b921e132cdc555ed9aff
+  ELASTICSEARCH_COMMIT_SHA: 3b2a41103de35e0af4064d647974032fcc1bcde9
   ELASTICSEARCH_HOME: /usr/share/elasticsearch
   ELASTICSEARCH_OUTPUT_ARCHIVE_DIR: '#{ target.arch == "amd64" ? "linux-tar" : "linux-aarch64-tar" }'
   GO_ARCH: '#{ target.arch == "amd64" ? "x86_64" : "aarch64" }'
@@ -30,9 +30,9 @@ vars:
   JAVA_MAJOR_VERSION: "21"
   SEMVER_MAJOR_MINOR_VERSION: "8.19"
   SEMVER_MAJOR_VERSION: "8"
-  SEMVER_VERSION: 8.19.21
-  VERSION: 8.19.21
-  X_PACK_CORE_SHA256: sha256:70492fc477cb5d37e5d7403eea755420bdc8c54b4c9554a48a1ea82395f23a7c
+  SEMVER_VERSION: 8.19.22
+  VERSION: 8.19.22
+  X_PACK_CORE_SHA256: sha256:6fa978bddb9a8e98f26d92e63ee7286f5f9d8e442bef24e9772f07879328394d
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -65,21 +65,21 @@ contents:
           - tini
           - eclipse-temurin-21-jdk
         files:
-          - url: git+https://github.com/elastic/elasticsearch.git#v8.19.21
-            checksum: 4fe44c255c3d0da06779b921e132cdc555ed9aff
+          - url: git+https://github.com/elastic/elasticsearch.git#v8.19.22
+            checksum: 3b2a41103de35e0af4064d647974032fcc1bcde9
             path: ${source.dir}/elasticsearch
             spdx:
               name: elasticsearch
-              version: 8.19.21
+              version: 8.19.22
               packages:
                 - name: elasticsearch
-                  purl: pkg:dhi/elasticsearch@8.19.21
+                  purl: pkg:dhi/elasticsearch@8.19.22
                   license: Apache-2.0
             uid: 0
             gid: 0
-          - url: https://repo1.maven.org/maven2/org/elasticsearch/plugin/x-pack-core/8.19.21/x-pack-core-8.19.21.jar
-            checksum: sha256:70492fc477cb5d37e5d7403eea755420bdc8c54b4c9554a48a1ea82395f23a7c
-            path: ${source.dir}/x-pack-core/x-pack-core-8.19.21.jar
+          - url: https://repo1.maven.org/maven2/org/elasticsearch/plugin/x-pack-core/8.19.22/x-pack-core-8.19.22.jar
+            checksum: sha256:6fa978bddb9a8e98f26d92e63ee7286f5f9d8e442bef24e9772f07879328394d
+            path: ${source.dir}/x-pack-core/x-pack-core-8.19.22.jar
             uid: 0
             gid: 0
       pipeline:
@@ -102,7 +102,7 @@ contents:
           runs: |
             set -eux -o pipefail
 
-            jar xf x-pack-core-8.19.21.jar public.key
+            jar xf x-pack-core-8.19.22.jar public.key
         - name: build
           work-dir: ${source.dir}/elasticsearch
           privileged: true
@@ -137,10 +137,10 @@ contents:
             set -eux -o pipefail
 
             # remove bundled jdk
-            rm -r "${source.dir}/elasticsearch/distribution/archives/${ELASTICSEARCH_OUTPUT_ARCHIVE_DIR}/build/install/elasticsearch-8.19.21/jdk"
+            rm -r "${source.dir}/elasticsearch/distribution/archives/${ELASTICSEARCH_OUTPUT_ARCHIVE_DIR}/build/install/elasticsearch-8.19.22/jdk"
 
             mkdir -p "${target.dir}/usr/share/elasticsearch/"
-            cp -r "${source.dir}/elasticsearch/distribution/archives/${ELASTICSEARCH_OUTPUT_ARCHIVE_DIR}/build/install/elasticsearch-8.19.21/." "${target.dir}/usr/share/elasticsearch"
+            cp -r "${source.dir}/elasticsearch/distribution/archives/${ELASTICSEARCH_OUTPUT_ARCHIVE_DIR}/build/install/elasticsearch-8.19.22/." "${target.dir}/usr/share/elasticsearch"
 
             # Upstream's Docker build renames the distro file-based log4j config before
             # overlaying the console variant (see distribution/docker Dockerfile). Preserve
@@ -221,7 +221,7 @@ os-release:
 work-dir: /usr/share/elasticsearch
 environment:
   ELASTIC_CONTAINER: "true"
-  ELASTICSEARCH_VERSION: 8.19.21
+  ELASTICSEARCH_VERSION: 8.19.22
   ES_JAVA_HOME: /usr/lib/jvm/temurin-21
   LANG: en_US.UTF-8
   LANGUAGE: en_US:en
