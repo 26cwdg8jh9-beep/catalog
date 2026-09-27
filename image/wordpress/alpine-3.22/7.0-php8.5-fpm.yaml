@@ -5,7 +5,6 @@ image: dhi.io/wordpress
 variant: runtime
 flavor: php8.5-fpm
 tags:
-  - 7.0.6-alpine-php8.5-fpm
   - 7.0.6-alpine3.22-php8.5-fpm
 platforms:
   - linux/amd64
@@ -19,7 +18,7 @@ vars:
   IMAGEMAGICK_VERSION: 7.1.2-31
   IMAGICK_COMMIT_SHA: 70087bab33eab913e99ac77d64d04d1a2fd0b7b0
   IMAGICK_VERSION: 3.8.1
-  PHP_DEV_REFERENCE: dhi/php:8.5.11-alpine3.22-dev@sha256:1e2893b66d13662909e47c4d19afffe080c54eef107d3146027a581fa10bb538
+  PHP_DEV_REFERENCE: dhi/php:8.5.11-alpine3.22-dev@sha256:e9b91e91eb57ae53a3857469e658b3c8621e27a669a266921e1aea3aa7e0dbea
   PHP_FPM_REFERENCE: dhi/php:8.5.11-alpine3.22-fpm@sha256:98053ab73c4d37ef189f331e24a7f46c582920c8a8b297e771eed74fb6afd4ef
   PHP_INI_DIR: /opt/php-8.5/etc/php
   PHP_MAJOR_MINOR: "8.5"
@@ -80,7 +79,7 @@ contents:
       mode: "0644"
   builds:
     - name: build php extensions
-      uses: dhi.io/php:8.5.11-alpine3.22-dev@sha256:1e2893b66d13662909e47c4d19afffe080c54eef107d3146027a581fa10bb538
+      uses: dhi.io/php:8.5.11-alpine3.22-dev@sha256:e9b91e91eb57ae53a3857469e658b3c8621e27a669a266921e1aea3aa7e0dbea
       shell: bash
       contents:
         repositories:
