@@ -4,17 +4,17 @@ image: dhi.io/pkg-valkey-json
 variant: runtime
 tags:
   - 1.0.3
-  - 1.0.3-r0
+  - 1.0.3-r1
   - 1.0.3-debian13
-  - 1.0.3-r0-debian13
+  - 1.0.3-r1-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 dates:
   release: "2025-04-01"
 vars:
-  COMMIT_SHA: a05327019064cb64f5d2c80d22cb061579191b96
-  REL: "0"
+  COMMIT_SHA: c839dcccc3570d24f2764c7025ca4cb8698e4ab6
+  REL: "1"
   SEMVER_MAJOR_MINOR_VERSION: "1.0"
   SEMVER_MAJOR_VERSION: "1"
   SEMVER_VERSION: 1.0.3
@@ -43,7 +43,7 @@ contents:
           - sed
         files:
           - url: git+https://github.com/valkey-io/valkey-json.git#1.0.3
-            checksum: a05327019064cb64f5d2c80d22cb061579191b96
+            checksum: c839dcccc3570d24f2764c7025ca4cb8698e4ab6
             path: ${source.dir}/valkey-json
             spdx:
               name: valkey-json
@@ -87,7 +87,7 @@ contents:
               - deb
             license: BSD-3-Clause
             name: valkey-json
-            rel: 0
+            rel: 1
             url: https://github.com/valkey-io/valkey-json
             version: 1.0.3
 os-release:
