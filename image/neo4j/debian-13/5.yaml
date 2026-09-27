@@ -6,19 +6,19 @@ variant: runtime
 tags:
   - "5"
   - "5.26"
-  - 5.26.30
+  - 5.26.31
   - 5-debian
   - 5-debian13
   - 5.26-debian
   - 5.26-debian13
-  - 5.26.30-debian
-  - 5.26.30-debian13
+  - 5.26.31-debian
+  - 5.26.31-debian13
 platforms:
   - linux/amd64
   - linux/arm64
 vars:
   ARCH: '#{ target.arch == "amd64" ? "x64" : "aarch64" }'
-  COMMIT_SHA: d3ee27440d2c5fee6d4087cf1e05f30bf687e9c3
+  COMMIT_SHA: 191241718f1c09b6e0f7a55d4b4ed31327d95158
   GOSU_REFERENCE: dhi/pkg-gosu:1.19-debian13@sha256:a4046334ab89599751b3ccbcbbfd539a6b1365b493686ebb2c09c427f2fef55b
   JAVA_HOME: /usr/lib/jvm/temurin-21
   JDK_MAJOR_VERSION: "21"
@@ -28,8 +28,8 @@ vars:
   NEO4J_HOME: /var/lib/neo4j
   SEMVER_MAJOR_MINOR_VERSION: "5.26"
   SEMVER_MAJOR_VERSION: "5"
-  SEMVER_VERSION: 5.26.30
-  VERSION: 5.26.30
+  SEMVER_VERSION: 5.26.31
+  VERSION: 5.26.31
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
@@ -64,15 +64,15 @@ contents:
           - tar
           - xmlstarlet
         files:
-          - url: git+https://github.com/neo4j/neo4j.git#5.26.30
-            checksum: d3ee27440d2c5fee6d4087cf1e05f30bf687e9c3
+          - url: git+https://github.com/neo4j/neo4j.git#5.26.31
+            checksum: 191241718f1c09b6e0f7a55d4b4ed31327d95158
             path: ${source.dir}/neo4j
             spdx:
               name: neo4j
-              version: 5.26.30
+              version: 5.26.31
               packages:
                 - name: neo4j
-                  purl: pkg:dhi/neo4j@5.26.30
+                  purl: pkg:dhi/neo4j@5.26.31
                   license: GPL-3.0
             uid: 0
             gid: 0
@@ -80,10 +80,10 @@ contents:
             path: ${source.dir}/docker-neo4j-publish
             spdx:
               name: docker-neo4j-publish
-              version: 5.26.30
+              version: 5.26.31
               packages:
                 - name: docker-neo4j-publish
-                  purl: pkg:dhi/docker-neo4j-publish@5.26.30
+                  purl: pkg:dhi/docker-neo4j-publish@5.26.31
                   license: Apache-2.0
             uid: 0
             gid: 0
@@ -122,7 +122,7 @@ contents:
           runs: |
             set -eux -o pipefail
 
-            cp -R 5.26.30/trixie/community/local-package ${target.dir}/startup
+            cp -R 5.26.31/trixie/community/local-package ${target.dir}/startup
         - name: patch entrypoint to use gosu instead of su-exec
           work-dir: ${target.dir}/startup
           runs: |
@@ -203,7 +203,7 @@ contents:
             fi
 
             # Set release version (source pom.xml uses SNAPSHOT versioning)
-            mvn versions:set -DnewVersion=5.26.30 -DgenerateBackupPoms=false -q
+            mvn versions:set -DnewVersion=5.26.31 -DgenerateBackupPoms=false -q
 
             # After updated dependencies, the pom.xml file may need linting;
             mvn spotless:apply
