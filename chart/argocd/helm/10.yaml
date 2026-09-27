@@ -16,9 +16,9 @@ vars:
   DHI_PREFIX: ""
   DHI_REGISTRY: dhi.io
   DHI_SKIP_CONTEXT_COPY: "true"
-  HAPROXY_CHART_REFERENCE: dhi/haproxy-chart:1.30.2@sha256:4dd95b865bcca1ac81e211398b4a6b86ab58ef405e5a77cd6d68e6e3810e6b03
+  HAPROXY_CHART_REFERENCE: dhi/haproxy-chart:1.30.2@sha256:c1b5616e31a8d9f41a3628bd18dffca19431a837ab47fd0ee05ea6659fa41376
   HELM_VERSION: 4.1.4-2
-  REDIS_CHART_REFERENCE: dhi/redis-chart:23.0.7@sha256:1bee9ed2f5fbe3dd77624b15042a9221826ec0a9542ed865afb5d32d99116ceb
+  REDIS_CHART_REFERENCE: dhi/redis-chart:23.0.7@sha256:05649497f67bb737f4bad0b3f578f04eeba913adee8784c1e7367c0cc17f12a5
   REDIS_EXPORTER_REFERENCE: dhi/redis-exporter:1.92.0-debian13@sha256:4e4d51c887e102e688dbe31b62174f5edc0f6429e5d88a47a7939b595d81a03b
   REDIS_REFERENCE: dhi/redis:8.10.2-debian13-compat@sha256:9008acf6e2804fe8da637172fe789309be542079359804e50ace38596647d2d2
   SEMVER_MAJOR_MINOR_VERSION: "10.9"
@@ -57,11 +57,11 @@ contents:
                 - alias: redis-ha
                   condition: redis-ha.enabled
                   name: redis-ha
-                  ref: dhi/redis-chart:23.0.7@sha256:1bee9ed2f5fbe3dd77624b15042a9221826ec0a9542ed865afb5d32d99116ceb
+                  ref: dhi/redis-chart:23.0.7@sha256:05649497f67bb737f4bad0b3f578f04eeba913adee8784c1e7367c0cc17f12a5
                 - alias: haproxy
                   condition: haproxy.enabled
                   name: haproxy
-                  ref: dhi/haproxy-chart:1.30.2@sha256:4dd95b865bcca1ac81e211398b4a6b86ab58ef405e5a77cd6d68e6e3810e6b03
+                  ref: dhi/haproxy-chart:1.30.2@sha256:c1b5616e31a8d9f41a3628bd18dffca19431a837ab47fd0ee05ea6659fa41376
               description: Docker Hardened Images Helm chart for Argo CD
               images:
                 - name: argocd
