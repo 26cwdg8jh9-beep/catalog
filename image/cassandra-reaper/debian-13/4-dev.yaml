@@ -21,9 +21,11 @@ dates:
 vars:
   COMMIT_SHA: 335fd72ed0cba4b057c1e3495581e6a3e4a30df6
   JAVA_FIPS_SUFFIX: ""
+  JAVA_HOME: /usr/lib/jvm/temurin-21
   JAVA_VARIANT: jdk
   JDK_MAJOR_VERSION: "11"
-  MAVEN_REFERENCE: dhi/maven:3.9.16-jdk21-debian13-dev@sha256:ebc5985bddb0be1a7e006d1270975360f03e4efaed6c306b63c761a1430c070e
+  MAVEN_JDK_MAJOR_VERSION: "21"
+  MAVEN_REFERENCE: dhi/maven:3.9.16-jdk21-debian13-dev@sha256:202550ac52e94dc83df5ac7503851197e2b1472f90474ec681b8829d62223084
   MAVEN_VERSION: 3.9.16
   SEMVER_MAJOR_MINOR_VERSION: "4.2"
   SEMVER_MAJOR_VERSION: "4"
@@ -59,10 +61,11 @@ contents:
     - util-linux
   builds:
     - name: cassandra-reaper
-      uses: dhi.io/maven:3.9.16-jdk21-debian13-dev@sha256:ebc5985bddb0be1a7e006d1270975360f03e4efaed6c306b63c761a1430c070e
       work-dir: ${source.dir}/cassandra-reaper
       environment:
+        JAVA_HOME: /usr/lib/jvm/temurin-21
         MAVEN_ARGS: --batch-mode --no-transfer-progress
+        MAVEN_HOME: /opt/java/apache-maven-3.9.16
       caches:
         - path: /root/.m2/repository
         - path: /src/cassandra-reaper/src/ui/node_modules
@@ -70,11 +73,12 @@ contents:
         packages:
           - bash
           - coreutils
+          - eclipse-temurin-21-jdk
           - findutils
           - git
+          - grep
           - sed
           - tar
-          - base-files
           - ca-certificates
           - libc6
           - libstdc++6
@@ -94,6 +98,13 @@ contents:
                 - name: cassandra-reaper
                   purl: pkg:dhi/cassandra-reaper@4.2.7
                   license: Apache-2.0
+            uid: 0
+            gid: 0
+        artifacts:
+          - name: dhi.io/maven:3.9.16-jdk21-debian13-dev@sha256:202550ac52e94dc83df5ac7503851197e2b1472f90474ec681b8829d62223084
+            includes:
+              - opt/**
+              - usr/local/bin/**
             uid: 0
             gid: 0
       pipeline:
