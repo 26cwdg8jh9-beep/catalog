@@ -16,7 +16,7 @@ vars:
   DHI_PREFIX: ""
   DHI_REGISTRY: dhi.io
   DHI_SKIP_CONTEXT_COPY: "true"
-  HAPROXY_CHART_REFERENCE: dhi/haproxy-chart:1.30.2@sha256:c1b5616e31a8d9f41a3628bd18dffca19431a837ab47fd0ee05ea6659fa41376
+  HAPROXY_CHART_REFERENCE: dhi/haproxy-chart:1.30.2@sha256:f556bf52877bc0005a36416b9e5c7478eb9b14d86bf3cda8022632b72a790c77
   HELM_VERSION: 4.1.4-2
   REDIS_CHART_REFERENCE: dhi/redis-chart:23.0.7@sha256:05649497f67bb737f4bad0b3f578f04eeba913adee8784c1e7367c0cc17f12a5
   REDIS_EXPORTER_REFERENCE: dhi/redis-exporter:1.92.0-debian13@sha256:4e4d51c887e102e688dbe31b62174f5edc0f6429e5d88a47a7939b595d81a03b
@@ -61,7 +61,7 @@ contents:
                 - alias: haproxy
                   condition: haproxy.enabled
                   name: haproxy
-                  ref: dhi/haproxy-chart:1.30.2@sha256:c1b5616e31a8d9f41a3628bd18dffca19431a837ab47fd0ee05ea6659fa41376
+                  ref: dhi/haproxy-chart:1.30.2@sha256:f556bf52877bc0005a36416b9e5c7478eb9b14d86bf3cda8022632b72a790c77
               description: Docker Hardened Images Helm chart for Argo CD
               images:
                 - name: argocd
